@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-27",
+  "events": [
+    {
+      "id": "kod-uust-2026-09-29",
+      "title": "Код УУНиТ: наука, которая меняет жизнь",
+      "date": "2026-09-29",
+      "time": "13:10",
+      "endTime": "14:10",
+      "category": "Лекция",
+      "description": "Первая открытая лекция проекта «Код УУНиТ». Профессор Евгений Парфенов расскажет, из чего создают медицинские имплантаты, как работают биомиметики и зачем нужны специальные покрытия. Лекция рассчитана на студентов разных направлений. Для участия организаторы предлагают заполнить форму на странице анонса.",
+      "place": "Карла Маркса, 12 · корпус 9 · аудитория 101",
+      "buildingId": "9",
+      "source": "https://uust.ru/events/get/v-uunit-startuet-kod-uunit-novyj-nauchno-populyarnyj-proekt-dlya-studentov",
+      "sourceLabel": "Анонс УУНиТ от 23 сентября",
+      "accent": "lime"
+    },
+    {
+      "id": "sport-conference-2026-10-01",
+      "title": "Спорт, технологии и образование",
+      "date": "2026-10-01",
+      "time": null,
+      "endTime": null,
+      "category": "Конференция",
+      "description": "XII Всероссийская конференция о развитии физической культуры и спорта в образовательных учреждениях. Среди направлений — фиджитал, киберспорт и спортивный менеджмент. Приём статей и регистрационных карт — до 29 сентября. Организационный взнос не предусмотрен. Точное время и аудиторию нужно уточнить у организаторов.",
+      "place": "Кафедра физической культуры ИПЧ · площадку уточняйте у организатора",
+      "buildingId": null,
+      "source": "https://uust.ru/events/get/xii-vserossijskaya-konferenciya-problemy-i-perspektivy-razvitiya-fizicheskoj-kultury-i-sporta-v-obrazovatelnyh-uchrezhdeniyah",
+      "sourceLabel": "Анонс УУНиТ от 15 сентября",
+      "accent": "blue"
+    },
+    {
+      "id": "dialog-2026-11-27",
+      "title": "Диалог времён",
+      "date": "2026-11-27",
+      "time": null,
+      "endTime": null,
+      "category": "Конференция",
+      "description": "Международная конференция о наследии и современных исследованиях в гуманитарных науках. Приглашаются в том числе студенты. Материалы принимают до 20 ноября. Условия участия и публикации указаны в официальном анонсе; время начала не опубликовано.",
+      "place": "Заки Валиди, 32 · аудитория 425 · другой кампус",
+      "buildingId": null,
+      "source": "https://uust.ru/events/get/mezhdunarodnaya-nauchno-prakticheskaya-konferenciya-dialog-vremen-nasledie-dostizheniya-i-innovacii-v-oblasti-gumanitarnyh-nauk",
+      "sourceLabel": "Анонс УУНиТ от 21 сентября",
+      "accent": "peach"
+    }
+  ]
+}

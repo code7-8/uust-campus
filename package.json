@@ -1,0 +1,12 @@
+{
+  "name": "uust-campus",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline Android campus assistant with a Russian interface",
+  "scripts": {
+    "test": "node --test tests/core.test.js",
+    "preview": "python tools/preview.py",
+    "build:android": "powershell -ExecutionPolicy Bypass -File tools/build.ps1"
+  }
+}

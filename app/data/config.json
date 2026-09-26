@@ -1,0 +1,10 @@
+{
+  "semester": 241,
+  "academicStart": "2026-08-31",
+  "academicEnd": "2027-08-29",
+  "academicLabel": "2026 / 2027",
+  "timeZone": "Asia/Yekaterinburg",
+  "checkedAt": "2026-09-27",
+  "scheduleSource": "https://schedule.uust.ru/",
+  "apiBase": "https://dev.uust-time.ru/api/v/852972/"
+}
