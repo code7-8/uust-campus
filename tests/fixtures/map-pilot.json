@@ -1,0 +1,1490 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "synthetic-test-1",
+  "campusId": "uust-karl-marx",
+  "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+  "verifiedAt": "2026-09-27",
+  "synthetic": true,
+  "floors": [
+    {
+      "id": "test-3-f1",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "name": "1 этаж",
+      "order": 1,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "viewBox": [
+        0,
+        0,
+        600,
+        400
+      ],
+      "areas": [
+        {
+          "id": "test-3-1-area-room",
+          "kind": "room",
+          "locationId": "test-3-1-place-room",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              220,
+              40
+            ],
+            [
+              220,
+              180
+            ],
+            [
+              40,
+              180
+            ]
+          ]
+        },
+        {
+          "id": "test-3-1-area-corridor",
+          "kind": "corridor",
+          "points": [
+            [
+              40,
+              180
+            ],
+            [
+              560,
+              180
+            ],
+            [
+              560,
+              260
+            ],
+            [
+              40,
+              260
+            ]
+          ]
+        },
+        {
+          "id": "test-3-1-area-library",
+          "kind": "room",
+          "points": [
+            [
+              230,
+              260
+            ],
+            [
+              360,
+              260
+            ],
+            [
+              360,
+              360
+            ],
+            [
+              230,
+              360
+            ]
+          ]
+        },
+        {
+          "id": "test-3-1-area-wc",
+          "kind": "room",
+          "points": [
+            [
+              400,
+              260
+            ],
+            [
+              560,
+              260
+            ],
+            [
+              560,
+              360
+            ],
+            [
+              400,
+              360
+            ]
+          ]
+        }
+      ],
+      "walls": [
+        [
+          [
+            40,
+            180
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            220,
+            40
+          ],
+          [
+            220,
+            180
+          ]
+        ],
+        [
+          [
+            40,
+            180
+          ],
+          [
+            120,
+            180
+          ]
+        ],
+        [
+          [
+            140,
+            180
+          ],
+          [
+            560,
+            180
+          ],
+          [
+            560,
+            260
+          ],
+          [
+            40,
+            260
+          ],
+          [
+            40,
+            230
+          ]
+        ],
+        [
+          [
+            230,
+            260
+          ],
+          [
+            230,
+            360
+          ],
+          [
+            360,
+            360
+          ],
+          [
+            360,
+            260
+          ]
+        ],
+        [
+          [
+            400,
+            260
+          ],
+          [
+            400,
+            360
+          ],
+          [
+            560,
+            360
+          ],
+          [
+            560,
+            260
+          ]
+        ]
+      ],
+      "doors": [
+        {
+          "id": "test-3-1-door-opening",
+          "nodeId": "test-3-1-door",
+          "points": [
+            [
+              120,
+              180
+            ],
+            [
+              140,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test-3-f2",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "name": "2 этаж",
+      "order": 2,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "viewBox": [
+        0,
+        0,
+        600,
+        400
+      ],
+      "areas": [
+        {
+          "id": "test-3-2-area-room",
+          "kind": "room",
+          "locationId": "test-3-2-place-room",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              220,
+              40
+            ],
+            [
+              220,
+              180
+            ],
+            [
+              40,
+              180
+            ]
+          ]
+        },
+        {
+          "id": "test-3-2-area-corridor",
+          "kind": "corridor",
+          "points": [
+            [
+              40,
+              180
+            ],
+            [
+              560,
+              180
+            ],
+            [
+              560,
+              260
+            ],
+            [
+              40,
+              260
+            ]
+          ]
+        },
+        {
+          "id": "test-3-2-area-library",
+          "kind": "room",
+          "points": [
+            [
+              230,
+              260
+            ],
+            [
+              360,
+              260
+            ],
+            [
+              360,
+              360
+            ],
+            [
+              230,
+              360
+            ]
+          ]
+        },
+        {
+          "id": "test-3-2-area-wc",
+          "kind": "room",
+          "points": [
+            [
+              400,
+              260
+            ],
+            [
+              560,
+              260
+            ],
+            [
+              560,
+              360
+            ],
+            [
+              400,
+              360
+            ]
+          ]
+        }
+      ],
+      "walls": [
+        [
+          [
+            40,
+            180
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            220,
+            40
+          ],
+          [
+            220,
+            180
+          ]
+        ],
+        [
+          [
+            40,
+            180
+          ],
+          [
+            120,
+            180
+          ]
+        ],
+        [
+          [
+            140,
+            180
+          ],
+          [
+            560,
+            180
+          ],
+          [
+            560,
+            260
+          ],
+          [
+            40,
+            260
+          ],
+          [
+            40,
+            230
+          ]
+        ],
+        [
+          [
+            230,
+            260
+          ],
+          [
+            230,
+            360
+          ],
+          [
+            360,
+            360
+          ],
+          [
+            360,
+            260
+          ]
+        ],
+        [
+          [
+            400,
+            260
+          ],
+          [
+            400,
+            360
+          ],
+          [
+            560,
+            360
+          ],
+          [
+            560,
+            260
+          ]
+        ]
+      ],
+      "doors": [
+        {
+          "id": "test-3-2-door-opening",
+          "nodeId": "test-3-2-door",
+          "points": [
+            [
+              120,
+              180
+            ],
+            [
+              140,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test-7-f1",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "name": "1 этаж",
+      "order": 1,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "viewBox": [
+        0,
+        0,
+        600,
+        400
+      ],
+      "areas": [
+        {
+          "id": "test-7-1-area-room",
+          "kind": "room",
+          "locationId": "test-7-1-place-room",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              220,
+              40
+            ],
+            [
+              220,
+              180
+            ],
+            [
+              40,
+              180
+            ]
+          ]
+        },
+        {
+          "id": "test-7-1-area-corridor",
+          "kind": "corridor",
+          "points": [
+            [
+              40,
+              180
+            ],
+            [
+              560,
+              180
+            ],
+            [
+              560,
+              260
+            ],
+            [
+              40,
+              260
+            ]
+          ]
+        },
+        {
+          "id": "test-7-1-area-library",
+          "kind": "room",
+          "points": [
+            [
+              230,
+              260
+            ],
+            [
+              360,
+              260
+            ],
+            [
+              360,
+              360
+            ],
+            [
+              230,
+              360
+            ]
+          ]
+        },
+        {
+          "id": "test-7-1-area-wc",
+          "kind": "room",
+          "points": [
+            [
+              400,
+              260
+            ],
+            [
+              560,
+              260
+            ],
+            [
+              560,
+              360
+            ],
+            [
+              400,
+              360
+            ]
+          ]
+        }
+      ],
+      "walls": [
+        [
+          [
+            40,
+            180
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            220,
+            40
+          ],
+          [
+            220,
+            180
+          ]
+        ],
+        [
+          [
+            40,
+            180
+          ],
+          [
+            120,
+            180
+          ]
+        ],
+        [
+          [
+            140,
+            180
+          ],
+          [
+            560,
+            180
+          ],
+          [
+            560,
+            260
+          ],
+          [
+            40,
+            260
+          ],
+          [
+            40,
+            230
+          ]
+        ],
+        [
+          [
+            230,
+            260
+          ],
+          [
+            230,
+            360
+          ],
+          [
+            360,
+            360
+          ],
+          [
+            360,
+            260
+          ]
+        ],
+        [
+          [
+            400,
+            260
+          ],
+          [
+            400,
+            360
+          ],
+          [
+            560,
+            360
+          ],
+          [
+            560,
+            260
+          ]
+        ]
+      ],
+      "doors": [
+        {
+          "id": "test-7-1-door-opening",
+          "nodeId": "test-7-1-door",
+          "points": [
+            [
+              120,
+              180
+            ],
+            [
+              140,
+              180
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "test-3-1-place-entry",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "entrance",
+      "name": "Вход А",
+      "point": [
+        80,
+        220
+      ],
+      "nodeId": "test-3-1-entry",
+      "aliases": []
+    },
+    {
+      "id": "test-3-1-place-stairs",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "stairs",
+      "name": "Лестница А",
+      "point": [
+        520,
+        220
+      ],
+      "nodeId": "test-3-1-stairs",
+      "aliases": []
+    },
+    {
+      "id": "test-3-1-place-room",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "room",
+      "name": "Аудитория 101А",
+      "point": [
+        130,
+        110
+      ],
+      "nodeId": "test-3-1-door",
+      "aliases": [],
+      "number": "101А",
+      "areaId": "test-3-1-area-room",
+      "doorId": "test-3-1-door-opening"
+    },
+    {
+      "id": "test-3-1-place-cafe",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "cafe",
+      "name": "Буфет",
+      "point": [
+        420,
+        220
+      ],
+      "nodeId": "test-3-1-cafe-node",
+      "aliases": [
+        "столовая",
+        "кафе"
+      ]
+    },
+    {
+      "id": "test-3-1-place-toilet",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "toilet",
+      "name": "Туалет",
+      "point": [
+        480,
+        320
+      ],
+      "nodeId": null,
+      "aliases": [
+        "WC",
+        "санузел"
+      ]
+    },
+    {
+      "id": "test-3-1-place-library",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "library",
+      "name": "Библиотека",
+      "point": [
+        270,
+        320
+      ],
+      "nodeId": null,
+      "aliases": [
+        "читальный зал"
+      ]
+    },
+    {
+      "id": "test-3-2-place-entry",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "entrance",
+      "name": "Вход А",
+      "point": [
+        80,
+        220
+      ],
+      "nodeId": "test-3-2-entry",
+      "aliases": []
+    },
+    {
+      "id": "test-3-2-place-stairs",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "stairs",
+      "name": "Лестница А",
+      "point": [
+        520,
+        220
+      ],
+      "nodeId": "test-3-2-stairs",
+      "aliases": []
+    },
+    {
+      "id": "test-3-2-place-room",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "room",
+      "name": "Аудитория 412",
+      "point": [
+        130,
+        110
+      ],
+      "nodeId": "test-3-2-door",
+      "aliases": [],
+      "number": "412",
+      "areaId": "test-3-2-area-room",
+      "doorId": "test-3-2-door-opening"
+    },
+    {
+      "id": "test-3-2-place-cafe",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "cafe",
+      "name": "Буфет",
+      "point": [
+        420,
+        220
+      ],
+      "nodeId": "test-3-2-cafe-node",
+      "aliases": [
+        "столовая",
+        "кафе"
+      ]
+    },
+    {
+      "id": "test-3-2-place-toilet",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "toilet",
+      "name": "Туалет",
+      "point": [
+        480,
+        320
+      ],
+      "nodeId": null,
+      "aliases": [
+        "WC",
+        "санузел"
+      ]
+    },
+    {
+      "id": "test-3-2-place-library",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "library",
+      "name": "Библиотека",
+      "point": [
+        270,
+        320
+      ],
+      "nodeId": null,
+      "aliases": [
+        "читальный зал"
+      ]
+    },
+    {
+      "id": "test-7-1-place-entry",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "entrance",
+      "name": "Вход А",
+      "point": [
+        80,
+        220
+      ],
+      "nodeId": "test-7-1-entry",
+      "aliases": []
+    },
+    {
+      "id": "test-7-1-place-stairs",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "stairs",
+      "name": "Лестница А",
+      "point": [
+        520,
+        220
+      ],
+      "nodeId": "test-7-1-stairs",
+      "aliases": []
+    },
+    {
+      "id": "test-7-1-place-room",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "room",
+      "name": "Аудитория 412",
+      "point": [
+        130,
+        110
+      ],
+      "nodeId": "test-7-1-door",
+      "aliases": [],
+      "number": "412",
+      "areaId": "test-7-1-area-room",
+      "doorId": "test-7-1-door-opening"
+    },
+    {
+      "id": "test-7-1-place-cafe",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "cafe",
+      "name": "Буфет",
+      "point": [
+        420,
+        220
+      ],
+      "nodeId": "test-7-1-cafe-node",
+      "aliases": [
+        "столовая",
+        "кафе"
+      ]
+    },
+    {
+      "id": "test-7-1-place-toilet",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "toilet",
+      "name": "Туалет",
+      "point": [
+        480,
+        320
+      ],
+      "nodeId": null,
+      "aliases": [
+        "WC",
+        "санузел"
+      ]
+    },
+    {
+      "id": "test-7-1-place-library",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "library",
+      "name": "Библиотека",
+      "point": [
+        270,
+        320
+      ],
+      "nodeId": null,
+      "aliases": [
+        "читальный зал"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "test-3-1-entry",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "entrance",
+      "name": "Вход А",
+      "point": [
+        80,
+        220
+      ]
+    },
+    {
+      "id": "test-3-1-junction",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "junction",
+      "name": "Развилка у лестницы",
+      "point": [
+        280,
+        220
+      ]
+    },
+    {
+      "id": "test-3-1-stairs",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "stairs",
+      "name": "Лестница А",
+      "point": [
+        520,
+        220
+      ],
+      "connectorId": "test-stairs-3"
+    },
+    {
+      "id": "test-3-1-door",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "door",
+      "name": "Дверь 101А",
+      "point": [
+        130,
+        180
+      ]
+    },
+    {
+      "id": "test-3-1-cafe-node",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f1",
+      "type": "landmark",
+      "name": "Буфет",
+      "point": [
+        420,
+        220
+      ]
+    },
+    {
+      "id": "test-3-2-entry",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "entrance",
+      "name": "Вход А",
+      "point": [
+        80,
+        220
+      ]
+    },
+    {
+      "id": "test-3-2-junction",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "junction",
+      "name": "Развилка у лестницы",
+      "point": [
+        280,
+        220
+      ]
+    },
+    {
+      "id": "test-3-2-stairs",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "stairs",
+      "name": "Лестница А",
+      "point": [
+        520,
+        220
+      ],
+      "connectorId": "test-stairs-3"
+    },
+    {
+      "id": "test-3-2-door",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "door",
+      "name": "Дверь 412",
+      "point": [
+        130,
+        180
+      ]
+    },
+    {
+      "id": "test-3-2-cafe-node",
+      "campusId": "uust-karl-marx",
+      "buildingId": "3",
+      "floorId": "test-3-f2",
+      "type": "landmark",
+      "name": "Буфет",
+      "point": [
+        420,
+        220
+      ]
+    },
+    {
+      "id": "test-7-1-entry",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "entrance",
+      "name": "Вход А",
+      "point": [
+        80,
+        220
+      ]
+    },
+    {
+      "id": "test-7-1-junction",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "junction",
+      "name": "Развилка у лестницы",
+      "point": [
+        280,
+        220
+      ]
+    },
+    {
+      "id": "test-7-1-stairs",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "stairs",
+      "name": "Лестница А",
+      "point": [
+        520,
+        220
+      ],
+      "connectorId": "test-stairs-7"
+    },
+    {
+      "id": "test-7-1-door",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "door",
+      "name": "Дверь 412",
+      "point": [
+        130,
+        180
+      ]
+    },
+    {
+      "id": "test-7-1-cafe-node",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "test-7-f1",
+      "type": "landmark",
+      "name": "Буфет",
+      "point": [
+        420,
+        220
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "test-3-1-edge-entry",
+      "from": "test-3-1-entry",
+      "to": "test-3-1-junction",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          80,
+          220
+        ],
+        [
+          280,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-3-1-edge-room",
+      "from": "test-3-1-junction",
+      "to": "test-3-1-door",
+      "kind": "door",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          280,
+          220
+        ],
+        [
+          130,
+          220
+        ],
+        [
+          130,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "test-3-1-edge-cafe",
+      "from": "test-3-1-junction",
+      "to": "test-3-1-cafe-node",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          280,
+          220
+        ],
+        [
+          420,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-3-1-edge-stairs",
+      "from": "test-3-1-cafe-node",
+      "to": "test-3-1-stairs",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          420,
+          220
+        ],
+        [
+          520,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-3-1-edge-closed",
+      "from": "test-3-1-entry",
+      "to": "test-3-1-door",
+      "kind": "door",
+      "weight": 0,
+      "direction": "both",
+      "status": "closed",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          80,
+          220
+        ],
+        [
+          130,
+          220
+        ],
+        [
+          130,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "test-3-2-edge-entry",
+      "from": "test-3-2-entry",
+      "to": "test-3-2-junction",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          80,
+          220
+        ],
+        [
+          280,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-3-2-edge-room",
+      "from": "test-3-2-junction",
+      "to": "test-3-2-door",
+      "kind": "door",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          280,
+          220
+        ],
+        [
+          130,
+          220
+        ],
+        [
+          130,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "test-3-2-edge-cafe",
+      "from": "test-3-2-junction",
+      "to": "test-3-2-cafe-node",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          280,
+          220
+        ],
+        [
+          420,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-3-2-edge-stairs",
+      "from": "test-3-2-cafe-node",
+      "to": "test-3-2-stairs",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          420,
+          220
+        ],
+        [
+          520,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-3-2-edge-closed",
+      "from": "test-3-2-entry",
+      "to": "test-3-2-door",
+      "kind": "door",
+      "weight": 0,
+      "direction": "both",
+      "status": "closed",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          80,
+          220
+        ],
+        [
+          130,
+          220
+        ],
+        [
+          130,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "test-7-1-edge-entry",
+      "from": "test-7-1-entry",
+      "to": "test-7-1-junction",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          80,
+          220
+        ],
+        [
+          280,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-7-1-edge-room",
+      "from": "test-7-1-junction",
+      "to": "test-7-1-door",
+      "kind": "door",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          280,
+          220
+        ],
+        [
+          130,
+          220
+        ],
+        [
+          130,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "test-7-1-edge-cafe",
+      "from": "test-7-1-junction",
+      "to": "test-7-1-cafe-node",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          280,
+          220
+        ],
+        [
+          420,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-7-1-edge-stairs",
+      "from": "test-7-1-cafe-node",
+      "to": "test-7-1-stairs",
+      "kind": "corridor",
+      "weight": 1,
+      "direction": "both",
+      "status": "open",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          420,
+          220
+        ],
+        [
+          520,
+          220
+        ]
+      ]
+    },
+    {
+      "id": "test-7-1-edge-closed",
+      "from": "test-7-1-entry",
+      "to": "test-7-1-door",
+      "kind": "door",
+      "weight": 0,
+      "direction": "both",
+      "status": "closed",
+      "stepFree": true,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": [
+        [
+          80,
+          220
+        ],
+        [
+          130,
+          220
+        ],
+        [
+          130,
+          180
+        ]
+      ]
+    },
+    {
+      "id": "test-vertical",
+      "from": "test-3-1-stairs",
+      "to": "test-3-2-stairs",
+      "kind": "stairs",
+      "weight": 3,
+      "direction": "both",
+      "status": "open",
+      "stepFree": false,
+      "source": "СИНТЕТИЧЕСКИЙ ТЕСТ. Не план УУНиТ. Координаты вымышлены.",
+      "verifiedAt": "2026-09-27",
+      "geometry": null
+    }
+  ],
+  "routeOrigins": [
+    "test-3-1-place-entry",
+    "test-7-1-place-entry"
+  ],
+  "declaredTargets": [
+    "test-3-1-place-room",
+    "test-3-2-place-room",
+    "test-7-1-place-room"
+  ]
+}

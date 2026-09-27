@@ -41,7 +41,7 @@ public final class MainActivity extends Activity {
         s.setAllowFileAccess(false);
         s.setAllowContentAccess(true);
         s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        s.setTextZoom(100);
+        s.setTextZoom(Math.round(100 * getResources().getConfiguration().fontScale));
         web.addJavascriptInterface(new CampusActions(), "CampusAndroid");
         web.setWebViewClient(new WebViewClient() {
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {

@@ -1,15 +1,16 @@
-import {TIME_ZONE,dateKey,minuteOfDay,addDays,monday,academicWeek,formatDate,clock,lessonsOn,nextLesson,freeGaps,eventCompatibility,searchGroups,searchBuildings,validateEvents,ufaTimestamp} from './core.js';
+import {TIME_ZONE,dateKey,minuteOfDay,addDays,monday,academicWeek,formatDate,clock,lessonsOn,nextLesson,freeGaps,eventCompatibility,searchGroups,validateEvents,ufaTimestamp} from './core.js';
 import {initialData,loadSavedSchedule,refreshSchedule,refreshGroups,storage} from './repository.js';
 import {icon} from './icons.js';
+import {createMapController} from './map/view.js';
 
 const $ = s=>document.querySelector(s);
 const escape = value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const attrs = escape;
 const shortDays=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 const state={tab:'home',profile:storage.read('profile'),data:null,rows:[],loaded:false,source:null,at:null,error:null,busy:false,
-  date:dateKey(),scheduleView:'day',eventFilter:'all',mapId:'1',mapQuery:'',mapContext:null,mapZoom:1,mapView:null,
+  date:dateKey(),scheduleView:'day',eventFilter:'all',
   favorites:storage.read('favorites',[]),savedPlaces:storage.read('places',[]),modal:null,groupQuery:'ТОП-106Б',selectedGroup:null,request:0};
-let toastTimer,returnFocus;
+let toastTimer,returnFocus,mapController;
 function toast(text) {clearTimeout(toastTimer);const el=$('#toast');el.textContent=text;el.classList.add('visible');toastTimer=setTimeout(()=>el.classList.remove('visible'),3500);}
 const btn=(text,action,cls='button',more='')=>`<button class="${cls}" data-action="${action}" ${more}>${text}</button>`;
 const iconBtn=(name,label,action,more='')=>btn(icon(name),action,'icon-button',`aria-label="${attrs(label)}" ${more}`);
@@ -45,7 +46,7 @@ function nextHero(){
   const next=nextLesson(state.rows,new Date(),state.data.config);
   if(!state.loaded){return `<section class="hero hero-empty"><div class="eyebrow">Твоё расписание</div><h2>${state.busy?'Ищем ближайшую пару…':'Подключим твой учебный день'}</h2><p>${state.busy?'Получаем расписание с сервиса УУНиТ.':'Нужен интернет для первой загрузки. После этого пары будут доступны офлайн.'}</p>${btn('Загрузить расписание '+icon('refresh'),'refresh','button lime',state.busy?'disabled':'')}</section>`;}
   if(!next)return `<section class="hero hero-empty"><div class="eyebrow">Можно выдохнуть</div><h2>Впереди свободное время</h2><p>В загруженном расписании нет пар с известным временем на ближайшие 6 недель. Проверьте расписание и обновления источника.</p>${btn('Открыть расписание '+icon('arrow'),'schedule','button lime')}</section>`;
-  return `<section class="hero"><div class="hero-top"><span class="eyebrow">${next.ongoing?'Сейчас идёт':'Ближайшая пара'}</span><span class="chip">${dayRelative(next.date)} · ${clock(next.start)}</span></div><h2>${escape(next.subject)}</h2><div class="hero-meta"><span>${icon('clock')}${clock(next.start)}–${clock(next.end)}</span><span>${icon('pin')}${escape(next.room||'Место уточняется')}</span></div><div class="hero-footer">${next.buildingId?btn(`К корпусу ${next.buildingId} ${icon('arrow')}`,'next-map','button lime'):btn('О паре '+icon('arrow'),'next-detail','button lime')}${iconBtn('bell','Добавить ближайшую пару в календарь','next-calendar')}</div></section>`;
+  return `<section class="hero"><div class="hero-top"><span class="eyebrow">${next.ongoing?'Сейчас идёт':'Ближайшая пара'}</span><span class="chip">${dayRelative(next.date)} · ${clock(next.start)}</span></div><h2>${escape(next.subject)}</h2><div class="hero-meta"><span>${icon('clock')}${clock(next.start)}–${clock(next.end)}</span><span>${icon('pin')}${escape(next.room||'Место уточняется')}</span></div><div class="hero-footer">${next.buildingId||next.locationId?btn(`Показать место ${icon('arrow')}`,'next-map','button lime'):btn('О паре '+icon('arrow'),'next-detail','button lime')}${iconBtn('bell','Добавить ближайшую пару в календарь','next-calendar')}</div></section>`;
 }
 function home(){
   const today=dateKey(),now=new Date(),day=lessonsOn(state.rows,today,state.data.config),next=nextLesson(state.rows,now,state.data.config);
@@ -74,11 +75,7 @@ function mapSvg(selected,mini=false){
   ${state.data.buildings.map(b=>`<g ${mini?'':`data-building="${b.id}"`} class="map-marker"><circle cx="${b.center[0]}" cy="${b.center[1]}" r="${b.id===selected?54:43}" fill="${b.id===selected?'#dbf68b':'#f9fbf4'}" stroke="${b.id===selected?'#173b32':'#a6b993'}" stroke-width="3"/><text class="map-label ${b.id===selected?'selected':''}" x="${b.center[0]}" y="${b.center[1]}">${b.id}</text></g>`).join('')}
   <g fill="#7a8e6a"><path d="M813 422l21 12 28-2 4 6-24 6-12 25-5-1 3-25-21-13z"/><text x="868" y="463" font-size="17" letter-spacing="3" fill="#93a184">КАМПУС УУНИТ</text></g></svg>`;
 }
-function buildingCard(b){return `<article class="place-card">${b.photo?`<img class="place-photo" src="${attrs(b.photo)}" alt="${escape(b.name)} — фотография из материалов команды">`:''}<div class="place-body"><div class="row between"><h2>${b.name}</h2><span class="chip">На схеме</span></div><p class="subtle">${b.address}</p>${state.mapContext?.buildingId===b.id?`<div class="insight compact">${icon('pin')}<div><strong>${escape(state.mapContext.room||state.mapContext.place||'Место события')}</strong><p>${escape(state.mapContext.title)}</p></div></div>`:''}<p class="description">${b.description}</p><div class="place-actions">${btn(`${icon('external')} В городских картах`,'building-external','button light',`data-id="${b.id}"`)}${btn(icon('heart'), 'save-place',`button outline ${state.savedPlaces.includes(b.id)?'favorite-on':''}`,`data-id="${b.id}" aria-label="${state.savedPlaces.includes(b.id)?'Убрать из':'Добавить в'} избранные места" aria-pressed="${state.savedPlaces.includes(b.id)}"`)}</div></div></article>`;}
-function mapPage(){const b=state.data.buildings.find(x=>x.id===state.mapId)||state.data.buildings[0],results=searchBuildings(state.data.buildings,state.mapQuery);return `${pageHeading('Знакомое место','Твой кампус','Карла Маркса, 12 · схема корпусов')}<label class="search-field">${icon('search')}<input id="building-search" placeholder="Найти корпус, например: корпус 3" value="${attrs(state.mapQuery)}" autocomplete="off" aria-label="Найти корпус"></label>
-  <div id="building-results">${buildingResults(results)}</div><div class="map-frame"><span class="map-badge">СХЕМА · БЕЗ ГЕОПРИВЯЗКИ</span>${mapSvg(b.id)}<div class="map-controls">${iconBtn('plus','Увеличить карту','zoom-in')}${iconBtn('minus','Уменьшить карту','zoom-out')}${iconBtn('focus','Показать весь кампус','zoom-reset')}</div></div><p class="map-caption">Перемещай и увеличивай схему. Нажми на корпус.</p>${buildingCard(b)}
-  <div class="insight compact">${icon('info')}<p>Маршрут до входа пока не проверен. Для подхода к кампусу открой городскую карту; внутри территории ориентируйся по указателям.</p></div>${section('Все корпуса')}<div class="building-grid">${state.data.buildings.map(x=>btn(x.name,'select-building',`building-button ${x.id===b.id?'active':''}`,`data-id="${x.id}"`)).join('')}</div>${btn('Открыть исходную схему '+icon('external'),'original-map','text-button')}`;}
-function buildingResults(results){if(!state.mapQuery)return '';return `<div class="map-result-summary">${results.length?'Найдено: '+results.length:'Корпус не найден. Попробуйте номер от 1 до 9.'}</div><div class="filters" style="margin-top:8px;margin-bottom:4px">${results.map(b=>btn(b.name,'select-building','filter',`data-id="${b.id}"`)).join('')}</div>`;}
+function mapPage(){return '<div id="map-root"></div>';}
 function cover(e){return `<div class="event-cover ${e.accent}"><span class="eyebrow">${escape(e.category)} · УУНиТ</span><span class="cover-index">${e.date.slice(8)} / ${e.date.slice(5,7)}</span><div class="cover-title">${e.id.startsWith('kod-uust')?'КОД<br>УУНИТ':e.accent==='blue'?'В ДВИЖЕНИИ':escape(e.title.split(':')[0]).slice(0,35)}</div><span class="orbit"></span><span class="orbit"></span><span class="orbit"></span><span class="orb"></span></div>`;}
 function eventCard(e){const fit=eventCompatibility(e,state.rows,state.loaded,state.data.config),saved=state.favorites.includes(e.id);return `<article class="event-card"><button class="event-open" data-event="${attrs(e.id)}" aria-label="Подробнее: ${attrs(e.title)}">${cover(e)}<div class="event-body"><div class="row">${e.demo?'<span class="chip demo">Демонстрация</span>':''}<span class="eyebrow">${formatDate(e.date,{day:'numeric',month:'long'})} · ${e.time||'Время уточняется'}</span></div><h3>${escape(e.title)}</h3><p>${escape(e.place||'Место уточняется')}</p></div></button><div class="event-body" style="padding-top:0"><div class="event-bottom" style="margin-top:0"><span class="chip ${fit.kind}">${icon(fit.kind==='free'?'check':fit.kind==='conflict'?'clock':'info','small-icon')}${fit.kind==='unknown'?'Время или расписание уточняется':fit.label}</span>${btn(icon('heart'),'favorite',`icon-button ${saved?'favorite-on':''}`,`data-id="${attrs(e.id)}" aria-label="${saved?'Убрать событие из':'Сохранить событие в'} избранного" aria-pressed="${saved}"`)}</div></div></article>`;}
 function eventsPage(){
@@ -100,8 +97,9 @@ function groupPicker(){return `<label class="search-field">${icon('search')}<inp
 function onboarding(){return `<main class="intro"><div class="topbar">${wordmark()}<span class="step-number">ДОБРО ПОЖАЛОВАТЬ</span></div><section class="intro-hero"><div class="eyebrow">Твой помощник в университете</div><h1>Учёба ближе.<br>Кампус понятнее.</h1><p>Пары, корпуса и всё интересное вокруг — в одном месте.</p><div class="intro-map">${mapSvg('1',true)}</div></section><div class="intro-step"><h2>Начнём с группы</h2><span class="step-number">01 / 01</span></div><p class="intro-description">Выбери свою — мы соберём твой учебный день.</p>${groupPicker()}<div class="intro-foot"><div class="privacy">${icon('shield')}Без регистрации. Выбор останется на устройстве.</div></div></main>`;}
 function render(){
   const scroll=window.scrollY;
-  $('#app').innerHTML=`<div class="app-shell">${!state.profile?onboarding():topbar()+`<main class="content" id="main-content">${({home,schedule,map:mapPage,events:eventsPage,profile}[state.tab])()}</main>`+nav()}</div>`;
-  if(state.tab==='map'&&state.profile)bindMap();
+  mapController?.unmount();
+  $('#app').innerHTML=`<div class="app-shell ${state.tab==='map'&&state.profile?'map-active':''}">${!state.profile?onboarding():topbar()+`<main class="content" id="main-content">${({home,schedule,map:mapPage,events:eventsPage,profile}[state.tab])()}</main>`+nav()}</div>`;
+  if(state.tab==='map'&&state.profile)mapController.mount($('#map-root'));
   window.scrollTo(0,scroll);
 }
 function navigate(tab){closeModal();state.tab=tab;render();window.scrollTo(0,0);}
@@ -114,13 +112,13 @@ function renderModal(){
   const {kind,payload}=state.modal;let body='',label='';
   if(kind==='lesson'){
     const l=payload;label='Твоя пара';
-    body=`${tag(l.type)}<h1>${escape(l.subject)}</h1>${detailRow('calendar',formatDate(l.date,{weekday:'long',day:'numeric',month:'long'}),`${academicWeek(l.date,state.data.config)}-я учебная неделя`)}${detailRow('clock',l.start===null?'Время уточняется':`${clock(l.start)}–${clock(l.end)}`,'Время Уфы · UTC+5')}${detailRow('user',l.teacher||'Преподаватель не указан')}${detailRow('pin',l.room||'Аудитория не указана',l.buildingTitle||'Место уточняется')}${l.comment?`<p>${escape(l.comment)}</p>`:''}${!l.buildingId?'<div class="insight compact">'+icon('info')+'<p>Это место пока не сопоставлено со схемой кампуса. Сверьтесь с исходным адресом и указателями университета.</p></div>':''}<div class="modal-actions">${l.buildingId?btn('Показать корпус '+l.buildingId+' '+icon('map'),'lesson-map','button wide'):''}${l.start!==null?btn(icon('bell')+' Добавить в календарь','lesson-calendar','button light wide'):''}${btn('Расписание в источнике '+icon('external'),'schedule-source','button outline wide')}</div><p class="source-line">Данные: schedule.uust.ru · ${state.source==='live'?'загруженная версия':'сохранённая версия'}. Изменения проверяются при обновлении.</p>`;
+    body=`${tag(l.type)}<h1>${escape(l.subject)}</h1>${detailRow('calendar',formatDate(l.date,{weekday:'long',day:'numeric',month:'long'}),`${academicWeek(l.date,state.data.config)}-я учебная неделя`)}${detailRow('clock',l.start===null?'Время уточняется':`${clock(l.start)}–${clock(l.end)}`,'Время Уфы · UTC+5')}${detailRow('user',l.teacher||'Преподаватель не указан')}${detailRow('pin',l.room||'Аудитория не указана',l.buildingTitle||'Место уточняется')}${l.comment?`<p>${escape(l.comment)}</p>`:''}${!l.buildingId?'<div class="insight compact">'+icon('info')+'<p>Это место пока не сопоставлено со схемой кампуса. Сверьтесь с исходным адресом и указателями университета.</p></div>':''}<div class="modal-actions">${l.buildingId||l.locationId?btn('Показать место '+icon('map'),'lesson-map','button wide'):''}${l.start!==null?btn(icon('bell')+' Добавить в календарь','lesson-calendar','button light wide'):''}${btn('Расписание в источнике '+icon('external'),'schedule-source','button outline wide')}</div><p class="source-line">Данные: schedule.uust.ru · ${state.source==='live'?'загруженная версия':'сохранённая версия'}. Изменения проверяются при обновлении.</p>`;
   } else if(kind==='event'){
     const e=state.data.events.find(e=>e.id===payload);if(!e){closeModal();return;}
     const fit=eventCompatibility(e,state.rows,state.loaded,state.data.config);label=e.demo?'Демонстрационное событие':'Жизнь кампуса';
     body=`${cover(e)}<h1>${escape(e.title)}</h1>${detailRow('calendar',formatDate(e.date,{day:'numeric',month:'long',year:'numeric'}),e.time?`${e.time}${e.endTime?'–'+e.endTime:''} · время Уфы`:'Время начала не опубликовано')}${detailRow('pin',e.place||'Место уточняется')}
     <div class="insight compact">${icon(fit.kind==='free'?'check':'info')}<div><h3>${fit.label}</h3><p>${fit.kind==='conflict'?fit.lessons.map(l=>escape(l.subject)+' · '+clock(l.start)+'–'+clock(l.end)).join('<br>'):fit.kind==='free'?'Сравнено с загруженным расписанием. Время на дорогу не учтено.':'Для точного сравнения нужны начало и конец события, а также расписание на этот день.'}</p></div></div><p>${escape(e.description)}</p>
-    <div class="modal-actions">${e.buildingId?btn('К корпусу '+e.buildingId+' '+icon('arrow'),'event-map','button wide'):''}${btn(icon('heart')+(state.favorites.includes(e.id)?' В избранном':' Сохранить событие'),'favorite',`button ${state.favorites.includes(e.id)?'light':'outline'} wide`,`data-id="${attrs(e.id)}"`)}${e.time&&e.endTime?btn(icon('bell')+' Добавить в календарь','event-calendar','button light wide'):''}${e.source?btn('Условия участия и регистрация '+icon('external'),'event-source','button outline wide'):''}</div><p class="source-line">${escape(e.sourceLabel)}${e.imported?' · данные добавлены командой':'. Редакционная подборка по официальному анонсу.'}</p>`;
+    <div class="modal-actions">${e.buildingId||e.locationId?btn('Показать место '+icon('arrow'),'event-map','button wide'):''}${btn(icon('heart')+(state.favorites.includes(e.id)?' В избранном':' Сохранить событие'),'favorite',`button ${state.favorites.includes(e.id)?'light':'outline'} wide`,`data-id="${attrs(e.id)}"`)}${e.time&&e.endTime?btn(icon('bell')+' Добавить в календарь','event-calendar','button light wide'):''}${e.source?btn('Условия участия и регистрация '+icon('external'),'event-source','button outline wide'):''}</div><p class="source-line">${escape(e.sourceLabel)}${e.imported?' · данные добавлены командой':'. Редакционная подборка по официальному анонсу.'}</p>`;
   } else if(kind==='groups'){label='Учебная группа';body='<h1>Твой учебный ритм</h1><p>Начни вводить название и выбери группу из списка университета.</p>'+groupPicker();}
   else if(kind==='saved-places'){label='Избранные места';const places=state.data.buildings.filter(b=>state.savedPlaces.includes(b.id));body='<h1>Знакомые места</h1>'+ (places.length?`<div class="saved-list">${places.map(b=>setting('pin',b.name,b.address,'saved-place-'+b.id)).join('')}</div>`:empty('Сохрани первый корпус','Нажми на сердечко в карточке корпуса на карте.','map'));}
   else if(kind==='import'){label='Обновление подборки';body=`<h1>События от команды</h1><p>Выбери JSON-файл с мероприятиями. Он заменит текущую подборку на этом устройстве. Названия и даты проверим до сохранения.</p><label class="field-label" for="events-file">Файл мероприятий</label><input id="events-file" type="file" accept=".json,application/json"><div id="import-result"></div><p class="source-line">Формат: schemaVersion: 1 и массив events. Шаблон и инструкция находятся в исходном проекте. Импорт будет подписан «Импорт команды».</p>${btn('Вернуть подборку УУНиТ','restore-events','button light wide')}`;}
@@ -132,11 +130,11 @@ function renderModal(){
 async function refresh(){
   if(!group()||state.busy)return;
   const ticket=++state.request,id=group().id;state.busy=true;state.error=null;render();
-  try {const result=await refreshSchedule(id,state.data.config);if(ticket!==state.request || group().id!==id)return;Object.assign(state,result);if(result.persisted===false)toast('Расписание загружено, но память устройства заполнена');}
+  try {const result=await refreshSchedule(id,state.data.config,state.data);if(ticket!==state.request || group().id!==id)return;Object.assign(state,result);if(result.persisted===false)toast('Расписание загружено, но память устройства заполнена');}
   catch(e){if(ticket!==state.request)return;state.error=e.message||'Не удалось обновить';}
   finally{if(ticket===state.request){state.busy=false;render();if(state.modal?.kind==='event'||state.modal?.kind==='lesson')renderModal();}}
 }
-function openBuilding(id,context=null){state.mapId=id;state.mapContext=context;state.mapQuery='';state.mapZoom=1;state.mapView=null;navigate('map');}
+function openBuilding(id,context=null){mapController.open({...context,buildingId:id});navigate('map');}
 function calendar(item){
   if(!item.date || item.start===null || item.end===null)return;
   const start=ufaTimestamp(item.date,typeof item.start==='number'?clock(item.start):item.start),end=ufaTimestamp(item.date,typeof item.end==='number'?clock(item.end):item.end);
@@ -159,16 +157,14 @@ async function action(name,el){
   }
   if(name==='refresh'){refresh();return;}
   if(name==='refresh-groups'){el.disabled=true;try{state.data.groups=await refreshGroups();$('#group-results').innerHTML=groupResults();toast('Список групп обновлён');}catch{toast('Источник недоступен. Используем сохранённый список.');el.disabled=false;}return;}
-  if(name==='next-map'){const l=next();if(l?.buildingId)openBuilding(l.buildingId,{...l,title:l.subject});return;}
+  if(name==='next-map'){const l=next();if(l?.buildingId||l?.locationId)openBuilding(l.buildingId,{...l,title:l.subject});return;}
   if(name==='next-detail'){const l=next();if(l)showModal('lesson',l);return;}
   if(name==='next-calendar'){const l=next();if(l)calendar(l);return;}
   if(name==='today'){state.date=dateKey();render();return;}
   if(name.startsWith('view-')){state.scheduleView=name==='view-day'?'day':'week';render();return;}
   if(name==='week-prev'||name==='week-next'){const nextDate=addDays(state.date,name==='week-prev'?-7:7);if(nextDate<state.data.config.academicStart)state.date=state.data.config.academicStart;else if(nextDate>state.data.config.academicEnd)state.date=state.data.config.academicEnd;else state.date=nextDate;render();return;}
-  if(name==='select-building'){state.mapId=el.dataset.id;state.mapView=null;state.mapZoom=1;render();return;}
   if(name==='building-external'){const b=state.data.buildings.find(b=>b.id===el.dataset.id);external('https://yandex.ru/maps/?text='+encodeURIComponent(`УУНиТ Уфа Карла Маркса 12 ${b.name}`));return;}
   if(name==='save-place'){const id=el.dataset.id;state.savedPlaces=state.savedPlaces.includes(id)?state.savedPlaces.filter(x=>x!==id):[...state.savedPlaces,id];storage.write('places',state.savedPlaces);render();return;}
-  if(name.startsWith('zoom-')){updateZoom(name==='zoom-in'?1.4:name==='zoom-out'?1/1.4:0);return;}
   if(name==='filter-events'){state.eventFilter=el.dataset.id;render();return;}
   if(name==='favorite'){const id=el.dataset.id;state.favorites=state.favorites.includes(id)?state.favorites.filter(x=>x!==id):[...state.favorites,id];storage.write('favorites',state.favorites);render();if(state.modal)renderModal();return;}
   if(name==='saved-events'){state.eventFilter='saved';navigate('events');return;}
@@ -192,11 +188,9 @@ document.addEventListener('click',e=>{
   if(el.dataset.event){showModal('event',el.dataset.event);return;}
   if(el.dataset.day){state.date=el.dataset.day;state.scheduleView='day';render();return;}
   if(el.dataset.pickGroup){state.selectedGroup=state.data.groups.find(g=>g.id===+el.dataset.pickGroup);$('#group-results').innerHTML=groupResults();$('#save-group').disabled=false;return;}
-  if(el.dataset.building){if(mapDragged){mapDragged=false;return;}state.mapId=el.dataset.building;render();}
 });
 document.addEventListener('input',e=>{
   if(e.target.id==='group-search'){state.groupQuery=e.target.value;state.selectedGroup=null;$('#group-results').innerHTML=groupResults();$('#save-group').disabled=true;}
-  if(e.target.id==='building-search'){state.mapQuery=e.target.value;$('#building-results').innerHTML=buildingResults(searchBuildings(state.data.buildings,state.mapQuery));}
 });
 document.addEventListener('change',async e=>{
   if(e.target.id==='schedule-date'){if(e.target.value&&e.target.validity.valid){state.date=e.target.value;render();}return;}
@@ -208,34 +202,13 @@ document.addEventListener('change',async e=>{
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&state.modal){closeModal();return;}
-  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-building]')){e.preventDefault();state.mapId=e.target.dataset.building;render();}
   if(e.key==='Tab'&&state.modal){const focusable=[...document.querySelectorAll('.modal button:not([disabled]),.modal input,.modal a[href]')];const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}
 });
-let mapDragged=false;
-function updateZoom(factor){
-  if(factor===0){state.mapZoom=1;state.mapView=[130,100,1450,730];}
-  else{const old=state.mapView||[130,100,1450,730],zoom=Math.max(.85,Math.min(3.5,state.mapZoom*factor)),ratio=state.mapZoom/zoom;state.mapZoom=zoom;state.mapView=[old[0]+old[2]*(1-ratio)/2,old[1]+old[3]*(1-ratio)/2,old[2]*ratio,old[3]*ratio];}
-  $('#campus-map')?.setAttribute('viewBox',state.mapView.join(' '));
-}
-function bindMap(){
-  const svg=$('#campus-map');if(!svg)return;
-  if(state.mapView)svg.setAttribute('viewBox',state.mapView.join(' '));
-  const pointers=new Map();let last=null,baseDistance=0,tapBuilding=null;
-  svg.addEventListener('pointerdown',e=>{mapDragged=false;tapBuilding=e.target.closest('[data-building]')?.dataset.building;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});last={x:e.clientX,y:e.clientY};svg.setPointerCapture(e.pointerId);if(pointers.size===2){const p=[...pointers.values()];baseDistance=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);}});
-  svg.addEventListener('pointermove',e=>{
-    if(!pointers.has(e.pointerId))return;
-    const point={x:e.clientX,y:e.clientY};pointers.set(e.pointerId,point);
-    if(pointers.size===2){const p=[...pointers.values()],distance=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);if(baseDistance>0)updateZoom(distance/baseDistance);baseDistance=distance;mapDragged=true;return;}
-    if(last){const dx=e.clientX-last.x,dy=e.clientY-last.y;if(Math.abs(dx)+Math.abs(dy)>2){mapDragged=true;const v=state.mapView||[130,100,1450,730],rect=svg.getBoundingClientRect(),scale=Math.max(v[2]/rect.width,v[3]/rect.height);state.mapView=[Math.max(-350,Math.min(1500,v[0]-dx*scale)),Math.max(-300,Math.min(900,v[1]-dy*scale)),v[2],v[3]];svg.setAttribute('viewBox',state.mapView.join(' '));last=point;}}
-  });
-  const release=e=>{const picked=!mapDragged&&pointers.size===1&&tapBuilding&&e.type==='pointerup';pointers.delete(e.pointerId);last=pointers.size?[...pointers.values()][0]:null;try{svg.releasePointerCapture(e.pointerId);}catch{};if(picked){state.mapId=tapBuilding;render();}setTimeout(()=>{mapDragged=false;},100);};
-  svg.addEventListener('pointerup',release);svg.addEventListener('pointercancel',release);
-  svg.addEventListener('wheel',e=>{e.preventDefault();updateZoom(e.deltaY<0?1.15:1/1.15);},{passive:false});
-}
-window.campusBack=()=>{if(state.modal){closeModal();return true;}if(state.tab!=='home'){navigate('home');return true;}return false;};
+window.campusBack=()=>{if(state.tab==='map'&&mapController.back())return true;if(state.modal){closeModal();return true;}if(state.tab!=='home'){navigate('home');return true;}return false;};
 async function boot(){
   try{
     state.data=await initialData();
+    mapController=createMapController({buildings:state.data.buildings,bundledPack:state.data.mapPack,storage,external,isFavorite:id=>state.savedPlaces.includes(id),onFavorite:id=>{state.savedPlaces=state.savedPlaces.includes(id)?state.savedPlaces.filter(x=>x!==id):[...state.savedPlaces,id];storage.write('places',state.savedPlaces);}});
     if(state.profile?.group && !state.data.groups.some(g=>g.id===state.profile.group.id))state.profile=null;
     if(!state.profile?.group)state.profile=null;
     state.selectedGroup=state.profile?.group||state.data.groups.find(g=>g.id===14381);
