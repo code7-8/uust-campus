@@ -1,14 +1,14 @@
 // Weights are relative costs, never metres or minutes.
-export function usableEdge(edge, stepFree = false) {
-  return edge.status === 'open' && (!stepFree || (edge.stepFree === true && edge.kind !== 'stairs'));
+export function usableEdge(edge, stepFree = false, allowArchive = false) {
+  return (edge.status === 'open' || allowArchive && edge.status === 'plan') && (!stepFree || (edge.stepFree === true && edge.kind !== 'stairs'));
 }
 
-export function findRoute(data, startId, endId, {stepFree = false} = {}) {
+export function findRoute(data, startId, endId, {stepFree = false,allowArchive=false} = {}) {
   const nodes = new Map(data.nodes.map(n => [n.id, n]));
   if (!nodes.has(startId) || !nodes.has(endId)) return null;
   const adjacency = new Map(data.nodes.map(n => [n.id, []]));
   for (const e of data.edges) {
-    if (!usableEdge(e, stepFree) || !Number.isFinite(e.weight) || e.weight < 0) continue;
+    if (!usableEdge(e, stepFree,allowArchive) || !Number.isFinite(e.weight) || e.weight < 0) continue;
     if (!nodes.has(e.from) || !nodes.has(e.to)) continue;
     adjacency.get(e.from).push({to:e.to, edge:e, reverse:false});
     if (e.direction === 'both') adjacency.get(e.to).push({to:e.from, edge:e, reverse:true});

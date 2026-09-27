@@ -41,7 +41,8 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
   const bIds=new Set(buildings.map(b=>b.id)), floors=new Map(pack.floors.map(f=>[f.id,f])), nodes=new Map(pack.nodes.map(n=>[n.id,n]));
   const locations=new Map(pack.locations.map(l=>[l.id,l]));
   const label=(v)=>typeof v==='string' && v.trim().length>0 && v.length<=240;
-  const evidence=(v,kind)=>{check(label(v.source),`${kind}: нужен источник`);check(dateOK(v.verifiedAt),`${kind}: нужна дата проверки`);};
+  const archive=pack.verification==='archive';
+  const evidence=(v,kind)=>{check(label(v.source),`${kind}: нужен источник`);check(dateOK(v.verifiedAt)||archive&&v.verifiedAt===null,`${kind}: нужна дата проверки`);};
   const inside=(p,f)=>pointOK(p) && f && p[0]>=f.viewBox[0] && p[1]>=f.viewBox[1] && p[0]<=f.viewBox[0]+f.viewBox[2] && p[1]<=f.viewBox[1]+f.viewBox[3];
   for(const f of pack.floors) {
     check(bIds.has(f.buildingId) && f.campusId===pack.campusId,`${f.id}: неизвестный корпус/кампус`);
@@ -49,6 +50,7 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     check(Array.isArray(f.viewBox) && f.viewBox.length===4 && f.viewBox.every(Number.isFinite) && f.viewBox[2]>0 && f.viewBox[3]>0,`${f.id}: неверный viewBox`);
     check(Array.isArray(f.areas) && f.areas.length<=3000 && Array.isArray(f.walls) && f.walls.length<=10000 && Array.isArray(f.doors) && f.doors.length<=3000,`${f.id}: нужны areas, walls, doors`);
     evidence(f,f.id);
+    if(f.image)check(/^assets\/campusway\/floor-6-[345]\.(png|jpg)$/.test(f.image)&&Array.isArray(f.imageSize)&&f.imageSize.length===2&&f.imageSize.every(n=>Number.isFinite(n)&&n>0&&n<10000),`${f.id}: неизвестная подложка`);
   }
   if(errors.length)throw new Error(errors.join('\n'));
   const doors=new Map(), areas=new Map();
@@ -85,7 +87,7 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     if(l.type==='room') {
       check(typeof l.number==='string' && label(l.number),`${l.id}: номер аудитории должен быть строкой`);
       check(areas.get(l.areaId)?.floorId===l.floorId && areas.get(l.areaId)?.locationId===l.id,`${l.id}: нужна область помещения с обратной ссылкой`);
-      check(n?.type==='door' && doors.get(l.doorId)?.nodeId===l.nodeId && doors.get(l.doorId)?.floorId===l.floorId,`${l.id}: нужна дверь, связанная с узлом маршрута`);
+      check(l.nodeId===null&&!l.doorId || n?.type==='door' && doors.get(l.doorId)?.nodeId===l.nodeId && doors.get(l.doorId)?.floorId===l.floorId,`${l.id}: нужна дверь, связанная с узлом маршрута`);
       const a=areas.get(l.areaId),d=doors.get(l.doorId);
       if(a && d && !errors.length){
         check(inPolygon(l.point,a.points),`${l.id}: подпись помещения вне его области`);
@@ -100,7 +102,7 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     check(a && b && a.id!==b.id,`${e.id}: неверные концы ребра`);
     check(Number.isFinite(e.weight) && e.weight>=0,`${e.id}: вес должен быть неотрицательным`);
     check(['corridor','door','stairs','lift'].includes(e.kind) && ['both','forward'].includes(e.direction),`${e.id}: неверный тип или направление`);
-    check(['open','closed','staff','unknown'].includes(e.status) && [true,false,null].includes(e.stepFree),`${e.id}: нужны status и stepFree`);
+    check((['open','closed','staff','unknown'].includes(e.status)||archive&&e.status==='plan') && [true,false,null].includes(e.stepFree),`${e.id}: нужны status и stepFree`);
     evidence(e,e.id);
     if(!a || !b)continue;
     check(a.buildingId===b.buildingId,`${e.id}: наружные переходы пока не поддерживаются`);
@@ -127,11 +129,11 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
   }
   if(errors.length)throw new Error(errors.join('\n'));
   const adjacent=new Map(pack.nodes.map(n=>[n.id,[]]));
-  for(const e of pack.edges)if(usableEdge(e)){adjacent.get(e.from).push(e.to);if(e.direction==='both')adjacent.get(e.to).push(e.from);}
+  for(const e of pack.edges)if(usableEdge(e,false,archive)){adjacent.get(e.from).push(e.to);if(e.direction==='both')adjacent.get(e.to).push(e.from);}
   const queue=pack.routeOrigins.map(id=>locations.get(id).nodeId), reached=new Set(queue);
   for(let i=0;i<queue.length;i++)for(const id of adjacent.get(queue[i]))if(!reached.has(id)){reached.add(id);queue.push(id);}
   for(const id of pack.declaredTargets) check(reached.has(locations.get(id).nodeId),`${id}: заявленная цель недостижима от routeOrigins по открытым проходам`);
-  if(pack.floors.length)check(dateOK(pack.verifiedAt),'Для набора с этажами нужна дата проверки');
+  if(pack.floors.length)check(dateOK(pack.verifiedAt)||archive&&pack.verifiedAt===null,'Для набора с этажами нужна дата проверки');
   if(errors.length)throw new Error(errors.join('\n'));
   return pack;
 }

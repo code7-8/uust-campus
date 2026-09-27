@@ -13,6 +13,7 @@ import sqlite3
 import threading
 import time
 from collections import defaultdict, deque
+from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
@@ -50,11 +51,15 @@ class Store:
               FOREIGN KEY(author_id) REFERENCES users(id));
             ''')
 
+    @contextmanager
     def connect(self):
         db = sqlite3.connect(self.path, timeout=10)
         db.row_factory = sqlite3.Row
         db.execute('PRAGMA foreign_keys=ON')
-        return db
+        try:
+            with db: yield db
+        finally:
+            db.close()
 
     def register(self, data, role='user'):
         username = str(data.get('username', '')).strip().lower()

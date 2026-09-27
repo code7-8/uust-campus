@@ -11,7 +11,7 @@ export function campusSvg(data, selected) {
     ${data.buildings.map(b=>{const p=campusPoint(b.center),on=selected?.buildingId===b.id;return `<g class="map-number ${on?'is-selected':''}" ${targetAttrs(data.locations.find(l=>l.id==='building:'+b.id))}><circle cx="${p[0]}" cy="${p[1]}" r="${on?37:31}"/><text x="${p[0]}" y="${p[1]}" dy=".35em">${esc(b.id)}</text>${on?`<text class="selected-building-label" x="${p[0]}" y="${p[1]+65}">Корпус ${esc(b.id)}</text>`:''}</g>`;}).join('')}</g>`;
 }
 
-export function floorSvg(data, floor, selected, route, typeFilter='all') {
+export function floorSvg(data, floor, selected, route, typeFilter='all',sourcePlan=false) {
   const places=data.locations.filter(l=>l.floorId===floor.id);
   const nodes=new Map(data.nodes.map(n=>[n.id,n]));
   const activeLines=(route?.links||[]).filter(l=>nodes.get(l.from).floorId===floor.id && nodes.get(l.to).floorId===floor.id);
@@ -20,7 +20,7 @@ export function floorSvg(data, floor, selected, route, typeFilter='all') {
   const pois=places.filter(l=>l.type!=='room' && (typeFilter==='all'||l.type===typeFilter||l.id===selected?.id))
     .sort((a,b)=>(b.id===selected?.id)-(a.id===selected?.id) || ['entrance','stairs','lift'].includes(b.type)-['entrance','stairs','lift'].includes(a.type))
     .filter(l=>{const special=l.id===selected?.id || route?.nodeIds.includes(l.nodeId);if(!special && accepted.some(p=>Math.hypot(p[0]-l.point[0],p[1]-l.point[1])<38))return false;accepted.push(l.point);return true;});
-  return `<g class="map-floor"><g class="floor-areas">${floor.areas.map(a=>{const l=places.find(l=>l.id===a.locationId);return `<polygon points="${points(a.points)}" class="floor-area ${a.kind} ${l?.id===selected?.id?'is-selected':''}" ${l?targetAttrs(l):''}/>`;}).join('')}</g>
+  return `<g class="map-floor ${sourcePlan?'source-plan':''}">${sourcePlan&&floor.image?`<image class="floor-source-image" href="${esc(floor.image)}" width="${floor.imageSize[0]}" height="${floor.imageSize[1]}" transform="matrix(0 -1 1 0 0 ${floor.imageSize[0]})"/>`:''}<g class="floor-areas">${floor.areas.map(a=>{const l=places.find(l=>l.id===a.locationId);return `<polygon points="${points(a.points)}" class="floor-area ${a.kind} ${l?.id===selected?.id?'is-selected':''}" ${l?targetAttrs(l):''}/>`;}).join('')}</g>
     <g class="floor-walls">${floor.walls.map(w=>`<polyline points="${points(w)}"/>`).join('')}</g>
     <g class="floor-doors">${floor.doors.map(d=>`<polyline points="${points(d.points)}"/>`).join('')}</g>
     <g class="route-halo">${activeLines.map(l=>`<polyline points="${points(l.edge.geometry)}"/>`).join('')}</g><g class="route-line">${activeLines.map(l=>`<polyline points="${points(l.edge.geometry)}"/>`).join('')}</g>

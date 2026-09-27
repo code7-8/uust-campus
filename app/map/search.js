@@ -3,6 +3,8 @@ const synonyms = {буфет:['буфет','кафе','столовая','еда
 const tokens = value => normalize(value).split(' ').map(w => Object.entries(synonyms).find(([,words])=>words.includes(w))?.[0] || w);
 export function parseQuery(query) {
   let q=normalize(query), buildingId=null;
+  const compact=q.match(/^([1-9])\s*[-/]\s*(\d+[а-яa-z]?)$/);
+  if(compact)return {buildingId:compact[1],text:compact[2],roomExplicit:true};
   const candidates=[q.match(/(?:корпус|корп|к)\s*(\d+)(?=\s|$)/),q.match(/(?:^|\s)(\d+)\s*(?:корпус|корп|к)(?=\s|$)/)].filter(Boolean);
   const match=candidates.sort((a,b)=>a.index-b.index)[0];
   if (match) {buildingId=match[1]; q=q.replace(match[0],' ').trim();}

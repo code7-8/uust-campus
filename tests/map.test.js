@@ -11,11 +11,17 @@ const fixture=read('./fixtures/map-pilot.json');
 const data=createMapData(fixture,buildings,{allowSynthetic:true});
 const start='test-3-1-entry',end='test-3-2-door';
 const check=p=>validateMapPack(p,buildings,{allowSynthetic:true});
-test('bundled campus is valid, has no invented floors, entrances or routes',()=>{
+test('CampusWay archive has real source floors and rooms but no field-verified route',()=>{
   const pack=read('../app/data/maps.json');check(pack);
   const real=createMapData(pack,buildings);
-  assert.equal(real.locations.length,9);assert.equal(real.floors.length,0);assert.equal(real.edges.length,0);
-  assert.equal(searchPlaces(real,'412').length,0);assert.equal(resolvePlace(real,{buildingId:'3',room:'412'}).exact,false);
+  assert.equal(real.floors.length,3);assert.equal(real.verification,'archive');assert.equal(real.verifiedAt,null);
+  assert.equal(searchPlaces(real,'6-416')[0].id,'cw-6-416');assert.equal(searchPlaces(real,'6 корпус 513')[0].id,'cw-6-513');
+  assert.equal(resolvePlace(real,{buildingId:'3',room:'412'}).exact,false);
+  const a=real.locations.find(l=>l.id==='cw-6-416').nodeId,b=real.locations.find(l=>l.id==='cw-6-513').nodeId;
+  assert.equal(findRoute(real,a,b),null);
+  assert.ok(findRoute(real,a,b,{allowArchive:true}));
+  assert.equal(findRoute(real,a,b,{allowArchive:true,stepFree:true}),null);
+  assert.ok(real.edges.every(e=>e.status==='plan'&&e.verifiedAt===null));
 });
 test('synthetic fixtures are rejected by production validation/import',()=>assert.throws(()=>validateMapPack(fixture,buildings),/Синтетический/));
 test('building synonyms and exact room search do not choose an ambiguous building',()=>{

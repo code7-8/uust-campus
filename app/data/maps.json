@@ -1,14 +1,3576 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "2026-09-27.1",
+  "dataVersion": "campusway-2026.09.27",
   "campusId": "uust-karl-marx",
-  "source": "Схема территории из материалов команды: ugatu_interactive_map_1.rar. Поэтажные планы не предоставлены.",
+  "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
   "verifiedAt": null,
+  "verification": "archive",
   "synthetic": false,
-  "floors": [],
-  "locations": [],
-  "nodes": [],
-  "edges": [],
-  "routeOrigins": [],
-  "declaredTargets": []
+  "floors": [
+    {
+      "id": "cw-6-f3",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "name": "3 этаж",
+      "order": 3,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "viewBox": [
+        0,
+        0,
+        514,
+        1280
+      ],
+      "areas": [
+        {
+          "id": "cw-6-f3-area-hall",
+          "kind": "corridor",
+          "points": [
+            [
+              80,
+              1147
+            ],
+            [
+              80,
+              1101
+            ],
+            [
+              356,
+              1101
+            ],
+            [
+              356,
+              6
+            ],
+            [
+              398,
+              6
+            ],
+            [
+              398,
+              1100
+            ],
+            [
+              491,
+              1100
+            ],
+            [
+              491,
+              1147
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-301-area",
+          "kind": "room",
+          "points": [
+            [
+              86,
+              1237
+            ],
+            [
+              86,
+              1151
+            ],
+            [
+              161,
+              1151
+            ],
+            [
+              161,
+              1237
+            ]
+          ],
+          "locationId": "cw-6-301"
+        },
+        {
+          "id": "cw-6-302-area",
+          "kind": "room",
+          "points": [
+            [
+              87,
+              1095
+            ],
+            [
+              87,
+              1008
+            ],
+            [
+              236,
+              1008
+            ],
+            [
+              236,
+              1095
+            ]
+          ],
+          "locationId": "cw-6-302"
+        },
+        {
+          "id": "cw-6-303-area",
+          "kind": "room",
+          "points": [
+            [
+              168,
+              1237
+            ],
+            [
+              168,
+              1155
+            ],
+            [
+              240,
+              1155
+            ],
+            [
+              240,
+              1237
+            ]
+          ],
+          "locationId": "cw-6-303"
+        },
+        {
+          "id": "cw-6-303a-area",
+          "kind": "room",
+          "points": [
+            [
+              247,
+              1237
+            ],
+            [
+              247,
+              1155
+            ],
+            [
+              321,
+              1155
+            ],
+            [
+              321,
+              1237
+            ]
+          ],
+          "locationId": "cw-6-303a"
+        },
+        {
+          "id": "cw-6-304-area",
+          "kind": "room",
+          "points": [
+            [
+              245,
+              1095
+            ],
+            [
+              245,
+              1007
+            ],
+            [
+              330,
+              1007
+            ],
+            [
+              330,
+              1095
+            ]
+          ],
+          "locationId": "cw-6-304"
+        },
+        {
+          "id": "cw-6-305-area",
+          "kind": "room",
+          "points": [
+            [
+              330,
+              1237
+            ],
+            [
+              330,
+              1149
+            ],
+            [
+              491,
+              1149
+            ],
+            [
+              491,
+              1237
+            ]
+          ],
+          "locationId": "cw-6-305"
+        },
+        {
+          "id": "cw-6-307-area",
+          "kind": "room",
+          "points": [
+            [
+              414,
+              1099
+            ],
+            [
+              414,
+              1009
+            ],
+            [
+              491,
+              1009
+            ],
+            [
+              491,
+              1099
+            ]
+          ],
+          "locationId": "cw-6-307"
+        },
+        {
+          "id": "cw-6-309-area",
+          "kind": "room",
+          "points": [
+            [
+              412,
+              921
+            ],
+            [
+              412,
+              842
+            ],
+            [
+              491,
+              842
+            ],
+            [
+              491,
+              921
+            ]
+          ],
+          "locationId": "cw-6-309"
+        },
+        {
+          "id": "cw-6-310-area",
+          "kind": "room",
+          "points": [
+            [
+              291,
+              835
+            ],
+            [
+              291,
+              760
+            ],
+            [
+              364,
+              760
+            ],
+            [
+              364,
+              835
+            ]
+          ],
+          "locationId": "cw-6-310"
+        },
+        {
+          "id": "cw-6-311-area",
+          "kind": "room",
+          "points": [
+            [
+              410,
+              836
+            ],
+            [
+              410,
+              757
+            ],
+            [
+              490,
+              757
+            ],
+            [
+              490,
+              836
+            ]
+          ],
+          "locationId": "cw-6-311"
+        },
+        {
+          "id": "cw-6-312-area",
+          "kind": "room",
+          "points": [
+            [
+              286,
+              755
+            ],
+            [
+              286,
+              641
+            ],
+            [
+              366,
+              641
+            ],
+            [
+              366,
+              755
+            ]
+          ],
+          "locationId": "cw-6-312"
+        },
+        {
+          "id": "cw-6-313-area",
+          "kind": "room",
+          "points": [
+            [
+              410,
+              754
+            ],
+            [
+              410,
+              643
+            ],
+            [
+              489,
+              643
+            ],
+            [
+              489,
+              754
+            ]
+          ],
+          "locationId": "cw-6-313"
+        },
+        {
+          "id": "cw-6-314-area",
+          "kind": "room",
+          "points": [
+            [
+              283,
+              635
+            ],
+            [
+              283,
+              521
+            ],
+            [
+              365,
+              521
+            ],
+            [
+              365,
+              635
+            ]
+          ],
+          "locationId": "cw-6-314"
+        },
+        {
+          "id": "cw-6-315-area",
+          "kind": "room",
+          "points": [
+            [
+              408,
+              636
+            ],
+            [
+              408,
+              356
+            ],
+            [
+              486,
+              356
+            ],
+            [
+              486,
+              636
+            ]
+          ],
+          "locationId": "cw-6-315"
+        },
+        {
+          "id": "cw-6-316-area",
+          "kind": "room",
+          "points": [
+            [
+              281,
+              514
+            ],
+            [
+              281,
+              436
+            ],
+            [
+              367,
+              436
+            ],
+            [
+              367,
+              514
+            ]
+          ],
+          "locationId": "cw-6-316"
+        },
+        {
+          "id": "cw-6-317-area",
+          "kind": "room",
+          "points": [
+            [
+              407,
+              265
+            ],
+            [
+              407,
+              110
+            ],
+            [
+              479,
+              110
+            ],
+            [
+              479,
+              265
+            ]
+          ],
+          "locationId": "cw-6-317"
+        },
+        {
+          "id": "cw-6-318-area",
+          "kind": "room",
+          "points": [
+            [
+              282,
+              429
+            ],
+            [
+              282,
+              351
+            ],
+            [
+              364,
+              351
+            ],
+            [
+              364,
+              429
+            ]
+          ],
+          "locationId": "cw-6-318"
+        },
+        {
+          "id": "cw-6-318a-area",
+          "kind": "room",
+          "points": [
+            [
+              282,
+              344
+            ],
+            [
+              282,
+              311
+            ],
+            [
+              365,
+              311
+            ],
+            [
+              365,
+              344
+            ]
+          ],
+          "locationId": "cw-6-318a"
+        },
+        {
+          "id": "cw-6-319-area",
+          "kind": "room",
+          "points": [
+            [
+              359,
+              99
+            ],
+            [
+              359,
+              8
+            ],
+            [
+              434,
+              8
+            ],
+            [
+              434,
+              99
+            ]
+          ],
+          "locationId": "cw-6-319"
+        },
+        {
+          "id": "cw-6-320-area",
+          "kind": "room",
+          "points": [
+            [
+              280,
+              270
+            ],
+            [
+              280,
+              236
+            ],
+            [
+              365,
+              236
+            ],
+            [
+              365,
+              270
+            ]
+          ],
+          "locationId": "cw-6-320"
+        },
+        {
+          "id": "cw-6-322-area",
+          "kind": "room",
+          "points": [
+            [
+              280,
+              148
+            ],
+            [
+              280,
+              108
+            ],
+            [
+              363,
+              108
+            ],
+            [
+              363,
+              148
+            ]
+          ],
+          "locationId": "cw-6-322"
+        }
+      ],
+      "walls": [],
+      "doors": [],
+      "image": "assets/campusway/floor-6-3.jpg",
+      "imageSize": [
+        1280,
+        514
+      ]
+    },
+    {
+      "id": "cw-6-f4",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "name": "4 этаж",
+      "order": 4,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "viewBox": [
+        290,
+        0,
+        390,
+        1536
+      ],
+      "areas": [
+        {
+          "id": "cw-6-f4-area-hall",
+          "kind": "corridor",
+          "points": [
+            [
+              460,
+              1501
+            ],
+            [
+              460,
+              116
+            ],
+            [
+              509,
+              116
+            ],
+            [
+              509,
+              1501
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-409-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              1393
+            ],
+            [
+              510,
+              1271
+            ],
+            [
+              640,
+              1271
+            ],
+            [
+              640,
+              1393
+            ]
+          ],
+          "locationId": "cw-6-409"
+        },
+        {
+          "id": "cw-6-410-area",
+          "kind": "room",
+          "points": [
+            [
+              318,
+              1267
+            ],
+            [
+              318,
+              1158
+            ],
+            [
+              456,
+              1158
+            ],
+            [
+              456,
+              1267
+            ]
+          ],
+          "locationId": "cw-6-410"
+        },
+        {
+          "id": "cw-6-411-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              1266
+            ],
+            [
+              510,
+              1046
+            ],
+            [
+              638,
+              1046
+            ],
+            [
+              638,
+              1266
+            ]
+          ],
+          "locationId": "cw-6-411"
+        },
+        {
+          "id": "cw-6-412-area",
+          "kind": "room",
+          "points": [
+            [
+              318,
+              1153
+            ],
+            [
+              318,
+              1038
+            ],
+            [
+              456,
+              1038
+            ],
+            [
+              456,
+              1153
+            ]
+          ],
+          "locationId": "cw-6-412"
+        },
+        {
+          "id": "cw-6-413-area",
+          "kind": "room",
+          "points": [
+            [
+              515,
+              1039
+            ],
+            [
+              515,
+              791
+            ],
+            [
+              640,
+              791
+            ],
+            [
+              640,
+              1039
+            ]
+          ],
+          "locationId": "cw-6-413"
+        },
+        {
+          "id": "cw-6-414-area",
+          "kind": "room",
+          "points": [
+            [
+              318,
+              1033
+            ],
+            [
+              318,
+              856
+            ],
+            [
+              456,
+              856
+            ],
+            [
+              456,
+              1033
+            ]
+          ],
+          "locationId": "cw-6-414"
+        },
+        {
+          "id": "cw-6-414a-area",
+          "kind": "room",
+          "points": [
+            [
+              319,
+              852
+            ],
+            [
+              319,
+              790
+            ],
+            [
+              456,
+              790
+            ],
+            [
+              456,
+              852
+            ]
+          ],
+          "locationId": "cw-6-414a"
+        },
+        {
+          "id": "cw-6-415-area",
+          "kind": "room",
+          "points": [
+            [
+              515,
+              787
+            ],
+            [
+              515,
+              488
+            ],
+            [
+              638,
+              488
+            ],
+            [
+              638,
+              787
+            ]
+          ],
+          "locationId": "cw-6-415"
+        },
+        {
+          "id": "cw-6-416-area",
+          "kind": "room",
+          "points": [
+            [
+              319,
+              785
+            ],
+            [
+              319,
+              488
+            ],
+            [
+              456,
+              488
+            ],
+            [
+              456,
+              785
+            ]
+          ],
+          "locationId": "cw-6-416"
+        },
+        {
+          "id": "cw-6-417-area",
+          "kind": "room",
+          "points": [
+            [
+              515,
+              368
+            ],
+            [
+              515,
+              118
+            ],
+            [
+              638,
+              118
+            ],
+            [
+              638,
+              368
+            ]
+          ],
+          "locationId": "cw-6-417"
+        },
+        {
+          "id": "cw-6-419-area",
+          "kind": "room",
+          "points": [
+            [
+              438,
+              111
+            ],
+            [
+              438,
+              40
+            ],
+            [
+              562,
+              40
+            ],
+            [
+              562,
+              111
+            ]
+          ],
+          "locationId": "cw-6-419"
+        },
+        {
+          "id": "cw-6-420-area",
+          "kind": "room",
+          "points": [
+            [
+              319,
+              252
+            ],
+            [
+              319,
+              118
+            ],
+            [
+              386,
+              118
+            ],
+            [
+              386,
+              252
+            ]
+          ],
+          "locationId": "cw-6-420"
+        },
+        {
+          "id": "cw-6-420a-area",
+          "kind": "room",
+          "points": [
+            [
+              320,
+              477
+            ],
+            [
+              320,
+              376
+            ],
+            [
+              456,
+              376
+            ],
+            [
+              456,
+              477
+            ]
+          ],
+          "locationId": "cw-6-420a"
+        },
+        {
+          "id": "cw-6-422-area",
+          "kind": "room",
+          "points": [
+            [
+              390,
+              174
+            ],
+            [
+              390,
+              120
+            ],
+            [
+              456,
+              120
+            ],
+            [
+              456,
+              174
+            ]
+          ],
+          "locationId": "cw-6-422"
+        },
+        {
+          "id": "cw-6-f4-area-west-landing",
+          "kind": "corridor",
+          "points": [
+            [
+              510,
+              1484
+            ],
+            [
+              510,
+              1410
+            ],
+            [
+              637,
+              1410
+            ],
+            [
+              637,
+              1484
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-f4-area-east-landing",
+          "kind": "corridor",
+          "points": [
+            [
+              510,
+              472
+            ],
+            [
+              510,
+              398
+            ],
+            [
+              637,
+              398
+            ],
+            [
+              637,
+              472
+            ]
+          ]
+        }
+      ],
+      "walls": [],
+      "doors": [
+        {
+          "id": "cw-6-415-door",
+          "nodeId": "cw-6-f4-node-door-415",
+          "points": [
+            [
+              515,
+              605
+            ],
+            [
+              515,
+              587
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-416-door",
+          "nodeId": "cw-6-f4-node-door-416",
+          "points": [
+            [
+              456,
+              533
+            ],
+            [
+              456,
+              515
+            ]
+          ]
+        }
+      ],
+      "image": "assets/campusway/floor-6-4.png",
+      "imageSize": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "cw-6-f5",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "name": "5 этаж",
+      "order": 5,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "viewBox": [
+        0,
+        0,
+        853,
+        1280
+      ],
+      "areas": [
+        {
+          "id": "cw-6-f5-area-hall",
+          "kind": "corridor",
+          "points": [
+            [
+              340,
+              1250
+            ],
+            [
+              340,
+              28
+            ],
+            [
+              498,
+              28
+            ],
+            [
+              498,
+              1250
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-509-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              1095
+            ],
+            [
+              510,
+              964
+            ],
+            [
+              829,
+              964
+            ],
+            [
+              829,
+              1095
+            ]
+          ],
+          "locationId": "cw-6-509"
+        },
+        {
+          "id": "cw-6-510-area",
+          "kind": "room",
+          "points": [
+            [
+              25,
+              954
+            ],
+            [
+              25,
+              765
+            ],
+            [
+              330,
+              765
+            ],
+            [
+              330,
+              954
+            ]
+          ],
+          "locationId": "cw-6-510"
+        },
+        {
+          "id": "cw-6-511-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              954
+            ],
+            [
+              510,
+              765
+            ],
+            [
+              829,
+              765
+            ],
+            [
+              829,
+              954
+            ]
+          ],
+          "locationId": "cw-6-511"
+        },
+        {
+          "id": "cw-6-512-area",
+          "kind": "room",
+          "points": [
+            [
+              25,
+              756
+            ],
+            [
+              25,
+              562
+            ],
+            [
+              330,
+              562
+            ],
+            [
+              330,
+              756
+            ]
+          ],
+          "locationId": "cw-6-512"
+        },
+        {
+          "id": "cw-6-513-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              756
+            ],
+            [
+              510,
+              562
+            ],
+            [
+              829,
+              562
+            ],
+            [
+              829,
+              756
+            ]
+          ],
+          "locationId": "cw-6-513"
+        },
+        {
+          "id": "cw-6-514-area",
+          "kind": "room",
+          "points": [
+            [
+              25,
+              553
+            ],
+            [
+              25,
+              354
+            ],
+            [
+              330,
+              354
+            ],
+            [
+              330,
+              553
+            ]
+          ],
+          "locationId": "cw-6-514"
+        },
+        {
+          "id": "cw-6-515-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              553
+            ],
+            [
+              510,
+              354
+            ],
+            [
+              829,
+              354
+            ],
+            [
+              829,
+              553
+            ]
+          ],
+          "locationId": "cw-6-515"
+        },
+        {
+          "id": "cw-6-516-area",
+          "kind": "room",
+          "points": [
+            [
+              25,
+              344
+            ],
+            [
+              25,
+              284
+            ],
+            [
+              330,
+              284
+            ],
+            [
+              330,
+              344
+            ]
+          ],
+          "locationId": "cw-6-516"
+        },
+        {
+          "id": "cw-6-518-area",
+          "kind": "room",
+          "points": [
+            [
+              25,
+              277
+            ],
+            [
+              25,
+              208
+            ],
+            [
+              330,
+              208
+            ],
+            [
+              330,
+              277
+            ]
+          ],
+          "locationId": "cw-6-518"
+        },
+        {
+          "id": "cw-6-520-area",
+          "kind": "room",
+          "points": [
+            [
+              25,
+              200
+            ],
+            [
+              25,
+              149
+            ],
+            [
+              330,
+              149
+            ],
+            [
+              330,
+              200
+            ]
+          ],
+          "locationId": "cw-6-520"
+        },
+        {
+          "id": "cw-6-522-area",
+          "kind": "room",
+          "points": [
+            [
+              204,
+              140
+            ],
+            [
+              204,
+              27
+            ],
+            [
+              330,
+              27
+            ],
+            [
+              330,
+              140
+            ]
+          ],
+          "locationId": "cw-6-522"
+        },
+        {
+          "id": "cw-6-517-area",
+          "kind": "room",
+          "points": [
+            [
+              510,
+              140
+            ],
+            [
+              510,
+              27
+            ],
+            [
+              829,
+              27
+            ],
+            [
+              829,
+              140
+            ]
+          ],
+          "locationId": "cw-6-517"
+        },
+        {
+          "id": "cw-6-f5-area-west-landing",
+          "kind": "corridor",
+          "points": [
+            [
+              510,
+              1225
+            ],
+            [
+              510,
+              1131
+            ],
+            [
+              829,
+              1131
+            ],
+            [
+              829,
+              1225
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-f5-area-east-landing",
+          "kind": "corridor",
+          "points": [
+            [
+              510,
+              311
+            ],
+            [
+              510,
+              217
+            ],
+            [
+              829,
+              217
+            ],
+            [
+              829,
+              311
+            ]
+          ]
+        }
+      ],
+      "walls": [],
+      "doors": [
+        {
+          "id": "cw-6-509-door",
+          "nodeId": "cw-6-f5-node-door-509",
+          "points": [
+            [
+              510,
+              1008
+            ],
+            [
+              510,
+              990
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-510-door",
+          "nodeId": "cw-6-f5-node-door-510",
+          "points": [
+            [
+              330,
+              919
+            ],
+            [
+              330,
+              901
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-511-door",
+          "nodeId": "cw-6-f5-node-door-511",
+          "points": [
+            [
+              510,
+              847
+            ],
+            [
+              510,
+              829
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-512-door",
+          "nodeId": "cw-6-f5-node-door-512",
+          "points": [
+            [
+              330,
+              689
+            ],
+            [
+              330,
+              671
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-513-door",
+          "nodeId": "cw-6-f5-node-door-513",
+          "points": [
+            [
+              510,
+              653
+            ],
+            [
+              510,
+              635
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-514-door",
+          "nodeId": "cw-6-f5-node-door-514",
+          "points": [
+            [
+              330,
+              523
+            ],
+            [
+              330,
+              505
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-515-door",
+          "nodeId": "cw-6-f5-node-door-515",
+          "points": [
+            [
+              510,
+              543
+            ],
+            [
+              510,
+              525
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-517-door",
+          "nodeId": "cw-6-f5-node-door-517",
+          "points": [
+            [
+              510,
+              102
+            ],
+            [
+              510,
+              84
+            ]
+          ]
+        }
+      ],
+      "image": "assets/campusway/floor-6-5.png",
+      "imageSize": [
+        1280,
+        853
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "cw-6-409",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Класс 6-409",
+      "number": "409",
+      "aliases": [
+        "6-409",
+        "кабинет 409",
+        "Класс"
+      ],
+      "point": [
+        575.0,
+        1332.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-409-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-410",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Преподавательская 6-410",
+      "number": "410",
+      "aliases": [
+        "6-410",
+        "кабинет 410",
+        "Преподавательская"
+      ],
+      "point": [
+        387.0,
+        1212.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-410-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-411",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Преподавательская 6-411",
+      "number": "411",
+      "aliases": [
+        "6-411",
+        "кабинет 411",
+        "Преподавательская"
+      ],
+      "point": [
+        574.0,
+        1156.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-411-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-412",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Лаборатория 6-412",
+      "number": "412",
+      "aliases": [
+        "6-412",
+        "кабинет 412",
+        "Лаборатория"
+      ],
+      "point": [
+        387.0,
+        1095.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-412-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-413",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Класс 6-413",
+      "number": "413",
+      "aliases": [
+        "6-413",
+        "кабинет 413",
+        "Класс"
+      ],
+      "point": [
+        577.5,
+        915.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-413-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-414",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Класс 6-414",
+      "number": "414",
+      "aliases": [
+        "6-414",
+        "кабинет 414",
+        "Класс"
+      ],
+      "point": [
+        387.0,
+        944.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-414-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-414a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Лаборатория 6-414а",
+      "number": "414а",
+      "aliases": [
+        "6-414а",
+        "кабинет 414а",
+        "Лаборатория"
+      ],
+      "point": [
+        387.5,
+        821.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-414a-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-415",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Аудитория 6-415",
+      "number": "415",
+      "aliases": [
+        "6-415",
+        "кабинет 415",
+        "Аудитория"
+      ],
+      "point": [
+        576.5,
+        637.5
+      ],
+      "nodeId": "cw-6-f4-node-door-415",
+      "areaId": "cw-6-415-area",
+      "doorId": "cw-6-415-door",
+      "photo": "assets/campusway/room-6-415.png"
+    },
+    {
+      "id": "cw-6-416",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Аудитория 6-416",
+      "number": "416",
+      "aliases": [
+        "6-416",
+        "кабинет 416",
+        "Аудитория"
+      ],
+      "point": [
+        387.5,
+        636.5
+      ],
+      "nodeId": "cw-6-f4-node-door-416",
+      "areaId": "cw-6-416-area",
+      "doorId": "cw-6-416-door",
+      "photo": "assets/campusway/room-6-416.png"
+    },
+    {
+      "id": "cw-6-417",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Преподавательская 6-417",
+      "number": "417",
+      "aliases": [
+        "6-417",
+        "кабинет 417",
+        "Преподавательская"
+      ],
+      "point": [
+        576.5,
+        243.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-417-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-419",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Лаборатория 6-419",
+      "number": "419",
+      "aliases": [
+        "6-419",
+        "кабинет 419",
+        "Лаборатория"
+      ],
+      "point": [
+        500.0,
+        75.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-419-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-420",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Кабинет 6-420",
+      "number": "420",
+      "aliases": [
+        "6-420",
+        "кабинет 420",
+        "Кабинет"
+      ],
+      "point": [
+        352.5,
+        185.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-420-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-420a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Кабинет 6-420а",
+      "number": "420а",
+      "aliases": [
+        "6-420а",
+        "кабинет 420а",
+        "Кабинет"
+      ],
+      "point": [
+        388.0,
+        426.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-420a-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-422",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "room",
+      "name": "Кабинет 6-422",
+      "number": "422",
+      "aliases": [
+        "6-422",
+        "кабинет 422",
+        "Кабинет"
+      ],
+      "point": [
+        423.0,
+        147.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-422-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-f4-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "aliases": [
+        "Лестница у левого торца"
+      ],
+      "point": [
+        550,
+        1447
+      ],
+      "nodeId": "cw-6-f4-node-west"
+    },
+    {
+      "id": "cw-6-f4-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница у аудитории 415",
+      "aliases": [
+        "Лестница у аудитории 415"
+      ],
+      "point": [
+        550,
+        435
+      ],
+      "nodeId": "cw-6-f4-node-east"
+    },
+    {
+      "id": "cw-6-f4-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "toilet",
+      "name": "Туалет",
+      "aliases": [
+        "Туалет"
+      ],
+      "point": [
+        380,
+        1371
+      ],
+      "nodeId": null
+    },
+    {
+      "id": "cw-6-509",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Лаборатория 6-509",
+      "number": "509",
+      "aliases": [
+        "6-509",
+        "кабинет 509",
+        "Лаборатория"
+      ],
+      "point": [
+        669.5,
+        1029.5
+      ],
+      "nodeId": "cw-6-f5-node-door-509",
+      "areaId": "cw-6-509-area",
+      "doorId": "cw-6-509-door"
+    },
+    {
+      "id": "cw-6-510",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Преподавательская 6-510",
+      "number": "510",
+      "aliases": [
+        "6-510",
+        "кабинет 510",
+        "Преподавательская"
+      ],
+      "point": [
+        177.5,
+        859.5
+      ],
+      "nodeId": "cw-6-f5-node-door-510",
+      "areaId": "cw-6-510-area",
+      "doorId": "cw-6-510-door"
+    },
+    {
+      "id": "cw-6-511",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Лаборатория 6-511",
+      "number": "511",
+      "aliases": [
+        "6-511",
+        "кабинет 511",
+        "Лаборатория"
+      ],
+      "point": [
+        669.5,
+        859.5
+      ],
+      "nodeId": "cw-6-f5-node-door-511",
+      "areaId": "cw-6-511-area",
+      "doorId": "cw-6-511-door"
+    },
+    {
+      "id": "cw-6-512",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Аудитория 6-512",
+      "number": "512",
+      "aliases": [
+        "6-512",
+        "кабинет 512",
+        "Аудитория"
+      ],
+      "point": [
+        177.5,
+        659.0
+      ],
+      "nodeId": "cw-6-f5-node-door-512",
+      "areaId": "cw-6-512-area",
+      "doorId": "cw-6-512-door"
+    },
+    {
+      "id": "cw-6-513",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Аудитория 6-513",
+      "number": "513",
+      "aliases": [
+        "6-513",
+        "кабинет 513",
+        "Аудитория"
+      ],
+      "point": [
+        669.5,
+        659.0
+      ],
+      "nodeId": "cw-6-f5-node-door-513",
+      "areaId": "cw-6-513-area",
+      "doorId": "cw-6-513-door",
+      "photo": "assets/campusway/room-6-513.png"
+    },
+    {
+      "id": "cw-6-514",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Аудитория 6-514",
+      "number": "514",
+      "aliases": [
+        "6-514",
+        "кабинет 514",
+        "Аудитория"
+      ],
+      "point": [
+        177.5,
+        453.5
+      ],
+      "nodeId": "cw-6-f5-node-door-514",
+      "areaId": "cw-6-514-area",
+      "doorId": "cw-6-514-door"
+    },
+    {
+      "id": "cw-6-515",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Аудитория 6-515",
+      "number": "515",
+      "aliases": [
+        "6-515",
+        "кабинет 515",
+        "Аудитория"
+      ],
+      "point": [
+        669.5,
+        453.5
+      ],
+      "nodeId": "cw-6-f5-node-door-515",
+      "areaId": "cw-6-515-area",
+      "doorId": "cw-6-515-door"
+    },
+    {
+      "id": "cw-6-516",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Служебное помещение 6-516",
+      "number": "516",
+      "aliases": [
+        "6-516",
+        "кабинет 516",
+        "Служебное помещение"
+      ],
+      "point": [
+        177.5,
+        314.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-516-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-518",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Кабинет 6-518",
+      "number": "518",
+      "aliases": [
+        "6-518",
+        "кабинет 518",
+        "Кабинет"
+      ],
+      "point": [
+        177.5,
+        242.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-518-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-520",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Кабинет 6-520",
+      "number": "520",
+      "aliases": [
+        "6-520",
+        "кабинет 520",
+        "Кабинет"
+      ],
+      "point": [
+        177.5,
+        174.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-520-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-522",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Служебное помещение 6-522",
+      "number": "522",
+      "aliases": [
+        "6-522",
+        "кабинет 522",
+        "Служебное помещение"
+      ],
+      "point": [
+        267.0,
+        83.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-522-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-517",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "room",
+      "name": "Аудитория 6-517",
+      "number": "517",
+      "aliases": [
+        "6-517",
+        "кабинет 517",
+        "Аудитория"
+      ],
+      "point": [
+        669.5,
+        83.5
+      ],
+      "nodeId": "cw-6-f5-node-door-517",
+      "areaId": "cw-6-517-area",
+      "doorId": "cw-6-517-door"
+    },
+    {
+      "id": "cw-6-f5-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "aliases": [
+        "Лестница у левого торца"
+      ],
+      "point": [
+        600,
+        1178
+      ],
+      "nodeId": "cw-6-f5-node-west"
+    },
+    {
+      "id": "cw-6-f5-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "stairs",
+      "name": "Лестница у аудитории 515",
+      "aliases": [
+        "Лестница у аудитории 515"
+      ],
+      "point": [
+        600,
+        264
+      ],
+      "nodeId": "cw-6-f5-node-east"
+    },
+    {
+      "id": "cw-6-f5-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "toilet",
+      "name": "Туалет",
+      "aliases": [
+        "Туалет"
+      ],
+      "point": [
+        180,
+        1009
+      ],
+      "nodeId": null
+    },
+    {
+      "id": "cw-6-301",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-301",
+      "number": "301",
+      "aliases": [
+        "6-301",
+        "кабинет 301",
+        "Аудитория"
+      ],
+      "point": [
+        123.5,
+        1194.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-301-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-302",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Лаборатория 6-302",
+      "number": "302",
+      "aliases": [
+        "6-302",
+        "кабинет 302",
+        "Лаборатория"
+      ],
+      "point": [
+        161.5,
+        1051.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-302-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-303",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-303",
+      "number": "303",
+      "aliases": [
+        "6-303",
+        "кабинет 303",
+        "Аудитория"
+      ],
+      "point": [
+        204.0,
+        1196.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-303-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-303a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-303а",
+      "number": "303а",
+      "aliases": [
+        "6-303а",
+        "кабинет 303а",
+        "Аудитория"
+      ],
+      "point": [
+        284.0,
+        1196.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-303a-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-304",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-304",
+      "number": "304",
+      "aliases": [
+        "6-304",
+        "кабинет 304",
+        "Аудитория"
+      ],
+      "point": [
+        287.5,
+        1051.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-304-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-305",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-305",
+      "number": "305",
+      "aliases": [
+        "6-305",
+        "кабинет 305",
+        "Аудитория"
+      ],
+      "point": [
+        410.5,
+        1193.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-305-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-307",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-307",
+      "number": "307",
+      "aliases": [
+        "6-307",
+        "кабинет 307",
+        "Аудитория"
+      ],
+      "point": [
+        452.5,
+        1054.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-307-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-309",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Аудитория 6-309",
+      "number": "309",
+      "aliases": [
+        "6-309",
+        "кабинет 309",
+        "Аудитория"
+      ],
+      "point": [
+        451.5,
+        881.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-309-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-310",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Преподавательская 6-310",
+      "number": "310",
+      "aliases": [
+        "6-310",
+        "кабинет 310",
+        "Преподавательская"
+      ],
+      "point": [
+        327.5,
+        797.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-310-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-311",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Лаборатория 6-311",
+      "number": "311",
+      "aliases": [
+        "6-311",
+        "кабинет 311",
+        "Лаборатория"
+      ],
+      "point": [
+        450.0,
+        796.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-311-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-312",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Класс 6-312",
+      "number": "312",
+      "aliases": [
+        "6-312",
+        "кабинет 312",
+        "Класс"
+      ],
+      "point": [
+        326.0,
+        698.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-312-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-313",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Класс 6-313",
+      "number": "313",
+      "aliases": [
+        "6-313",
+        "кабинет 313",
+        "Класс"
+      ],
+      "point": [
+        449.5,
+        698.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-313-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-314",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Класс 6-314",
+      "number": "314",
+      "aliases": [
+        "6-314",
+        "кабинет 314",
+        "Класс"
+      ],
+      "point": [
+        324.0,
+        578.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-314-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-315",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Преподавательская 6-315",
+      "number": "315",
+      "aliases": [
+        "6-315",
+        "кабинет 315",
+        "Преподавательская"
+      ],
+      "point": [
+        447.0,
+        496.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-315-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-316",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Лаборатория 6-316",
+      "number": "316",
+      "aliases": [
+        "6-316",
+        "кабинет 316",
+        "Лаборатория"
+      ],
+      "point": [
+        324.0,
+        475.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-316-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-317",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Класс 6-317",
+      "number": "317",
+      "aliases": [
+        "6-317",
+        "кабинет 317",
+        "Класс"
+      ],
+      "point": [
+        443.0,
+        187.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-317-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-318",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Класс 6-318",
+      "number": "318",
+      "aliases": [
+        "6-318",
+        "кабинет 318",
+        "Класс"
+      ],
+      "point": [
+        323.0,
+        390.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-318-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-318a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Кабинет 6-318а",
+      "number": "318а",
+      "aliases": [
+        "6-318а",
+        "кабинет 318а",
+        "Кабинет"
+      ],
+      "point": [
+        323.5,
+        327.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-318a-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-319",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Класс 6-319",
+      "number": "319",
+      "aliases": [
+        "6-319",
+        "кабинет 319",
+        "Класс"
+      ],
+      "point": [
+        396.5,
+        53.5
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-319-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-320",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Кабинет 6-320",
+      "number": "320",
+      "aliases": [
+        "6-320",
+        "кабинет 320",
+        "Кабинет"
+      ],
+      "point": [
+        322.5,
+        253.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-320-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-322",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "room",
+      "name": "Приёмная 6-322",
+      "number": "322",
+      "aliases": [
+        "6-322",
+        "кабинет 322",
+        "Приёмная"
+      ],
+      "point": [
+        321.5,
+        128.0
+      ],
+      "nodeId": null,
+      "areaId": "cw-6-322-area",
+      "doorId": null
+    },
+    {
+      "id": "cw-6-f3-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "toilet",
+      "name": "Туалет",
+      "aliases": [
+        "Туалет"
+      ],
+      "point": [
+        323,
+        893
+      ],
+      "nodeId": null
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cw-6-f4-node-door-415",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Аудитория 6-415",
+      "point": [
+        515,
+        596
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-416",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Аудитория 6-416",
+      "point": [
+        456,
+        524
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "point": [
+        550,
+        1447
+      ],
+      "connectorId": "cw-stairs-west"
+    },
+    {
+      "id": "cw-6-f4-node-west-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1447
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница у аудитории 415",
+      "point": [
+        550,
+        435
+      ],
+      "connectorId": "cw-stairs-east"
+    },
+    {
+      "id": "cw-6-f4-node-east-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        435
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-415",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        596
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-416",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        524
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "landmark",
+      "name": "Туалет",
+      "point": [
+        380,
+        1371
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-509",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Лаборатория 6-509",
+      "point": [
+        510,
+        999
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-510",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Преподавательская 6-510",
+      "point": [
+        330,
+        910
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-511",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Лаборатория 6-511",
+      "point": [
+        510,
+        838
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-512",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-512",
+      "point": [
+        330,
+        680
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-513",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-513",
+      "point": [
+        510,
+        644
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-514",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-514",
+      "point": [
+        330,
+        514
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-515",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-515",
+      "point": [
+        510,
+        534
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-517",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-517",
+      "point": [
+        510,
+        93
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "point": [
+        600,
+        1178
+      ],
+      "connectorId": "cw-stairs-west"
+    },
+    {
+      "id": "cw-6-f5-node-west-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        1178
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "stairs",
+      "name": "Лестница у аудитории 515",
+      "point": [
+        600,
+        264
+      ],
+      "connectorId": "cw-stairs-east"
+    },
+    {
+      "id": "cw-6-f5-node-east-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        264
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-509",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        999
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-510",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        910
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-511",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        838
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-512",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        680
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-513",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        644
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-514",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        514
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-515",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        534
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-517",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        93
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "landmark",
+      "name": "Туалет",
+      "point": [
+        180,
+        1009
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "landmark",
+      "name": "Туалет",
+      "point": [
+        323,
+        893
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "cw-edge-1",
+      "to": "cw-6-f4-node-west-hall",
+      "kind": "corridor",
+      "weight": 64.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          550,
+          1447
+        ],
+        [
+          486,
+          1447
+        ]
+      ],
+      "from": "cw-6-f4-node-west"
+    },
+    {
+      "id": "cw-edge-2",
+      "to": "cw-6-f4-node-east-hall",
+      "kind": "corridor",
+      "weight": 64.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          550,
+          435
+        ],
+        [
+          486,
+          435
+        ]
+      ],
+      "from": "cw-6-f4-node-east"
+    },
+    {
+      "id": "cw-edge-3",
+      "to": "cw-6-f4-node-door-415",
+      "kind": "corridor",
+      "weight": 29.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          596
+        ],
+        [
+          515,
+          596
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-415"
+    },
+    {
+      "id": "cw-edge-4",
+      "to": "cw-6-f4-node-door-416",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          524
+        ],
+        [
+          456,
+          524
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-416"
+    },
+    {
+      "id": "cw-edge-5",
+      "to": "cw-6-f4-node-hall-415",
+      "kind": "corridor",
+      "weight": 851.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1447
+        ],
+        [
+          486,
+          596
+        ]
+      ],
+      "from": "cw-6-f4-node-west-hall"
+    },
+    {
+      "id": "cw-edge-6",
+      "to": "cw-6-f4-node-hall-416",
+      "kind": "corridor",
+      "weight": 72.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          596
+        ],
+        [
+          486,
+          524
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-415"
+    },
+    {
+      "id": "cw-edge-7",
+      "to": "cw-6-f4-node-east-hall",
+      "kind": "corridor",
+      "weight": 89.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          524
+        ],
+        [
+          486,
+          435
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-416"
+    },
+    {
+      "id": "cw-edge-8",
+      "to": "cw-6-f5-node-west-hall",
+      "kind": "corridor",
+      "weight": 180.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          600,
+          1178
+        ],
+        [
+          420,
+          1178
+        ]
+      ],
+      "from": "cw-6-f5-node-west"
+    },
+    {
+      "id": "cw-edge-9",
+      "to": "cw-6-f5-node-west",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f4-node-west"
+    },
+    {
+      "id": "cw-edge-10",
+      "to": "cw-6-f5-node-east-hall",
+      "kind": "corridor",
+      "weight": 180.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          600,
+          264
+        ],
+        [
+          420,
+          264
+        ]
+      ],
+      "from": "cw-6-f5-node-east"
+    },
+    {
+      "id": "cw-edge-11",
+      "to": "cw-6-f5-node-east",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f4-node-east"
+    },
+    {
+      "id": "cw-edge-12",
+      "to": "cw-6-f5-node-door-509",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          999
+        ],
+        [
+          510,
+          999
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-509"
+    },
+    {
+      "id": "cw-edge-13",
+      "to": "cw-6-f5-node-door-510",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          910
+        ],
+        [
+          330,
+          910
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-510"
+    },
+    {
+      "id": "cw-edge-14",
+      "to": "cw-6-f5-node-door-511",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          838
+        ],
+        [
+          510,
+          838
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-511"
+    },
+    {
+      "id": "cw-edge-15",
+      "to": "cw-6-f5-node-door-512",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          680
+        ],
+        [
+          330,
+          680
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-512"
+    },
+    {
+      "id": "cw-edge-16",
+      "to": "cw-6-f5-node-door-513",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          644
+        ],
+        [
+          510,
+          644
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-513"
+    },
+    {
+      "id": "cw-edge-17",
+      "to": "cw-6-f5-node-door-514",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          514
+        ],
+        [
+          330,
+          514
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-514"
+    },
+    {
+      "id": "cw-edge-18",
+      "to": "cw-6-f5-node-door-515",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          534
+        ],
+        [
+          510,
+          534
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-515"
+    },
+    {
+      "id": "cw-edge-19",
+      "to": "cw-6-f5-node-door-517",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          93
+        ],
+        [
+          510,
+          93
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-517"
+    },
+    {
+      "id": "cw-edge-20",
+      "to": "cw-6-f5-node-hall-509",
+      "kind": "corridor",
+      "weight": 179.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          1178
+        ],
+        [
+          420,
+          999
+        ]
+      ],
+      "from": "cw-6-f5-node-west-hall"
+    },
+    {
+      "id": "cw-edge-21",
+      "to": "cw-6-f5-node-hall-510",
+      "kind": "corridor",
+      "weight": 89.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          999
+        ],
+        [
+          420,
+          910
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-509"
+    },
+    {
+      "id": "cw-edge-22",
+      "to": "cw-6-f5-node-hall-511",
+      "kind": "corridor",
+      "weight": 72.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          910
+        ],
+        [
+          420,
+          838
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-510"
+    },
+    {
+      "id": "cw-edge-23",
+      "to": "cw-6-f5-node-hall-512",
+      "kind": "corridor",
+      "weight": 158.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          838
+        ],
+        [
+          420,
+          680
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-511"
+    },
+    {
+      "id": "cw-edge-24",
+      "to": "cw-6-f5-node-hall-513",
+      "kind": "corridor",
+      "weight": 36.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          680
+        ],
+        [
+          420,
+          644
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-512"
+    },
+    {
+      "id": "cw-edge-25",
+      "to": "cw-6-f5-node-hall-515",
+      "kind": "corridor",
+      "weight": 110.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          644
+        ],
+        [
+          420,
+          534
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-513"
+    },
+    {
+      "id": "cw-edge-26",
+      "to": "cw-6-f5-node-hall-514",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          534
+        ],
+        [
+          420,
+          514
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-515"
+    },
+    {
+      "id": "cw-edge-27",
+      "to": "cw-6-f5-node-east-hall",
+      "kind": "corridor",
+      "weight": 250.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          514
+        ],
+        [
+          420,
+          264
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-514"
+    },
+    {
+      "id": "cw-edge-28",
+      "to": "cw-6-f5-node-hall-517",
+      "kind": "corridor",
+      "weight": 171.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          264
+        ],
+        [
+          420,
+          93
+        ]
+      ],
+      "from": "cw-6-f5-node-east-hall"
+    }
+  ],
+  "routeOrigins": [
+    "cw-6-f4-west",
+    "cw-6-f4-east",
+    "cw-6-f5-west",
+    "cw-6-f5-east"
+  ],
+  "declaredTargets": [
+    "cw-6-415",
+    "cw-6-416",
+    "cw-6-509",
+    "cw-6-510",
+    "cw-6-511",
+    "cw-6-512",
+    "cw-6-513",
+    "cw-6-514",
+    "cw-6-515",
+    "cw-6-517"
+  ]
 }
