@@ -1,4 +1,4 @@
-param([string]$Sdk = $env:ANDROID_HOME, [string]$Jdk = $env:JAVA_HOME)
+param([string]$Sdk = $env:ANDROID_HOME, [string]$Jdk = $env:JAVA_HOME, [switch]$SideBySide)
 $ErrorActionPreference = 'Stop'
 $Project = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $Project
@@ -14,6 +14,16 @@ $env:JAVA_HOME = $Jdk
 New-Item -ItemType Directory -Force -Path "$Build\classes","$Build\dex","$Project\artifacts","$Project\tools\signing" | Out-Null
 Copy-Item -LiteralPath "$Project\android" -Destination "$Stage\android" -Recurse
 Copy-Item -LiteralPath "$Project\app" -Destination "$Stage\app" -Recurse
+if ($SideBySide) {
+  # Keep the Java class package; only the install identity and launcher aliases change.
+  $ManifestPath = Join-Path $Stage 'android\AndroidManifest.xml'
+  $ManifestText = Get-Content -LiteralPath $ManifestPath -Raw -Encoding UTF8
+  $ManifestText = $ManifestText.Replace('package="ru.uust.campus"', 'package="ru.uust.campus.preview"')
+  $ManifestText = $ManifestText.Replace('android:name=".MainActivity"', 'android:name="ru.uust.campus.MainActivity"')
+  $ManifestText = $ManifestText.Replace('android:targetActivity=".MainActivity"', 'android:targetActivity="ru.uust.campus.MainActivity"')
+  $ManifestText = $ManifestText -replace '(android:label="[^"]+)(")', '$1 0.2.1$2'
+  [IO.File]::WriteAllText($ManifestPath, $ManifestText, [Text.UTF8Encoding]::new($false))
+}
 # Android's Windows aapt2 cannot reliably read Cyrillic paths. Stage only this
 # project's source in an ASCII temporary directory; keep the deliverables here.
 function Check { if ($LASTEXITCODE -ne 0) { throw "Build command failed: $LASTEXITCODE" } }
@@ -38,6 +48,7 @@ if (-not (Test-Path -LiteralPath $Key)) {
   Check
 }
 $Apk = "$Project\artifacts\uust-campus-0.2.1.apk"
+if ($SideBySide) { $Apk = "$Project\artifacts\uust-campus-0.2.1-parallel.apk" }
 & "$Jdk\bin\java.exe" -jar "$Bt\lib\apksigner.jar" sign --ks $Key --ks-key-alias campus --ks-pass pass:android --key-pass pass:android --out "$Build\campus.apk" "$Build\aligned.apk"
 Check
 Copy-Item -LiteralPath "$Build\campus.apk" -Destination $Apk -Force
