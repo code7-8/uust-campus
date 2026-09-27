@@ -35,6 +35,10 @@ export function findRoute(data, startId, endId, {stepFree = false,allowArchive=f
 export function routeSteps(data, route) {
   if (!route) return [];
   const nodes = new Map(data.nodes.map(n => [n.id,n]));
+  if(data.kind==='campus')return route.nodeIds.filter(id=>nodes.get(id).buildingId).map((id,index,ids)=>({
+    text:ids.length===1?'Старт и цель: '+nodes.get(id).name:(index===0?'Начало: ':index===ids.length-1?'Цель: ':'Через: ')+nodes.get(id).name,
+    floorId:null,nodeId:id
+  }));
   const floorName = id => data.floors.find(f => f.id===id)?.name || id;
   const name = id => data.locations.find(l => l.nodeId===id)?.name || nodes.get(id)?.name || 'ориентир';
   const steps = [{text:`Начало: ${name(route.startId)}`, floorId:nodes.get(route.startId).floorId, nodeId:route.startId}];
