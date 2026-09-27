@@ -37,7 +37,7 @@ if (-not (Test-Path -LiteralPath $Key)) {
   & "$Jdk\bin\keytool.exe" -genkeypair -keystore $Key -storepass android -keypass android -alias campus -dname 'CN=UUST Campus Hackathon' -keyalg RSA -keysize 2048 -validity 10000
   Check
 }
-$Apk = "$Project\artifacts\uust-campus-0.1.0.apk"
+$Apk = "$Project\artifacts\uust-campus-0.2.0.apk"
 & "$Jdk\bin\java.exe" -jar "$Bt\lib\apksigner.jar" sign --ks $Key --ks-key-alias campus --ks-pass pass:android --key-pass pass:android --out "$Build\campus.apk" "$Build\aligned.apk"
 Check
 Copy-Item -LiteralPath "$Build\campus.apk" -Destination $Apk -Force

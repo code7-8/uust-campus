@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Синтетический тест карты — не план университета</title>
+<link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/map/map.css">
+<style>.test-banner{background:#fff0bf;color:#614317;text-align:center;font-size:12px;font-weight:700;padding:8px}.test-shell{max-width:580px;margin:auto;height:100dvh;display:flex;flex-direction:column}#map-root{flex:1;min-height:0}</style></head>
+<body><main class="test-shell"><div class="test-banner">СИНТЕТИЧЕСКИЙ ТЕСТ · НЕ ПЛАН УНИВЕРСИТЕТА</div><div id="map-root"></div></main>
+<script type="module">
+import {createMapController} from '/map/view.js';
+const [pack,{buildings}]=await Promise.all([fetch('/test-fixture.json').then(r=>r.json()),fetch('/data/buildings.json').then(r=>r.json())]);
+const storage={read(){return null;},write(){return true;}};
+const map=createMapController({buildings,bundledPack:pack,storage,external(){},onFavorite(){},isFavorite(){return false;},testMode:true});
+map.mount(document.querySelector('#map-root'));
+</script></body></html>

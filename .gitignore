@@ -17,3 +17,7 @@ Thumbs.db
 local.properties
 node_modules/
 __pycache__/
+server/data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

@@ -7,6 +7,8 @@ import json, re, argparse
 
 ROOT = Path(__file__).resolve().parents[1]
 class Handler(SimpleHTTPRequestHandler):
+    # Windows registry may associate .js with text/plain; modules require JS MIME.
+    extensions_map = {**SimpleHTTPRequestHandler.extensions_map, '.js':'application/javascript', '.mjs':'application/javascript', '.css':'text/css', '.json':'application/json', '.svg':'image/svg+xml'}
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT / 'app'), **kwargs)
     def do_GET(self):

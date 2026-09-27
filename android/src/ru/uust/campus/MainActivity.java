@@ -22,6 +22,7 @@ public final class MainActivity extends Activity {
     private static final String ORIGIN = "appassets.androidplatform.net";
     private static final String API = "https://dev.uust-time.ru/api/v/852972/";
     private final ConcurrentHashMap<String, Cached> cache = new ConcurrentHashMap<>();
+    private final ExecutorService communityExecutor = Executors.newFixedThreadPool(2);
     private static class Cached { final byte[] data; final long at; Cached(byte[] d) {data=d; at=System.currentTimeMillis();} }
 
     @Override public void onCreate(Bundle state) {
@@ -41,7 +42,7 @@ public final class MainActivity extends Activity {
         s.setAllowFileAccess(false);
         s.setAllowContentAccess(true);
         s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
-        s.setTextZoom(100);
+        s.setTextZoom(Math.round(100 * getResources().getConfiguration().fontScale));
         web.addJavascriptInterface(new CampusActions(), "CampusAndroid");
         web.setWebViewClient(new WebViewClient() {
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -59,7 +60,7 @@ public final class MainActivity extends Activity {
                 try {
                     String asset = path.equals("/") ? "index.html" : path.substring(1);
                     if (asset.contains("..")) return response(403, "text/plain", "Blocked");
-                    String mime = asset.endsWith(".js") ? "application/javascript" : asset.endsWith(".css") ? "text/css" : asset.endsWith(".json") ? "application/json" : asset.endsWith(".svg") ? "image/svg+xml" : asset.endsWith(".jpg") ? "image/jpeg" : asset.endsWith(".woff2") ? "font/woff2" : "text/html";
+                    String mime = asset.endsWith(".js") ? "application/javascript" : asset.endsWith(".css") ? "text/css" : asset.endsWith(".json") ? "application/json" : asset.endsWith(".svg") ? "image/svg+xml" : asset.endsWith(".png") ? "image/png" : asset.endsWith(".jpg") ? "image/jpeg" : asset.endsWith(".woff2") ? "font/woff2" : "text/html";
                     return new WebResourceResponse(mime, "UTF-8", getAssets().open(asset));
                 } catch (IOException e) {android.util.Log.e("CampusAssets", path, e); return response(404, "text/plain", "Not found");}
             }
@@ -114,6 +115,55 @@ public final class MainActivity extends Activity {
         runOnUiThread(() -> {try {startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(Exception e){Toast.makeText(this,"Не найден браузер",Toast.LENGTH_SHORT).show();}});
     }
     public final class CampusActions {
+        @JavascriptInterface public void setColorTheme(String theme) {
+            final boolean green = "green".equals(theme);
+            runOnUiThread(() -> {
+                int color = android.graphics.Color.parseColor(green ? "#f6f7f2" : "#faf8ff");
+                getWindow().setStatusBarColor(color); getWindow().setNavigationBarColor(color); web.setBackgroundColor(color);
+                String chosen = green ? "GreenLauncher" : "PurpleLauncher";
+                String previous = getPreferences(0).getString("launcherTheme", "PurpleLauncher");
+                if (!chosen.equals(previous)) {
+                    android.content.pm.PackageManager pm = getPackageManager();
+                    pm.setComponentEnabledSetting(new android.content.ComponentName(MainActivity.this, getPackageName()+"."+chosen), 1, android.content.pm.PackageManager.DONT_KILL_APP);
+                    pm.setComponentEnabledSetting(new android.content.ComponentName(MainActivity.this, getPackageName()+"."+(green?"PurpleLauncher":"GreenLauncher")), 2, android.content.pm.PackageManager.DONT_KILL_APP);
+                    getPreferences(0).edit().putString("launcherTheme", chosen).apply();
+                }
+            });
+        }
+        @JavascriptInterface public void serverRequest(String request) {
+            communityExecutor.execute(() -> {
+                String id = ""; int status = 0; String result = "";
+                try {
+                    JSONObject p = new JSONObject(request); id = p.getString("id");
+                    URL base = new URL(p.getString("baseUrl"));
+                    String host = base.getHost(), protocol = base.getProtocol();
+                    boolean local = Arrays.asList("localhost","127.0.0.1","10.0.2.2","192.168.137.1","192.168.31.245").contains(host);
+                    if (!(protocol.equals("https") || protocol.equals("http") && local) || base.getUserInfo()!=null || base.getQuery()!=null || base.getRef()!=null || !base.getPath().matches("/?")) throw new IOException("Invalid server address");
+                    String path = p.getString("path"), method = p.getString("method");
+                    if (!path.matches("/v1/[a-zA-Z0-9/_-]+") || !Arrays.asList("GET","POST","PATCH","DELETE").contains(method)) throw new IOException("Invalid request");
+                    HttpURLConnection conn = (HttpURLConnection)new URL(protocol, host, base.getPort(), path).openConnection(Proxy.NO_PROXY);
+                    conn.setConnectTimeout(8000); conn.setReadTimeout(12000); conn.setInstanceFollowRedirects(false); conn.setRequestMethod(method);
+                    conn.setRequestProperty("Accept", "application/json");
+                    String token = p.optString("token");
+                    if (!token.isEmpty()) {if(!token.matches("[A-Za-z0-9_-]{20,200}"))throw new IOException("Invalid token");conn.setRequestProperty("Authorization", "Bearer " + token);}
+                    try {
+                        if (!method.equals("GET")) {
+                            byte[] body = p.optJSONObject("body")==null ? "{}".getBytes(StandardCharsets.UTF_8) : p.getJSONObject("body").toString().getBytes(StandardCharsets.UTF_8);
+                            if(body.length>65536)throw new IOException("Request too large");
+                            conn.setRequestProperty("Content-Type", "application/json");conn.setDoOutput(true);conn.setFixedLengthStreamingMode(body.length);
+                            try(OutputStream out=conn.getOutputStream()){out.write(body);}
+                        }
+                        status=conn.getResponseCode();
+                        InputStream stream=status>=400?conn.getErrorStream():conn.getInputStream();
+                        ByteArrayOutputStream out=new ByteArrayOutputStream();
+                        if(stream!=null)try(InputStream in=stream){byte[] buf=new byte[8192];int n;while((n=in.read(buf))!=-1){out.write(buf,0,n);if(out.size()>2*1024*1024)throw new IOException("Response too large");}}
+                        result=new String(out.toByteArray(),StandardCharsets.UTF_8);
+                    } finally {conn.disconnect();}
+                } catch(Exception e) {status=0;result="{\"error\":\"Сервер недоступен. Проверьте адрес ноутбука и подключение к точке доступа.\"}";}
+                final String callback="window.campusServerResult && window.campusServerResult("+JSONObject.quote(id)+","+status+","+JSONObject.quote(result)+")";
+                runOnUiThread(() -> {if(!isFinishing()&&!isDestroyed())web.evaluateJavascript(callback,null);});
+            });
+        }
         @JavascriptInterface public void openExternal(String url) {MainActivity.this.openExternal(url);}
         @JavascriptInterface public void addCalendar(String json) {
             runOnUiThread(() -> {try {
@@ -133,5 +183,5 @@ public final class MainActivity extends Activity {
         if(requestCode==12 && fileCallback!=null){fileCallback.onReceiveValue(resultCode==RESULT_OK && data!=null && data.getData()!=null?new Uri[]{data.getData()}:null);fileCallback=null;}
     }
     @Override public void onBackPressed() {web.evaluateJavascript("window.campusBack && window.campusBack()",result -> {if(!"true".equals(result))finish();});}
-    @Override protected void onDestroy(){if(fileCallback!=null)fileCallback.onReceiveValue(null);web.removeJavascriptInterface("CampusAndroid");web.destroy();super.onDestroy();}
+    @Override protected void onDestroy(){communityExecutor.shutdownNow();if(fileCallback!=null)fileCallback.onReceiveValue(null);web.removeJavascriptInterface("CampusAndroid");web.destroy();super.onDestroy();}
 }
