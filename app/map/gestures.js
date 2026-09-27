@@ -37,7 +37,7 @@ export function bindGestures(svg, camera, onPick, onChange) {
     onChange?.();
   };
   const zoom=(factor,x,y)=>{
-    const b=bounds(),v=camera.box,ratio=Math.max(.16,Math.min(1.25,v[2]/b[2]/factor))/(v[2]/b[2]);
+    const b=camera.home||bounds(),v=camera.box,ratio=Math.max(.16,Math.min(1.25,v[2]/b[2]/factor))/(v[2]/b[2]);
     const anchor=x===undefined?{x:v[0]+v[2]/2,y:v[1]+v[3]/2}:world(x,y);
     camera.box=[anchor.x+(v[0]-anchor.x)*ratio,anchor.y+(v[1]-anchor.y)*ratio,v[2]*ratio,v[3]*ratio];apply();
   };
@@ -61,5 +61,5 @@ export function bindGestures(svg, camera, onPick, onChange) {
     if(offsets[e.key]){e.preventDefault();camera.box[0]+=offsets[e.key][0]*camera.box[2];camera.box[1]+=offsets[e.key][1]*camera.box[3];apply();}
     if(['+','=','-'].includes(e.key)){e.preventDefault();zoom(e.key==='-'?1/1.3:1.3);}
   });
-  apply();return {zoom,reset(){camera.box=[...camera.base];apply();},apply};
+  apply();return {zoom,reset(){camera.box=[...(camera.home||camera.base)];apply();},apply};
 }

@@ -20,9 +20,9 @@ try {
   await page.locator('[data-pick-group="14381"]').click();await page.locator('#save-group').click();
   await page.locator('[data-tab="map"]').click();await page.locator('#map-surface').waitFor();
   await shot(page,'01-territory');
-  await page.locator('[data-map-action="building"][data-id="3"]').click();
+  await page.locator('.map-number[data-map-place="building:3"]').click();
   assert.match(await page.locator('.map-sheet').innerText(),/План корпуса пока не добавлен/);
-  await page.locator('#map-search').fill('Аудитория 412');assert.equal(await page.locator('.map-search-result').count(),0);
+  await page.locator('#map-search').fill('3 корпус 412');assert.equal(await page.locator('.map-search-result').count(),0);
   await shot(page,'02-no-plan-search');await page.locator('[data-map-action="search-close"]').click();
   await page.locator('[data-map-action="data-open"]').first().click();
   await page.locator('#map-import').setInputFiles(new URL('./fixtures/map-pilot.json',import.meta.url).pathname.replace(/^\/([A-Za-z]:)/,'$1'));
@@ -95,7 +95,7 @@ try {
   assert.ok(await p.locator('.route-endpoint.end').isVisible());
   await shot(p,'08-route-destination-synthetic');
   await p.locator('.map-route-settings summary').click();await p.locator('#map-step-free').check();assert.equal(await p.locator('.route-line polyline').count(),0);
-  assert.match(await p.locator('.map-sheet').innerText(),/Нет подтверждённого пути/);
+  assert.match(await p.locator('.map-sheet').innerText(),/Нет размеченного пути/);
   await shot(p,'09-no-route-synthetic');
   // Selecting another search result exits the old route and opens its own card.
   await p.locator('#map-search').fill('101А');await p.locator('.map-search-result').click();

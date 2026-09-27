@@ -19,7 +19,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
   const availableFloors=()=>data.floors.filter(f=>f.buildingId===selected()?.buildingId).sort((a,b)=>a.order-b.order);
   const routePlaces=()=>data.locations.filter(l=>l.nodeId && l.buildingId===data.locations.find(x=>x.id===s.targetId)?.buildingId);
   function setView(floorId, point=null) {
-    s.floorId=floorId;const base=floor()?.viewBox||campusBox;s.camera={base:[...base],box:[...base]};
+    s.floorId=floorId;const base=floor()?.viewBox||campusBox;s.camera={base:[...base],box:[...base],fit:true};
     if(point){const w=base[2]*.75,h=base[3]*.75;s.camera.box=[point[0]-w/2,point[1]-h/2,w,h];}
     else if(s.route && floorId) {
       const nodes=new Map(data.nodes.map(n=>[n.id,n]));
@@ -54,25 +54,39 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     const l=selected();
     if(!l)return `<div class="map-welcome"><span class="map-kicker">КАРЛА МАРКСА, 12</span><h2>Куда направимся?</h2><p class="map-muted">Выберите корпус на схеме или найдите место.</p><div class="map-building-strip">${buildings.map(b=>button(b.id,'building',`data-id="${b.id}" aria-label="Корпус ${b.id}"`,'map-building-chip')).join('')}</div></div>`;
     const b=buildings.find(b=>b.id===l.buildingId),floors=availableFloors();
-    return `<button class="map-card-toggle" data-map-action="card-toggle" aria-expanded="${s.expanded}" aria-label="${s.expanded?'Свернуть':'Развернуть'} карточку"><span></span></button><div class="map-card-title"><div><span class="map-kicker">${l.type==='building'?'ТЕРРИТОРИЯ':esc(subtitle(l))}</span><h2>${esc(l.name)}</h2></div>${button(icon('heart'),'favorite',`aria-label="Сохранить корпус" aria-pressed="${isFavorite(b.id)}"`,'map-icon-button')}</div>${s.context?`<div class="map-context"><strong>${esc(s.context.room||s.context.place||'Место из расписания')}</strong><span>${esc(s.context.title||s.context.subject||'')}</span>${!s.exact?'<small>Точное помещение не сопоставлено. Показан подтверждённый корпус.</small>':''}</div>`:''}
+    return `<div class="map-card-title"><div><span class="map-kicker">${l.type==='building'?'ТЕРРИТОРИЯ':esc(subtitle(l))}</span><h2>${esc(l.name)}</h2></div><div class="map-card-tools">${iconButton('close','Закрыть карточку','card-close')}${button(icon('heart'),'favorite',`aria-label="Сохранить корпус" aria-pressed="${isFavorite(b.id)}"`,'map-icon-button')}</div></div>${s.context?`<div class="map-context"><strong>${esc(s.context.room||s.context.place||'Место из расписания')}</strong><span>${esc(s.context.title||s.context.subject||'')}</span>${!s.exact?'<small>Точное помещение не сопоставлено. Показан подтверждённый корпус.</small>':''}</div>`:''}
       ${l.type==='building'?`<p class="map-muted">${floors.length?`${floors.length} этажа с планами CampusWay`:'План корпуса пока не добавлен'} · входы на территории не проверены</p><div class="map-card-actions">${floors.length?button('Открыть этажи '+icon('arrow'),'open-floor','','map-button primary'):button('Добавить планы '+icon('plus'),'data-open','','map-button primary')}${button(icon('external')+' Городская карта','external','','map-button')}</div>`:`<div class="map-card-actions">${button(icon('arrow')+' Маршрут','route-to',l.nodeId?'':'disabled','map-button primary')}${button('Отсюда','route-from',l.nodeId?'':'disabled')}</div>${!l.nodeId?'<p class="map-muted">Точка ещё не подключена к графу маршрутов.</p>':''}`}
-      ${floor()?.image?`<div class="plan-note">Архив CampusWay · без проверки на месте</div>${button(s.sourcePlan?'Векторная схема':'Исходный план','source-plan','','map-text-button')}`:''}${l.photo&&/^assets\/campusway\/room-6-\d+\.png$/.test(l.photo)?`<img class="floor-photo" src="${esc(l.photo)}" alt="${esc(l.name)}" loading="lazy">`:''}${s.expanded?`<div class="map-card-details">${l.type==='building'&&b.photo?`<img src="${esc(b.photo)}" alt="${esc(b.name)} из материалов команды">`:''}<p>${esc(l.type==='building'?b.description:floor()?.source||'План из набора команды')}</p><p>Схема не определяет местоположение. Внутренний маршрут требует известной точки старта.</p>${button('Набор карт и источник','data-open','','map-text-button')}</div>`:''}`;
+      ${button(s.expanded?'Свернуть подробности':'Подробнее о месте','card-toggle',`aria-expanded="${s.expanded}"`,'map-text-button')}${floor()?.image?`<div class="plan-note">Архив CampusWay · без проверки на месте</div>${button(s.sourcePlan?'Векторная схема':'Исходный план','source-plan','','map-text-button')}`:''}${l.photo&&/^assets\/campusway\/room-6-\d+\.png$/.test(l.photo)?`<img class="floor-photo" src="${esc(l.photo)}" alt="${esc(l.name)}" loading="lazy">`:''}${s.expanded?`<div class="map-card-details">${l.type==='building'&&b.photo?`<img src="${esc(b.photo)}" alt="${esc(b.name)} из материалов команды">`:''}<p>${esc(l.type==='building'?b.description:floor()?.source||'План из набора команды')}</p><p>Схема не определяет местоположение. Внутренний маршрут требует известной точки старта.</p>${button('Набор карт и источник','data-open','','map-text-button')}</div>`:''}`;
   }
   function draw() {
     if(!root)return;
     const f=floor(),l=selected();
     if(!s.camera)setView(null);
-    root.innerHTML=`<section class="map-module ${s.searching||s.query?'is-searching':''}" aria-label="Карта кампуса"><header class="map-header"><div class="map-title-row"><div><span class="map-kicker">УУНИТ · КАРЛА МАРКСА</span><h1>Карта кампуса</h1></div>${iconButton('download','Добавить планы','data-open')}</div><div class="map-search-field">${icon('search')}<input id="map-search" type="search" placeholder="Корпус, аудитория, место" value="${esc(s.query)}" aria-label="Поиск мест" autocomplete="off">${s.query?iconButton('close','Очистить поиск','search-clear'):''}</div><div class="map-filters" aria-label="Тип места">${[['all','Всё'],['room','Аудитории'],['entrance','Входы'],['cafe','Буфет'],['toilet','Туалет'],['library','Библиотека']].map(([id,label])=>button(label,'filter',`data-type="${id}" aria-pressed="${s.filter===id}"`,s.filter===id?'map-filter active':'map-filter')).join('')}</div></header>
+    root.innerHTML=`<section class="map-module ${s.searching||s.query?'is-searching':''} ${l||s.panel||s.planning||s.error?'has-sheet':''}" aria-label="Карта кампуса"><header class="map-header"><div class="map-title-row"><div><h1>Карта кампуса</h1><span class="map-kicker">УУНИТ · КАРЛА МАРКСА, 12</span></div>${iconButton('download','Добавить планы','data-open')}</div><div class="map-search-field">${icon('search')}<input id="map-search" type="search" placeholder="Корпус, аудитория, место" value="${esc(s.query)}" aria-label="Поиск мест" autocomplete="off">${s.query?iconButton('close','Очистить поиск','search-clear'):''}</div><div class="map-filters" aria-label="Тип места">${[['all','Всё'],['room','Аудитории'],['entrance','Входы'],['cafe','Буфет'],['toilet','Туалет'],['library','Библиотека']].map(([id,label])=>button(label,'filter',`data-type="${id}" aria-pressed="${s.filter===id}"`,s.filter===id?'map-filter active':'map-filter')).join('')}</div></header>
       <div class="map-canvas"><div class="map-level-row">${button(f?`${icon('left')} Территория`:'Схема территории','territory','','map-level-button')}<span>${f?esc(f.name):'Без GPS-привязки'}</span></div><svg id="map-surface" viewBox="${s.camera.box.join(' ')}" role="group" tabindex="0" aria-label="${f?esc(f.name)+': помещения, двери и проходы':'Расположение девяти корпусов на территории'}">${f?floorSvg(data,f,l,s.route,s.filter,s.sourcePlan):campusSvg(data,l)}</svg>${f?`<div class="map-floor-switch" aria-label="Этаж для просмотра">${availableFloors().map(fl=>button(esc(fl.name),'floor',`data-floor="${esc(fl.id)}" aria-pressed="${f.id===fl.id}"`,f.id===fl.id?'active':'')).join('')}</div>`:''}<div class="map-zoom">${iconButton('plus','Увеличить','zoom-in')}${iconButton('minus','Уменьшить','zoom-out')}${iconButton('focus','Сбросить вид','zoom-reset')}</div><div class="map-canvas-caption">${f?(data.verification==='archive'?'CampusWay · архивный план':'План · '+esc(f.verifiedAt)):'9 корпусов · планы 3–5 этажей корпуса 6'}${data.synthetic?' · СИНТЕТИЧЕСКИЙ ТЕСТ':''}</div><div id="map-results-host">${results()}</div></div>
-      <section class="map-sheet ${s.panel||s.planning?'expanded':''}" aria-label="Информация о месте">${s.error?`<p class="map-error" role="alert">${esc(s.error)}</p>`:''}${card()}</section></section>`;
+      <section class="map-sheet ${s.panel||s.planning||s.expanded?'expanded':''}" aria-label="Информация о месте">${s.error?`<p class="map-error" role="alert">${esc(s.error)}</p>`:''}${card()}</section></section>`;
+    resize?.disconnect();
     gestures=bindGestures(root.querySelector('#map-surface'),s.camera,id=>choose(id));
-    resize?.disconnect();resize=new ResizeObserver(()=>{gestures.apply();if(!s.searching && selected())keepSelectionVisible();});resize.observe(root.querySelector('.map-canvas'));
+    resize=new ResizeObserver(()=>{fitView();gestures.apply();});resize.observe(root.querySelector('.map-canvas'));
+    fitView();
   }
-  function keepSelectionVisible() {
-    const l=selected();if(!l || l.floorId!==s.floorId || s.route)return;
-    // The card is in layout, never laid over the target. Recenter when the usable canvas shrinks.
-    const p=l.floorId?l.point:campusPoint(l.point),v=s.camera.box;
-    if(p[0]<v[0]+v[2]*.15||p[0]>v[0]+v[2]*.85||p[1]<v[1]+v[3]*.15||p[1]>v[1]+v[3]*.85){v[0]=p[0]-v[2]/2;v[1]=p[1]-v[3]/2;gestures.apply();}
+  // UI is over the canvas. Fit content inside the visible window without shrinking the SVG.
+  function fitView() {
+    if(!root || !s.camera.fit)return;
+    const svg=root.querySelector('#map-surface'),rect=svg.getBoundingClientRect();
+    if(!rect.width||!rect.height)return;
+    const header=root.querySelector('.map-header').getBoundingClientRect();
+    const nav=root.closest('.app-shell')?.querySelector('.bottom-nav')?.getBoundingClientRect();
+    const sheet=root.querySelector('.map-sheet');
+    const sheetTop=sheet.offsetHeight&&getComputedStyle(sheet).display!=='none'?sheet.getBoundingClientRect().top:rect.bottom;
+    const level=root.querySelector('.map-level-row').getBoundingClientRect();
+    const top=Math.max(16,header.bottom-rect.top+22,level.bottom-rect.top+16);
+    const bottom=Math.max(30,rect.bottom-Math.min(sheetTop,nav?.top??rect.bottom)+20);
+    const usableHeight=Math.max(120,rect.height-top-bottom),usableWidth=Math.max(120,rect.width-56);
+    const b=s.camera.box,scale=Math.min(usableWidth/b[2],usableHeight/b[3]);
+    const width=rect.width/scale,height=rect.height/scale;
+    s.camera.box=[b[0]+b[2]/2-width/2,b[1]+b[3]/2-(top+usableHeight/2)/scale,width,height];
+    s.camera.home=[...s.camera.box];s.camera.fit=false;gestures.apply();
   }
   function calculate() {
     const start=data.locations.find(l=>l.id===s.startId),target=data.locations.find(l=>l.id===s.targetId);
@@ -87,6 +101,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     if(action==='building'){choose('building:'+el.dataset.id);return;}
     if(action==='filter'){s.filter=el.dataset.type;s.searching=true;draw();return;}
     if(action==='search-clear'||action==='search-close'){s.query='';s.searching=false;s.filter='all';draw();return;}
+    if(action==='card-close'){s.selected=null;s.context=null;s.error='';s.expanded=false;}
     if(action==='card-toggle')s.expanded=!s.expanded;
     if(action==='territory')setView(null);
     if(action==='source-plan')s.sourcePlan=!s.sourcePlan;
