@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "campusway-2026.09.27",
+  "dataVersion": "campusway-2026.09.28",
   "campusId": "uust-karl-marx",
   "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
   "verifiedAt": null,
@@ -277,11 +277,11 @@
             ],
             [
               410,
-              757
+              677
             ],
             [
               490,
-              757
+              677
             ],
             [
               490,
@@ -319,19 +319,19 @@
           "points": [
             [
               410,
-              754
+              673
             ],
             [
               410,
-              643
+              540
             ],
             [
               489,
-              643
+              540
             ],
             [
               489,
-              754
+              673
             ]
           ],
           "locationId": "cw-6-313"
@@ -365,7 +365,7 @@
           "points": [
             [
               408,
-              636
+              534
             ],
             [
               408,
@@ -377,7 +377,7 @@
             ],
             [
               486,
-              636
+              534
             ]
           ],
           "locationId": "cw-6-315"
@@ -545,7 +545,302 @@
         }
       ],
       "walls": [],
-      "doors": [],
+      "doors": [
+        {
+          "id": "cw-6-301-door",
+          "nodeId": "cw-6-f3-node-door-301",
+          "points": [
+            [
+              138,
+              1151
+            ],
+            [
+              152,
+              1151
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-302-door",
+          "nodeId": "cw-6-f3-node-door-302",
+          "points": [
+            [
+              110,
+              1095
+            ],
+            [
+              124,
+              1095
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-303-door",
+          "nodeId": "cw-6-f3-node-door-303",
+          "points": [
+            [
+              180,
+              1155
+            ],
+            [
+              194,
+              1155
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-303a-door",
+          "nodeId": "cw-6-f3-node-door-303a",
+          "points": [
+            [
+              296,
+              1155
+            ],
+            [
+              310,
+              1155
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-304-door",
+          "nodeId": "cw-6-f3-node-door-304",
+          "points": [
+            [
+              298,
+              1095
+            ],
+            [
+              312,
+              1095
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-305-door",
+          "nodeId": "cw-6-f3-node-door-305",
+          "points": [
+            [
+              353,
+              1149
+            ],
+            [
+              367,
+              1149
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-307-door",
+          "nodeId": "cw-6-f3-node-door-307",
+          "points": [
+            [
+              425,
+              1099
+            ],
+            [
+              439,
+              1099
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-309-door",
+          "nodeId": "cw-6-f3-node-door-309",
+          "points": [
+            [
+              412,
+              865
+            ],
+            [
+              412,
+              851
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-310-door",
+          "nodeId": "cw-6-f3-node-door-310",
+          "points": [
+            [
+              364,
+              777
+            ],
+            [
+              364,
+              763
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-311-door",
+          "nodeId": "cw-6-f3-node-door-311",
+          "points": [
+            [
+              410,
+              751
+            ],
+            [
+              410,
+              737
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-312-door",
+          "nodeId": "cw-6-f3-node-door-312",
+          "points": [
+            [
+              366,
+              714
+            ],
+            [
+              366,
+              700
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-313-door",
+          "nodeId": "cw-6-f3-node-door-313",
+          "points": [
+            [
+              410,
+              612
+            ],
+            [
+              410,
+              598
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-314-door",
+          "nodeId": "cw-6-f3-node-door-314",
+          "points": [
+            [
+              365,
+              610
+            ],
+            [
+              365,
+              596
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-315-door",
+          "nodeId": "cw-6-f3-node-door-315",
+          "points": [
+            [
+              408,
+              507
+            ],
+            [
+              408,
+              493
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-316-door",
+          "nodeId": "cw-6-f3-node-door-316",
+          "points": [
+            [
+              367,
+              498
+            ],
+            [
+              367,
+              484
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-317-door",
+          "nodeId": "cw-6-f3-node-door-317",
+          "points": [
+            [
+              407,
+              153
+            ],
+            [
+              407,
+              139
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-318-door",
+          "nodeId": "cw-6-f3-node-door-318",
+          "points": [
+            [
+              364,
+              407
+            ],
+            [
+              364,
+              393
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-318a-door",
+          "nodeId": "cw-6-f3-node-door-318a",
+          "points": [
+            [
+              365,
+              340
+            ],
+            [
+              365,
+              326
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-319-door",
+          "nodeId": "cw-6-f3-node-door-319",
+          "points": [
+            [
+              380,
+              99
+            ],
+            [
+              394,
+              99
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-320-door",
+          "nodeId": "cw-6-f3-node-door-320",
+          "points": [
+            [
+              365,
+              253
+            ],
+            [
+              365,
+              239
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-322-door",
+          "nodeId": "cw-6-f3-node-door-322",
+          "points": [
+            [
+              363,
+              145
+            ],
+            [
+              363,
+              131
+            ]
+          ]
+        }
+      ],
       "image": "assets/campusway/floor-6-3.jpg",
       "imageSize": [
         1280,
@@ -959,16 +1254,114 @@
       "walls": [],
       "doors": [
         {
+          "id": "cw-6-409-door",
+          "nodeId": "cw-6-f4-node-door-409",
+          "points": [
+            [
+              510,
+              1308
+            ],
+            [
+              510,
+              1294
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-410-door",
+          "nodeId": "cw-6-f4-node-door-410",
+          "points": [
+            [
+              456,
+              1178
+            ],
+            [
+              456,
+              1164
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-411-door",
+          "nodeId": "cw-6-f4-node-door-411",
+          "points": [
+            [
+              510,
+              1139
+            ],
+            [
+              510,
+              1125
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-412-door",
+          "nodeId": "cw-6-f4-node-door-412",
+          "points": [
+            [
+              456,
+              1080
+            ],
+            [
+              456,
+              1066
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-413-door",
+          "nodeId": "cw-6-f4-node-door-413",
+          "points": [
+            [
+              515,
+              833
+            ],
+            [
+              515,
+              819
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-414-door",
+          "nodeId": "cw-6-f4-node-door-414",
+          "points": [
+            [
+              456,
+              937
+            ],
+            [
+              456,
+              923
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-414a-door",
+          "nodeId": "cw-6-f4-node-door-414a",
+          "points": [
+            [
+              456,
+              833
+            ],
+            [
+              456,
+              819
+            ]
+          ]
+        },
+        {
           "id": "cw-6-415-door",
           "nodeId": "cw-6-f4-node-door-415",
           "points": [
             [
               515,
-              605
+              603
             ],
             [
               515,
-              587
+              589
             ]
           ]
         },
@@ -978,11 +1371,67 @@
           "points": [
             [
               456,
-              533
+              531
             ],
             [
               456,
-              515
+              517
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-417-door",
+          "nodeId": "cw-6-f4-node-door-417",
+          "points": [
+            [
+              515,
+              341
+            ],
+            [
+              515,
+              327
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-419-door",
+          "nodeId": "cw-6-f4-node-door-419",
+          "points": [
+            [
+              478,
+              111
+            ],
+            [
+              492,
+              111
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-420a-door",
+          "nodeId": "cw-6-f4-node-door-420a",
+          "points": [
+            [
+              456,
+              455
+            ],
+            [
+              456,
+              441
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-422-door",
+          "nodeId": "cw-6-f4-node-door-422",
+          "points": [
+            [
+              456,
+              165
+            ],
+            [
+              456,
+              151
             ]
           ]
         }
@@ -1359,11 +1808,11 @@
           "points": [
             [
               510,
-              1008
+              1006
             ],
             [
               510,
-              990
+              992
             ]
           ]
         },
@@ -1373,11 +1822,11 @@
           "points": [
             [
               330,
-              919
+              917
             ],
             [
               330,
-              901
+              903
             ]
           ]
         },
@@ -1387,11 +1836,11 @@
           "points": [
             [
               510,
-              847
+              845
             ],
             [
               510,
-              829
+              831
             ]
           ]
         },
@@ -1401,11 +1850,11 @@
           "points": [
             [
               330,
-              689
+              687
             ],
             [
               330,
-              671
+              673
             ]
           ]
         },
@@ -1415,11 +1864,11 @@
           "points": [
             [
               510,
-              653
+              651
             ],
             [
               510,
-              635
+              637
             ]
           ]
         },
@@ -1429,11 +1878,11 @@
           "points": [
             [
               330,
-              523
+              521
             ],
             [
               330,
-              505
+              507
             ]
           ]
         },
@@ -1443,11 +1892,39 @@
           "points": [
             [
               510,
-              543
+              541
             ],
             [
               510,
-              525
+              527
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-518-door",
+          "nodeId": "cw-6-f5-node-door-518",
+          "points": [
+            [
+              330,
+              251
+            ],
+            [
+              330,
+              237
+            ]
+          ]
+        },
+        {
+          "id": "cw-6-520-door",
+          "nodeId": "cw-6-f5-node-door-520",
+          "points": [
+            [
+              330,
+              187
+            ],
+            [
+              330,
+              173
             ]
           ]
         },
@@ -1457,11 +1934,11 @@
           "points": [
             [
               510,
-              102
+              100
             ],
             [
               510,
-              84
+              86
             ]
           ]
         }
@@ -1491,9 +1968,9 @@
         575.0,
         1332.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-409",
       "areaId": "cw-6-409-area",
-      "doorId": null
+      "doorId": "cw-6-409-door"
     },
     {
       "id": "cw-6-410",
@@ -1512,9 +1989,9 @@
         387.0,
         1212.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-410",
       "areaId": "cw-6-410-area",
-      "doorId": null
+      "doorId": "cw-6-410-door"
     },
     {
       "id": "cw-6-411",
@@ -1533,9 +2010,9 @@
         574.0,
         1156.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-411",
       "areaId": "cw-6-411-area",
-      "doorId": null
+      "doorId": "cw-6-411-door"
     },
     {
       "id": "cw-6-412",
@@ -1554,9 +2031,9 @@
         387.0,
         1095.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-412",
       "areaId": "cw-6-412-area",
-      "doorId": null
+      "doorId": "cw-6-412-door"
     },
     {
       "id": "cw-6-413",
@@ -1575,9 +2052,9 @@
         577.5,
         915.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-413",
       "areaId": "cw-6-413-area",
-      "doorId": null
+      "doorId": "cw-6-413-door"
     },
     {
       "id": "cw-6-414",
@@ -1596,9 +2073,9 @@
         387.0,
         944.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-414",
       "areaId": "cw-6-414-area",
-      "doorId": null
+      "doorId": "cw-6-414-door"
     },
     {
       "id": "cw-6-414a",
@@ -1617,9 +2094,9 @@
         387.5,
         821.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-414a",
       "areaId": "cw-6-414a-area",
-      "doorId": null
+      "doorId": "cw-6-414a-door"
     },
     {
       "id": "cw-6-415",
@@ -1682,9 +2159,9 @@
         576.5,
         243.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-417",
       "areaId": "cw-6-417-area",
-      "doorId": null
+      "doorId": "cw-6-417-door"
     },
     {
       "id": "cw-6-419",
@@ -1703,9 +2180,9 @@
         500.0,
         75.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-419",
       "areaId": "cw-6-419-area",
-      "doorId": null
+      "doorId": "cw-6-419-door"
     },
     {
       "id": "cw-6-420",
@@ -1745,9 +2222,9 @@
         388.0,
         426.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-420a",
       "areaId": "cw-6-420a-area",
-      "doorId": null
+      "doorId": "cw-6-420a-door"
     },
     {
       "id": "cw-6-422",
@@ -1766,9 +2243,9 @@
         423.0,
         147.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f4-node-door-422",
       "areaId": "cw-6-422-area",
-      "doorId": null
+      "doorId": "cw-6-422-door"
     },
     {
       "id": "cw-6-f4-west",
@@ -2004,9 +2481,9 @@
         177.5,
         242.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f5-node-door-518",
       "areaId": "cw-6-518-area",
-      "doorId": null
+      "doorId": "cw-6-518-door"
     },
     {
       "id": "cw-6-520",
@@ -2025,9 +2502,9 @@
         177.5,
         174.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f5-node-door-520",
       "areaId": "cw-6-520-area",
-      "doorId": null
+      "doorId": "cw-6-520-door"
     },
     {
       "id": "cw-6-522",
@@ -2136,9 +2613,9 @@
         123.5,
         1194.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-301",
       "areaId": "cw-6-301-area",
-      "doorId": null
+      "doorId": "cw-6-301-door"
     },
     {
       "id": "cw-6-302",
@@ -2157,9 +2634,9 @@
         161.5,
         1051.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-302",
       "areaId": "cw-6-302-area",
-      "doorId": null
+      "doorId": "cw-6-302-door"
     },
     {
       "id": "cw-6-303",
@@ -2178,9 +2655,9 @@
         204.0,
         1196.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-303",
       "areaId": "cw-6-303-area",
-      "doorId": null
+      "doorId": "cw-6-303-door"
     },
     {
       "id": "cw-6-303a",
@@ -2199,9 +2676,9 @@
         284.0,
         1196.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-303a",
       "areaId": "cw-6-303a-area",
-      "doorId": null
+      "doorId": "cw-6-303a-door"
     },
     {
       "id": "cw-6-304",
@@ -2220,9 +2697,9 @@
         287.5,
         1051.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-304",
       "areaId": "cw-6-304-area",
-      "doorId": null
+      "doorId": "cw-6-304-door"
     },
     {
       "id": "cw-6-305",
@@ -2241,9 +2718,9 @@
         410.5,
         1193.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-305",
       "areaId": "cw-6-305-area",
-      "doorId": null
+      "doorId": "cw-6-305-door"
     },
     {
       "id": "cw-6-307",
@@ -2262,9 +2739,9 @@
         452.5,
         1054.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-307",
       "areaId": "cw-6-307-area",
-      "doorId": null
+      "doorId": "cw-6-307-door"
     },
     {
       "id": "cw-6-309",
@@ -2283,9 +2760,9 @@
         451.5,
         881.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-309",
       "areaId": "cw-6-309-area",
-      "doorId": null
+      "doorId": "cw-6-309-door"
     },
     {
       "id": "cw-6-310",
@@ -2304,9 +2781,9 @@
         327.5,
         797.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-310",
       "areaId": "cw-6-310-area",
-      "doorId": null
+      "doorId": "cw-6-310-door"
     },
     {
       "id": "cw-6-311",
@@ -2323,11 +2800,11 @@
       ],
       "point": [
         450.0,
-        796.5
+        756.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-311",
       "areaId": "cw-6-311-area",
-      "doorId": null
+      "doorId": "cw-6-311-door"
     },
     {
       "id": "cw-6-312",
@@ -2346,9 +2823,9 @@
         326.0,
         698.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-312",
       "areaId": "cw-6-312-area",
-      "doorId": null
+      "doorId": "cw-6-312-door"
     },
     {
       "id": "cw-6-313",
@@ -2365,11 +2842,11 @@
       ],
       "point": [
         449.5,
-        698.5
+        606.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-313",
       "areaId": "cw-6-313-area",
-      "doorId": null
+      "doorId": "cw-6-313-door"
     },
     {
       "id": "cw-6-314",
@@ -2388,9 +2865,9 @@
         324.0,
         578.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-314",
       "areaId": "cw-6-314-area",
-      "doorId": null
+      "doorId": "cw-6-314-door"
     },
     {
       "id": "cw-6-315",
@@ -2407,11 +2884,11 @@
       ],
       "point": [
         447.0,
-        496.0
+        445.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-315",
       "areaId": "cw-6-315-area",
-      "doorId": null
+      "doorId": "cw-6-315-door"
     },
     {
       "id": "cw-6-316",
@@ -2430,9 +2907,9 @@
         324.0,
         475.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-316",
       "areaId": "cw-6-316-area",
-      "doorId": null
+      "doorId": "cw-6-316-door"
     },
     {
       "id": "cw-6-317",
@@ -2451,9 +2928,9 @@
         443.0,
         187.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-317",
       "areaId": "cw-6-317-area",
-      "doorId": null
+      "doorId": "cw-6-317-door"
     },
     {
       "id": "cw-6-318",
@@ -2472,9 +2949,9 @@
         323.0,
         390.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-318",
       "areaId": "cw-6-318-area",
-      "doorId": null
+      "doorId": "cw-6-318-door"
     },
     {
       "id": "cw-6-318a",
@@ -2493,9 +2970,9 @@
         323.5,
         327.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-318a",
       "areaId": "cw-6-318a-area",
-      "doorId": null
+      "doorId": "cw-6-318a-door"
     },
     {
       "id": "cw-6-319",
@@ -2514,9 +2991,9 @@
         396.5,
         53.5
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-319",
       "areaId": "cw-6-319-area",
-      "doorId": null
+      "doorId": "cw-6-319-door"
     },
     {
       "id": "cw-6-320",
@@ -2535,9 +3012,9 @@
         322.5,
         253.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-320",
       "areaId": "cw-6-320-area",
-      "doorId": null
+      "doorId": "cw-6-320-door"
     },
     {
       "id": "cw-6-322",
@@ -2556,9 +3033,41 @@
         321.5,
         128.0
       ],
-      "nodeId": null,
+      "nodeId": "cw-6-f3-node-door-322",
       "areaId": "cw-6-322-area",
-      "doorId": null
+      "doorId": "cw-6-322-door"
+    },
+    {
+      "id": "cw-6-f3-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "aliases": [
+        "Лестница у левого торца"
+      ],
+      "point": [
+        452,
+        962
+      ],
+      "nodeId": "cw-6-f3-node-west"
+    },
+    {
+      "id": "cw-6-f3-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "stairs",
+      "name": "Лестница у аудитории 317",
+      "aliases": [
+        "Лестница у аудитории 317"
+      ],
+      "point": [
+        452,
+        308
+      ],
+      "nodeId": "cw-6-f3-node-east"
     },
     {
       "id": "cw-6-f3-wc",
@@ -2578,6 +3087,90 @@
     }
   ],
   "nodes": [
+    {
+      "id": "cw-6-f4-node-door-409",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Класс 6-409",
+      "point": [
+        510,
+        1301
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-410",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Преподавательская 6-410",
+      "point": [
+        456,
+        1171
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-411",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Преподавательская 6-411",
+      "point": [
+        510,
+        1132
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-412",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Лаборатория 6-412",
+      "point": [
+        456,
+        1073
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-413",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Класс 6-413",
+      "point": [
+        515,
+        826
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-414",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Класс 6-414",
+      "point": [
+        456,
+        930
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-414a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Лаборатория 6-414а",
+      "point": [
+        456,
+        826
+      ]
+    },
     {
       "id": "cw-6-f4-node-door-415",
       "campusId": "uust-karl-marx",
@@ -2600,6 +3193,54 @@
       "point": [
         456,
         524
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-417",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Преподавательская 6-417",
+      "point": [
+        515,
+        334
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-419",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Лаборатория 6-419",
+      "point": [
+        485,
+        111
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-420a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Кабинет 6-420а",
+      "point": [
+        456,
+        448
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-422",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Кабинет 6-422",
+      "point": [
+        456,
+        158
       ]
     },
     {
@@ -2653,6 +3294,90 @@
       ]
     },
     {
+      "id": "cw-6-f4-node-hall-409",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1301
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-410",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1171
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-411",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1132
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-412",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1073
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-413",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        826
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-414",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        930
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-414a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        826
+      ]
+    },
+    {
       "id": "cw-6-f4-node-hall-415",
       "campusId": "uust-karl-marx",
       "buildingId": "6",
@@ -2674,6 +3399,54 @@
       "point": [
         486,
         524
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-417",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        334
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-419",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        111
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-420a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        448
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-422",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        158
       ]
     },
     {
@@ -2770,6 +3543,30 @@
       "point": [
         510,
         534
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-518",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Кабинет 6-518",
+      "point": [
+        330,
+        244
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-520",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Кабинет 6-520",
+      "point": [
+        330,
+        180
       ]
     },
     {
@@ -2919,6 +3716,30 @@
       ]
     },
     {
+      "id": "cw-6-f5-node-hall-518",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        244
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-520",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        180
+      ]
+    },
+    {
       "id": "cw-6-f5-node-hall-517",
       "campusId": "uust-karl-marx",
       "buildingId": "6",
@@ -2940,6 +3761,572 @@
       "point": [
         180,
         1009
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-301",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-301",
+      "point": [
+        145,
+        1151
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-302",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Лаборатория 6-302",
+      "point": [
+        117,
+        1095
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-303",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-303",
+      "point": [
+        187,
+        1155
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-303a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-303а",
+      "point": [
+        303,
+        1155
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-304",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-304",
+      "point": [
+        305,
+        1095
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-305",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-305",
+      "point": [
+        360,
+        1149
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-307",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-307",
+      "point": [
+        432,
+        1099
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-309",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-309",
+      "point": [
+        412,
+        858
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-310",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Преподавательская 6-310",
+      "point": [
+        364,
+        770
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-311",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Лаборатория 6-311",
+      "point": [
+        410,
+        744
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-312",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-312",
+      "point": [
+        366,
+        707
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-313",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-313",
+      "point": [
+        410,
+        605
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-314",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-314",
+      "point": [
+        365,
+        603
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-315",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Преподавательская 6-315",
+      "point": [
+        408,
+        500
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-316",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Лаборатория 6-316",
+      "point": [
+        367,
+        491
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-317",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-317",
+      "point": [
+        407,
+        146
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-318",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-318",
+      "point": [
+        364,
+        400
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-318a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Кабинет 6-318а",
+      "point": [
+        365,
+        333
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-319",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-319",
+      "point": [
+        387,
+        99
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-320",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Кабинет 6-320",
+      "point": [
+        365,
+        246
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-322",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Приёмная 6-322",
+      "point": [
+        363,
+        138
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-turn",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-301",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        145,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-302",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        117,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-303",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        187,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-303a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        303,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-304",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        305,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-305",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        360,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-307",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        432,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-309",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        858
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-310",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        770
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-311",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        744
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-312",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        707
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-313",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        605
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-314",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        603
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-315",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        500
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-316",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        491
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-317",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        146
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-318",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        400
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-318a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        333
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-319",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        99
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-320",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        246
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-322",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        138
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "point": [
+        452,
+        962
+      ],
+      "connectorId": "cw-stairs-west"
+    },
+    {
+      "id": "cw-6-f3-node-west-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        962
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "stairs",
+      "name": "Лестница у аудитории 317",
+      "point": [
+        452,
+        308
+      ],
+      "connectorId": "cw-stairs-east"
+    },
+    {
+      "id": "cw-6-f3-node-east-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        308
       ]
     },
     {
@@ -3002,6 +4389,160 @@
     },
     {
       "id": "cw-edge-3",
+      "to": "cw-6-f4-node-door-409",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1301
+        ],
+        [
+          510,
+          1301
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-409"
+    },
+    {
+      "id": "cw-edge-4",
+      "to": "cw-6-f4-node-door-410",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1171
+        ],
+        [
+          456,
+          1171
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-410"
+    },
+    {
+      "id": "cw-edge-5",
+      "to": "cw-6-f4-node-door-411",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1132
+        ],
+        [
+          510,
+          1132
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-411"
+    },
+    {
+      "id": "cw-edge-6",
+      "to": "cw-6-f4-node-door-412",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1073
+        ],
+        [
+          456,
+          1073
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-412"
+    },
+    {
+      "id": "cw-edge-7",
+      "to": "cw-6-f4-node-door-413",
+      "kind": "corridor",
+      "weight": 29.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          515,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-413"
+    },
+    {
+      "id": "cw-edge-8",
+      "to": "cw-6-f4-node-door-414",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          930
+        ],
+        [
+          456,
+          930
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414"
+    },
+    {
+      "id": "cw-edge-9",
+      "to": "cw-6-f4-node-door-414a",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          456,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414a"
+    },
+    {
+      "id": "cw-edge-10",
       "to": "cw-6-f4-node-door-415",
       "kind": "corridor",
       "weight": 29.0,
@@ -3023,7 +4564,7 @@
       "from": "cw-6-f4-node-hall-415"
     },
     {
-      "id": "cw-edge-4",
+      "id": "cw-edge-11",
       "to": "cw-6-f4-node-door-416",
       "kind": "corridor",
       "weight": 30.0,
@@ -3045,10 +4586,98 @@
       "from": "cw-6-f4-node-hall-416"
     },
     {
-      "id": "cw-edge-5",
-      "to": "cw-6-f4-node-hall-415",
+      "id": "cw-edge-12",
+      "to": "cw-6-f4-node-door-417",
       "kind": "corridor",
-      "weight": 851.0,
+      "weight": 29.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          334
+        ],
+        [
+          515,
+          334
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-417"
+    },
+    {
+      "id": "cw-edge-13",
+      "to": "cw-6-f4-node-door-419",
+      "kind": "corridor",
+      "weight": 1.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          111
+        ],
+        [
+          485,
+          111
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-419"
+    },
+    {
+      "id": "cw-edge-14",
+      "to": "cw-6-f4-node-door-420a",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          448
+        ],
+        [
+          456,
+          448
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-420a"
+    },
+    {
+      "id": "cw-edge-15",
+      "to": "cw-6-f4-node-door-422",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          158
+        ],
+        [
+          456,
+          158
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-422"
+    },
+    {
+      "id": "cw-edge-16",
+      "to": "cw-6-f4-node-hall-409",
+      "kind": "corridor",
+      "weight": 146.0,
       "direction": "both",
       "status": "plan",
       "stepFree": null,
@@ -3061,13 +4690,167 @@
         ],
         [
           486,
-          596
+          1301
         ]
       ],
       "from": "cw-6-f4-node-west-hall"
     },
     {
-      "id": "cw-edge-6",
+      "id": "cw-edge-17",
+      "to": "cw-6-f4-node-hall-410",
+      "kind": "corridor",
+      "weight": 130.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1301
+        ],
+        [
+          486,
+          1171
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-409"
+    },
+    {
+      "id": "cw-edge-18",
+      "to": "cw-6-f4-node-hall-411",
+      "kind": "corridor",
+      "weight": 39.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1171
+        ],
+        [
+          486,
+          1132
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-410"
+    },
+    {
+      "id": "cw-edge-19",
+      "to": "cw-6-f4-node-hall-412",
+      "kind": "corridor",
+      "weight": 59.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1132
+        ],
+        [
+          486,
+          1073
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-411"
+    },
+    {
+      "id": "cw-edge-20",
+      "to": "cw-6-f4-node-hall-414",
+      "kind": "corridor",
+      "weight": 143.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1073
+        ],
+        [
+          486,
+          930
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-412"
+    },
+    {
+      "id": "cw-edge-21",
+      "to": "cw-6-f4-node-hall-413",
+      "kind": "corridor",
+      "weight": 104.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          930
+        ],
+        [
+          486,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414"
+    },
+    {
+      "id": "cw-edge-22",
+      "to": "cw-6-f4-node-hall-414a",
+      "kind": "corridor",
+      "weight": 0.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          486,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-413"
+    },
+    {
+      "id": "cw-edge-23",
+      "to": "cw-6-f4-node-hall-415",
+      "kind": "corridor",
+      "weight": 230.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          486,
+          596
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414a"
+    },
+    {
+      "id": "cw-edge-24",
       "to": "cw-6-f4-node-hall-416",
       "kind": "corridor",
       "weight": 72.0,
@@ -3089,10 +4872,10 @@
       "from": "cw-6-f4-node-hall-415"
     },
     {
-      "id": "cw-edge-7",
-      "to": "cw-6-f4-node-east-hall",
+      "id": "cw-edge-25",
+      "to": "cw-6-f4-node-hall-420a",
       "kind": "corridor",
-      "weight": 89.0,
+      "weight": 76.0,
       "direction": "both",
       "status": "plan",
       "stepFree": null,
@@ -3105,13 +4888,101 @@
         ],
         [
           486,
-          435
+          448
         ]
       ],
       "from": "cw-6-f4-node-hall-416"
     },
     {
-      "id": "cw-edge-8",
+      "id": "cw-edge-26",
+      "to": "cw-6-f4-node-east-hall",
+      "kind": "corridor",
+      "weight": 13.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          448
+        ],
+        [
+          486,
+          435
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-420a"
+    },
+    {
+      "id": "cw-edge-27",
+      "to": "cw-6-f4-node-hall-417",
+      "kind": "corridor",
+      "weight": 101.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          435
+        ],
+        [
+          486,
+          334
+        ]
+      ],
+      "from": "cw-6-f4-node-east-hall"
+    },
+    {
+      "id": "cw-edge-28",
+      "to": "cw-6-f4-node-hall-422",
+      "kind": "corridor",
+      "weight": 176.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          334
+        ],
+        [
+          486,
+          158
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-417"
+    },
+    {
+      "id": "cw-edge-29",
+      "to": "cw-6-f4-node-hall-419",
+      "kind": "corridor",
+      "weight": 47.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          158
+        ],
+        [
+          486,
+          111
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-422"
+    },
+    {
+      "id": "cw-edge-30",
       "to": "cw-6-f5-node-west-hall",
       "kind": "corridor",
       "weight": 180.0,
@@ -3133,7 +5004,7 @@
       "from": "cw-6-f5-node-west"
     },
     {
-      "id": "cw-edge-9",
+      "id": "cw-edge-31",
       "to": "cw-6-f5-node-west",
       "kind": "stairs",
       "weight": 1,
@@ -3146,7 +5017,7 @@
       "from": "cw-6-f4-node-west"
     },
     {
-      "id": "cw-edge-10",
+      "id": "cw-edge-32",
       "to": "cw-6-f5-node-east-hall",
       "kind": "corridor",
       "weight": 180.0,
@@ -3168,7 +5039,7 @@
       "from": "cw-6-f5-node-east"
     },
     {
-      "id": "cw-edge-11",
+      "id": "cw-edge-33",
       "to": "cw-6-f5-node-east",
       "kind": "stairs",
       "weight": 1,
@@ -3181,7 +5052,7 @@
       "from": "cw-6-f4-node-east"
     },
     {
-      "id": "cw-edge-12",
+      "id": "cw-edge-34",
       "to": "cw-6-f5-node-door-509",
       "kind": "corridor",
       "weight": 90.0,
@@ -3203,7 +5074,7 @@
       "from": "cw-6-f5-node-hall-509"
     },
     {
-      "id": "cw-edge-13",
+      "id": "cw-edge-35",
       "to": "cw-6-f5-node-door-510",
       "kind": "corridor",
       "weight": 90.0,
@@ -3225,7 +5096,7 @@
       "from": "cw-6-f5-node-hall-510"
     },
     {
-      "id": "cw-edge-14",
+      "id": "cw-edge-36",
       "to": "cw-6-f5-node-door-511",
       "kind": "corridor",
       "weight": 90.0,
@@ -3247,7 +5118,7 @@
       "from": "cw-6-f5-node-hall-511"
     },
     {
-      "id": "cw-edge-15",
+      "id": "cw-edge-37",
       "to": "cw-6-f5-node-door-512",
       "kind": "corridor",
       "weight": 90.0,
@@ -3269,7 +5140,7 @@
       "from": "cw-6-f5-node-hall-512"
     },
     {
-      "id": "cw-edge-16",
+      "id": "cw-edge-38",
       "to": "cw-6-f5-node-door-513",
       "kind": "corridor",
       "weight": 90.0,
@@ -3291,7 +5162,7 @@
       "from": "cw-6-f5-node-hall-513"
     },
     {
-      "id": "cw-edge-17",
+      "id": "cw-edge-39",
       "to": "cw-6-f5-node-door-514",
       "kind": "corridor",
       "weight": 90.0,
@@ -3313,7 +5184,7 @@
       "from": "cw-6-f5-node-hall-514"
     },
     {
-      "id": "cw-edge-18",
+      "id": "cw-edge-40",
       "to": "cw-6-f5-node-door-515",
       "kind": "corridor",
       "weight": 90.0,
@@ -3335,7 +5206,51 @@
       "from": "cw-6-f5-node-hall-515"
     },
     {
-      "id": "cw-edge-19",
+      "id": "cw-edge-41",
+      "to": "cw-6-f5-node-door-518",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          244
+        ],
+        [
+          330,
+          244
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-518"
+    },
+    {
+      "id": "cw-edge-42",
+      "to": "cw-6-f5-node-door-520",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          180
+        ],
+        [
+          330,
+          180
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-520"
+    },
+    {
+      "id": "cw-edge-43",
       "to": "cw-6-f5-node-door-517",
       "kind": "corridor",
       "weight": 90.0,
@@ -3357,7 +5272,7 @@
       "from": "cw-6-f5-node-hall-517"
     },
     {
-      "id": "cw-edge-20",
+      "id": "cw-edge-44",
       "to": "cw-6-f5-node-hall-509",
       "kind": "corridor",
       "weight": 179.0,
@@ -3379,7 +5294,7 @@
       "from": "cw-6-f5-node-west-hall"
     },
     {
-      "id": "cw-edge-21",
+      "id": "cw-edge-45",
       "to": "cw-6-f5-node-hall-510",
       "kind": "corridor",
       "weight": 89.0,
@@ -3401,7 +5316,7 @@
       "from": "cw-6-f5-node-hall-509"
     },
     {
-      "id": "cw-edge-22",
+      "id": "cw-edge-46",
       "to": "cw-6-f5-node-hall-511",
       "kind": "corridor",
       "weight": 72.0,
@@ -3423,7 +5338,7 @@
       "from": "cw-6-f5-node-hall-510"
     },
     {
-      "id": "cw-edge-23",
+      "id": "cw-edge-47",
       "to": "cw-6-f5-node-hall-512",
       "kind": "corridor",
       "weight": 158.0,
@@ -3445,7 +5360,7 @@
       "from": "cw-6-f5-node-hall-511"
     },
     {
-      "id": "cw-edge-24",
+      "id": "cw-edge-48",
       "to": "cw-6-f5-node-hall-513",
       "kind": "corridor",
       "weight": 36.0,
@@ -3467,7 +5382,7 @@
       "from": "cw-6-f5-node-hall-512"
     },
     {
-      "id": "cw-edge-25",
+      "id": "cw-edge-49",
       "to": "cw-6-f5-node-hall-515",
       "kind": "corridor",
       "weight": 110.0,
@@ -3489,7 +5404,7 @@
       "from": "cw-6-f5-node-hall-513"
     },
     {
-      "id": "cw-edge-26",
+      "id": "cw-edge-50",
       "to": "cw-6-f5-node-hall-514",
       "kind": "corridor",
       "weight": 20.0,
@@ -3511,7 +5426,7 @@
       "from": "cw-6-f5-node-hall-515"
     },
     {
-      "id": "cw-edge-27",
+      "id": "cw-edge-51",
       "to": "cw-6-f5-node-east-hall",
       "kind": "corridor",
       "weight": 250.0,
@@ -3533,10 +5448,10 @@
       "from": "cw-6-f5-node-hall-514"
     },
     {
-      "id": "cw-edge-28",
-      "to": "cw-6-f5-node-hall-517",
+      "id": "cw-edge-52",
+      "to": "cw-6-f5-node-hall-518",
       "kind": "corridor",
-      "weight": 171.0,
+      "weight": 20.0,
       "direction": "both",
       "status": "plan",
       "stepFree": null,
@@ -3549,21 +5464,1116 @@
         ],
         [
           420,
-          93
+          244
         ]
       ],
       "from": "cw-6-f5-node-east-hall"
+    },
+    {
+      "id": "cw-edge-53",
+      "to": "cw-6-f5-node-hall-520",
+      "kind": "corridor",
+      "weight": 64.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          244
+        ],
+        [
+          420,
+          180
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-518"
+    },
+    {
+      "id": "cw-edge-54",
+      "to": "cw-6-f5-node-hall-517",
+      "kind": "corridor",
+      "weight": 87.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          180
+        ],
+        [
+          420,
+          93
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-520"
+    },
+    {
+      "id": "cw-edge-55",
+      "to": "cw-6-f3-node-door-301",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          145,
+          1123
+        ],
+        [
+          145,
+          1151
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-301"
+    },
+    {
+      "id": "cw-edge-56",
+      "to": "cw-6-f3-node-door-302",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          117,
+          1123
+        ],
+        [
+          117,
+          1095
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-302"
+    },
+    {
+      "id": "cw-edge-57",
+      "to": "cw-6-f3-node-door-303",
+      "kind": "corridor",
+      "weight": 32.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          187,
+          1123
+        ],
+        [
+          187,
+          1155
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303"
+    },
+    {
+      "id": "cw-edge-58",
+      "to": "cw-6-f3-node-door-303a",
+      "kind": "corridor",
+      "weight": 32.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          1123
+        ],
+        [
+          303,
+          1155
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303a"
+    },
+    {
+      "id": "cw-edge-59",
+      "to": "cw-6-f3-node-door-304",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          305,
+          1123
+        ],
+        [
+          305,
+          1095
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-304"
+    },
+    {
+      "id": "cw-edge-60",
+      "to": "cw-6-f3-node-door-305",
+      "kind": "corridor",
+      "weight": 26.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          360,
+          1123
+        ],
+        [
+          360,
+          1149
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-305"
+    },
+    {
+      "id": "cw-edge-61",
+      "to": "cw-6-f3-node-door-307",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          432,
+          1123
+        ],
+        [
+          432,
+          1099
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-307"
+    },
+    {
+      "id": "cw-edge-62",
+      "to": "cw-6-f3-node-door-309",
+      "kind": "corridor",
+      "weight": 27.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          858
+        ],
+        [
+          412,
+          858
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-309"
+    },
+    {
+      "id": "cw-edge-63",
+      "to": "cw-6-f3-node-door-310",
+      "kind": "corridor",
+      "weight": 21.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          770
+        ],
+        [
+          364,
+          770
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-310"
+    },
+    {
+      "id": "cw-edge-64",
+      "to": "cw-6-f3-node-door-311",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          744
+        ],
+        [
+          410,
+          744
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-311"
+    },
+    {
+      "id": "cw-edge-65",
+      "to": "cw-6-f3-node-door-312",
+      "kind": "corridor",
+      "weight": 19.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          707
+        ],
+        [
+          366,
+          707
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-312"
+    },
+    {
+      "id": "cw-edge-66",
+      "to": "cw-6-f3-node-door-313",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          605
+        ],
+        [
+          410,
+          605
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-313"
+    },
+    {
+      "id": "cw-edge-67",
+      "to": "cw-6-f3-node-door-314",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          603
+        ],
+        [
+          365,
+          603
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-314"
+    },
+    {
+      "id": "cw-edge-68",
+      "to": "cw-6-f3-node-door-315",
+      "kind": "corridor",
+      "weight": 23.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          500
+        ],
+        [
+          408,
+          500
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-315"
+    },
+    {
+      "id": "cw-edge-69",
+      "to": "cw-6-f3-node-door-316",
+      "kind": "corridor",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          491
+        ],
+        [
+          367,
+          491
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-316"
+    },
+    {
+      "id": "cw-edge-70",
+      "to": "cw-6-f3-node-door-317",
+      "kind": "corridor",
+      "weight": 22.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          146
+        ],
+        [
+          407,
+          146
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-317"
+    },
+    {
+      "id": "cw-edge-71",
+      "to": "cw-6-f3-node-door-318",
+      "kind": "corridor",
+      "weight": 21.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          400
+        ],
+        [
+          364,
+          400
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318"
+    },
+    {
+      "id": "cw-edge-72",
+      "to": "cw-6-f3-node-door-318a",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          333
+        ],
+        [
+          365,
+          333
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318a"
+    },
+    {
+      "id": "cw-edge-73",
+      "to": "cw-6-f3-node-door-319",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          99
+        ],
+        [
+          387,
+          99
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-319"
+    },
+    {
+      "id": "cw-edge-74",
+      "to": "cw-6-f3-node-door-320",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          246
+        ],
+        [
+          365,
+          246
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-320"
+    },
+    {
+      "id": "cw-edge-75",
+      "to": "cw-6-f3-node-door-322",
+      "kind": "corridor",
+      "weight": 22.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          138
+        ],
+        [
+          363,
+          138
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-322"
+    },
+    {
+      "id": "cw-edge-76",
+      "to": "cw-6-f3-node-west-hall",
+      "kind": "corridor",
+      "weight": 67.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          452,
+          962
+        ],
+        [
+          385,
+          962
+        ]
+      ],
+      "from": "cw-6-f3-node-west"
+    },
+    {
+      "id": "cw-edge-77",
+      "to": "cw-6-f4-node-west",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f3-node-west"
+    },
+    {
+      "id": "cw-edge-78",
+      "to": "cw-6-f3-node-east-hall",
+      "kind": "corridor",
+      "weight": 67.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          452,
+          308
+        ],
+        [
+          385,
+          308
+        ]
+      ],
+      "from": "cw-6-f3-node-east"
+    },
+    {
+      "id": "cw-edge-79",
+      "to": "cw-6-f4-node-east",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f3-node-east"
+    },
+    {
+      "id": "cw-edge-80",
+      "to": "cw-6-f3-node-hall-301",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          117,
+          1123
+        ],
+        [
+          145,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-302"
+    },
+    {
+      "id": "cw-edge-81",
+      "to": "cw-6-f3-node-hall-303",
+      "kind": "corridor",
+      "weight": 42.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          145,
+          1123
+        ],
+        [
+          187,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-301"
+    },
+    {
+      "id": "cw-edge-82",
+      "to": "cw-6-f3-node-hall-303a",
+      "kind": "corridor",
+      "weight": 116.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          187,
+          1123
+        ],
+        [
+          303,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303"
+    },
+    {
+      "id": "cw-edge-83",
+      "to": "cw-6-f3-node-hall-304",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          1123
+        ],
+        [
+          305,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303a"
+    },
+    {
+      "id": "cw-edge-84",
+      "to": "cw-6-f3-node-hall-305",
+      "kind": "corridor",
+      "weight": 55.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          305,
+          1123
+        ],
+        [
+          360,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-304"
+    },
+    {
+      "id": "cw-edge-85",
+      "to": "cw-6-f3-node-turn",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          360,
+          1123
+        ],
+        [
+          385,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-305"
+    },
+    {
+      "id": "cw-edge-86",
+      "to": "cw-6-f3-node-hall-307",
+      "kind": "corridor",
+      "weight": 47.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          1123
+        ],
+        [
+          432,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-turn"
+    },
+    {
+      "id": "cw-edge-87",
+      "to": "cw-6-f3-node-hall-322",
+      "kind": "corridor",
+      "weight": 39.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          99
+        ],
+        [
+          385,
+          138
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-319"
+    },
+    {
+      "id": "cw-edge-88",
+      "to": "cw-6-f3-node-hall-317",
+      "kind": "corridor",
+      "weight": 8.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          138
+        ],
+        [
+          385,
+          146
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-322"
+    },
+    {
+      "id": "cw-edge-89",
+      "to": "cw-6-f3-node-hall-320",
+      "kind": "corridor",
+      "weight": 100.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          146
+        ],
+        [
+          385,
+          246
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-317"
+    },
+    {
+      "id": "cw-edge-90",
+      "to": "cw-6-f3-node-east-hall",
+      "kind": "corridor",
+      "weight": 62.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          246
+        ],
+        [
+          385,
+          308
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-320"
+    },
+    {
+      "id": "cw-edge-91",
+      "to": "cw-6-f3-node-hall-318a",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          308
+        ],
+        [
+          385,
+          333
+        ]
+      ],
+      "from": "cw-6-f3-node-east-hall"
+    },
+    {
+      "id": "cw-edge-92",
+      "to": "cw-6-f3-node-hall-318",
+      "kind": "corridor",
+      "weight": 67.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          333
+        ],
+        [
+          385,
+          400
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318a"
+    },
+    {
+      "id": "cw-edge-93",
+      "to": "cw-6-f3-node-hall-316",
+      "kind": "corridor",
+      "weight": 91.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          400
+        ],
+        [
+          385,
+          491
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318"
+    },
+    {
+      "id": "cw-edge-94",
+      "to": "cw-6-f3-node-hall-315",
+      "kind": "corridor",
+      "weight": 9.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          491
+        ],
+        [
+          385,
+          500
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-316"
+    },
+    {
+      "id": "cw-edge-95",
+      "to": "cw-6-f3-node-hall-314",
+      "kind": "corridor",
+      "weight": 103.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          500
+        ],
+        [
+          385,
+          603
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-315"
+    },
+    {
+      "id": "cw-edge-96",
+      "to": "cw-6-f3-node-hall-313",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          603
+        ],
+        [
+          385,
+          605
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-314"
+    },
+    {
+      "id": "cw-edge-97",
+      "to": "cw-6-f3-node-hall-312",
+      "kind": "corridor",
+      "weight": 102.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          605
+        ],
+        [
+          385,
+          707
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-313"
+    },
+    {
+      "id": "cw-edge-98",
+      "to": "cw-6-f3-node-hall-311",
+      "kind": "corridor",
+      "weight": 37.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          707
+        ],
+        [
+          385,
+          744
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-312"
+    },
+    {
+      "id": "cw-edge-99",
+      "to": "cw-6-f3-node-hall-310",
+      "kind": "corridor",
+      "weight": 26.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          744
+        ],
+        [
+          385,
+          770
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-311"
+    },
+    {
+      "id": "cw-edge-100",
+      "to": "cw-6-f3-node-hall-309",
+      "kind": "corridor",
+      "weight": 88.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          770
+        ],
+        [
+          385,
+          858
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-310"
+    },
+    {
+      "id": "cw-edge-101",
+      "to": "cw-6-f3-node-west-hall",
+      "kind": "corridor",
+      "weight": 104.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          858
+        ],
+        [
+          385,
+          962
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-309"
+    },
+    {
+      "id": "cw-edge-102",
+      "to": "cw-6-f3-node-turn",
+      "kind": "corridor",
+      "weight": 161.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          962
+        ],
+        [
+          385,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-west-hall"
     }
   ],
   "routeOrigins": [
     "cw-6-f4-west",
     "cw-6-f4-east",
     "cw-6-f5-west",
-    "cw-6-f5-east"
+    "cw-6-f5-east",
+    "cw-6-f3-west",
+    "cw-6-f3-east"
   ],
   "declaredTargets": [
+    "cw-6-409",
+    "cw-6-410",
+    "cw-6-411",
+    "cw-6-412",
+    "cw-6-413",
+    "cw-6-414",
+    "cw-6-414a",
     "cw-6-415",
     "cw-6-416",
+    "cw-6-417",
+    "cw-6-419",
+    "cw-6-420a",
+    "cw-6-422",
     "cw-6-509",
     "cw-6-510",
     "cw-6-511",
@@ -3571,6 +6581,29 @@
     "cw-6-513",
     "cw-6-514",
     "cw-6-515",
-    "cw-6-517"
+    "cw-6-518",
+    "cw-6-520",
+    "cw-6-517",
+    "cw-6-301",
+    "cw-6-302",
+    "cw-6-303",
+    "cw-6-303a",
+    "cw-6-304",
+    "cw-6-305",
+    "cw-6-307",
+    "cw-6-309",
+    "cw-6-310",
+    "cw-6-311",
+    "cw-6-312",
+    "cw-6-313",
+    "cw-6-314",
+    "cw-6-315",
+    "cw-6-316",
+    "cw-6-317",
+    "cw-6-318",
+    "cw-6-318a",
+    "cw-6-319",
+    "cw-6-320",
+    "cw-6-322"
   ]
 }

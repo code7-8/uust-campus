@@ -21,7 +21,7 @@ export function bindGestures(svg, camera, onPick, onChange) {
     }
     if(scale>0){
       for(const text of svg.querySelectorAll('.map-street-name'))text.style.fontSize=(9/scale)+'px';
-      for(const text of svg.querySelectorAll('.room-label'))text.style.fontSize=(12/scale)+'px';
+      for(const text of svg.querySelectorAll('.room-label'))text.style.fontSize=(Math.max(7,Math.min(12,(Number(text.dataset.roomWidth)*scale-3)/(text.textContent.length*.62)))/scale)+'px';
       for(const text of svg.querySelectorAll('.selection-caption text'))text.style.fontSize=(12/scale)+'px';
       const used=[];
       for(const poi of svg.querySelectorAll('.floor-poi')) {

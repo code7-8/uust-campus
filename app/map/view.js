@@ -1,6 +1,6 @@
 import {createMapData, validateMapPack} from './data.js';
 import {searchPlaces, resolvePlace} from './search.js';
-import {findRoute, routeSteps} from './routing.js';
+import {floorRooms,placeNode,journeyGraph,planJourney,journeySteps} from './journey.js';
 import {campusSvg, floorSvg, campusBox, campusPoint, esc} from './svg.js';
 import {bindGestures} from './gestures.js';
 import {icon} from '../icons.js';
@@ -11,16 +11,19 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
   let data, pack=bundledPack, error='';
   try {pack=storage.read('maps')||bundledPack;data=createMapData(pack,buildings,{allowSynthetic:testMode});}
   catch {pack=bundledPack;data=createMapData(pack,buildings,{allowSynthetic:testMode});error='Сохранённый набор карт повреждён. Открыта встроенная схема.';}
-  const s={selected:null,floorId:null,query:'',filter:'all',expanded:false,context:null,exact:false,route:null,startId:'',targetId:'',planning:false,stepFree:false,panel:false,pending:null,error,searching:false,camera:null,sourcePlan:false};
+  const s={selected:null,floorId:null,query:'',filter:'all',expanded:false,context:null,exact:false,route:null,startId:'',targetId:'',planning:false,stepFree:false,panel:false,pending:null,error,searching:false,camera:null,sourcePlan:false,mode:'shortest',routeReason:'',graph:null};
   let root=null,gestures=null,resize=null;
   const selected=()=>data.locations.find(l=>l.id===s.selected);
   const floor=()=>data.floors.find(f=>f.id===s.floorId);
   const subtitle=l=>[buildings.find(b=>b.id===l.buildingId)?.name,data.floors.find(f=>f.id===l.floorId)?.name].filter(Boolean).join(' · ');
   const availableFloors=()=>data.floors.filter(f=>f.buildingId===(floor()?.buildingId||selected()?.buildingId)).sort((a,b)=>a.order-b.order);
-  const campusRoute=()=>s.planning && data.locations.find(location=>location.id===s.targetId)?.type==='building';
-  const routeData=()=>campusRoute()?data.campus:data;
-  const routeNode=location=>location?.type==='building'?'campus:building:'+location.buildingId:location?.nodeId;
-  const routePlaces=()=>campusRoute()?data.locations.filter(location=>location.type==='building'):data.locations.filter(l=>l.nodeId && l.buildingId===data.locations.find(x=>x.id===s.targetId)?.buildingId);
+  const routeData=()=>s.graph||journeyGraph(data,{mode:s.mode});
+  const routePlaces=()=>data.locations.filter(l=>l.type==='building'||l.type==='room'||l.nodeId);
+  function endpointOptions(id) {
+    const option=l=>`<option value="${esc(l.id)}" ${id===l.id?'selected':''} ${placeNode(l)?'':'disabled'}>${esc(l.name)}${placeNode(l)?'':' · дверь не размечена'}</option>`;
+    return `<optgroup label="Корпуса">${routePlaces().filter(l=>l.type==='building').map(option).join('')}</optgroup>`+
+      data.floors.map(f=>`<optgroup label="Корпус ${esc(f.buildingId)} · ${esc(f.name)}">${routePlaces().filter(l=>l.floorId===f.id).map(option).join('')}</optgroup>`).join('');
+  }
   function setView(floorId, point=null) {
     s.floorId=floorId;const base=floor()?.viewBox||campusBox;s.camera={base:[...base],box:[...base]};
     if(point){const w=base[2]*.75,h=base[3]*.75;s.camera.box=[point[0]-w/2,point[1]-h/2,w,h];}
@@ -36,21 +39,27 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     return `<section class="map-results" aria-label="Результаты поиска"><div class="map-results-heading" role="status">${list.length?`Найдено: ${list.length}`:'Ничего не найдено'}${button('Закрыть','search-close','','map-text-button')}</div>${list.length?list.slice(0,100).map(l=>`<button class="map-search-result" data-map-pick="${esc(l.id)}"><span class="map-result-icon">${icon(l.type==='building'?'map':'pin')}</span><span><strong>${esc(l.name)}</strong><small>${esc(subtitle(l))}${l.type==='building'?' · схема территории':''}</small></span>${icon('chevron')}</button>`).join(''):`<div class="map-search-empty">Уточните корпус или название. Например: «3 корпус 412».<p>Поиск находит только размеченные объекты. Сейчас подключено этажей: ${data.floors.length}.</p></div>`}${list.length>100?'<p>Уточните запрос, чтобы увидеть остальные результаты.</p>':''}</section>`;
   }
   function routeCard() {
-    const target=data.locations.find(l=>l.id===s.targetId);
-    if(!target)return '';
-    if(campusRoute())return campusRouteCard();
-    const routeOptions=routePlaces().map(l=>`<option value="${esc(l.id)}" ${l.id===s.startId?'selected':''}>${esc(l.name)} · ${esc(data.floors.find(f=>f.id===l.floorId)?.name)}</option>`).join('');
-    const steps=routeSteps(data,s.route);
-    const start=data.locations.find(l=>l.id===s.startId), transition=steps.find(step=>step.nextFloorId && step.floorId===s.floorId);
-    return `<div class="map-route-head"><span class="map-kicker">${data.verification==='archive'?'ПО АРХИВНОМУ ПЛАНУ':'МАРШРУТ ПО ПЛАНУ'}</span>${button('Закрыть','route-close','','map-text-button')}</div><h2>К ${esc(target.name)}</h2><p class="map-muted">${esc(subtitle(target))}</p><details class="map-route-settings" ${s.route?'':'open'}><summary>${s.route?`Старт: ${esc(start?.name)} · изменить`:'Выберите начальную точку'}</summary><label class="map-field">Откуда вы начнёте<select id="map-route-start"><option value="">Выберите известную точку</option>${routeOptions}</select></label><label class="map-checkbox"><input id="map-step-free" type="checkbox" ${s.stepFree?'checked':''}> Только проверенные проходы без ступеней</label></details>${s.route?`<div class="map-route-note">А — выбранный старт · Б — цель<br>${data.verification==='archive'?'Проходы взяты из архивной схемы, на месте не проверены. ':''}Перемещение не отслеживается.</div>${transition?button(esc(transition.text)+' →','route-floor',`data-floor="${esc(transition.nextFloorId)}"`,'map-button map-next-floor'):''}<ol class="map-steps">${steps.map((step,i)=>`<li><span class="map-step-number">${i+1}</span><div>${esc(step.text)}${button(step.nextFloorId?'Показать следующий этаж':'Показать участок','route-floor',`data-floor="${esc(step.nextFloorId||step.floorId)}" data-node="${esc(step.nodeId)}"`,'map-text-button')}</div></li>`).join('')}</ol>`:`<p class="map-muted">${s.startId?'Нет размеченного пути с выбранными условиями. Попробуйте другую начальную точку.':'Старт задаётся вручную. Выбор корпуса или этажа не определяет ваше положение.'}</p>`}`;
+    const start=data.locations.find(l=>l.id===s.startId),target=data.locations.find(l=>l.id===s.targetId);
+    const steps=journeySteps(routeData(),s.route);
+    return `<div class="map-route-head"><span class="map-kicker">ДО КАБИНЕТА</span>${button('Закрыть','route-close','','map-text-button')}</div>
+      <h2>${s.route?`${esc(start.name)} → ${esc(target.name)}`:'Откуда — куда'}</h2>
+      <details class="map-route-settings" ${s.route?'':'open'}><summary>${s.route?'Изменить начало, цель или способ':'Выберите точки маршрута'}</summary>
+        <label class="map-field">Откуда<select id="map-route-start"><option value="">Корпус, кабинет или лестница</option>${endpointOptions(s.startId)}</select></label>
+        ${button('⇅ Поменять местами','route-swap','','map-text-button')}
+        <label class="map-field">Куда<select id="map-route-target"><option value="">Корпус, кабинет или лестница</option>${endpointOptions(s.targetId)}</select></label>
+        <label class="map-field">Как идти<select id="map-route-mode">${[['shortest','Короткий по схеме'],['indoor','Через переходы'],['outdoor','Через улицу']].map(([id,label])=>`<option value="${id}" ${s.mode===id?'selected':''}>${label}</option>`).join('')}</select></label>
+        <label class="map-checkbox"><input id="map-step-free" type="checkbox" ${s.stepFree?'checked':''}> Только проверенные проходы без ступеней</label>
+      </details>
+      ${s.route?`<p class="map-route-note">${s.route.partial?'Есть самостоятельные участки: они описаны в шагах и не нарисованы линией.':'Линия по архивному плану.'} Проходы не проверены на месте. Перемещение не отслеживается.</p>
+        ${s.route.outdoor?'<p class="map-error">Улица: ориентировочная схема, точные входы и дорожки ещё не нанесены. Краткость сравнивается по схеме, без оценки минут.</p>':''}
+        <ol class="map-steps">${steps.map((step,i)=>`<li class="${step.manual?'manual-step':''}"><span class="map-step-number">${i+1}</span><div>${esc(step.text)}${button(step.nextFloorId?'Показать следующий этаж':step.floorId?'Показать этаж':'Показать территорию','route-floor',`data-floor="${esc(step.nextFloorId===undefined?step.floorId||'':step.nextFloorId||'')}"`,'map-text-button')}</div></li>`).join('')}</ol>`:
+        `<p class="map-muted">${s.startId&&s.targetId?esc(s.routeReason):'Выберите начало и цель. Можно идти от корпуса к кабинету или между кабинетами.'}</p>`}`;
   }
-  function campusRouteCard() {
-    const options=selectedId=>routePlaces().map(location=>`<option value="${esc(location.id)}" ${location.id===selectedId?'selected':''}>${esc(location.name)}</option>`).join('');
-    const steps=routeSteps(data.campus,s.route);
-    const start=data.locations.find(location=>location.id===s.startId),target=data.locations.find(location=>location.id===s.targetId);
-    return `<div class="map-route-head"><span class="map-kicker">МЕЖДУ КОРПУСАМИ</span>${button('Закрыть','route-close','','map-text-button')}</div><h2>${s.route?`${esc(start.name)} → ${esc(target.name)}`:'Построить маршрут'}</h2>
-      <details class="map-route-settings" ${s.route?'':'open'}><summary>${s.route?'Изменить маршрут':'Откуда → куда'}</summary><label class="map-field">Откуда<select id="map-route-start"><option value="">Выберите корпус</option>${options(s.startId)}</select></label><label class="map-field">Куда<select id="map-route-target">${options(s.targetId)}</select></label></details>
-      ${s.route?`<p class="map-route-note">Схематический маршрут · проходы не проверены на месте.${s.route.startId===s.route.endId?' Старт и цель совпадают.':' А — старт, Б — цель.'}</p>${s.route.links.some(link=>link.edge.reported)?'<p class="map-error">Переход 5–6 — по сообщению команды, не проверен.</p>':''}<ol class="map-steps">${steps.map((step,index)=>`<li><span class="map-step-number">${index+1}</span><span>${esc(step.text)}</span></li>`).join('')}</ol>`:`<p class="map-muted">${s.startId?'Нет размеченного пути между выбранными корпусами.':'Выберите корпус, от которого начнёте путь.'}</p>`}`;
+  function floorCard() {
+    const f=floor(),rooms=floorRooms(data,f.id);
+    return `<div class="map-card-title"><div><span class="map-kicker">КОРПУС ${esc(f.buildingId)}</span><h2>${esc(f.name)} · кабинеты</h2></div>${button('Территория','territory','','map-text-button')}</div>
+      <div class="floor-room-list" aria-label="Кабинеты выбранного этажа">${rooms.map(l=>`<button data-map-pick="${esc(l.id)}" aria-label="${esc(l.name)}">${esc(l.number)}</button>`).join('')}</div>
+      <div class="map-card-links">${button('Построить маршрут','route-open','','map-text-button')}${button(s.sourcePlan?'Векторная схема':'Исходный план','source-plan','','map-text-button')}</div>`;
   }
   function dataPanel() {
     return `<div class="map-route-head"><span class="map-kicker">ПЛАНЫ КОМАНДЫ</span>${button('Закрыть','data-close','','map-text-button')}</div><h2>Добавить планы</h2><p class="map-muted">Загрузите подготовленный JSON: помещения, двери и проверенные проходы. Набор заменит внутренние карты только на этом устройстве.</p><label class="map-field">Набор карт (JSON, до 2 МБ)<input type="file" id="map-import" accept=".json,application/json"></label>${s.pending?`<div class="map-import-preview"><strong>Проверка структуры пройдена</strong><p>Версия ${esc(s.pending.dataVersion)} · этажей ${s.pending.floors.length} · мест ${s.pending.locations.length}</p><p>Источник: ${esc(s.pending.source)}<br>Проверка по данным автора: ${esc(s.pending.verifiedAt||'не указана')}</p><p>Автоматическая проверка не подтверждает проходимость на месте.</p>${button('Сохранить на устройстве','import-apply','','map-button primary')}</div>`:''}<div class="map-data-meta"><strong>Текущий набор: ${esc(pack.dataVersion)}</strong><p>${esc(pack.source)}</p><p>Дата проверки: ${esc(pack.verifiedAt||'не подтверждена')}<br>Этажей: ${pack.floors.length} · объектов: ${pack.locations.length}</p></div>${pack!==bundledPack?button('Вернуть встроенную схему','import-reset','','map-text-button'):''}<p class="map-muted">Формат и инструкция — docs/MAPS.md в репозитории проекта. Сам файл JSON содержит всю геометрию: подключение к сети не требуется.</p>`;
@@ -59,6 +68,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     if(s.panel)return dataPanel();
     if(s.planning)return routeCard();
     const l=selected();
+    if(floor()&&(!l||l.type==='building'||l.floorId!==s.floorId))return floorCard();
     if(!l)return '';
     const b=buildings.find(b=>b.id===l.buildingId),floors=availableFloors();
     return `<div class="map-card-title"><div><span class="map-kicker">${l.type==='building'?'ТЕРРИТОРИЯ':esc(subtitle(l))}</span><h2>${esc(l.name)}</h2></div>${button(icon('heart'),'favorite',`aria-label="Сохранить корпус" aria-pressed="${isFavorite(b.id)}"`,'map-icon-button')}${iconButton('close','Закрыть карточку','card-close')}</div>${s.context?`<div class="map-context"><strong>${esc(s.context.room||s.context.place||'Место из расписания')}</strong><span>${esc(s.context.title||s.context.subject||'')}</span>${!s.exact?'<small>Точное помещение не сопоставлено. Показан подтверждённый корпус.</small>':''}</div>`:''}
@@ -71,7 +81,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     const f=floor(),l=selected(),content=card();
     if(!s.camera)setView(null);
     root.innerHTML=`<section class="map-module ${s.searching||s.query?'is-searching':''}" aria-label="Карта кампуса"><header class="map-header"><div class="map-title-row"><div><span class="map-kicker">УУНИТ · КАРЛА МАРКСА</span><h1>Карта кампуса</h1></div>${iconButton('download','Добавить планы','data-open')}</div><div class="map-search-field">${icon('search')}<input id="map-search" type="search" placeholder="Корпус, аудитория, место" value="${esc(s.query)}" aria-label="Поиск мест" autocomplete="off">${s.query?iconButton('close','Очистить поиск','search-clear'):''}</div><div class="map-filters" aria-label="Тип места">${[['all','Всё'],['room','Аудитории'],['entrance','Входы'],['cafe','Буфет'],['toilet','Туалет'],['library','Библиотека']].map(([id,label])=>button(label,'filter',`data-type="${id}" aria-pressed="${s.filter===id}"`,s.filter===id?'map-filter active':'map-filter')).join('')}</div></header>
-      <div class="map-canvas"><div class="map-level-row">${button(f?`${icon('left')} Территория`:'Схема территории','territory','','map-level-button')}<span>${f?esc(f.name):'9 корпусов'}</span></div><svg id="map-surface" viewBox="${s.camera.box.join(' ')}" role="group" tabindex="0" aria-label="${f?esc(f.name)+': помещения, двери и проходы':'Расположение девяти корпусов на территории'}">${f?floorSvg(data,f,l,s.route,s.filter,s.sourcePlan):campusSvg(data,l,campusRoute()?s.route:null)}</svg>${f?`<div class="map-floor-switch" aria-label="Этаж для просмотра">${availableFloors().map(fl=>button(esc(fl.name),'floor',`data-floor="${esc(fl.id)}" aria-pressed="${f.id===fl.id}"`,f.id===fl.id?'active':'')).join('')}</div>`:''}<div class="map-zoom">${iconButton('plus','Увеличить','zoom-in')}${iconButton('minus','Уменьшить','zoom-out')}${iconButton('focus','Сбросить вид','zoom-reset')}</div><div class="map-canvas-caption">${f?(data.verification==='archive'?'CampusWay · архивный план':'План · '+esc(f.verifiedAt)):'Пунктир 5–6 · не проверен'}${data.synthetic?' · СИНТЕТИЧЕСКИЙ ТЕСТ':''}</div><div id="map-results-host">${results()}</div></div>
+      <div class="map-canvas"><div class="map-level-row">${button(f?`${icon('left')} Территория`:'Схема территории','territory','','map-level-button')}<span>${f?esc(f.name):'9 корпусов'}</span></div><svg id="map-surface" viewBox="${s.camera.box.join(' ')}" role="group" tabindex="0" aria-label="${f?esc(f.name)+': помещения, двери и проходы':'Расположение девяти корпусов на территории'}">${f?floorSvg(routeData(),f,l,s.route,s.filter,s.sourcePlan):campusSvg({...data,campus:routeData()},l,s.route)}</svg>${f?`<div class="map-floor-switch" aria-label="Этаж для просмотра">${availableFloors().map(fl=>button(esc(fl.name),'floor',`data-floor="${esc(fl.id)}" aria-pressed="${f.id===fl.id}"`,f.id===fl.id?'active':'')).join('')}</div>`:''}<div class="map-zoom">${iconButton('plus','Увеличить','zoom-in')}${iconButton('minus','Уменьшить','zoom-out')}${iconButton('focus','Сбросить вид','zoom-reset')}</div><div class="map-canvas-caption">${f?(data.verification==='archive'?'CampusWay · архивный план':'План · '+esc(f.verifiedAt)):'Схема · входы и проходы не проверены'}${data.synthetic?' · СИНТЕТИЧЕСКИЙ ТЕСТ':''}</div><div id="map-results-host">${results()}</div></div>
       ${content||s.error?`<section class="map-sheet ${s.panel||s.planning||s.expanded?'expanded':''}" aria-label="Информация о месте">${s.error?`<p class="map-error" role="alert">${esc(s.error)}</p>`:''}${content}</section>`:''}</section>`;
     gestures=bindGestures(root.querySelector('#map-surface'),s.camera,id=>choose(id));
     resize?.disconnect();resize=new ResizeObserver(()=>keepSelectionVisible());
@@ -87,14 +97,14 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     module.style.setProperty('--map-bottom',Math.ceil(bottom)+'px');
     if(s.searching||s.query)return;
     const floorSwitch=root.querySelector('.map-floor-switch')?.getBoundingClientRect();
-    const insets={top:header.bottom-canvas.top+60,right:floorSwitch?canvas.right-floorSwitch.left+24:32,bottom:bottom+80,left:32};
+    const insets={top:header.bottom-canvas.top+48,right:floorSwitch?canvas.right-floorSwitch.left+16:24,bottom:bottom+60,left:24};
     const current=selected(),base=s.camera.base;
     let points=[[base[0],base[1]],[base[0]+base[2],base[1]+base[3]]],keepScale=false;
     if(!overview && s.route) {
       const graph=routeData(),nodes=new Map(graph.nodes.map(node=>[node.id,node]));
       const routePoints=s.route.links.filter(link=>nodes.get(link.from).floorId===s.floorId&&nodes.get(link.to).floorId===s.floorId).flatMap(link=>link.edge.geometry||[]);
       routePoints.push(...s.route.nodeIds.map(id=>nodes.get(id)).filter(node=>node.floorId===s.floorId).map(node=>node.point));
-      if(routePoints.length)points=campusRoute()?routePoints.map(campusPoint):routePoints;
+      if(routePoints.length)points=s.floorId?routePoints:routePoints.map(campusPoint);
       if(s.route.startId===s.route.endId)keepScale=true;
     } else if(!overview && current && current.floorId===s.floorId) {
       points=[current.floorId?current.point:campusPoint(current.point)];keepScale=true;
@@ -102,11 +112,10 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     gestures.fit(points,insets,keepScale);
   }
   function calculate() {
-    const start=data.locations.find(l=>l.id===s.startId),target=data.locations.find(l=>l.id===s.targetId);
-    const startNode=routeNode(start),targetNode=routeNode(target);
-    s.route=startNode&&targetNode?findRoute(routeData(),startNode,targetNode,{stepFree:campusRoute()?false:s.stepFree,allowArchive:campusRoute()||data.verification==='archive'}):null;
-    if(campusRoute())setView(null);
-    else if(s.route)setView(start.floorId);
+    const result=planJourney(data,s.startId,s.targetId,{stepFree:s.stepFree,mode:s.mode});
+    s.route=result.route;s.graph=result.graph;s.routeReason=result.reason;
+    const start=data.locations.find(l=>l.id===s.startId);
+    if(s.route)setView(start?.floorId||null);
     draw();
   }
   function act(action,el) {
@@ -120,22 +129,24 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     if(action==='card-close'){s.selected=null;s.context=null;s.expanded=false;s.error='';}
     if(action==='territory')setView(null);
     if(action==='source-plan')s.sourcePlan=!s.sourcePlan;
-    if(action==='floor'||action==='route-floor'){setView(el.dataset.floor);}
-    if(action==='open-floor')setView(availableFloors()[0]?.id||null);
+    if(action==='floor'||action==='route-floor'){setView(el.dataset.floor||null);if(action==='floor'){s.selected='building:'+floor().buildingId;s.expanded=false;}}
+    if(action==='open-floor'){setView(availableFloors()[0]?.id||null);s.expanded=false;}
     if(action==='external'){external('https://yandex.ru/maps/?text='+encodeURIComponent(`УУНиТ Уфа Карла Маркса 12 ${buildings.find(b=>b.id===l.buildingId).name}`));return;}
     if(action==='favorite')onFavorite(l.buildingId);
     if(action==='data-open'){s.panel=true;s.searching=false;s.query='';s.error='';}
     if(action==='data-close'){s.panel=false;s.pending=null;s.error='';}
+    if(action==='route-open'){s.planning=true;s.targetId='';s.route=null;draw();return;}
+    if(action==='route-swap'){[s.startId,s.targetId]=[s.targetId,s.startId];calculate();return;}
     if(action==='route-to'){s.targetId=l.id;s.planning=true;s.route=null;s.error='';if(!routePlaces().some(location=>location.id===s.startId))s.startId='';calculate();return;}
-    if(action==='route-from'){s.startId=l.id;s.route=null;s.error='Начало сохранено: '+l.name+'. Найдите цель и нажмите «Маршрут».';}
+    if(action==='route-from'){s.startId=l.id;s.route=null;s.planning=false;s.error='Начало сохранено: '+l.name+'. Найдите цель и нажмите «Маршрут».';}
     if(action==='route-close'){s.planning=false;s.route=null;if(l)setView(l.floorId,l.floorId?l.point:campusPoint(l.point));}
     if(action==='import-apply'&&s.pending){
       if(!storage.write('maps',s.pending)){s.error='Не хватило памяти. Текущий набор сохранён.';draw();return;}
-      pack=s.pending;data=createMapData(pack,buildings);Object.assign(s,{selected:null,floorId:null,route:null,planning:false,startId:'',targetId:'',context:null,pending:null,error:'Набор сохранён. Можно искать помещения.',camera:null});
+      pack=s.pending;data=createMapData(pack,buildings);Object.assign(s,{selected:null,floorId:null,route:null,planning:false,startId:'',targetId:'',context:null,pending:null,graph:null,error:'Набор сохранён. Можно искать помещения.',camera:null});
     }
     if(action==='import-reset'){
       if(!storage.write('maps',bundledPack)){s.error='Не удалось сохранить встроенный набор.';draw();return;}
-      pack=bundledPack;data=createMapData(pack,buildings);Object.assign(s,{selected:null,floorId:null,route:null,planning:false,startId:'',targetId:'',context:null,pending:null,error:'',camera:null});
+      pack=bundledPack;data=createMapData(pack,buildings);Object.assign(s,{selected:null,floorId:null,route:null,planning:false,startId:'',targetId:'',context:null,pending:null,graph:null,error:'',camera:null});
     }
     draw();
   }
@@ -144,6 +155,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
   async function onChange(e) {
     if(e.target.id==='map-route-start'){s.startId=e.target.value;calculate();}
     if(e.target.id==='map-route-target'){s.targetId=e.target.value;s.selected=s.targetId;calculate();}
+    if(e.target.id==='map-route-mode'){s.mode=e.target.value;calculate();}
     if(e.target.id==='map-step-free'){s.stepFree=e.target.checked;calculate();}
     if(e.target.id==='map-import') {
       const file=e.target.files[0];if(!file)return;s.pending=null;s.error='';

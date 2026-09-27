@@ -64,7 +64,7 @@
 .map-floor-switch button{padding:9px 8px;min-height:40px;border-radius:8px;background:none;font-size:.75rem;color:var(--tone-52694d,#52694d)}.map-floor-switch button.active{background:var(--tone-234d3b,#234d3b);color:white}
 .floor-area.room{fill:var(--tone-e7eddc,#e7eddc);stroke:var(--tone-c2cdb5,#c2cdb5);stroke-width:.8}.floor-area.corridor{fill:#fffef4;stroke:none}.floor-area.is-selected{fill:var(--tone-d8ef9a,#d8ef9a);stroke:var(--tone-587c3f,#587c3f);stroke-width:2}
 .floor-walls{fill:none;stroke:var(--tone-56634e,#56634e);stroke-width:3;stroke-linejoin:round}.floor-doors{fill:none;stroke:var(--tone-6d994b,#6d994b);stroke-width:2;stroke-dasharray:3 2}
-.room-label{font-size:12px;text-anchor:middle;fill:var(--tone-617452,#617452);pointer-events:none;display:none}.show-room-labels .room-label,.room-label.is-selected{display:block}.room-label.is-selected{fill:var(--tone-28442a,#28442a);font-weight:750}
+.room-label{font-size:12px;text-anchor:middle;fill:var(--tone-617452,#617452);pointer-events:none;display:block}.show-room-labels .room-label,.room-label.is-selected{display:block}.room-label.is-selected{fill:var(--tone-28442a,#28442a);font-weight:750}
 .floor-poi{cursor:pointer}.floor-poi circle{fill:#fff;stroke:var(--tone-8d9d80,#8d9d80);stroke-width:1.2}.floor-poi text{font-size:10px;fill:var(--tone-456137,#456137);text-anchor:middle;pointer-events:none}.floor-poi.is-selected circle{fill:var(--tone-e2f3b1,#e2f3b1);stroke:var(--tone-3e6930,#3e6930);stroke-width:2}
 .selection-caption text{font-size:11px;font-weight:700;fill:var(--tone-25482c,#25482c);paint-order:stroke;stroke:var(--tone-fffff7,#fffff7);stroke-width:5;stroke-linejoin:round;pointer-events:none}
 .route-line,.route-halo{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.route-halo{stroke:#fff;stroke-width:9}.route-line{stroke:#2871d1;stroke-width:4;stroke-dasharray:8 3}
@@ -81,3 +81,5 @@
 @media(max-height:650px){.map-module:not(.is-searching) .map-filters{display:none}.map-header{top:calc(8px + env(safe-area-inset-top))}.map-sheet{padding:10px 12px}.map-kicker{font-size:.6rem}}
 @media(min-width:700px){.map-active>.content{height:calc(100dvh - 85px)}.map-sheet{padding-left:24px;padding-right:24px}}
 @media(max-width:359px){.map-button{font-size:.7rem;padding:9px}.map-card-title{gap:6px}}
+
+.floor-room-list{display:flex;gap:7px;margin:8px 0;overflow-x:auto;scrollbar-width:thin;padding-bottom:5px}.floor-room-list button{flex-shrink:0;min-width:45px;min-height:40px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-size:13px;font-weight:650}.manual-step{border-left:3px solid #dca246;padding-left:8px!important}.route-line .outdoor-route{stroke:#b67728;stroke-dasharray:3 7}.map-route-settings select{font-size:16px}.room-label{paint-order:stroke;stroke:#ffffffdd;stroke-width:2px;stroke-linejoin:round}.map-card-title h2{overflow-wrap:anywhere}

@@ -24,5 +24,23 @@ export function createCampusGraph(buildings) {
     connect('hub','8',[[1234,524],[1250,499],[1305,489],[1305,429],[1459,429]],[[1234,565],[1234,524],[1250,499],[1269,489]]),
     connect('hub','9',[[1270,565],[1302,592],[1302,653],[1382,653]],[[1234,565],[1270,565],[1302,592],[1302,620]])
   ];
+  // A schematic alternative along the outside of the supplied footprints.
+  // Access links have no line: the APK does not contain actual door positions.
+  const outdoorSource='Ориентировочная схема обхода корпусов по контурам команды; входы и пешеходные дорожки не подтверждены';
+  const outside=[['nw',[160,170]],['4',[341,170]],['5',[530,170]],['6',[797,170]],
+    ['7',[1205,170]],['ne',[1560,170]],['8',[1560,454]],['se',[1560,800]],
+    ['9',[1382,800]],['1',[986,800]],['2',[670,800]],['3',[237,800]],['sw',[160,800]]];
+  for(const [key,point] of outside)nodes.push({id:'outdoor:'+key,buildingId:null,floorId:null,type:'junction',name:'На улице',point});
+  for(let i=0;i<outside.length;i++){
+    const [a,p]=outside[i],[b,q]=outside[(i+1)%outside.length];
+    edges.push({id:'outdoor:'+a+'-'+b,from:'outdoor:'+a,to:'outdoor:'+b,kind:'outdoor',direction:'both',status:'plan',stepFree:null,
+      weight:Math.hypot(p[0]-q[0],p[1]-q[1]),geometry:[p,q],passage:[],source:outdoorSource,verifiedAt:null,approximate:true});
+  }
+  for(const building of buildings){
+    const p=outside.find(([key])=>key===building.id)[1];
+    edges.push({id:'outdoor:access:'+building.id,from:'campus:building:'+building.id,to:'outdoor:'+building.id,
+      kind:'access',direction:'both',status:'plan',stepFree:null,weight:Math.hypot(p[0]-building.center[0],p[1]-building.center[1])+60,
+      geometry:null,passage:[],source:outdoorSource,verifiedAt:null,manual:true});
+  }
   return {kind:'campus',nodes,edges,floors:[],locations:[],source:schemeSource};
 }
