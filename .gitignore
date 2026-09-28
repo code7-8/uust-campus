@@ -3,6 +3,7 @@ tools/avd/
 tools/downloads/
 build/
 research/
+экспорт_тг_фото_карты/
 artifacts/
 tools/github.local.py
 tools/toolchain.local.ps1

@@ -51,6 +51,9 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     check(Array.isArray(f.viewBox) && f.viewBox.length===4 && f.viewBox.every(Number.isFinite) && f.viewBox[2]>0 && f.viewBox[3]>0,`${f.id}: неверный viewBox`);
     check(Array.isArray(f.areas) && f.areas.length<=3000 && Array.isArray(f.walls) && f.walls.length<=10000 && Array.isArray(f.doors) && f.doors.length<=3000,`${f.id}: нужны areas, walls, doors`);
     evidence(f,f.id);
+    if(f.costScale!==undefined)check(Number.isFinite(f.costScale)&&f.costScale>0&&f.costScale<=100,`${f.id}: неверный масштаб стоимости`);
+    if(f.sourceLabel!==undefined)check(label(f.sourceLabel),`${f.id}: неверная подпись источника`);
+    if(f.navigationNote!==undefined)check(typeof f.navigationNote==='string'&&f.navigationNote.length<=600,`${f.id}: слишком длинное пояснение`);
     if(f.image)check(/^assets\/campusway\/floor-6-[345]\.(png|jpg)$/.test(f.image)&&Array.isArray(f.imageSize)&&f.imageSize.length===2&&f.imageSize.every(n=>Number.isFinite(n)&&n>0&&n<10000),`${f.id}: неизвестная подложка`);
   }
   if(errors.length)throw new Error(errors.join('\n'));
@@ -127,6 +130,13 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
   for(const key of ['routeOrigins','declaredTargets']) {
     check(new Set(pack[key]).size===pack[key].length,`${key}: повторные ссылки`);
     for(const id of pack[key])check(locations.get(id)?.nodeId,`${key}: неизвестная точка ${id}`);
+  }
+  if(pack.campusAnchors!==undefined){
+    check(Array.isArray(pack.campusAnchors)&&pack.campusAnchors.length<=100,'campusAnchors: нужен массив до 100 точек');
+    if(Array.isArray(pack.campusAnchors))for(const id of pack.campusAnchors){
+      const place=locations.get(id),node=nodes.get(place?.nodeId);
+      check(node&&['entrance','stairs','lift'].includes(node.type)&&pack.routeOrigins.includes(id),`campusAnchors: неверная точка ${id}`);
+    }
   }
   if(errors.length)throw new Error(errors.join('\n'));
   const adjacent=new Map(pack.nodes.map(n=>[n.id,[]]));

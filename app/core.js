@@ -108,7 +108,10 @@ export function validateEvents(payload, imported=false) {
     return {id:clean(e.id).slice(0,80),title:clean(e.title).slice(0,200),date:e.date,time:e.time||null,endTime:e.endTime||null,
       category:clean(e.category||'Кампус').slice(0,40),description:clean(e.description).slice(0,4000),place:clean(e.place).slice(0,240),buildingId:e.buildingId?String(e.buildingId):null,
       locationId:clean(e.locationId)||null,campusId:clean(e.campusId)||null,floorId:clean(e.floorId)||null,
-      community:!!e.community,authorId:clean(e.authorId).slice(0,80),authorName:clean(e.authorName).slice(0,80),
+      kind:imported?'imported':e.kind==='student'?'student':'official',
+      capacity:Number.isInteger(e.capacity)&&e.capacity>0?e.capacity:null,attendeeCount:!imported&&Number.isInteger(e.attendeeCount)&&e.attendeeCount>=0?e.attendeeCount:0,viewerGoing:!imported&&e.viewerGoing===true,
+      room:clean(e.room).slice(0,80),organizer:clean(e.organizer).slice(0,160),
+      community:!imported&&!!e.community,authorId:clean(e.authorId).slice(0,80),authorName:clean(e.authorName).slice(0,80),
       source:clean(e.source),sourceLabel:imported?'Импорт команды':clean(e.sourceLabel||'УУНиТ'),imported,demo:!!e.demo,accent:['lime','peach','blue'].includes(e.accent)?e.accent:'lime'};
   });
   return events.sort((a,b)=>a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||''));

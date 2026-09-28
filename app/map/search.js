@@ -40,7 +40,7 @@ export function resolvePlace(data, context={}) {
   }
   if (building && context.room) {
     const q=parseQuery(context.room);
-    const matches=data.locations.filter(l => l.type==='room' && l.buildingId===building.id && normalize(l.number)===q.text);
+    const matches=data.locations.filter(l => l.type==='room' && l.buildingId===building.id && normalize(l.number)===q.text && (!context.floorId || l.floorId===context.floorId));
     if (matches.length===1 && (!q.buildingId || q.buildingId===building.id)) return {location:matches[0],exact:true};
   }
   return {location:fallback, exact:false};

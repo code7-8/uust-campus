@@ -20,6 +20,7 @@ export function campusSvg(data, selected, route=null) {
 }
 
 export function floorSvg(data, floor, selected, route, typeFilter='all',sourcePlan=false) {
+  sourcePlan=sourcePlan&&!!floor.image;
   const places=data.locations.filter(l=>l.floorId===floor.id);
   const nodes=new Map(data.nodes.map(n=>[n.id,n]));
   const activeLines=(route?.links||[]).filter(l=>l.edge.geometry && nodes.get(l.from)?.floorId===floor.id && nodes.get(l.to)?.floorId===floor.id);
