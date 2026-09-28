@@ -49,6 +49,10 @@ class Store:
             CREATE TABLE IF NOT EXISTS events(id TEXT PRIMARY KEY, author_id TEXT NOT NULL,
               payload TEXT NOT NULL, created REAL NOT NULL, updated REAL NOT NULL,
               FOREIGN KEY(author_id) REFERENCES users(id));
+            CREATE TABLE IF NOT EXISTS attendance(event_id TEXT NOT NULL, user_id TEXT NOT NULL,
+              created REAL NOT NULL, PRIMARY KEY(event_id,user_id),
+              FOREIGN KEY(event_id) REFERENCES events(id) ON DELETE CASCADE,
+              FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
             ''')
 
     @contextmanager
@@ -129,8 +133,29 @@ class Store:
             raise APIError(400, 'Неизвестный корпус.')
         result['buildingId'] = str(building) if building else None
         result['locationId'] = text('locationId', 96) or None
+        result['floorId'] = text('floorId', 96) or None
+        result['room'] = text('room', 80)
+        result['organizer'] = text('organizer', 160)
+        result['kind'] = data.get('kind', 'student')
+        if result['kind'] not in ('student', 'official'): raise APIError(400, 'Неизвестный тип события.')
+        capacity = data.get('capacity')
+        if capacity is not None and (type(capacity) is not int or not 1 <= capacity <= 10000):
+            raise APIError(400, 'Количество мест: целое число от 1 до 10000 или без ограничения.')
+        result['capacity'] = capacity
+        if not building and any(result[k] for k in ('locationId', 'floorId', 'room')):
+            raise APIError(400, 'Укажите корпус для аудитории или этажа.')
         result.update(source='', sourceLabel='Афиша сообщества', accent='lime', community=True, demo=False)
         return result
+
+    def event_view(self, db, row, viewer_id=None):
+        payload = json.loads(row['payload'])
+        # Before student meetings were introduced, only staff could publish.
+        payload.setdefault('kind', 'official')
+        count = db.execute('SELECT COUNT(*) FROM attendance WHERE event_id=?', (row['id'],)).fetchone()[0]
+        going = viewer_id is not None and db.execute('SELECT 1 FROM attendance WHERE event_id=? AND user_id=?',
+                                                     (row['id'], viewer_id)).fetchone() is not None
+        return {**payload, 'id': row['id'], 'authorId': row['author_id'], 'authorName': row['author_name'],
+                'attendeeCount': count, 'viewerGoing': going}
 
     def dispatch(self, method, path, data, token):
         if method == 'GET' and path == '/v1/health':
@@ -140,11 +165,12 @@ class Store:
             return self.login(data.get('username'), data.get('password'))
         if method == 'POST' and path == '/v1/auth/login': return self.login(data.get('username'), data.get('password'))
         if method == 'GET' and path == '/v1/events':
+            viewer = self.user(token) if token else None
             with self.connect() as db:
                 rows = db.execute('SELECT e.*, u.name AS author_name FROM events e JOIN users u '
                                   'ON u.id=e.author_id ORDER BY e.updated DESC LIMIT 300').fetchall()
-            return {'events': [{**json.loads(r['payload']), 'id': r['id'], 'authorId': r['author_id'],
-                                'authorName': r['author_name']} for r in rows], 'updatedAt': dt.datetime.now(dt.timezone.utc).isoformat()}
+                events = [self.event_view(db, row, viewer['id'] if viewer else None) for row in rows]
+            return {'events': events, 'updatedAt': dt.datetime.now(dt.timezone.utc).isoformat()}
         user = self.user(token)
         if method == 'GET' and path == '/v1/auth/me': return {'user': user}
         if method == 'POST' and path == '/v1/auth/logout':
@@ -164,18 +190,43 @@ class Store:
                     if target['role'] == 'admin': raise APIError(403, 'Администратора нельзя изменить из приложения.')
                     db.execute('UPDATE users SET role=? WHERE id=?', (role, match[1]))
                     return {'ok': True}
+        attendance = re.fullmatch(r'/v1/events/(event-[a-f0-9]{24})/attendance', path)
+        if attendance and method in ('POST', 'DELETE'):
+            eid = attendance[1]
+            with self.connect() as db:
+                # Serialize joins, withdrawals and edits: the last seat cannot be oversold.
+                db.execute('BEGIN IMMEDIATE')
+                row = db.execute('SELECT e.*, u.name AS author_name FROM events e JOIN users u ON u.id=e.author_id WHERE e.id=?', (eid,)).fetchone()
+                if not row: raise APIError(404, 'Событие не найдено.')
+                event = self.event_view(db, row, user['id'])
+                if method == 'POST' and not event['viewerGoing']:
+                    ends = dt.datetime.fromisoformat(event['date'] + 'T' + event['endTime'] + ':00+05:00')
+                    if ends <= dt.datetime.now(dt.timezone.utc): raise APIError(409, 'Событие уже завершилось.')
+                    if event.get('capacity') is not None and event['attendeeCount'] >= event['capacity']:
+                        raise APIError(409, 'Все места заняты. Попробуйте позже.')
+                    db.execute('INSERT INTO attendance VALUES (?,?,?)', (eid, user['id'], time.time()))
+                elif method == 'DELETE':
+                    db.execute('DELETE FROM attendance WHERE event_id=? AND user_id=?', (eid, user['id']))
+                return {'event': self.event_view(db, row, user['id'])}
         match = re.fullmatch(r'/v1/events(?:/(event-[a-f0-9]{24}))?', path)
         if match and method in ('POST', 'PATCH', 'DELETE'):
-            if user['role'] not in ('organizer', 'admin'): raise APIError(403, 'Администратор ещё не разрешил вам публиковать события.')
             eid = match[1]
             if method == 'POST' and eid is not None or method != 'POST' and eid is None:
                 raise APIError(404, 'Событие не найдено.')
             event = self.validate_event(data) if method != 'DELETE' else None
             with self.connect() as db:
+                db.execute('BEGIN IMMEDIATE')
                 if eid:
                     row = db.execute('SELECT * FROM events WHERE id=?', (eid,)).fetchone()
                     if not row: raise APIError(404, 'Событие не найдено.')
                     if user['role'] != 'admin' and row['author_id'] != user['id']: raise APIError(403, 'Можно изменять только свои события.')
+                    if json.loads(row['payload']).get('kind', 'official') == 'official' and user['role'] not in ('organizer', 'admin'):
+                        raise APIError(403, 'Официальными событиями управляет организатор.')
+                if event and event['kind'] == 'official' and user['role'] not in ('organizer', 'admin'):
+                    raise APIError(403, 'Публикация от УУНиТ доступна только организаторам.')
+                if event and eid and event['capacity'] is not None:
+                    count = db.execute('SELECT COUNT(*) FROM attendance WHERE event_id=?', (eid,)).fetchone()[0]
+                    if event['capacity'] < count: raise APIError(409, 'Лимит мест меньше числа записавшихся участников.')
                 if method == 'POST':
                     eid = 'event-' + secrets.token_hex(12)
                     db.execute('INSERT INTO events VALUES (?,?,?,?,?)', (eid, user['id'], json.dumps(event, ensure_ascii=False), time.time(), time.time()))
