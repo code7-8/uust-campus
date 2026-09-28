@@ -101,6 +101,35 @@ test('validation catches duplicate IDs, bad references, geometry, evidence and u
 });
 
 const archive=createMapData(read('../app/data/maps.json'),buildings);
+
+test('campus routes turn at corridor junctions instead of visiting and retracing building centres',()=>{
+  for(const [a,b] of [['9','4'],['4','9'],['2','5'],['5','2'],['2','4'],['4','2']]){
+    const j=planJourney(archive,'building:'+a,'building:'+b,{mode:'indoor'});
+    assert.ok(j.route);
+    assert.ok(!j.route.nodeIds.includes('campus:building:6'),`${a} → ${b} detours into building 6`);
+    assert.ok(!j.route.nodeIds.includes('campus:building:3'),`${a} → ${b} detours into building 3`);
+    const points=j.route.nodeIds.map(id=>j.graph.nodes.find(n=>n.id===id).point.join(','));
+    assert.equal(new Set(points).size,points.length,'route must not retrace a corridor');
+    assert.ok(j.route.cost<({'9-4':1791.87,'4-9':1791.87,'2-5':676,'5-2':676,'2-4':867,'4-2':867})[a+'-'+b]);
+    assert.doesNotMatch(campusSvg({...archive,campus:j.graph},null,j.route),/NaN|undefined/);
+  }
+});
+
+test('split campus passage segments stay connected to their drawn endpoints in both directions',()=>{
+  const nodes=new Map(archive.campus.nodes.map(n=>[n.id,n]));
+  for(const edge of archive.campus.edges.filter(e=>e.kind==='passage')){
+    assert.deepEqual(edge.geometry[0],nodes.get(edge.from).point);
+    assert.deepEqual(edge.geometry.at(-1),nodes.get(edge.to).point);
+    assert.ok(edge.weight>0);
+  }
+  for(const a of buildings)for(const b of buildings){
+    const forward=planJourney(archive,'building:'+a.id,'building:'+b.id,{mode:'indoor'}).route;
+    const reverse=planJourney(archive,'building:'+b.id,'building:'+a.id,{mode:'indoor'}).route;
+    assert.ok(forward);assert.ok(reverse);
+    assert.ok(Math.abs(forward.cost-reverse.cost)<1e-6);
+  }
+});
+
 test('every floor lists its rooms in numeric order; unmapped doors remain explicit',()=>{
   assert.deepEqual(archive.floors.map(f=>floorRooms(archive,f.id).length),[21,14,12]);
   assert.equal(floorRooms(archive,'cw-6-f3')[0].number,'301');
