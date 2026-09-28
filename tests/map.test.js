@@ -4,6 +4,8 @@ import {readFileSync} from 'node:fs';
 import {createMapData,validateMapPack} from '../app/map/data.js';
 import {searchPlaces,resolvePlace,withPlaceReference} from '../app/map/search.js';
 import {findRoute,routeSteps} from '../app/map/routing.js';
+import {floorRooms,planJourney,journeySteps} from '../app/map/journey.js';
+import {floorSvg,campusSvg} from '../app/map/svg.js';
 import {validateEvents,normalizeSchedule} from '../app/core.js';
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url),'utf8'));
 const buildings=read('../app/data/buildings.json').buildings;
@@ -96,4 +98,78 @@ test('validation catches duplicate IDs, bad references, geometry, evidence and u
     p=>p.locations.find(l=>l.type==='room').point=[550,350],
   ];
   for(const mutate of corrupt){const pack=structuredClone(fixture);mutate(pack);assert.throws(()=>check(pack));}
+});
+
+const archive=createMapData(read('../app/data/maps.json'),buildings);
+
+test('campus routes turn at corridor junctions instead of visiting and retracing building centres',()=>{
+  for(const [a,b] of [['9','4'],['4','9'],['2','5'],['5','2'],['2','4'],['4','2']]){
+    const j=planJourney(archive,'building:'+a,'building:'+b,{mode:'indoor'});
+    assert.ok(j.route);
+    assert.ok(!j.route.nodeIds.includes('campus:building:6'),`${a} → ${b} detours into building 6`);
+    assert.ok(!j.route.nodeIds.includes('campus:building:3'),`${a} → ${b} detours into building 3`);
+    const points=j.route.nodeIds.map(id=>j.graph.nodes.find(n=>n.id===id).point.join(','));
+    assert.equal(new Set(points).size,points.length,'route must not retrace a corridor');
+    assert.ok(j.route.cost<({'9-4':1791.87,'4-9':1791.87,'2-5':676,'5-2':676,'2-4':867,'4-2':867})[a+'-'+b]);
+    assert.doesNotMatch(campusSvg({...archive,campus:j.graph},null,j.route),/NaN|undefined/);
+  }
+});
+
+test('split campus passage segments stay connected to their drawn endpoints in both directions',()=>{
+  const nodes=new Map(archive.campus.nodes.map(n=>[n.id,n]));
+  for(const edge of archive.campus.edges.filter(e=>e.kind==='passage')){
+    assert.deepEqual(edge.geometry[0],nodes.get(edge.from).point);
+    assert.deepEqual(edge.geometry.at(-1),nodes.get(edge.to).point);
+    assert.ok(edge.weight>0);
+  }
+  for(const a of buildings)for(const b of buildings){
+    const forward=planJourney(archive,'building:'+a.id,'building:'+b.id,{mode:'indoor'}).route;
+    const reverse=planJourney(archive,'building:'+b.id,'building:'+a.id,{mode:'indoor'}).route;
+    assert.ok(forward);assert.ok(reverse);
+    assert.ok(Math.abs(forward.cost-reverse.cost)<1e-6);
+  }
+});
+
+test('every floor lists its rooms in numeric order; unmapped doors remain explicit',()=>{
+  assert.deepEqual(archive.floors.map(f=>floorRooms(archive,f.id).length),[21,14,12]);
+  assert.equal(floorRooms(archive,'cw-6-f3')[0].number,'301');
+  const rooms=archive.locations.filter(l=>l.type==='room');
+  assert.equal(rooms.filter(l=>l.nodeId).length,44);
+  for(const l of rooms.filter(l=>!l.nodeId))assert.equal(planJourney(archive,'building:6',l.id).route,null);
+});
+test('room-to-room routes across all three floors are continuous, without uncharted ground-floor shortcuts',()=>{
+  const rooms=archive.locations.filter(l=>l.type==='room'&&l.nodeId);
+  for(const a of rooms)for(const b of rooms){
+    const {route}=planJourney(archive,a.id,b.id);
+    assert.ok(route,`${a.id} → ${b.id}`);
+    assert.equal(route.startId,a.nodeId);assert.equal(route.endId,b.nodeId);
+    assert.equal(route.partial,false);assert.equal(route.outdoor,false);
+    assert.ok(route.links.every(l=>l.edge.geometry||l.edge.kind==='stairs'));
+  }
+  const j=planJourney(archive,'cw-6-301','cw-6-513');
+  assert.deepEqual(journeySteps(j.graph,j.route).filter(s=>s.nextFloorId).map(s=>s.nextFloorId),['cw-6-f4','cw-6-f5']);
+});
+test('street alternative can beat passages, and modes exclude the other edge type',()=>{
+  const shortest=planJourney(archive,'building:6','building:7');
+  const indoor=planJourney(archive,'building:6','building:7',{mode:'indoor'});
+  const outside=planJourney(archive,'building:6','building:8',{mode:'outdoor'});
+  assert.ok(shortest.route.outdoor);assert.ok(shortest.route.cost<indoor.route.cost);
+  assert.ok(indoor.route.links.every(l=>!['outdoor','access'].includes(l.edge.kind)));
+  assert.ok(outside.route.links.every(l=>l.edge.kind!=='passage'));
+  assert.equal(planJourney(archive,'building:6','building:7',{stepFree:true}).route,null);
+});
+test('building/room routes work in both directions and mark manual entrance handoffs without geometry',()=>{
+  for(const [a,b] of [['building:7','cw-6-416'],['cw-6-513','building:2']]){
+    const j=planJourney(archive,a,b);assert.ok(j.route);assert.equal(j.route.partial,true);
+    assert.ok(j.route.links.some(l=>l.edge.kind==='handoff'));
+    assert.ok(j.route.links.filter(l=>l.edge.manual).every(l=>l.edge.geometry===null));
+    assert.ok(journeySteps(j.graph,j.route).some(s=>s.manual));
+    assert.match(campusSvg({...archive,campus:j.graph},null,j.route),/map-territory/);
+    for(const floor of archive.floors){const svg=floorSvg(j.graph,floor,null,j.route);assert.doesNotMatch(svg,/NaN|undefined/);}
+  }
+});
+test('same endpoint and disconnected graph are handled without inventing a route',()=>{
+  const j=planJourney(archive,'cw-6-416','cw-6-416');assert.equal(j.route.links.length,0);assert.equal(journeySteps(j.graph,j.route).length,1);
+  assert.equal(planJourney(archive,'missing','cw-6-416').route,null);
+  const changed={...archive,edges:[]};assert.equal(planJourney(changed,'cw-6-416','cw-6-513').route,null);
 });

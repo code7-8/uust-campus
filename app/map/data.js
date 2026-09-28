@@ -1,4 +1,5 @@
 import {usableEdge} from './routing.js';
+import {createCampusGraph} from './campus.js';
 
 export const CAMPUS_ID='uust-karl-marx';
 const types=['room','entrance','stairs','lift','toilet','cafe','library','landmark'];
@@ -140,5 +141,5 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
 
 export function createMapData(pack, buildings, options) {
   validateMapPack(pack,buildings,options);
-  return {...pack,buildings,locations:[...buildings.map(b=>({id:'building:'+b.id,campusId:pack.campusId,buildingId:b.id,floorId:null,type:'building',name:b.name,number:b.id,aliases:['корпус '+b.id],point:b.center,nodeId:null})),...pack.locations]};
+  return {...pack,buildings,campus:createCampusGraph(buildings),locations:[...buildings.map(b=>({id:'building:'+b.id,campusId:pack.campusId,buildingId:b.id,floorId:null,type:'building',name:b.name,number:b.id,aliases:['корпус '+b.id],point:b.center,nodeId:null})),...pack.locations]};
 }
