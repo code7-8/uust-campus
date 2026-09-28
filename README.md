@@ -4,6 +4,10 @@ Android-приложение для хакатона «Умный помощни
 
 Текущая сборка: **0.2.2**, Android **8.0+**. Это студенческий прототип, а не официальное приложение университета.
 
+**[Скачать APK 0.2.2 для Android](https://github.com/code7-8/uust-campus/releases/download/v0.2.2/uust-campus-0.2.2.apk)** · [Все файлы релиза](https://github.com/code7-8/uust-campus/releases/tag/v0.2.2)
+
+Для установки рядом с прежней сборкой сокомандника или обновления параллельной версии 0.2.1 используйте [параллельный APK 0.2.2](https://github.com/code7-8/uust-campus/releases/download/v0.2.2/uust-campus-0.2.2-parallel.apk).
+
 Отчёт новой сборки: [0.2.2 и ограничения маршрутов](docs/RELEASE_0.2.2.md). Восстановление версии команды: [APK_RECOVERY.md](docs/APK_RECOVERY.md).
 
 ## Возможности
