@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {createMapData,validateMapPack} from '../app/map/data.js';
 import {searchPlaces,resolvePlace,withPlaceReference} from '../app/map/search.js';
 import {findRoute,routeSteps} from '../app/map/routing.js';
-import {floorRooms,planJourney,journeySteps} from '../app/map/journey.js';
+import {floorRooms,planJourney,journeySteps,journeyGraph} from '../app/map/journey.js';
 import {floorSvg,campusSvg} from '../app/map/svg.js';
 import {validateEvents,normalizeSchedule} from '../app/core.js';
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url),'utf8'));
@@ -16,7 +16,7 @@ const check=p=>validateMapPack(p,buildings,{allowSynthetic:true});
 test('CampusWay archive has real source floors and rooms but no field-verified route',()=>{
   const pack=read('../app/data/maps.json');check(pack);
   const real=createMapData(pack,buildings);
-  assert.equal(real.floors.length,3);assert.equal(real.verification,'archive');assert.equal(real.verifiedAt,null);
+  assert.equal(real.floors.filter(f=>f.id.startsWith('cw-')).length,3);assert.equal(real.verification,'archive');assert.equal(real.verifiedAt,null);
   assert.equal(searchPlaces(real,'6-416')[0].id,'cw-6-416');assert.equal(searchPlaces(real,'6 корпус 513')[0].id,'cw-6-513');
   assert.equal(resolvePlace(real,{buildingId:'3',room:'412'}).exact,false);
   const a=real.locations.find(l=>l.id==='cw-6-416').nodeId,b=real.locations.find(l=>l.id==='cw-6-513').nodeId;
@@ -133,14 +133,14 @@ test('split campus passage segments stay connected to their drawn endpoints in b
 });
 
 test('every floor lists its rooms in numeric order; unmapped doors remain explicit',()=>{
-  assert.deepEqual(archive.floors.map(f=>floorRooms(archive,f.id).length),[21,14,12]);
+  assert.deepEqual(archive.floors.filter(f=>f.id.startsWith('cw-')).map(f=>floorRooms(archive,f.id).length),[21,14,12]);
   assert.equal(floorRooms(archive,'cw-6-f3')[0].number,'301');
-  const rooms=archive.locations.filter(l=>l.type==='room');
+  const rooms=archive.locations.filter(l=>l.type==='room'&&l.id.startsWith('cw-'));
   assert.equal(rooms.filter(l=>l.nodeId).length,44);
   for(const l of rooms.filter(l=>!l.nodeId))assert.equal(planJourney(archive,'building:6',l.id).route,null);
 });
 test('room-to-room routes across all three floors are continuous, without uncharted ground-floor shortcuts',()=>{
-  const rooms=archive.locations.filter(l=>l.type==='room'&&l.nodeId);
+  const rooms=archive.locations.filter(l=>l.type==='room'&&l.nodeId&&l.id.startsWith('cw-'));
   for(const a of rooms)for(const b of rooms){
     const {route}=planJourney(archive,a.id,b.id);
     assert.ok(route,`${a.id} → ${b.id}`);
@@ -174,4 +174,52 @@ test('same endpoint and disconnected graph are handled without inventing a route
   const j=planJourney(archive,'cw-6-416','cw-6-416');assert.equal(j.route.links.length,0);assert.equal(journeySteps(j.graph,j.route).length,1);
   assert.equal(planJourney(archive,'missing','cw-6-416').route,null);
   const changed={...archive,edges:[]};assert.equal(planJourney(changed,'cw-6-416','cw-6-513').route,null);
+});
+
+test('survey plans extend both buildings and every mapped room connects to its building or isolated annex',()=>{
+  assert.deepEqual(archive.floors.filter(f=>f.buildingId==='6').map(f=>f.order),[1,2,3,4,4.5,5]);
+  assert.deepEqual(archive.floors.filter(f=>f.buildingId==='7').map(f=>f.order),[1,2,3,4]);
+  assert.equal(archive.locations.filter(l=>l.type==='room').length,121);
+  for(const room of archive.locations.filter(l=>l.type==='room'&&l.nodeId)){
+    const start=room.floorId==='sv-6-f4-annex'?'sv-6-401a':room.buildingId==='6'?'sv-6-101':'sv-7-101';
+    for(const [a,b] of [[start,room.id],[room.id,start]]){
+      const {route}=planJourney(archive,a,b);assert.ok(route,`${a} → ${b}`);
+      assert.equal(route.partial,false);assert.equal(route.outdoor,false);
+    }
+    const svg=floorSvg(archive,archive.floors.find(f=>f.id===room.floorId),room,null);
+    assert.match(svg,new RegExp(room.id));assert.doesNotMatch(svg,/NaN|undefined/);
+  }
+  const {graph,route}=planJourney(archive,'sv-6-101','cw-6-513');
+  assert.deepEqual(journeySteps(graph,route).filter(s=>s.nextFloorId).map(s=>s.nextFloorId),['sv-6-f2','cw-6-f3','cw-6-f4','cw-6-f5']);
+  const across=planJourney(archive,'sv-7-101','sv-7-407');
+  assert.equal(across.route.links.filter(l=>l.edge.kind==='stairs').length,3);
+});
+
+test('known entrance anchors replace upper-floor teleportation and do not connect the ambiguous annex',()=>{
+  const g=journeyGraph(archive);
+  assert.equal(g.edges.filter(e=>e.kind==='handoff').length,2);
+  for(const e of g.edges.filter(e=>e.kind==='handoff'))assert.equal(archive.floors.find(f=>f.id===g.nodes.find(n=>n.id===e.to).floorId).order,1);
+  for(const start of ['building:6','building:7','cw-6-416','cw-6-513'])assert.equal(planJourney(archive,start,'sv-6-401a').route,null);
+  assert.ok(planJourney(archive,'sv-6-401a','sv-6-407').route);
+  assert.ok(planJourney(archive,'sv-6-101','sv-7-407').route);
+  for(const mutate of [p=>p.campusAnchors.push('sv-6-401a'),p=>p.floors[0].costScale=-1]){
+    const p=read('../app/data/maps.json');mutate(p);assert.throws(()=>check(p));
+  }
+});
+
+test('duplicate printed room numbers stay ambiguous and removed buffet is not searchable',()=>{
+  for(const [building,number] of [['6','216'],['7','205'],['7','206'],['7','109']]){
+    assert.equal(searchPlaces(archive,building+'-'+number).length,2);
+    assert.equal(resolvePlace(archive,{buildingId:building,room:number}).exact,false);
+  }
+  for(const q of ['Буфет','кафе','столовая'])assert.equal(searchPlaces(archive,q,'6').length,0);
+  assert.equal(resolvePlace(archive,{buildingId:'7',room:'407'}).location.id,'sv-7-407');
+  assert.ok(searchPlaces(archive,'библиотека').some(l=>l.id==='sv-7-115'));
+  assert.equal(archive.floors.some(f=>f.buildingId==='6'&&f.order===6),false);
+});
+
+test('source-plan toggle cannot make vector-only floors invisible',()=>{
+  const f=archive.floors.find(f=>f.id==='sv-6-f1');
+  assert.doesNotMatch(floorSvg(archive,f,null,null,'all',true),/class="map-floor source-plan"/);
+  assert.match(floorSvg(archive,archive.floors.find(f=>f.id==='cw-6-f3'),null,null,'all',true),/floor-source-image/);
 });

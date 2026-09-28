@@ -9,15 +9,15 @@ export function journeyGraph(data,{mode='shortest'}={}) {
   // including a stair penalty, never advertise these costs as metres or minutes.
   const scale=floorId=>{
     const f=data.floors.find(f=>f.id===floorId);
-    return f?.imageSize?315/(f.imageSize[0]-(f.order===3?280:0)):1;
+    return f?.costScale??(f?.imageSize?315/(f.imageSize[0]-(f.order===3?280:0)):1);
   };
   const nodes=[...data.campus.nodes,...data.nodes];
   const byId=new Map(nodes.map(n=>[n.id,n]));
   const edges=[...data.campus.edges.filter(e=>mode==='indoor'?!['outdoor','access'].includes(e.kind):mode==='outdoor'?e.kind!=='passage':true),
     ...data.edges.map(e=>({...e,weight:e.kind==='stairs'?60:e.kind==='lift'?75:e.weight*scale(byId.get(e.from).floorId)}))];
-  // No plans of levels 1–2 or surveyed entrance connections were supplied.
-  // These explicit manual handoffs are instructions, never a drawn passage.
-  for(const id of data.routeOrigins){
+  // New packs explicitly name campus anchors. Do not teleport to every stair
+  // or to an unconnected annex; older imported packs retain their handoffs.
+  for(const id of data.campusAnchors??data.routeOrigins){
     const place=data.locations.find(l=>l.id===id),n=byId.get(place?.nodeId);
     if(!n||!['stairs','entrance','lift'].includes(n.type))continue;
     const f=data.floors.find(f=>f.id===n.floorId);
@@ -57,7 +57,7 @@ export function journeySteps(graph,route) {
     if(kind==='handoff'){
       const entering=!!to.floorId,indoor=entering?to:from;
       result.push(step(entering?`Корпус ${indoor.buildingId}: самостоятельно найдите «${indoor.name}», ${floorName(indoor.floorId)}. Отсюда начинается линия по этажу.`:
-        `От «${indoor.name}» самостоятельно спуститесь к выходу корпуса ${indoor.buildingId}. Нижние этажи не размечены.`,entering?to:from,{manual:true,nextFloorId:to.floorId}));
+        `От «${indoor.name}» выйдите к территории корпуса ${indoor.buildingId}. Связь входа с наружной схемой ещё не размечена.`,entering?to:from,{manual:true,nextFloorId:to.floorId}));
     }else if(kind==='access'){
       result.push(step(from.buildingId?`Выйдите из корпуса ${from.buildingId} на улицу. Точное место выхода на схеме не отмечено.`:
         `Найдите открытый вход в корпус ${to.buildingId}. Место входа нужно уточнить на месте.`,to,{manual:true}));

@@ -134,5 +134,6 @@ poi(f3,'wc',387,323,'Туалет','toilet')
 # Outline each room without claiming an unseen door or a traversable route.
 # Areas define the visual walls; confirmed gaps are separate door segments for mapped routes.
 pack['floors'].sort(key=lambda f:f['order'])
-(ROOT/'app/data/maps.json').write_text(json.dumps(pack,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-print(f"CampusWay: {len(pack['floors'])} floors, {sum(l['type']=='room' for l in pack['locations'])} rooms, {len(pack['edges'])} archive-plan edges")
+if __name__ == '__main__':
+    (ROOT/'app/data/maps.json').write_text(json.dumps(pack,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(f"CampusWay: {len(pack['floors'])} floors, {sum(l['type']=='room' for l in pack['locations'])} rooms, {len(pack['edges'])} archive-plan edges")

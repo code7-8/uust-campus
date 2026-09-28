@@ -83,3 +83,5 @@
 @media(max-width:359px){.map-button{font-size:.7rem;padding:9px}.map-card-title{gap:6px}}
 
 .floor-room-list{display:flex;gap:7px;margin:8px 0;overflow-x:auto;scrollbar-width:thin;padding-bottom:5px}.floor-room-list button{flex-shrink:0;min-width:45px;min-height:40px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-size:13px;font-weight:650}.manual-step{border-left:3px solid #dca246;padding-left:8px!important}.route-line .outdoor-route{stroke:#b67728;stroke-dasharray:3 7}.map-route-settings select{font-size:16px}.room-label{paint-order:stroke;stroke:#ffffffdd;stroke-width:2px;stroke-linejoin:round}.map-card-title h2{overflow-wrap:anywhere}
+
+.floor-room-list button small{display:block;max-width:150px;white-space:normal;font-size:10px;font-weight:400;margin-top:3px}
