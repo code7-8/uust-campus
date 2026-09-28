@@ -168,7 +168,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
   return {
     mount(element){this.unmount();root=element;root.addEventListener('click',onClick);root.addEventListener('input',onInput);root.addEventListener('change',onChange);root.addEventListener('keydown',onKey);draw();},
     unmount(){resize?.disconnect();if(root){root.removeEventListener('click',onClick);root.removeEventListener('input',onInput);root.removeEventListener('change',onChange);root.removeEventListener('keydown',onKey);}root=null;},
-    open(context){s.route=null;s.planning=false;s.startId='';s.targetId='';const result=resolvePlace(data,context);if(result.location)choose(result.location.id,{context,exact:result.exact});else{Object.assign(s,{selected:null,floorId:null,camera:null,query:'',context:null,error:'Место не найдено: '+(context.room||context.place||context.locationId||'уточните корпус')});draw();}},
+    open(context){s.route=null;s.planning=false;s.startId='';s.targetId='';const result=resolvePlace(data,context);if(result.location){choose(result.location.id,{context,exact:result.exact});if(context.planRoute){s.targetId=result.location.id;s.planning=true;calculate();}}else{Object.assign(s,{selected:null,floorId:null,camera:null,query:'',context:null,error:'Место не найдено: '+(context.room||context.place||context.locationId||'уточните корпус')});draw();}},
     back(){if(s.searching||s.query){s.searching=false;s.query='';draw();return true;}if(s.panel){s.panel=false;draw();return true;}if(s.planning){s.planning=false;s.route=null;draw();return true;}if(s.selected){s.selected=null;s.context=null;s.error='';draw();return true;}if(s.floorId){setView(null);draw();return true;}return false;},
   };
 }

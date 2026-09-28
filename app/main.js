@@ -3,13 +3,15 @@ import {initialData,loadSavedSchedule,refreshSchedule,refreshGroups,storage} fro
 import {icon} from './icons.js';
 import {createMapController} from './map/view.js';
 import {createCommunity} from './community.js';
+import {createMapData} from './map/data.js';
+import {clubCard,clubDetail,kindBadge,eventKind,eventEnded,campusPreview} from './student-life.js';
 
 const $ = s=>document.querySelector(s);
 const escape = value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const attrs = escape;
 const shortDays=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 const state={tab:'home',profile:storage.read('profile'),data:null,rows:[],loaded:false,source:null,at:null,error:null,busy:false,
-  date:dateKey(),scheduleView:'day',eventFilter:'all',
+  date:dateKey(),scheduleView:'day',eventFilter:'all',lifeSection:'clubs',
   favorites:storage.read('favorites',[]),savedPlaces:storage.read('places',[]),modal:null,groupQuery:'ТОП-106Б',selectedGroup:null,request:0};
 let toastTimer,returnFocus,mapController,community;
 function toast(text) {clearTimeout(toastTimer);const el=$('#toast');el.textContent=text;el.classList.add('visible');toastTimer=setTimeout(()=>el.classList.remove('visible'),3500);}
@@ -22,7 +24,7 @@ function tag(type) {const cls=/Лекц/.test(type)?'lecture':/Лаб/.test(type
 const brandIcon=()=>'<span class="brand-symbol brand-image"><img class="brand-purple" src="assets/uust-logo.png" alt="УУНиТ"><img class="brand-green" src="assets/uust-logo-green.png" alt="УУНиТ"></span>';
 const wordmark=()=>`<div class="wordmark">${brandIcon()}<span><strong>кампус.</strong><small>УУНИТ · УФА</small></span></div>`;
 function topbar(){return `<header class="topbar">${wordmark()}${btn(`${icon('user')} ${escape(group()?.title||'Выбрать группу')} ${icon('chevron')}`,'groups','group-chip','aria-label="Изменить учебную группу"')}</header>`;}
-function nav(){return `<nav class="bottom-nav" aria-label="Основная навигация">${[['home','home','Сегодня'],['schedule','calendar','Расписание'],['map','map','Карта'],['events','spark','События'],['profile','user','Профиль']].map(([id,ico,label])=>`<button class="nav-item ${state.tab===id?'active':''}" data-tab="${id}" ${state.tab===id?'aria-current="page"':''}><span class="nav-icon">${icon(ico)}</span>${label}</button>`).join('')}</nav>`;}
+function nav(){return `<nav class="bottom-nav" aria-label="Основная навигация">${[['home','home','Сегодня'],['schedule','calendar','Расписание'],['map','map','Карта'],['events','spark','Жизнь'],['profile','user','Профиль']].map(([id,ico,label])=>`<button class="nav-item ${state.tab===id?'active':''}" data-tab="${id}" ${state.tab===id?'aria-current="page"':''}><span class="nav-icon">${icon(ico)}</span>${label}</button>`).join('')}</nav>`;}
 function statusLine(){
   const stamp=state.at?new Intl.DateTimeFormat('ru-RU',{timeZone:TIME_ZONE,day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(state.at)):null;
   let text=state.loaded?`${state.source==='bundled'?'Снимок':'Обновлено'} ${stamp}`:'Расписание ещё не сохранено';
@@ -54,11 +56,11 @@ function nextHero(){
 function home(){
   const today=dateKey(),now=new Date(),day=lessonsOn(state.rows,today,state.data.config),next=nextLesson(state.rows,now,state.data.config);
   const previewDate=day.length?today:next?.date||today,preview=currentLessons(previewDate),gaps=freeGaps(day);
-  const upcoming=state.data.events.find(e=>e.date>=today);
+  const lifePreview=campusPreview(state.data.events,state.data.clubs);
   const info=!state.loaded?['offline','Пары останутся с тобой','После первой загрузки расписание сохраняется на этом устройстве.']:!day.length?['sun','Сегодня без пар','Хороший момент спланировать неделю и найти что-то интересное в кампусе.']:gaps.length?['coffee',`Окно ${gaps[0].minutes} минут`,`${clock(gaps[0].start)}–${clock(gaps[0].end)} · время между занятиями по расписанию.`]:['check','День собран',`${day.length} ${declension(day.length,['занятие','занятия','занятий'])} сегодня. Аудитории и корпуса — в одном касании.`];
   return `${pageHeading(formatDate(today,{weekday:'long',day:'numeric',month:'long'}),'Твой день,<br>без суеты.')}${nextHero()}${statusLine()}<div class="insight"><span class="insight-icon">${icon(info[0])}</span><div><h3>${info[1]}</h3><p>${info[2]}</p></div></div>
   ${section(previewDate===today?'План на сегодня':`Пары · ${dayRelative(previewDate).toLowerCase()}`,'schedule','Расписание')}${preview.length?lessonList(preview,previewDate,3):empty(state.loaded?'Сегодня можно выдохнуть':'Расписание пока не загружено',state.loaded?'В источнике нет занятий на этот день.':'Нажмите «Обновить», чтобы получить пары вашей группы.','book')}
-  ${section('За пределами пар','events','Все события')}${upcoming?eventCard(upcoming):empty('Новые встречи впереди','Пока в подборке нет будущих событий. Загляните в объявления университета.','spark')}
+  ${section('Сегодня в кампусе','events','Смотреть всё')}<p class="life-preview-caption">Клубы и ближайшие встречи — найди, к чему присоединиться.</p><div class="life-preview">${lifePreview.map(({type,item})=>type==='club'?clubCard(item):eventCard(item)).join('')}</div>
   <div class="mini-map-card">${mapSvg('7',true)}${btn('Исследовать кампус '+icon('arrow'),'map','button light')}</div>`;
 }
 function declension(n,words){const x=n%100;return words[x>10&&x<20?2:n%10===1?0:n%10>=2&&n%10<=4?1:2];}
@@ -80,16 +82,21 @@ function mapSvg(selected,mini=false){
   <g fill="#7a8e6a"><path d="M813 422l21 12 28-2 4 6-24 6-12 25-5-1 3-25-21-13z"/><text x="868" y="463" font-size="17" letter-spacing="3" fill="#93a184">КАМПУС УУНИТ</text></g></svg>`;
 }
 function mapPage(){return '<div id="map-root"></div>';}
-function cover(e){return `<div class="event-cover ${e.accent}"><span class="eyebrow">${escape(e.category)} · УУНиТ</span><span class="cover-index">${e.date.slice(8)} / ${e.date.slice(5,7)}</span><div class="cover-title">${e.id.startsWith('kod-uust')?'КОД<br>УУНИТ':e.accent==='blue'?'В ДВИЖЕНИИ':escape(e.title.split(':')[0]).slice(0,35)}</div><span class="orbit"></span><span class="orbit"></span><span class="orbit"></span><span class="orb"></span></div>`;}
-function eventCard(e){const fit=eventCompatibility(e,state.rows,state.loaded,state.data.config),saved=state.favorites.includes(e.id);return `<article class="event-card"><button class="event-open" data-event="${attrs(e.id)}" aria-label="Подробнее: ${attrs(e.title)}">${cover(e)}<div class="event-body"><div class="row">${e.demo?'<span class="chip demo">Демонстрация</span>':''}<span class="eyebrow">${formatDate(e.date,{day:'numeric',month:'long'})} · ${e.time||'Время уточняется'}</span></div><h3>${escape(e.title)}</h3><p>${escape(e.place||'Место уточняется')}</p></div></button><div class="event-body" style="padding-top:0"><div class="event-bottom" style="margin-top:0"><span class="chip ${fit.kind}">${icon(fit.kind==='free'?'check':fit.kind==='conflict'?'clock':'info','small-icon')}${fit.kind==='unknown'?'Время или расписание уточняется':fit.label}</span>${btn(icon('heart'),'favorite',`icon-button ${saved?'favorite-on':''}`,`data-id="${attrs(e.id)}" aria-label="${saved?'Убрать событие из':'Сохранить событие в'} избранного" aria-pressed="${saved}"`)}</div></div></article>`;}
+function cover(e){return `<div class="event-cover ${e.accent}"><span class="eyebrow">${escape(e.category)} · ${eventKind(e)==='student'?'ВСТРЕЧА':eventKind(e)==='imported'?'ПОДБОРКА':'УУНиТ'}</span><span class="cover-index">${e.date.slice(8)} / ${e.date.slice(5,7)}</span><div class="cover-title">${e.id.startsWith('kod-uust')?'КОД<br>УУНИТ':e.accent==='blue'?'В ДВИЖЕНИИ':escape(e.title.split(':')[0]).slice(0,35)}</div><span class="orbit"></span><span class="orbit"></span><span class="orbit"></span><span class="orb"></span></div>`;}
+function eventCard(e){const fit=eventCompatibility(e,state.rows,state.loaded,state.data.config),saved=state.favorites.includes(e.id);return `<article class="event-card"><button class="event-open" data-event="${attrs(e.id)}" aria-label="Подробнее: ${attrs(e.title)}">${cover(e)}<div class="event-body">${kindBadge(e)}<div class="row">${e.demo?'<span class="chip demo">Демонстрация</span>':''}<span class="eyebrow">${formatDate(e.date,{day:'numeric',month:'long'})} · ${e.time||'Время уточняется'}</span></div><h3>${escape(e.title)}</h3><p>${escape(e.place||'Место уточняется')}</p><p class="life-organizer">${escape(e.organizer||e.authorName||e.sourceLabel)}${e.buildingId?' · корпус '+escape(e.buildingId):''}${e.room?' · ауд. '+escape(e.room):''}</p></div></button><div class="event-body" style="padding-top:0"><div class="event-bottom" style="margin-top:0"><span class="chip ${fit.kind}">${icon(fit.kind==='free'?'check':fit.kind==='conflict'?'clock':'info','small-icon')}${fit.kind==='unknown'?'Время или расписание уточняется':fit.label}</span>${btn(icon('heart'),'favorite',`icon-button ${saved?'favorite-on':''}`,`data-id="${attrs(e.id)}" aria-label="${saved?'Убрать событие из':'Сохранить событие в'} избранного" aria-pressed="${saved}"`)}</div>${community?.attendance(e)||''}</div></article>`;}
 function eventsPage(){
-  let events=state.data.events.filter(e=>state.eventFilter==='past'?e.date<dateKey():e.date>=dateKey());
+  const clubs=state.lifeSection==='clubs';
+  let events=state.data.events.filter(e=>eventKind(e)===(state.lifeSection==='student'?'student':'official')||state.lifeSection==='official'&&eventKind(e)==='imported');
   if(state.eventFilter==='saved')events=state.data.events.filter(e=>state.favorites.includes(e.id));
+  else events=events.filter(e=>state.eventFilter==='past'?eventEnded(e):!eventEnded(e));
   if(state.eventFilter==='free')events=events.filter(e=>eventCompatibility(e,state.rows,state.loaded,state.data.config).kind==='free');
-  return `${pageHeading('Больше, чем учёба','Жизнь кампуса','Встречи, идеи и люди рядом.')}${community?.toolbar()||''}<div class="filters" aria-label="Фильтры событий">${[['all','Впереди'],['free','Без пересечений'],['saved','Избранное'],['past','Прошедшие']].map(([id,name])=>btn(name,'filter-events',`filter ${state.eventFilter===id?'active':''}`,`data-id="${id}" aria-pressed="${state.eventFilter===id}"`)).join('')}</div>
-  ${state.eventFilter==='free'?`<div class="insight compact">${icon('spark')}<p>Сравниваем время событий с ${state.source==='live'?'загруженным':'сохранённым'} расписанием ${escape((group()?.title||'без выбранной группы'))}. Время на дорогу не учтено.</p></div>`:''}
-  <div class="event-list">${events.length?events.map(eventCard).join(''):empty(state.eventFilter==='saved'?'Сохраняй то, что интересно':'Подходящих событий пока нет',state.eventFilter==='saved'?'Нажми на сердечко у события, чтобы вернуться к нему позже.':'Другие встречи доступны во вкладке «Впереди». Для части событий время ещё не опубликовано.','spark')}</div>
-  <p class="events-note">Подборка обновлена ${escape(state.data.eventsUpdated)}. Даты взяты из текста анонсов. Перед посещением проверь условия у организатора.</p>${btn('Все объявления УУНиТ '+icon('external'),'all-events','text-button')}`;
+  const heading=`<header class="life-intro"><div class="eyebrow">Больше, чем учёба</div><h1>Студенческая<br>жизнь</h1><p>Найди своих людей.<br>И повод встретиться после пар.</p></header>`;
+  const tabs=`<div class="life-tabs" aria-label="Разделы студенческой жизни">${[['clubs','Клубы'],['official','События УУНиТ'],['student','От студентов']].map(([id,title])=>btn(title,'life-section',state.lifeSection===id?'active':'',`data-id="${id}" aria-pressed="${state.lifeSection===id}"`)).join('')}</div>`;
+  if(clubs)return heading+tabs+`<p class="life-count">${state.data.clubs.length} клуба для знакомства · сообщества УУНиТ</p><div class="club-list">${state.data.clubs.map(clubCard).join('')}</div><p class="events-note">В карточках — проверенные ссылки на сообщества. Узнавай о наборе и встречах прямо у клуба.</p>`;
+  return heading+tabs+`${community?.toolbar()||''}<div class="filters" aria-label="Фильтры событий">${[['all','Впереди'],['free','Без пересечений'],['saved','Избранное'],['past','Прошедшие']].map(([id,name])=>btn(name,'filter-events',`filter ${state.eventFilter===id?'active':''}`,`data-id="${id}" aria-pressed="${state.eventFilter===id}"`)).join('')}</div>
+  ${state.eventFilter==='free'?'<p class="life-count">Сравниваем с загруженным расписанием. Время на дорогу не учтено.</p>':''}
+  <div class="event-list">${events.length?events.map(eventCard).join(''):state.lifeSection==='student'&&state.eventFilter==='all'?`<section class="life-empty"><h2>Встреча начинается с тебя</h2><p>Настолки, разговорный английский или команда на хакатон. Предложи свою идею — другие смогут записаться.</p><button class="button" data-community="create">Создать первую встречу</button></section>`:empty('Здесь пока нет событий','Попробуй другой фильтр или загляни позже.','spark')}</div>
+  ${state.lifeSection==='official'?`<p class="events-note">УУНиТ ✓ — анонс из источника университета или публикация организатора сервера. Перед посещением проверь условия участия.</p>${btn('Все объявления УУНиТ '+icon('external'),'all-events','text-button')}`:'<p class="events-note">Встречи создают участники сообщества. Счётчик показывает записавшихся, а не фактическую посещаемость.</p>'}`;
 }
 function setting(ico,title,description,action){return `<button class="setting" data-action="${action}">${icon(ico)}<span><strong>${title}</strong><small>${description}</small></span>${icon('chevron')}</button>`;}
 
@@ -120,6 +127,7 @@ function modalFrame(label,body){return `<div class="modal-overlay" data-overlay>
 function detailRow(ico,title,sub=''){return `<div class="detail-row">${icon(ico)}<div><strong>${escape(title)}</strong>${sub?`<small>${escape(sub)}</small>`:''}</div></div>`;}
 function renderModal(){
   if(!state.modal)return;
+  const modalScroll=$('#modal-root .modal')?.scrollTop||0;
   const {kind,payload}=state.modal;let body='',label='';
   if(kind==='lesson'){
     const l=payload;label='Твоя пара';
@@ -127,16 +135,18 @@ function renderModal(){
   } else if(kind==='event'){
     const e=state.data.events.find(e=>e.id===payload);if(!e){closeModal();return;}
     const fit=eventCompatibility(e,state.rows,state.loaded,state.data.config);label=e.demo?'Демонстрационное событие':'Жизнь кампуса';
-    body=`${cover(e)}<h1>${escape(e.title)}</h1>${detailRow('calendar',formatDate(e.date,{day:'numeric',month:'long',year:'numeric'}),e.time?`${e.time}${e.endTime?'–'+e.endTime:''} · время Уфы`:'Время начала не опубликовано')}${detailRow('pin',e.place||'Место уточняется')}
-    <div class="insight compact">${icon(fit.kind==='free'?'check':'info')}<div><h3>${fit.label}</h3><p>${fit.kind==='conflict'?fit.lessons.map(l=>escape(l.subject)+' · '+clock(l.start)+'–'+clock(l.end)).join('<br>'):fit.kind==='free'?'Сравнено с загруженным расписанием. Время на дорогу не учтено.':'Для точного сравнения нужны начало и конец события, а также расписание на этот день.'}</p></div></div><p>${escape(e.description)}</p>
-    <div class="modal-actions">${e.buildingId||e.locationId?btn('Показать место '+icon('arrow'),'event-map','button wide'):''}${btn(icon('heart')+(state.favorites.includes(e.id)?' В избранном':' Сохранить событие'),'favorite',`button ${state.favorites.includes(e.id)?'light':'outline'} wide`,`data-id="${attrs(e.id)}"`)}${e.time&&e.endTime?btn(icon('bell')+' Добавить в календарь','event-calendar','button light wide'):''}${e.source?btn('Условия участия и регистрация '+icon('external'),'event-source','button outline wide'):''}</div><p class="source-line">${escape(e.sourceLabel)}${e.community?' · событие участника':e.imported?' · данные добавлены командой':'. Редакционная подборка по официальному анонсу.'}</p>${community?.controls(e)||''}`;
+    body=`${cover(e)}${kindBadge(e)}<h1>${escape(e.title)}</h1>${detailRow('calendar',formatDate(e.date,{day:'numeric',month:'long',year:'numeric'}),e.time?`${e.time}${e.endTime?'–'+e.endTime:''} · время Уфы`:'Время начала не опубликовано')}${detailRow('user',e.organizer||e.authorName||e.sourceLabel,'Организатор')}${detailRow('pin',e.place||'Место уточняется',[e.buildingId?'Корпус '+e.buildingId:'',e.room?'Аудитория '+e.room:'',state.data.mapPack.floors.find(f=>f.id===e.floorId)?.name||''].filter(Boolean).join(' · '))}${community?.attendance(e)||''}
+    <div class="insight compact">${icon(fit.kind==='free'?'check':'info')}<div><h3>${fit.label}</h3><p>${fit.kind==='conflict'?fit.lessons.map(l=>escape(l.subject)+' · '+clock(l.start)+'–'+clock(l.end)).join('<br>'):fit.kind==='free'?'Сравнено с загруженным расписанием. Время на дорогу не учтено.':'Для точного сравнения нужны начало и конец события, а также расписание на этот день.'}</p></div></div><p class="life-description">${escape(e.description)}</p>
+    <div class="modal-actions">${e.buildingId||e.locationId?btn('Показать маршрут '+icon('arrow'),'event-map','button wide'):''}${btn(icon('heart')+(state.favorites.includes(e.id)?' В избранном':' Сохранить событие'),'favorite',`button ${state.favorites.includes(e.id)?'light':'outline'} wide`,`data-id="${attrs(e.id)}"`)}${e.time&&e.endTime?btn(icon('bell')+' Добавить в календарь','event-calendar','button light wide'):''}${e.source?btn('Условия участия и регистрация '+icon('external'),'event-source','button outline wide'):''}</div><p class="source-line">${escape(e.sourceLabel)}${e.community?e.kind==='student'?' · встреча студента':' · публикация организатора':e.imported?' · данные добавлены командой':'. Редакционная подборка по официальному анонсу.'}</p>${community?.controls(e)||''}`;
+  } else if(kind==='club'){const club=state.data.clubs.find(c=>c.id===payload);if(!club){closeModal();return;}label='Студенческий клуб';body=clubDetail(club);
   } else if(kind==='groups'){label='Учебная группа';body='<h1>Твой учебный ритм</h1><p>Начни вводить название и выбери группу из списка университета.</p>'+groupPicker();}
   else if(kind==='saved-places'){label='Избранные места';const places=state.data.buildings.filter(b=>state.savedPlaces.includes(b.id));body='<h1>Знакомые места</h1>'+ (places.length?`<div class="saved-list">${places.map(b=>setting('pin',b.name,b.address,'saved-place-'+b.id)).join('')}</div>`:empty('Сохрани первый корпус','Нажми на сердечко в карточке корпуса на карте.','map'));}
   else if(kind==='import'){label='Обновление подборки';body=`<h1>События от команды</h1><p>Выбери JSON-файл с мероприятиями. Он заменит текущую подборку на этом устройстве. Названия и даты проверим до сохранения.</p><label class="field-label" for="events-file">Файл мероприятий</label><input id="events-file" type="file" accept=".json,application/json"><div id="import-result"></div><p class="source-line">Формат: schemaVersion: 1 и массив events. Шаблон и инструкция находятся в исходном проекте. Импорт будет подписан «Импорт команды».</p>${btn('Вернуть подборку УУНиТ','restore-events','button light wide')}`;}
-  else if(kind==='privacy'){label='Приватность';body=`<h1>Только нужное</h1>${detailRow('shield','Вход по желанию','Картой, расписанием и афишей можно пользоваться без аккаунта.')}${detailRow('user','Аккаунт сообщества','При регистрации выбранному серверу передаются имя, логин и пароль. Сервер хранит хеш пароля и опубликованные события; сессия хранится на устройстве.')}${detailRow('user','Локальное хранение','Группа, избранное и расписание сохраняются внутри приложения.')}${detailRow('globe','Обновление расписания','Сервису расписания передаётся идентификатор выбранной группы. Сервер источника видит обычные сетевые метаданные запроса.')}${detailRow('map','Без разрешения на GPS','Схема не привязана к координатам. Доступ к геолокации не запрашивается.')}${detailRow('calendar','Календарь по твоему выбору','Открываем форму события в приложении календаря. Сохранение и напоминание подтверждаешь там.')}`;}
+  else if(kind==='privacy'){label='Приватность';body=`<h1>Только нужное</h1>${detailRow('shield','Вход по желанию','Картой, расписанием и афишей можно пользоваться без аккаунта.')}${detailRow('user','Аккаунт сообщества','При регистрации выбранному серверу передаются имя, логин и пароль. Сервер хранит хеш пароля, опубликованные события и записи об участии; публичен только счётчик участников; сессия хранится на устройстве.')}${detailRow('user','Локальное хранение','Группа, избранное и расписание сохраняются внутри приложения.')}${detailRow('globe','Обновление расписания','Сервису расписания передаётся идентификатор выбранной группы. Сервер источника видит обычные сетевые метаданные запроса.')}${detailRow('map','Без разрешения на GPS','Схема не привязана к координатам. Доступ к геолокации не запрашивается.')}${detailRow('calendar','Календарь по твоему выбору','Открываем форму события в приложении календаря. Сохранение и напоминание подтверждаешь там.')}`;}
   else if(kind==='original-map'){label='Материалы команды';body='<h1>Исходная схема</h1><img src="assets/original-map.jpg" alt="Исходная схема расположения корпусов из архива команды" style="width:100%;border-radius:18px"><p>Из этой схемы взяты взаимное расположение корпусов и их контуры. Обозначенные в исходнике входы не проверены на местности.</p>';}
   else if(kind==='sources'){label='Источники и ограничения';body=`<h1>За каждой карточкой — источник</h1><div class="sources-list"><article class="source-item"><h3>Расписание</h3><p>Публичный JSON-интерфейс сервиса schedule.uust.ru. Учебный год 2026/2027, идентификатор 241. Первая учебная неделя начинается 31 августа 2026. ТОП-106Б: 14381. Данные обновляются при запуске и вручную.</p>${btn('Открыть сервис '+icon('external'),'schedule-source','text-button')}</article><article class="source-item"><h3>Кампус</h3><p>Контуры и фотографии из архива ugatu_interactive_map_1.rar команды. Схема показывает взаимное расположение корпусов, не географические координаты. Входы, проходы и доступность предстоит проверить.</p></article><article class="source-item"><h3>События</h3><p>Редакционная подборка по официальным объявлениям uust.ru. В каждой карточке есть ссылка. Автоматического обновления афиши нет: команда может импортировать JSON без изменения экранов.</p>${btn('Объявления УУНиТ '+icon('external'),'all-events','text-button')}</article><article class="source-item"><h3>О приложении</h3><p>Студенческий проект для хакатона. Не является официальным приложением университета. Не все площадки УУНиТ входят в схему на Карла Маркса.</p></article></div>`;}
   $('#modal-root').innerHTML=modalFrame(label,body);
+  $('#modal-root .modal').scrollTop=modalScroll;
 }
 async function refresh(){
   if(!group()||state.busy)return;
@@ -157,6 +167,9 @@ function calendar(item){
   const url=URL.createObjectURL(new Blob([text],{type:'text/calendar;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='campus-event.ics';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);toast('Файл для календаря сохранён');
 }
 async function action(name,el){
+  if(name==='life-section'){state.lifeSection=el.dataset.id;state.eventFilter='all';render();if(state.lifeSection!=='clubs')community?.sync({quiet:true});return;}
+  if(name==='club-detail'){showModal('club',el.dataset.id);return;}
+  if(name==='club-link'){const club=state.data.clubs.find(c=>c.id===el.dataset.id);if(club&&['vk','telegram','source'].includes(el.dataset.link))external(club[el.dataset.link]);return;}
   const next=()=>nextLesson(state.rows,new Date(),state.data.config);
   const event=()=>state.data.events.find(e=>e.id===state.modal?.payload);
   if(['home','schedule','map','events','profile'].includes(name)){navigate(name);return;}
@@ -179,14 +192,14 @@ async function action(name,el){
   if(name==='save-place'){const id=el.dataset.id;state.savedPlaces=state.savedPlaces.includes(id)?state.savedPlaces.filter(x=>x!==id):[...state.savedPlaces,id];storage.write('places',state.savedPlaces);render();return;}
   if(name==='filter-events'){state.eventFilter=el.dataset.id;render();return;}
   if(name==='favorite'){const id=el.dataset.id;state.favorites=state.favorites.includes(id)?state.favorites.filter(x=>x!==id):[...state.favorites,id];storage.write('favorites',state.favorites);render();if(state.modal)renderModal();return;}
-  if(name==='saved-events'){state.eventFilter='saved';navigate('events');return;}
+  if(name==='saved-events'){state.lifeSection='official';state.eventFilter='saved';navigate('events');return;}
   if(name.startsWith('saved-place-')){openBuilding(name.replace('saved-place-',''));return;}
   if(['sources','privacy','import','saved-places','original-map'].includes(name)){showModal(name);return;}
   if(name==='schedule-source'){external(`https://schedule.uust.ru/schedule?type=0&id=${group()?.id||14381}`);return;}
   if(name==='all-events'){external('https://uust.ru/events/');return;}
   if(name==='lesson-map'){const l=state.modal.payload;openBuilding(l.buildingId,{...l,title:l.subject});return;}
   if(name==='lesson-calendar'){calendar(state.modal.payload);return;}
-  if(name==='event-map'){const e=event();openBuilding(e.buildingId,{...e,room:e.place});return;}
+  if(name==='event-map'){const e=event();openBuilding(e.buildingId,{...e,room:e.room||e.place,planRoute:true});return;}
   if(name==='event-calendar'){const e=event();calendar({...e,start:e.time,end:e.endTime,location:e.place,description:e.source});return;}
   if(name==='event-source'){external(event().source);return;}
   if(name==='restore-events'){storage.remove('events');state.data.localEvents=validateEvents(state.data.bundledEvents);mergeCommunity(community?.events()||[]);state.data.eventsUpdated=state.data.bundledEvents.updatedAt;closeModal();render();toast('Подборка УУНиТ восстановлена');}
@@ -208,7 +221,7 @@ document.addEventListener('change',async e=>{
   if(e.target.id==='schedule-date'){if(e.target.value&&e.target.validity.valid){state.date=e.target.value;render();}return;}
   if(e.target.id==='events-file'){
     const file=e.target.files[0];if(!file)return;
-    try{if(file.size>512*1024)throw new Error('Файл больше 512 КБ');const payload=JSON.parse(await file.text()),events=validateEvents(payload,true);const saved={...payload,updatedAt:dateKey()};if(!storage.write('events',saved))throw new Error('Недостаточно места для сохранения');state.data.localEvents=events;mergeCommunity(community?.events()||[]);state.data.eventsUpdated=saved.updatedAt;closeModal();state.eventFilter='all';navigate('events');toast(`Импортировано событий: ${events.length}`);}
+    try{if(file.size>512*1024)throw new Error('Файл больше 512 КБ');const payload=JSON.parse(await file.text()),events=validateEvents(payload,true);const saved={...payload,updatedAt:dateKey()};if(!storage.write('events',saved))throw new Error('Недостаточно места для сохранения');state.data.localEvents=events;mergeCommunity(community?.events()||[]);state.data.eventsUpdated=saved.updatedAt;closeModal();state.lifeSection='official';state.eventFilter='all';navigate('events');toast(`Импортировано событий: ${events.length}`);}
     catch(error){$('#import-result').innerHTML=`<div class="error-panel" role="alert">Импорт не выполнен. ${escape(error.message)}</div>`;}
   }
 });
@@ -221,7 +234,7 @@ async function boot(){
   try{
     state.data=await initialData();
     state.data.localEvents=[...state.data.events];
-    community=createCommunity({toast,closeMainModal:closeModal,onEvents:events=>mergeCommunity(events),onChange:()=>{if(state.data&&state.profile&&!state.modal&&!community?.dialogOpen()&&['home','events','profile'].includes(state.tab))render();}});
+    community=createCommunity({onPublished:kind=>{state.lifeSection=kind==='official'?'official':'student';state.eventFilter='all';navigate('events');},mapData:createMapData(state.data.mapPack,state.data.buildings),toast,closeMainModal:closeModal,onEvents:events=>mergeCommunity(events),onChange:()=>{if(state.data&&state.profile&&!community?.dialogOpen()&&['home','events','profile'].includes(state.tab)){if(state.modal?.kind==='event'){const focused=document.activeElement?.dataset.community;render();renderModal();if(focused)$('#modal-root [data-community="'+focused+'"]')?.focus();}else if(!state.modal)render();}}});
     mergeCommunity(community.events());
     mapController=createMapController({buildings:state.data.buildings,bundledPack:state.data.mapPack,storage,external,isFavorite:id=>state.savedPlaces.includes(id),onFavorite:id=>{state.savedPlaces=state.savedPlaces.includes(id)?state.savedPlaces.filter(x=>x!==id):[...state.savedPlaces,id];storage.write('places',state.savedPlaces);}});
     if(state.profile?.group && !state.data.groups.some(g=>g.id===state.profile.group.id))state.profile=null;

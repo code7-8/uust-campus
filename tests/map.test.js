@@ -50,6 +50,8 @@ test('event/lesson references preserve source labels and never infer floor from 
   assert.equal(resolvePlace(data,{buildingId:'3',locationId:'deleted'}).exact,false);
   assert.equal(resolvePlace(data,{buildingId:'7',locationId:'test-3-2-place-room'}).location.id,'building:7');
   assert.equal(resolvePlace(data,{buildingId:'3',room:'412',campusId:'another-campus'}).location,null);
+  assert.equal(resolvePlace(data,{buildingId:'3',room:'412',floorId:'wrong-floor'}).exact,false);
+  assert.equal(resolvePlace(data,{buildingId:'3',room:'412',floorId:'wrong-floor'}).location.id,'building:3');
   const linked=withPlaceReference(data,room);assert.equal(linked.locationId,'test-3-2-place-room');assert.equal(linked.room,'412');
   const event=validateEvents({schemaVersion:1,events:[{id:'e',title:'Test',date:'2026-09-28',place:'Исходная подпись',locationId:linked.locationId}]})[0];
   assert.equal(resolvePlace(data,event).location.id,linked.locationId);assert.equal(event.place,'Исходная подпись');

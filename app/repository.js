@@ -13,15 +13,15 @@ export async function json(url, timeout=22000) {
   finally {clearTimeout(timer);}
 }
 export async function initialData() {
-  const [config, buildings, bundledEvents, groups, snapshot, raw, mapPack] = await Promise.all([
-    json('data/config.json'),json('data/buildings.json'),json('data/events.json'),json('data/groups.json'),json('data/snapshot.json'),json('data/schedule-14381-241.json'),json('data/maps.json')
+  const [config, buildings, bundledEvents, groups, snapshot, raw, mapPack, clubs] = await Promise.all([
+    json('data/config.json'),json('data/buildings.json'),json('data/events.json'),json('data/groups.json'),json('data/snapshot.json'),json('data/schedule-14381-241.json'),json('data/maps.json'),json('data/clubs.json'),json('data/clubs.json')
   ]);
   const saved=storage.read('events');
   let events;
   try {events=saved?validateEvents(saved,true):validateEvents(bundledEvents);} catch {events=validateEvents(bundledEvents);}
   let groupList;
   try{groupList=normalizeGroups(storage.read('groups')||groups);}catch{groupList=normalizeGroups(groups);}
-  return {config,mapPack,buildings:buildings.buildings,events,bundledEvents,groups:groupList,snapshot,seedRaw:raw,eventsUpdated:saved?.updatedAt||bundledEvents.updatedAt};
+  return {config,mapPack,clubs:clubs.clubs,buildings:buildings.buildings,events,bundledEvents,groups:groupList,snapshot,seedRaw:raw,eventsUpdated:saved?.updatedAt||bundledEvents.updatedAt};
 }
 export function loadSavedSchedule(groupId, data) {
   const key=`schedule.${data.config.semester}.${groupId}`, saved=storage.read(key);
