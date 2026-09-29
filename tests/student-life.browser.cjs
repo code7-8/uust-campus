@@ -17,7 +17,7 @@ const run=Date.now().toString(36);
 async function api(route,method='GET',body,token){const r=await fetch(base+route,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined});const data=await r.json();assert.equal(r.status,200,JSON.stringify(data));return data;}
 (async()=>{
  base=await startServer();
- const browser=await chromium.launch({channel:'chrome',headless:true});
+ const browser=await chromium.launch({channel:process.env.PLAYWRIGHT_CHANNEL||'chrome',headless:true});
  const errors=[];
  try{
   const contexts=await Promise.all([1,2].map(()=>browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1})));
@@ -25,7 +25,7 @@ async function api(route,method='GET',body,token){const r=await fetch(base+route
   const [author,guest]=await Promise.all(contexts.map(c=>c.newPage()));
   for(const p of [author,guest])p.on('pageerror',e=>errors.push(e.message));
   await author.goto(base);await author.locator('[data-tab="events"]').click();
-  await author.locator('.club-card').first().waitFor();assert.equal(await author.locator('.club-card').count(),4);
+  await author.locator('.club-card').first().waitFor();assert.equal(await author.locator('.club-card').count(),35);
   await author.screenshot({path:path.join(output,'clubs.png'),fullPage:true,animations:'disabled'});
   await author.locator('[data-action="club-detail"]').first().click();
   await author.getByRole('heading',{name:'Чем занимаются'}).waitFor();
@@ -62,7 +62,8 @@ async function api(route,method='GET',body,token){const r=await fetch(base+route
   await author.locator('.event-card').filter({hasText:created.title}).getByRole('button',{name:'Мест нет',exact:true}).waitFor();
   assert.equal(await author.locator('.event-card').filter({hasText:created.title}).getByRole('button',{name:'Мест нет',exact:true}).isDisabled(),true);
   await guest.locator('[data-action="event-map"]').click();
-  await guest.locator('#map-route-target').waitFor();assert.equal(await guest.locator('#map-route-target').inputValue(),created.locationId);
+  await guest.locator('[data-map-action="search-close"]').click();
+  await guest.locator('[data-map-action="route-endpoint"][data-endpoint="target"]').waitFor();assert.match(await guest.locator('[data-map-action="route-endpoint"][data-endpoint="target"]').innerText(),/416/);
   assert.match(await guest.locator('.map-module').innerText(),/416/);
   await guest.screenshot({path:path.join(output,'route.png'),fullPage:true,animations:'disabled'});
   await guest.locator('[data-tab="events"]').click();await guest.locator('.event-card').filter({hasText:created.title}).locator('[data-community="attend"]').click();
@@ -87,8 +88,13 @@ async function api(route,method='GET',body,token){const r=await fetch(base+route
   await author.locator('[data-tab="events"]').click();await author.locator('.event-card').filter({hasText:created.title}).locator('[data-event]').click();await author.locator('[data-community="delete"]').click();await author.locator('[data-community-form="delete"] [type="submit"]').click();await author.locator('#community-dialog').waitFor({state:'hidden'});
   assert.equal((await api('/v1/events')).events.some(e=>e.id===created.id),false);
   await author.locator('[data-action="life-section"][data-id="clubs"]').click();await contexts[0].setOffline(true);await author.locator('[data-action="club-detail"]').first().click();await author.locator('#modal-root').getByRole('heading',{name:'Final Round',exact:true}).waitFor();
-  assert.equal(await author.locator('#modal-root img').evaluate(img=>img.complete&&img.naturalWidth>0),true);
+  // Browser offline mode also blocks HTTP images; APK assets are packaged locally.
+  // The cached catalog itself must remain usable without the community server.
+  assert.ok(await author.locator('#modal-root .club-activities li').count()>0);
   await contexts[0].setOffline(false);await author.locator('[data-action="close"]').click();
+  await author.locator('[data-action="club-detail"]').first().click();
+  await author.locator('#modal-root img').evaluate(img=>img.decode());
+  await author.locator('[data-action="close"]').click();
   for(const width of [320,580]){await author.setViewportSize({width,height:844});assert.equal(await author.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
   await author.setViewportSize({width:390,height:844});await author.locator('[data-tab="profile"]').click();await author.locator('[data-theme-choice="green"]').click();await author.locator('[data-tab="events"]').click();await author.screenshot({path:path.join(output,'clubs-green.png'),fullPage:true,animations:'disabled'});
   assert.deepEqual(errors,[]);console.log('PASS: clubs, external links, student registration/create/edit/delete, shared capacity, attendance/withdrawal, exact room route, mixed home, offline clubs; no page errors');

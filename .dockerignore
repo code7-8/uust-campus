@@ -1,0 +1,6 @@
+**
+!server/
+!server/*.py
+!server/requirements.txt
+!app/
+!app/**

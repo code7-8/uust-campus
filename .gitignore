@@ -17,6 +17,7 @@ Thumbs.db
 *.log
 local.properties
 node_modules/
+.venv/
 __pycache__/
 server/data/
 *.sqlite

@@ -167,9 +167,9 @@ test('underground 6–7 passage beats the street detour and respects route modes
 test('building/room routes work in both directions and mark manual entrance handoffs without geometry',()=>{
   for(const [a,b] of [['building:7','cw-6-416'],['cw-6-513','building:2']]){
     const j=planJourney(archive,a,b);assert.ok(j.route);assert.equal(j.route.partial,true);
-    assert.ok(j.route.links.some(l=>l.edge.kind==='handoff'));
+    assert.ok(j.route.links.some(l=>l.edge.kind==='handoff'||l.edge.id.startsWith('underground-entry:')));
     assert.ok(j.route.links.filter(l=>l.edge.manual).every(l=>l.edge.geometry===null));
-    assert.ok(journeySteps(j.graph,j.route).some(s=>s.manual));
+    if(j.route.links.some(l=>l.edge.manual))assert.ok(journeySteps(j.graph,j.route).some(s=>s.manual));
     assert.match(campusSvg({...archive,campus:j.graph},null,j.route),/map-territory/);
     for(const floor of archive.floors){const svg=floorSvg(j.graph,floor,null,j.route);assert.doesNotMatch(svg,/NaN|undefined/);}
   }
@@ -199,15 +199,30 @@ test('survey plans extend both buildings and every mapped room connects to its b
   assert.equal(across.route.links.filter(l=>l.edge.kind==='stairs').length,3);
 });
 
-test('known entrance anchors replace upper-floor teleportation and do not connect the ambiguous annex',()=>{
+test('annex connects through the reported stair on floor 4, never an upper-floor campus handoff',()=>{
   const g=journeyGraph(archive);
   assert.equal(g.edges.filter(e=>e.kind==='handoff').length,2);
   for(const e of g.edges.filter(e=>e.kind==='handoff'))assert.equal(archive.floors.find(f=>f.id===g.nodes.find(n=>n.id===e.to).floorId).order,1);
-  for(const start of ['building:6','building:7','cw-6-416','cw-6-513'])assert.equal(planJourney(archive,start,'sv-6-401a').route,null);
+  for(const start of ['building:6','building:7','cw-6-416','cw-6-513']){
+    const trip=planJourney(archive,start,'sv-6-401a');assert.ok(trip.route);
+    assert.ok(trip.route.links.some(l=>l.edge.id==='sv-6-f4-to-annex'));
+  }
   assert.ok(planJourney(archive,'sv-6-401a','sv-6-407').route);
   assert.ok(planJourney(archive,'sv-6-101','sv-7-407').route);
   for(const mutate of [p=>p.campusAnchors.push('sv-6-401a'),p=>p.floors[0].costScale=-1]){
     const p=read('../app/data/maps.json');mutate(p);assert.throws(()=>check(p));
+  }
+});
+
+test('6–7 room routes use both first-floor passage stairs and outdoor mode excludes them',()=>{
+  for(const [a,b] of [['sv-6-101','sv-7-407'],['sv-7-407','sv-6-101']]){
+    const shortest=planJourney(archive,a,b),indoor=planJourney(archive,a,b,{mode:'indoor'}),outdoor=planJourney(archive,a,b,{mode:'outdoor'});
+    for(const route of [shortest.route,indoor.route]){
+      assert.ok(route);assert.ok(route.nodeIds.includes('sv-6-f1-underground-node'));assert.ok(route.nodeIds.includes('sv-7-f1-underground-node'));
+      assert.equal(route.links.some(l=>l.edge.kind==='handoff'),false);
+    }
+    assert.ok(shortest.route.cost<outdoor.route.cost);
+    assert.equal(outdoor.route.links.some(l=>l.edge.underground),false);
   }
 });
 

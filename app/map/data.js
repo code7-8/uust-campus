@@ -54,6 +54,16 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     if(f.costScale!==undefined)check(Number.isFinite(f.costScale)&&f.costScale>0&&f.costScale<=100,`${f.id}: неверный масштаб стоимости`);
     if(f.sourceLabel!==undefined)check(label(f.sourceLabel),`${f.id}: неверная подпись источника`);
     if(f.navigationNote!==undefined)check(typeof f.navigationNote==='string'&&f.navigationNote.length<=600,`${f.id}: слишком длинное пояснение`);
+    if(f.displayName!==undefined)check(label(f.displayName),`${f.id}: неверная подпись группы этажей`);
+    if(f.displayWith!==undefined){const parent=floors.get(f.displayWith);check(parent&&parent.buildingId===f.buildingId&&!parent.displayWith&&parent.id!==f.id,`${f.id}: неверная группа этажей`);}
+    if(f.placement!==undefined){
+      const p=f.placement,finite=v=>Number.isFinite(v)&&Math.abs(v)<100000;
+      check(p&&[180,270].includes(p.rotation),`${f.id}: неверный поворот размещения`);
+      if(p?.box)check(Array.isArray(p.box)&&p.box.length===4&&p.box.every(finite)&&p.box[2]>0&&p.box[3]>0,`${f.id}: неверная область размещения`);
+      else check(p?.rotation===180&&finite(p.coreX)&&p.coreX>f.viewBox[0]&&p.coreX<f.viewBox[0]+f.viewBox[2]&&finite(p.spineRight)
+        &&Array.isArray(p.sourceY)&&Array.isArray(p.targetY)&&p.sourceY.length>=2&&p.sourceY.length<=20&&p.sourceY.length===p.targetY.length
+        &&p.sourceY.every((v,i)=>finite(v)&&(!i||v>p.sourceY[i-1]))&&p.targetY.every((v,i)=>finite(v)&&(!i||v<p.targetY[i-1])),`${f.id}: неверные участки размещения`);
+    }
     if(f.image)check(/^assets\/campusway\/floor-6-[345]\.(png|jpg)$/.test(f.image)&&Array.isArray(f.imageSize)&&f.imageSize.length===2&&f.imageSize.every(n=>Number.isFinite(n)&&n>0&&n<10000),`${f.id}: неизвестная подложка`);
   }
   if(errors.length)throw new Error(errors.join('\n'));
@@ -66,6 +76,10 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
       check(Array.isArray(a.points) && a.points.length>=3 && a.points.length<=500 && a.points.every(p=>inside(p,f)),`${a.id}: неверный полигон`);
       if(a.locationId)check(locations.get(a.locationId)?.floorId===f.id,`${a.id}: неизвестное помещение`);
       areas.set(a.id,{...a,floorId:f.id});
+    }
+    if(f.placement&&!f.placement.box&&!errors.length){
+      const points=f.areas.flatMap(a=>a.points),xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),p=f.placement;
+      check(p.coreX>Math.min(...xs)&&p.coreX<Math.max(...xs)&&p.sourceY[0]<=Math.min(...ys)&&p.sourceY.at(-1)>=Math.max(...ys),`${f.id}: размещение должно охватывать план без нулевого масштаба`);
     }
     for(const wall of f.walls)check(Array.isArray(wall) && wall.length>=2 && wall.length<=500 && wall.every(p=>inside(p,f)),`${f.id}: неверная стена`);
     for(const d of f.doors) {
@@ -136,6 +150,13 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     if(Array.isArray(pack.campusAnchors))for(const id of pack.campusAnchors){
       const place=locations.get(id),node=nodes.get(place?.nodeId);
       check(node&&['entrance','stairs','lift'].includes(node.type)&&pack.routeOrigins.includes(id),`campusAnchors: неверная точка ${id}`);
+    }
+  }
+  if(pack.undergroundPortals!==undefined){
+    check(Array.isArray(pack.undergroundPortals)&&pack.undergroundPortals.length<=2,'undergroundPortals: максимум две лестницы');
+    if(Array.isArray(pack.undergroundPortals))for(const portal of pack.undergroundPortals){
+      const l=locations.get(portal.placeId);
+      check(l?.type==='stairs'&&nodes.get(l.nodeId)?.type==='stairs'&&((l.buildingId==='6'&&portal.campusNodeId==='campus:junction:924,334')||(l.buildingId==='7'&&portal.campusNodeId==='campus:junction:1053,334')),'undergroundPortals: неверная лестница перехода');
     }
   }
   if(errors.length)throw new Error(errors.join('\n'));

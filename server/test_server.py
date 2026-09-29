@@ -100,9 +100,11 @@ class CommunityTests(unittest.TestCase):
             with urlopen(base+'/v1/health') as response:self.assertEqual(json.load(response)['service'],'UUST Campus')
             with self.assertRaises(HTTPError) as result:urlopen(base+'/../server/server.py')
             self.assertEqual(result.exception.code,404)
+            result.exception.close()
             request=Request(base+'/v1/events',data=json.dumps(self.event).encode(),headers={'Content-Type':'application/json'},method='POST')
             with self.assertRaises(HTTPError) as result:urlopen(request)
             self.assertEqual(result.exception.code,401)
+            result.exception.close()
         finally:server.shutdown();server.server_close();thread.join()
 
 if __name__=='__main__':unittest.main()

@@ -3,13 +3,15 @@ export function bindGestures(svg, camera, onPick, onChange) {
   const pointers=new Map(); let dragged=false, pick=null, last=null;
   const world=(x,y)=>{const p=svg.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(svg.getScreenCTM().inverse());};
   const bounds=()=>camera.base;
-  const apply=()=>{
+  const apply=({constrain=true}={})=>{
     const b=bounds(),v=camera.box;
     const viewport=svg.getBoundingClientRect(),insets=camera.insets||{left:0,right:0,top:0,bottom:0};
     const units=Math.max(v[2]/(viewport.width||1),v[3]/(viewport.height||1));
     const offsetX=v[2]/2+(insets.left-insets.right)*units/2,offsetY=v[3]/2+(insets.top-insets.bottom)*units/2;
-    v[0]=Math.max(b[0]-offsetX,Math.min(b[0]+b[2]-offsetX,v[0]));
-    v[1]=Math.max(b[1]-offsetY,Math.min(b[1]+b[3]-offsetY,v[1]));
+    if(constrain){
+      v[0]=Math.max(b[0]-offsetX,Math.min(b[0]+b[2]-offsetX,v[0]));
+      v[1]=Math.max(b[1]-offsetY,Math.min(b[1]+b[3]-offsetY,v[1]));
+    }
     svg.setAttribute('viewBox',v.join(' '));
     svg.classList.toggle('show-room-labels',b[2]/v[2]>=1.25);
     const screenScale=el=>{const matrix=el.getScreenCTM();return matrix?Math.hypot(matrix.a,matrix.b):1;};

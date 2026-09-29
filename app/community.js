@@ -8,7 +8,7 @@ const pending=new Map();
 window.campusServerResult=(id,status,text)=>{const item=pending.get(id);if(item){clearTimeout(item.timer);pending.delete(id);item.resolve({status,text});}};
 
 export function normalizeServer(value) {
-  let url;try{url=new URL(String(value).trim());}catch{throw new Error('Введите адрес полностью, например http://192.168.137.1:8787');}
+  let url;try{url=new URL(String(value).trim());}catch{throw new Error('Введите полный адрес сервера, например https://campus.example.org');}
   if(url.username||url.password||url.search||url.hash||!['','/'].includes(url.pathname))throw new Error('Нужен адрес сервера без пути, пароля и параметров.');
   if(url.protocol!=='https:' && !(url.protocol==='http:' && localHosts.includes(url.hostname)))throw new Error('Для интернет-сервера нужен HTTPS. В точке доступа ноутбука используйте http://192.168.137.1:8787');
   return url.origin;
@@ -20,7 +20,7 @@ async function request(baseUrl,path,method='GET',body=null,token='') {
   if(window.CampusAndroid?.serverRequest){
     const id=crypto.randomUUID?.()||Date.now()+'-'+Math.random();
     response=await new Promise((resolve,reject)=>{
-      const timer=setTimeout(()=>{pending.delete(id);reject(new Error('Сервер не ответил. Проверьте подключение к Wi-Fi.'));},26000);
+      const timer=setTimeout(()=>{pending.delete(id);reject(new Error('Сервер не ответил. Проверьте интернет и адрес сервера.'));},26000);
       pending.set(id,{resolve,timer});
       try{window.CampusAndroid.serverRequest(JSON.stringify({id,baseUrl,path,method,body,token}));}
       catch(e){clearTimeout(timer);pending.delete(id);reject(e);}
@@ -30,7 +30,7 @@ async function request(baseUrl,path,method='GET',body=null,token='') {
     try{
       const r=await fetch(baseUrl+path,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined,signal:controller.signal,cache:'no-store',credentials:'omit',redirect:'error'});
       response={status:r.status,text:await r.text()};
-    }catch{throw new Error('Нет связи с сервером. Проверьте адрес и общую Wi-Fi сеть.');}
+    }catch{throw new Error('Нет связи с сервером. Проверьте интернет и адрес сервера.');}
     finally{clearTimeout(timer);}
   }
   let data;try{data=JSON.parse(response.text);}catch{throw new Error('По этому адресу не найден сервер УУНиТ.');}
@@ -39,7 +39,7 @@ async function request(baseUrl,path,method='GET',body=null,token='') {
 }
 
 export function createCommunity({onEvents,onChange,onPublished,toast,closeMainModal,mapData}) {
-  const browserDefault=!window.CampusAndroid&&location.port==='8787'?location.origin:'';
+  const browserDefault=!window.CampusAndroid&&(location.protocol==='https:'||location.port==='8787')?location.origin:'';
   let base=storage.read('serverUrl',browserDefault),session=storage.read('account'),events=[],online=false,lastSync=null,busy=null,screen='',editing=null;
   if(session?.server!==base)session=null;
   const cached=storage.read('communityCache');
@@ -69,7 +69,7 @@ export function createCommunity({onEvents,onChange,onPublished,toast,closeMainMo
   function controls(event){return event.community?`<p class="source-line">Опубликовал(а): ${esc(event.authorName||'участник команды')}</p>${canEdit(event)?`<div class="account-actions">${cbutton('Редактировать','edit',`data-id="${esc(event.id)}"`,'button light')}${cbutton('Удалить','delete',`data-id="${esc(event.id)}"`,'text-button')}</div>`:''}`:'';}
   function open(kind,event=null){
     closeMainModal?.();screen=kind;editing=event;
-    if(kind==='server')frame('Сервер команды',`<p class="subtle">Подключитесь к точке доступа ноутбука. Все участники используют один адрес.</p><form data-community-form="server">${field('server','Адрес сервера','url',base||'http://192.168.137.1:8787','required autocomplete="url" placeholder="http://192.168.137.1:8787"')}<button class="button wide" type="submit">Проверить и подключить</button></form><p class="account-help">При смене сервера нужно войти заново. Для подключения через интернет укажите HTTPS-адрес.</p>`);
+    if(kind==='server')frame('Сервер команды',`<p class="subtle">Введите общий HTTPS-адрес. Все участники используют один сервер и могут подключаться через мобильный интернет или любой Wi-Fi.</p><form data-community-form="server">${field('server','Адрес сервера','url',base,'required autocomplete="url" placeholder="https://campus.example.org"')}<button class="button wide" type="submit">Проверить и подключить</button></form><p class="account-help">Адрес выдаёт администратор команды. Укажите только https:// и имя сервера, без /v1. При смене сервера нужно войти заново.</p>`);
     if(kind==='login'||kind==='register')frame(kind==='login'?'Вход':'Регистрация',`<p class="subtle">${base?'Вход в сообщество кампуса.':'Сначала подключите сервер команды.'}</p>${base?`<form data-community-form="${kind}">${kind==='register'?field('name','Имя','text','','required maxlength="80" autocomplete="name"'):''}${field('username','Логин','text','','required minlength="3" maxlength="32" autocomplete="username" autocapitalize="none" spellcheck="false" pattern="[A-Za-z0-9][A-Za-z0-9_.-]{2,31}"')}${field('password','Пароль','password','','required minlength="8" maxlength="128" autocomplete="'+(kind==='login'?'current-password':'new-password')+'"')}<button type="submit" class="button wide">${kind==='login'?'Войти':'Зарегистрироваться'}</button></form>${cbutton(kind==='login'?'Нет аккаунта? Создать':'Уже есть аккаунт? Войти',kind==='login'?'register':'login','','text-button')}`:cbutton('Подключить сервер','server','','button wide')}<p class="account-help">${kind==='register'?'После регистрации можно создавать свои встречи и записываться на события.':'Смотреть карту и афишу можно без входа.'}</p>`);
     if(kind==='editor'){
       if(!canPublish()){open('login');return;}

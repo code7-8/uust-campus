@@ -197,7 +197,7 @@ public final class MainActivity extends Activity {
                         if(stream!=null)try(InputStream in=stream){byte[] buf=new byte[8192];int n;while((n=in.read(buf))!=-1){out.write(buf,0,n);if(out.size()>2*1024*1024)throw new IOException("Response too large");}}
                         result=new String(out.toByteArray(),StandardCharsets.UTF_8);
                     } finally {conn.disconnect();}
-                } catch(Exception e) {status=0;result="{\"error\":\"Сервер недоступен. Проверьте адрес ноутбука и подключение к точке доступа.\"}";}
+                } catch(Exception e) {status=0;result="{\"error\":\"Сервер недоступен. Проверьте интернет и HTTPS-адрес сервера.\"}";}
                 final String callback="window.campusServerResult && window.campusServerResult("+JSONObject.quote(id)+","+status+","+JSONObject.quote(result)+")";
                 runOnUiThread(() -> {if(!isFinishing()&&!isDestroyed())web.evaluateJavascript(callback,null);});
             });

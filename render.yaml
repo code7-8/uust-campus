@@ -1,0 +1,30 @@
+# SQLite requires one service instance and a persistent disk (paid Render plan).
+services:
+  - type: web
+    name: uust-campus
+    runtime: docker
+    plan: 0.5c-512mb
+    numInstances: 1
+    autoDeployTrigger: 'off'
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /v1/health
+    disk:
+      name: campus-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: CAMPUS_ENV
+        value: production
+      - key: PORT
+        value: '10000'
+      - key: DATABASE_PATH
+        value: /data/campus.sqlite
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Render terminates HTTPS. Do not expose the container's HTTP port directly.
+      - key: TRUSTED_PROXY
+        value: '*'
+      - key: TRUSTED_PROXY_COUNT
+        value: '1'

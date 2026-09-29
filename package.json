@@ -5,9 +5,14 @@
   "type": "module",
   "description": "Offline Android campus assistant with a Russian interface",
   "scripts": {
-    "test": "node --test tests/core.test.js tests/map.test.js tests/student-life.test.js tests/planning.test.js",
+    "test": "node --test tests/core.test.js tests/map.test.js tests/student-life.test.js tests/planning.test.js tests/community.test.js",
     "validate:maps": "node tools/validate-maps.mjs",
     "preview": "python tools/preview.py",
-    "build:android": "powershell -ExecutionPolicy Bypass -File tools/build.ps1"
+    "build:android": "powershell -ExecutionPolicy Bypass -File tools/build.ps1",
+    "test:browser": "node tests/student-life.browser.cjs && node tests/map-ui.mjs",
+    "test:server": "python -m unittest discover -s server -p \"test_*.py\" -v"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
   }
 }

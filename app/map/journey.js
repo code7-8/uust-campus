@@ -31,7 +31,7 @@ export function journeyGraph(data,{mode='shortest'}={}) {
   };
   const nodes=[...data.campus.nodes,...data.nodes];
   const byId=new Map(nodes.map(n=>[n.id,n]));
-  const edges=[...data.campus.edges.filter(e=>mode==='indoor'?!['outdoor','access'].includes(e.kind):mode==='outdoor'?e.kind!=='passage':true),
+  const edges=[...data.campus.edges.filter(e=>mode==='indoor'?!['outdoor','access'].includes(e.kind):mode==='outdoor'?e.kind!=='passage':true).map(e=>({...e,weight:e.weight*(e.underground?0.55:1)})),
     ...data.edges.map(e=>({...e,weight:e.kind==='stairs'?60:e.kind==='lift'?75:e.weight*scale(byId.get(e.from).floorId)}))];
   // New packs explicitly name campus anchors. Do not teleport to every stair
   // or to an unconnected annex; older imported packs retain their handoffs.
@@ -41,6 +41,11 @@ export function journeyGraph(data,{mode='shortest'}={}) {
     const f=data.floors.find(f=>f.id===n.floorId);
     edges.push({id:'handoff:'+n.id,from:'campus:building:'+n.buildingId,to:n.id,kind:'handoff',direction:'both',
       weight:120+60*Math.abs((f?.order||1)-1),status:'plan',stepFree:null,geometry:null,manual:true});
+  }
+  if(mode!=='outdoor')for(const portal of data.undergroundPortals||[]){
+    const place=data.locations.find(l=>l.id===portal.placeId),n=byId.get(place?.nodeId);
+    if(n&&byId.has(portal.campusNodeId))edges.push({id:'underground-entry:'+n.buildingId,from:n.id,to:portal.campusNodeId,kind:'stairs',direction:'both',
+      weight:18,status:'plan',stepFree:false,geometry:null,underground:true,source:place.source,verifiedAt:null});
   }
   return {...data,kind:'journey',nodes,edges};
 }
@@ -81,8 +86,10 @@ export function journeySteps(graph,route) {
         `Найдите открытый вход в корпус ${to.buildingId}. Место входа нужно уточнить на месте.`,to,{manual:true}));
     }else if(kind==='outdoor'){
       if(route.links[i-1]?.edge.kind!=='outdoor')result.push(step('Уличный участок: ориентировочный обход по схеме. Дорожки и ограждения не проверены.',from,{approximate:true}));
+    }else if(kind==='stairs'&&link.edge.underground){
+      result.push(step(to.floorId?'Поднимитесь из подземного перехода на 1 этаж корпуса '+to.buildingId:'Спуститесь в подземный переход между корпусами 6 и 7.',from,{nextFloorId:to.floorId}));
     }else if(kind==='passage'){
-      if(link.edge.underground&&!route.links[i-1]?.edge.underground)result.push(step('Подземный переход между корпусами 6 и 7. Спуститесь к переходу по указателям; входы на поэтажных планах пока не отмечены.',from,{manual:true}));
+      if(link.edge.underground&&!route.links[i-1]?.edge.underground)result.push(step('Подземный переход между корпусами 6 и 7. Лестницы отмечены на первых этажах.',from));
       if(to.buildingId)result.push(step((link.edge.underground?'По подземному переходу: ':'По переходам: ')+name(to.id),to));
     }else if(from.floorId!==to.floorId){
       const direction=(graph.floors.find(f=>f.id===to.floorId)?.order||0)>(graph.floors.find(f=>f.id===from.floorId)?.order||0)?'Поднимитесь':'Спуститесь';

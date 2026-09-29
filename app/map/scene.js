@@ -1,4 +1,5 @@
 import {campusPoint} from './svg.js';
+import {placement,projectPoint} from './projection.js';
 
 // Display coordinates only. Route costs and imported survey data stay untouched.
 export function floorBounds(floor) {
@@ -17,6 +18,7 @@ function spanAt(outline,y,frame) {
 }
 export function fitFloor(floor,frame,outline=[]) {
   const bounds=floorBounds(floor),[x,y,w,h]=bounds;
+  const explicit=placement(floor,bounds,frame,outline);if(explicit)return explicit;
   const sy=-frame[3]/h,ty=frame[1]+frame[3]-y*sy;
   const lines=[...floor.areas.map(a=>[...a.points,a.points[0]]),...floor.walls,...floor.doors.map(d=>d.points)],constraints=new Map();
   // Check edges too: a concave footprint can cut through a long room.
@@ -60,7 +62,7 @@ export function createSceneLayout(buildings,floors) {
 export function scenePoint(layout,floorId,point) {
   if(!floorId)return campusPoint(point);
   const plan=layout.plans.get(floorId);
-  return [plan.tx+point[0]*plan.sx,plan.ty+point[1]*plan.sy];
+  return projectPoint(plan,point);
 }
 
 export const boxPoints=box=>[[box[0],box[1]],[box[0]+box[2],box[1]+box[3]]];

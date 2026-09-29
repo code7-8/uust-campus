@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "survey-2026.09.29",
+  "dataVersion": "survey-2026.09.30",
   "campusId": "uust-karl-marx",
-  "source": "CampusWay (этажи 3–5 корпуса 6) и планы этажей, фото команды от 28.09.2026",
+  "source": "CampusWay (этажи 3–5 корпуса 6) и планы этажей, фото команды от 28.09.2026; уточнения команды 30.09.2026",
   "verifiedAt": null,
   "verification": "archive",
   "synthetic": false,
@@ -1339,7 +1339,26 @@
         227,
         320.0,
         798
-      ]
+      ],
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 253,
+        "sourceY": [
+          242,
+          266,
+          422,
+          803,
+          1010
+        ],
+        "targetY": [
+          1091,
+          1065,
+          1002,
+          863,
+          776
+        ]
+      }
     },
     {
       "id": "sv-6-f2",
@@ -3479,7 +3498,26 @@
         45,
         357.0,
         1050
-      ]
+      ],
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 230,
+        "sourceY": [
+          60,
+          122,
+          312,
+          876,
+          1080
+        ],
+        "targetY": [
+          1091,
+          1065,
+          1002,
+          863,
+          776
+        ]
+      }
     },
     {
       "id": "cw-6-f3",
@@ -4320,7 +4358,22 @@
         1280,
         514
       ],
-      "sourceLabel": "CampusWay · архивный план"
+      "sourceLabel": "CampusWay · архивный план",
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 280,
+        "sourceY": [
+          6,
+          1007,
+          1237
+        ],
+        "targetY": [
+          1091,
+          863,
+          776
+        ]
+      }
     },
     {
       "id": "cw-6-f4",
@@ -4724,6 +4777,28 @@
               472
             ]
           ]
+        },
+        {
+          "id": "sv-6-f4-annex-access-area",
+          "kind": "corridor",
+          "points": [
+            [
+              530,
+              1484
+            ],
+            [
+              570,
+              1484
+            ],
+            [
+              570,
+              1501
+            ],
+            [
+              530,
+              1501
+            ]
+          ]
         }
       ],
       "walls": [],
@@ -4916,7 +4991,17 @@
         1536,
         1024
       ],
-      "sourceLabel": "CampusWay · архивный план"
+      "sourceLabel": "CampusWay · архивный план",
+      "placement": {
+        "rotation": 180,
+        "box": [
+          230,
+          776,
+          65,
+          315
+        ]
+      },
+      "displayName": "4 + 4,5"
     },
     {
       "id": "sv-6-f4-annex",
@@ -6025,13 +6110,23 @@
           ]
         }
       ],
-      "navigationNote": "На плане указан 4 этаж; в подписи к фото — «4,5, переход с пятого». Связь с другими этажами не уточнена. Маршрут доступен внутри этого участка от выбранной точки.",
+      "navigationNote": "Крыло 4,5 показано вместе с 4 этажом. Лестница на 4 этаже находится выше «лестницы у левого торца» на карте. Связь уточнена командой 30.09.2026; размещение схематическое.",
       "viewBox": [
         126,
         458,
         433,
         557
-      ]
+      ],
+      "placement": {
+        "rotation": 270,
+        "box": [
+          295,
+          776,
+          44,
+          87
+        ]
+      },
+      "displayWith": "cw-6-f4"
     },
     {
       "id": "cw-6-f5",
@@ -6539,7 +6634,16 @@
         1280,
         853
       ],
-      "sourceLabel": "CampusWay · архивный план"
+      "sourceLabel": "CampusWay · архивный план",
+      "placement": {
+        "rotation": 180,
+        "box": [
+          230,
+          776,
+          65,
+          315
+        ]
+      }
     },
     {
       "id": "sv-7-f1",
@@ -7612,7 +7716,22 @@
         175,
         311.0,
         1010.0
-      ]
+      ],
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 495,
+        "sourceY": [
+          190,
+          413,
+          1170
+        ],
+        "targetY": [
+          660,
+          584,
+          283
+        ]
+      }
     },
     {
       "id": "sv-7-f2",
@@ -8467,7 +8586,22 @@
         87,
         353,
         1093.0
-      ]
+      ],
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 475,
+        "sourceY": [
+          102,
+          338,
+          1165
+        ],
+        "targetY": [
+          660,
+          584,
+          283
+        ]
+      }
     },
     {
       "id": "sv-7-f3",
@@ -9320,7 +9454,22 @@
         87,
         353,
         1093.0
-      ]
+      ],
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 475,
+        "sourceY": [
+          102,
+          338,
+          1165
+        ],
+        "targetY": [
+          660,
+          584,
+          283
+        ]
+      }
     },
     {
       "id": "sv-7-f4",
@@ -10067,7 +10216,22 @@
         87,
         353,
         1093.0
-      ]
+      ],
+      "placement": {
+        "rotation": 180,
+        "spineRight": 295,
+        "coreX": 475,
+        "sourceY": [
+          102,
+          338,
+          1165
+        ],
+        "targetY": [
+          660,
+          584,
+          283
+        ]
+      }
     }
   ],
   "locations": [
@@ -13339,6 +13503,66 @@
         143
       ],
       "nodeId": null
+    },
+    {
+      "id": "sv-6-f4-annex-access",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница на 4,5 этаж",
+      "point": [
+        550,
+        1490
+      ],
+      "connectorId": "sv-6-f4-annex-north",
+      "nodeId": "sv-6-f4-annex-access-node",
+      "aliases": [
+        "Лестница на 4,5 этаж",
+        "Лестница"
+      ],
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
+    },
+    {
+      "id": "sv-6-f1-underground",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "stairs",
+      "name": "Спуск в подземный переход к корпусу 7",
+      "point": [
+        114,
+        994
+      ],
+      "connectorId": "underground-6-7",
+      "nodeId": "sv-6-f1-underground-node",
+      "aliases": [
+        "Спуск в подземный переход к корпусу 7",
+        "Лестница"
+      ],
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
+    },
+    {
+      "id": "sv-7-f1-underground",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f1",
+      "type": "stairs",
+      "name": "Спуск в подземный переход к корпусу 6",
+      "point": [
+        385,
+        212
+      ],
+      "connectorId": "underground-6-7",
+      "nodeId": "sv-7-f1-underground-node",
+      "aliases": [
+        "Спуск в подземный переход к корпусу 6",
+        "Лестница"
+      ],
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
     }
   ],
   "nodes": [
@@ -17327,6 +17551,45 @@
         143
       ],
       "connectorId": "sv-7-f4-library-right-stair"
+    },
+    {
+      "id": "sv-6-f4-annex-access-node",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница на 4,5 этаж",
+      "point": [
+        550,
+        1490
+      ],
+      "connectorId": "sv-6-f4-annex-north"
+    },
+    {
+      "id": "sv-6-f1-underground-node",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "stairs",
+      "name": "Спуск в подземный переход к корпусу 7",
+      "point": [
+        114,
+        994
+      ],
+      "connectorId": "underground-6-7"
+    },
+    {
+      "id": "sv-7-f1-underground-node",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f1",
+      "type": "stairs",
+      "name": "Спуск в подземный переход к корпусу 6",
+      "point": [
+        385,
+        212
+      ],
+      "connectorId": "underground-6-7"
     }
   ],
   "edges": [
@@ -24006,6 +24269,97 @@
           225
         ]
       ]
+    },
+    {
+      "id": "sv-6-f4-annex-access-hall",
+      "from": "sv-6-f4-annex-access-node",
+      "to": "cw-6-f4-node-west",
+      "kind": "corridor",
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "weight": 43,
+      "geometry": [
+        [
+          550,
+          1490
+        ],
+        [
+          550,
+          1447
+        ]
+      ],
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
+    },
+    {
+      "id": "sv-6-f4-to-annex",
+      "from": "sv-6-f4-annex-access-node",
+      "to": "sv-6-f4-annex-n-north",
+      "kind": "stairs",
+      "direction": "both",
+      "status": "plan",
+      "stepFree": false,
+      "weight": 30,
+      "geometry": null,
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
+    },
+    {
+      "id": "sv-6-f1-underground-hall",
+      "from": "sv-6-f1-underground-node",
+      "to": "sv-6-f1-n-j3",
+      "kind": "corridor",
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "weight": 220,
+      "geometry": [
+        [
+          114,
+          994
+        ],
+        [
+          320,
+          994
+        ],
+        [
+          320,
+          980
+        ]
+      ],
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
+    },
+    {
+      "id": "sv-7-f1-underground-hall",
+      "from": "sv-7-f1-underground-node",
+      "to": "sv-7-f1-n-entry",
+      "kind": "corridor",
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "weight": 128,
+      "geometry": [
+        [
+          385,
+          212
+        ],
+        [
+          400,
+          212
+        ],
+        [
+          400,
+          300
+        ],
+        [
+          375,
+          300
+        ]
+      ],
+      "source": "Уточнение команды 30.09.2026: лестницы к крылу 4,5 и подземному переходу 6–7; размещение схематическое",
+      "verifiedAt": null
     }
   ],
   "routeOrigins": [
@@ -24030,7 +24384,10 @@
     "sv-7-f1-entry",
     "sv-7-f2-wing-stair",
     "sv-7-f3-wing-stair",
-    "sv-7-f4-wing-stair"
+    "sv-7-f4-wing-stair",
+    "sv-6-f4-annex-access",
+    "sv-6-f1-underground",
+    "sv-7-f1-underground"
   ],
   "declaredTargets": [
     "cw-6-409",
@@ -24148,5 +24505,15 @@
   "campusAnchors": [
     "sv-6-f1-entry",
     "sv-7-f1-entry"
+  ],
+  "undergroundPortals": [
+    {
+      "placeId": "sv-6-f1-underground",
+      "campusNodeId": "campus:junction:924,334"
+    },
+    {
+      "placeId": "sv-7-f1-underground",
+      "campusNodeId": "campus:junction:1053,334"
+    }
   ]
 }

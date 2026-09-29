@@ -4,6 +4,7 @@ import {placeNode,journeyGraph,planJourney,journeySections} from './journey.js';
 import {sceneSvg, campusBox, esc} from './svg.js';
 import {createSceneLayout,scenePoint,boxPoints} from './scene.js';
 import {bindGestures} from './gestures.js';
+import {displayFloorGroup,cameraFloor} from './projection.js';
 import {icon} from '../icons.js';
 
 const button=(label,action,extra='',cls='map-button')=>`<button class="${cls}" data-map-action="${action}" ${extra}>${label}</button>`;
@@ -17,6 +18,12 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
   let visibleFloors=new Set();
   const selected=()=>data.locations.find(l=>l.id===s.selected);
   const floor=()=>data.floors.find(f=>f.id===s.floorId);
+  const floorGroup=id=>displayFloorGroup(data.floors,id);
+  const floorBox=id=>{
+    const boxes=data.floors.filter(f=>floorGroup(f.id)===floorGroup(id)).map(f=>layout.plans.get(f.id).box);
+    const left=Math.min(...boxes.map(b=>b[0])),top=Math.min(...boxes.map(b=>b[1]));
+    return [left,top,Math.max(...boxes.map(b=>b[0]+b[2]))-left,Math.max(...boxes.map(b=>b[1]+b[3]))-top];
+  };
   const subtitle=l=>[buildings.find(b=>b.id===l.buildingId)?.name,data.floors.find(f=>f.id===l.floorId)?.name].filter(Boolean).join(' · ');
   const availableFloors=()=>data.floors.filter(f=>f.buildingId===(floor()?.buildingId||s.viewBuildingId||selected()?.buildingId)).sort((a,b)=>a.order-b.order);
   const routeData=()=>s.graph||journeyGraph(data,{mode:s.mode});
@@ -39,7 +46,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     for(const [buildingId,id] of Object.entries(s.floorChoices)){
       const f=data.floors.find(f=>f.id===id&&f.buildingId===buildingId);if(f)byBuilding.set(buildingId,f);
     }
-    return [...byBuilding.values()];
+    return [...byBuilding.values()].flatMap(f=>data.floors.filter(other=>floorGroup(other.id)===floorGroup(f.id)));
   }
   function useFloor(floorId) {
     if(s.floorId!==floorId)s.floorCardHidden=false;
@@ -93,7 +100,8 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     let transition='';
     if(current&&next){
       const link=s.route.links.find(l=>l.from===current.nodeIds.at(-1)&&l.to===next.nodeIds[0]);
-      if(link?.edge.kind==='stairs'||link?.edge.kind==='lift')transition=`${link.edge.kind==='lift'?'Лифт':'Лестница'} → ${data.floors.find(f=>f.id===next.floorId)?.name||''}`;
+      if(link?.edge.underground)transition=next.floorId?`Из перехода → 1 этаж корпуса ${next.buildingId}`:'Спуск в подземный переход 6–7';
+      else if(link?.edge.kind==='stairs'||link?.edge.kind==='lift')transition=`${link.edge.kind==='lift'?'Лифт':'Лестница'} → ${data.floors.find(f=>f.id===next.floorId)?.name||''}`;
       else if(!next.floorId)transition='Выход к территории';
       else transition=`Вход в корпус ${next.buildingId}`;
     }
@@ -129,7 +137,7 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     return `<span>Кампус</span><span>${f?`Корпус ${esc(f.buildingId)} · ${esc(f.name)}`:'9 корпусов'}</span>`;
   }
   function floorButtons() {
-    const f=floor();return f?availableFloors().map(fl=>button(esc(fl.name),'floor',`data-floor="${esc(fl.id)}" aria-pressed="${f.id===fl.id}"`,f.id===fl.id?'active':'')).join(''):'';
+    const f=floor();return f?availableFloors().filter(fl=>!fl.displayWith).map(fl=>button(esc(fl.displayName||fl.name),'floor',`data-floor="${esc(fl.id)}" aria-pressed="${floorGroup(f.id)===fl.id}"`,floorGroup(f.id)===fl.id?'active':'')).join(''):'';
   }
   function observeSize() {
     resize?.disconnect();
@@ -153,30 +161,28 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
   function syncCamera() {
     if(!root||!layout)return;
     const svg=root.querySelector('#map-surface'),matrix=svg.getScreenCTM();if(!matrix)return;
-    const viewport=svg.getBoundingClientRect(),insets=s.camera.insets||{top:0,right:0,bottom:0,left:0};
-    const left=viewport.left+insets.left,right=viewport.right-insets.right,top=viewport.top+insets.top,bottom=viewport.bottom-insets.bottom;
+    // Fixed viewport coordinates: changing the card must not move this probe.
+    const viewport=svg.getBoundingClientRect();
+    const {left,right,top,bottom}=viewport;
     const cx=(left+right)/2,cy=(top+bottom)/2,scale=Math.hypot(matrix.a,matrix.b);
-    const threshold=Math.max(140,Math.min(280,(bottom-top)*.7)),visible=new Set(),candidates=[];
+    const threshold=Math.max(140,Math.min(280,(bottom-top)*.7)),visible=new Set(),visibleGroups=new Set(),detailedBuildings=new Set(),candidates=[];
     for(const layer of svg.querySelectorAll('[data-scene-floor]')){
-      const id=layer.dataset.sceneFloor,plan=layout.plans.get(id),[x,y,w,h]=plan.box;
+      const id=layer.dataset.sceneFloor,plan=layout.plans.get(id),[x,y,w,h]=floorBox(id);
       const px=x*matrix.a+matrix.e,py=y*matrix.d+matrix.f,pw=w*scale,ph=h*scale;
       const intersects=px+pw>left&&px<right&&py+ph>top&&py<bottom;
       const detailed=intersects&&Math.max(pw,ph)>=threshold*(visibleFloors.has(id)?0.78:1);
       layer.classList.toggle('is-visible',detailed);layer.setAttribute('aria-hidden',String(!detailed));
       if(detailed){
-        visible.add(id);
+        visible.add(id);visibleGroups.add(floorGroup(id));detailedBuildings.add(plan.buildingId);
         // Nearby plans may be visible together. The floor selector belongs to
         // the building under the viewport centre, not a distant edge of the map.
-        if(cx>=px-16&&cx<=px+pw+16&&cy>=py-16&&cy<=py+ph+16)candidates.push({id,distance:Math.hypot(px+pw/2-cx,py+ph/2-cy)});
+        if(cx>=px-16&&cx<=px+pw+16&&cy>=py-16&&cy<=py+ph+16)candidates.push({id:floorGroup(id),distance:Math.hypot(px+pw/2-cx,py+ph/2-cy)});
       }
-      for(const marker of svg.querySelectorAll(`[data-campus-building="${plan.buildingId}"]`))marker.classList.toggle('is-detailed',detailed);
     }
+    for(const marker of svg.querySelectorAll('[data-campus-building]'))marker.classList.toggle('is-detailed',detailedBuildings.has(marker.dataset.campusBuilding));
     visibleFloors=visible;
-    candidates.sort((a,b)=>a.distance-b.distance);
-    const current=candidates.find(c=>c.id===s.floorId),nearest=candidates[0];
-    const active=current&&(!nearest||current.distance<nearest.distance*1.25)?current:nearest;
-    const id=active?.id||null;
-    if(id!==s.floorId){useFloor(id);drawChrome();}
+    const id=cameraFloor(candidates,floorGroup(s.floorId),visibleGroups);
+    if(id!==floorGroup(s.floorId)){useFloor(id);drawChrome();}
   }
   function draw() {
     if(!root)return;
@@ -200,12 +206,12 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     if(overview)pendingFocus={overview:true,floorId:null};
     if(s.searching||s.query)return;
     const focus=pendingFocus;
-    if(!focus){gestures.apply();return;}
+    if(!focus){gestures.apply({constrain:false});return;}
     pendingFocus=null;
     let points=boxPoints(campusBox);
     if(focus.buildingId)points=boxPoints(layout.frames.get(focus.buildingId));
     else if(focus.floorId){
-      const plan=layout.plans.get(focus.floorId);points=boxPoints(plan.box);
+      const plan=layout.plans.get(focus.floorId);points=boxPoints(floorBox(focus.floorId));
       if(focus.point){const p=scenePoint(layout,focus.floorId,focus.point),radius=Math.max(14,Math.min(45,plan.box[2]*.4));points=[[p[0]-radius,p[1]-radius],[p[0]+radius,p[1]+radius]];}
     }
     if(!focus.overview&&s.route&&!focus.point){

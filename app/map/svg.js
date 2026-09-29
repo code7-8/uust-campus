@@ -1,5 +1,6 @@
 export const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const points = list => list.map(p=>p.join(',')).join(' ');
+import {projectPoint,projectLine} from './projection.js';
 export const campusPoint = p => [p[1],1706-p[0]];
 export const campusBox = [40,40,800,1630];
 export const symbols={entrance:'↪',stairs:'↟',lift:'↕',toilet:'WC',cafe:'☕',library:'Б',landmark:'•'};
@@ -45,16 +46,19 @@ export function floorSvg(data, floor, selected, route, typeFilter='all',sourcePl
 export function sceneSvg(data,layout,shownFloors,selected,route,typeFilter,sourceFloorId=null) {
   return campusSvg({...data,campus:data},selected,route)+shownFloors.map(floor=>{
     const p=layout.plans.get(floor.id);if(!p)return '';
-    const point=q=>[p.tx+q[0]*p.sx,p.ty+q[1]*p.sy],clip='plan-clip-'+floor.id;
+    const point=q=>projectPoint(p,q),clip='plan-clip-'+floor.id;
     const sourceShown=sourceFloorId===floor.id&&!!floor.image;
-    const plan={...floor,image:null,sceneSourceImage:sourceShown,sceneCoordinates:true,areas:floor.areas.map(a=>({...a,points:a.points.map(point)})),walls:floor.walls.map(w=>w.map(point)),doors:floor.doors.map(d=>({...d,points:d.points.map(point)}))};
+    const plan={...floor,image:null,sceneSourceImage:sourceShown,sceneCoordinates:true,areas:floor.areas.map(a=>({...a,points:projectLine(p,a.points,true)})),walls:floor.walls.map(w=>projectLine(p,w)),doors:floor.doors.map(d=>({...d,points:projectLine(p,d.points)}))};
     const item=l=>l.floorId===floor.id?{...l,point:point(l.point)}:l;
     const projected={...data,locations:data.locations.map(item),nodes:data.nodes.map(item)};
     const nodes=new Map(data.nodes.map(n=>[n.id,n]));
-    const projectedRoute=route?{...route,links:route.links.map(l=>({...l,edge:{...l.edge,geometry:l.edge.geometry&&nodes.get(l.from)?.floorId===floor.id&&nodes.get(l.to)?.floorId===floor.id?l.edge.geometry.map(point):l.edge.geometry}}))}:null;
+    const projectedRoute=route?{...route,links:route.links.map(l=>({...l,edge:{...l.edge,geometry:l.edge.geometry&&nodes.get(l.from)?.floorId===floor.id&&nodes.get(l.to)?.floorId===floor.id?projectLine(p,l.edge.geometry):l.edge.geometry}}))}:null;
     const building=data.buildings.find(b=>b.id===floor.buildingId);
-    const outline=`<path d="${esc(building.path)}" transform="matrix(0 -1 1 0 0 1706)"/>`;
-    const image=sourceFloorId===floor.id&&floor.image?`<image class="floor-source-image" href="${esc(floor.image)}" width="${floor.imageSize[0]}" height="${floor.imageSize[1]}" transform="matrix(${p.sx} 0 0 ${p.sy} ${p.tx} ${p.ty}) matrix(0 -1 1 0 0 ${floor.imageSize[0]})"/>`:'';
+    const outline=floor.placement?.box?`<rect x="${p.box[0]}" y="${p.box[1]}" width="${p.box[2]}" height="${p.box[3]}"/>`:`<path d="${esc(building.path)}" transform="matrix(0 -1 1 0 0 1706)"/>`;
+    const image=sourceShown?(p.tiles||[p]).filter(t=>!t.target||t.target[2]>0).map((t,i)=>{
+      const tileClip=clip+'-image-'+i,rect=t.target?`<rect x="${t.target[0]}" y="${t.target[1]}" width="${t.target[2]}" height="${t.target[3]}"/>`:outline;
+      return `<defs><clipPath id="${tileClip}">${rect}</clipPath></defs><g clip-path="url(#${tileClip})"><image class="floor-source-image" href="${esc(floor.image)}" width="${floor.imageSize[0]}" height="${floor.imageSize[1]}" transform="matrix(${t.sx} ${t.yx||0} ${t.xy||0} ${t.sy} ${t.tx} ${t.ty}) matrix(0 -1 1 0 0 ${floor.imageSize[0]})"/></g>`;
+    }).join(''):'';
     return `<g class="map-indoor-layer" data-scene-floor="${esc(floor.id)}" data-scene-building="${esc(floor.buildingId)}" aria-hidden="true"><defs><clipPath id="${esc(clip)}">${outline}</clipPath></defs><g class="indoor-background">${outline}</g><g clip-path="url(#${esc(clip)})">${image}${floorSvg(projected,plan,selected?item(selected):null,projectedRoute,typeFilter,sourceShown)}</g></g>`;
   }).join('');
 }

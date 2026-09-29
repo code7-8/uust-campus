@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {semesterWeeks,normalizeSchedule,lessonsOn,addDays,ufaTimestamp} from '../app/core.js';
 import {notificationSettings,buildReminders,quietAt} from '../app/notifications.js';
 import {fitFloor,scenePoint} from '../app/map/scene.js';
+import {projectLine,projectPoint,cameraFloor,displayFloorGroup} from '../app/map/projection.js';
 import {campusPoint,sceneSvg} from '../app/map/svg.js';
 import {createMapData} from '../app/map/data.js';
 import {planJourney} from '../app/map/journey.js';
@@ -58,19 +59,26 @@ test('quiet hours cross midnight, use reminder time and normalize broken persist
   assert.deepEqual(buildReminders({events,favorites:['early','later'],settings,now}).map(i=>i.id),['event:later:2026-09-29']);
 });
 
-test('all ten floors rotate 180 degrees and every room/route remains inside the building contour',()=>{
+test('all ten placed floors preserve rooms and routes inside the building contour',()=>{
   const buildings=read('buildings.json').buildings,data=createMapData(read('maps.json'),buildings),plans=new Map(),frames=new Map();
   for(const floor of data.floors){
     const polygon=buildings.find(b=>b.id===floor.buildingId).sceneOutline.map(campusPoint);
     const xs=polygon.map(p=>p[0]),ys=polygon.map(p=>p[1]),frame=[Math.min(...xs),Math.min(...ys),Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys)];
     const p=fitFloor(floor,frame,polygon);plans.set(floor.id,p);frames.set(floor.buildingId,frame);
-    assert.ok(p.sx<0&&p.sy<0);assert.deepEqual(p.box,frame);
-    const inside=point=>{
-      const [x,y]=scenePoint({plans},floor.id,point);const py=Math.max(frame[1]+.0001,Math.min(frame[1]+frame[3]-.0001,y));
+    assert.equal(p.rotation,floor.id==='sv-6-f4-annex'?270:180);
+    const inside=([x,y])=>{
+      assert.ok(Number.isFinite(x)&&Number.isFinite(y));
+      assert.ok(y>=frame[1]-.01&&y<=frame[1]+frame[3]+.01);
+      if(polygon.some((a,i)=>{const b=polygon[(i+1)%polygon.length];return Math.abs((b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0]))<.001&&x>=Math.min(a[0],b[0])-.001&&x<=Math.max(a[0],b[0])+.001&&y>=Math.min(a[1],b[1])-.001&&y<=Math.max(a[1],b[1])+.001;}))return;
+      const py=Math.max(frame[1]+.0001,Math.min(frame[1]+frame[3]-.0001,y));
       const cross=[];for(let i=0;i<polygon.length;i++){const a=polygon[i],b=polygon[(i+1)%polygon.length];if((a[1]>py)!==(b[1]>py))cross.push(a[0]+(py-a[1])*(b[0]-a[0])/(b[1]-a[1]));}
-      assert.ok(x>=Math.min(...cross)-.01&&x<=Math.max(...cross)+.01,`${floor.id}: ${point} => ${x}, ${y}`);
+      assert.ok(x>=Math.min(...cross)-.01&&x<=Math.max(...cross)+.01,`${floor.id}: ${x}, ${y}`);
     };
-    const lines=[...floor.areas.map(a=>[...a.points,a.points[0]]),...data.edges.filter(e=>data.nodes.find(n=>n.id===e.from)?.floorId===floor.id&&e.geometry).map(e=>e.geometry)];
+    const lines=[...floor.areas.map(a=>{
+      const line=projectLine(p,a.points,true);
+      if(a.kind==='room'){const area=Math.abs(line.reduce((sum,q,i)=>{const next=line[(i+1)%line.length];return sum+q[0]*next[1]-q[1]*next[0];},0))/2;assert.ok(area>1,`${a.id}: room collapsed`);}
+      return line;
+    }),...data.edges.filter(e=>data.nodes.find(n=>n.id===e.from)?.floorId===floor.id&&e.geometry).map(e=>projectLine(p,e.geometry))];
     for(const line of lines)for(let i=1;i<line.length;i++)for(let k=0;k<=100;k++)inside([line[i-1][0]+(line[i][0]-line[i-1][0])*k/100,line[i-1][1]+(line[i][1]-line[i-1][1])*k/100]);
   }
   const trip=planJourney(data,'sv-6-101','sv-7-407');
@@ -78,4 +86,25 @@ test('all ten floors rotate 180 degrees and every room/route remains inside the 
   assert.doesNotMatch(svg,/NaN|undefined/);
   assert.equal((svg.match(/data-scene-floor=/g)||[]).length,10);
   assert.match(svg,/is-underground/);
+});
+
+test('main wings reach the right edge, upper floors share a footprint and annex rotates clockwise',()=>{
+  const buildings=read('buildings.json').buildings,data=createMapData(read('maps.json'),buildings);
+  for(const f of data.floors.filter(f=>f.placement?.coreX)){
+    const outline=buildings.find(b=>b.id===f.buildingId).sceneOutline.map(campusPoint),frame=f.buildingId==='6'?[230,776,162,315]:[230,283,110,377];
+    const p=fitFloor(f,frame,outline),ys=f.placement.sourceY;
+    for(let i=1;i<ys.length;i++)assert.ok(Math.abs(projectPoint(p,[f.placement.coreX,(ys[i-1]+ys[i])/2])[0]-295)<.001);
+  }
+  const fourth=data.floors.find(f=>f.id==='cw-6-f4'),fifth=data.floors.find(f=>f.id==='cw-6-f5'),annex=data.floors.find(f=>f.id==='sv-6-f4-annex');
+  assert.deepEqual(fourth.placement.box,fifth.placement.box);assert.equal(fourth.placement.box[0]+fourth.placement.box[2],annex.placement.box[0]);
+  assert.equal(displayFloorGroup(data.floors,annex.id),fourth.id);
+  const p=fitFloor(annex,annex.placement.box,[]),a=projectPoint(p,[300,600]),b=projectPoint(p,[300,700]);assert.ok(b[0]>a[0]);assert.equal(b[1],a[1]);
+});
+
+test('camera keeps its floor through a gap and small boundary changes, then switches decisively',()=>{
+  const visible=new Set(['6','7']);
+  assert.equal(cameraFloor([], '6',visible),'6');
+  assert.equal(cameraFloor([{id:'6',distance:80},{id:'7',distance:60}], '6',visible),'6');
+  assert.equal(cameraFloor([{id:'6',distance:140},{id:'7',distance:50}], '6',visible),'7');
+  assert.equal(cameraFloor([], '6',new Set()),null);
 });

@@ -1,25 +1,33 @@
-"""UUST Campus community server. Python 3.10+, standard library only."""
+"""UUST Campus: existing SQLite API, served by Waitress behind an HTTPS proxy."""
 import argparse
 import datetime as dt
 import getpass
 import hashlib
 import hmac
 import json
+import logging
 import mimetypes
+import os
 import re
 import secrets
-import socket
+import signal
 import sqlite3
+import sys
 import threading
 import time
-from collections import defaultdict, deque
-from contextlib import contextmanager
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from collections import deque
+from contextlib import contextmanager, closing
+from http import HTTPStatus
 from pathlib import Path
+from socketserver import ThreadingMixIn
 from urllib.parse import urlsplit, unquote
+from wsgiref.simple_server import WSGIServer, WSGIRequestHandler, make_server as wsgi_server
+
+from server_config import Settings
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_BODY = 64 * 1024
+LOG = logging.getLogger('campus')
 
 class APIError(Exception):
     def __init__(self, status, message): self.status, self.message = status, message
@@ -53,6 +61,9 @@ class Store:
               created REAL NOT NULL, PRIMARY KEY(event_id,user_id),
               FOREIGN KEY(event_id) REFERENCES events(id) ON DELETE CASCADE,
               FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE);
+            CREATE INDEX IF NOT EXISTS sessions_user ON sessions(user_id, expires);
+            CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires);
+            CREATE INDEX IF NOT EXISTS events_updated ON events(updated);
             ''')
 
     @contextmanager
@@ -94,6 +105,8 @@ class Store:
                 raise APIError(401, 'Неверный логин или пароль.')
             token = secrets.token_urlsafe(32)
             db.execute('DELETE FROM sessions WHERE expires < ?', (time.time(),))
+            db.execute('DELETE FROM sessions WHERE token_hash IN '
+                       '(SELECT token_hash FROM sessions WHERE user_id=? ORDER BY expires DESC LIMIT -1 OFFSET 9)', (row['id'],))
             db.execute('INSERT INTO sessions VALUES (?,?,?)',
                        (hashlib.sha256(token.encode()).hexdigest(), row['id'], time.time() + 30 * 86400))
         return {'token': token, 'user': public_user(row)}
@@ -110,6 +123,19 @@ class Store:
     def has_admin(self):
         with self.connect() as db:
             return db.execute("SELECT 1 FROM users WHERE role='admin' LIMIT 1").fetchone() is not None
+
+    def backup(self, destination):
+        """Consistent online snapshot, including data currently in the WAL."""
+        target = Path(destination).resolve()
+        target.parent.mkdir(parents=True, exist_ok=True)
+        # Exclusive creation prevents accidentally replacing the live DB or an older backup.
+        with target.open('xb'): pass
+        try:
+            with self.connect() as source, closing(sqlite3.connect(target)) as output:
+                source.backup(output)
+        except Exception:
+            target.unlink()
+            raise
 
     def validate_event(self, data):
         def text(key, maximum, required=False):
@@ -159,7 +185,7 @@ class Store:
 
     def dispatch(self, method, path, data, token):
         if method == 'GET' and path == '/v1/health':
-            return {'ok': True, 'service': 'UUST Campus', 'version': '0.2.0', 'setupRequired': not self.has_admin()}
+            return {'ok': True, 'service': 'UUST Campus', 'version': '0.3.3', 'setupRequired': not self.has_admin()}
         if method == 'POST' and path == '/v1/auth/register':
             self.register(data)
             return self.login(data.get('username'), data.get('password'))
@@ -236,123 +262,200 @@ class Store:
             return {'ok': True, 'id': eid}
         raise APIError(404, 'Адрес не найден.')
 
-class Handler(BaseHTTPRequestHandler):
-    server_version = 'UUSTCampus/0.2'
-    def log_message(self, fmt, *args):
-        # Never log request bodies, authorization headers, or passwords.
-        if args: print(time.strftime('%H:%M:%S'), self.client_address[0], str(args[0]).split('?')[0], flush=True)
+class RateLimiter:
+    """Bounded per-client counters; only the WSGI server resolves trusted proxies."""
+    def __init__(self, max_keys=10000):
+        self.entries, self.lock, self.max_keys = {}, threading.Lock(), max_keys
+        self.last_cleanup = 0
 
-    def cors(self):
-        origin = self.headers.get('Origin', '')
-        allowed = origin == 'https://appassets.androidplatform.net'
-        try:
-            u = urlsplit(origin)
-            allowed = allowed or u.netloc == self.headers.get('Host') or u.hostname in ('localhost', '127.0.0.1')
-        except ValueError: pass
+    def check(self, key, limit):
+        now = time.monotonic()
+        with self.lock:
+            if now - self.last_cleanup >= 60:
+                self.entries = {k: q for k, q in self.entries.items() if q and q[-1] > now - 60}
+                self.last_cleanup = now
+            q = self.entries.get(key)
+            if q is None:
+                if len(self.entries) >= self.max_keys: raise APIError(429, 'Сервер занят. Повторите через минуту.')
+                q = self.entries[key] = deque()
+            while q and q[0] <= now - 60: q.popleft()
+            if len(q) >= limit: raise APIError(429, 'Слишком много запросов. Подождите минуту.')
+            q.append(now)
+
+
+class Application:
+    """One WSGI transport for local tests and production; Store and /v1 API are shared."""
+    def __init__(self, store, settings=None):
+        self.store, self.settings, self.rates = store, settings or Settings(), RateLimiter()
+
+    def cors_origin(self, environ):
+        origin = environ.get('HTTP_ORIGIN', '')
+        allowed = {'https://appassets.androidplatform.net', self.settings.public_url, *self.settings.cors_origins}
+        if origin and origin in allowed: return origin
+        if not self.settings.production:
+            try:
+                parsed = urlsplit(origin)
+                if (parsed.scheme in ('http', 'https') and not parsed.path and not parsed.query
+                        and not parsed.fragment and not parsed.username and not parsed.password
+                        and (parsed.hostname in ('localhost', '127.0.0.1')
+                             or parsed.netloc == environ.get('HTTP_HOST'))):
+                    return origin
+            except ValueError: pass
+        return None
+
+    def __call__(self, environ, start_response):
+        started = time.monotonic()
+        path, method = environ.get('PATH_INFO', '/'), environ['REQUEST_METHOD']
+        headers = [('X-Content-Type-Options', 'nosniff'), ('Referrer-Policy', 'no-referrer'),
+                   ('X-Frame-Options', 'DENY'), ('Vary', 'Origin')]
+        allowed = self.cors_origin(environ)
         if allowed:
-            self.send_header('Access-Control-Allow-Origin', origin)
-            self.send_header('Vary', 'Origin')
-        self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
-
-    def json_response(self, status, data):
-        body = json.dumps(data, ensure_ascii=False).encode('utf-8')
-        self.send_response(status)
-        self.cors()
-        self.send_header('Content-Type', 'application/json; charset=utf-8')
-        self.send_header('Cache-Control', 'no-store')
-        self.send_header('X-Content-Type-Options', 'nosniff')
-        self.send_header('Content-Length', str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
-
-    def do_OPTIONS(self): self.json_response(200, {})
-    def do_GET(self): self.handle_request()
-    def do_POST(self): self.handle_request()
-    def do_PATCH(self): self.handle_request()
-    def do_DELETE(self): self.handle_request()
-
-    def handle_request(self):
+            headers += [('Access-Control-Allow-Origin', allowed),
+                        ('Access-Control-Allow-Headers', 'Authorization, Content-Type'),
+                        ('Access-Control-Allow-Methods', 'GET, HEAD, POST, PATCH, DELETE, OPTIONS')]
+        if self.settings.production and environ.get('wsgi.url_scheme') == 'https':
+            headers.append(('Strict-Transport-Security', 'max-age=31536000'))
+        status, content_type, cache = 200, 'application/json; charset=utf-8', 'no-store'
         try:
-            path = urlsplit(self.path).path
-            if path.startswith('/v1/'):
-                if self.headers.get('Transfer-Encoding'): raise APIError(400, 'Неподдерживаемый формат запроса.')
-                try: length = int(self.headers.get('Content-Length', '0'))
+            if method == 'OPTIONS':
+                if not path.startswith('/v1/'): raise APIError(404, 'Адрес не найден.')
+                if not allowed: raise APIError(403, 'Этот источник не разрешён.')
+                if environ.get('HTTP_ACCESS_CONTROL_REQUEST_METHOD', 'GET') not in ('GET', 'HEAD', 'POST', 'PATCH', 'DELETE'):
+                    raise APIError(405, 'Метод не поддерживается.')
+                requested = {v.strip().lower() for v in environ.get('HTTP_ACCESS_CONTROL_REQUEST_HEADERS', '').split(',') if v.strip()}
+                if not requested <= {'authorization', 'content-type'}: raise APIError(403, 'Заголовок не разрешён.')
+                body = b'{}'
+            elif path.startswith('/v1/'):
+                # CORS is an allowlist, not authentication; native clients have no Origin.
+                if environ.get('HTTP_ORIGIN') and not allowed: raise APIError(403, 'Этот источник не разрешён.')
+                client = environ.get('REMOTE_ADDR', 'unknown')
+                if path != '/v1/health': self.rates.check(('request', client), self.settings.request_rate_limit)
+                if method == 'POST' and path in ('/v1/auth/login', '/v1/auth/register'):
+                    self.rates.check(('auth', client), self.settings.auth_rate_limit)
+                try: length = int(environ.get('CONTENT_LENGTH') or '0')
                 except ValueError: raise APIError(400, 'Некорректный размер запроса.')
                 if not 0 <= length <= MAX_BODY: raise APIError(413, 'Запрос слишком большой.')
-                if '/auth/login' in path or '/auth/register' in path:
-                    key = self.client_address[0]
-                    with self.server.rate_lock:
-                        q = self.server.rates[key]
-                        now = time.monotonic()
-                        while q and q[0] < now - 60: q.popleft()
-                        if len(q) >= 25: raise APIError(429, 'Слишком много попыток. Подождите минуту.')
-                        q.append(now)
-                raw = self.rfile.read(length) if length else b'{}'
+                if length and environ.get('CONTENT_TYPE', '').split(';')[0].strip().lower() != 'application/json':
+                    raise APIError(415, 'Нужен Content-Type: application/json.')
+                raw = environ['wsgi.input'].read(length) if length else b'{}'
+                if length and len(raw) != length: raise APIError(400, 'Неполный запрос.')
                 try: data = json.loads(raw)
                 except (ValueError, UnicodeError): raise APIError(400, 'Некорректный JSON.')
                 if not isinstance(data, dict): raise APIError(400, 'Ожидается JSON-объект.')
-                auth = self.headers.get('Authorization', '')
+                auth = environ.get('HTTP_AUTHORIZATION', '')
                 token = auth[7:] if auth.startswith('Bearer ') else ''
-                result = self.server.store.dispatch(self.command, path, data, token)
-                self.json_response(200, result)
-            elif self.command == 'GET': self.static_file(path)
+                result = self.store.dispatch('GET' if method == 'HEAD' else method, path, data, token)
+                body = json.dumps(result, ensure_ascii=False).encode('utf-8')
+            elif method in ('GET', 'HEAD'):
+                base = (ROOT / 'app').resolve()
+                target = (base / unquote(path).lstrip('/')).resolve()
+                if target == base: target = base / 'index.html'
+                if not target.is_relative_to(base) or not target.is_file(): raise APIError(404, 'Файл не найден.')
+                body = target.read_bytes()
+                content_type = {'.js':'application/javascript', '.css':'text/css', '.json':'application/json'}.get(target.suffix) or mimetypes.guess_type(target.name)[0] or 'application/octet-stream'
+                cache = 'no-cache'
             else: raise APIError(404, 'Адрес не найден.')
-        except APIError as e: self.json_response(e.status, {'error': e.message})
-        except (BrokenPipeError, ConnectionResetError, TimeoutError): pass
-        except Exception as e:
-            print('Request error:', type(e).__name__, flush=True)
-            self.json_response(500, {'error': 'Ошибка сервера. Попробуйте ещё раз.'})
+        except APIError as error:
+            status = error.status
+            body = json.dumps({'error': error.message}, ensure_ascii=False).encode('utf-8')
+            if status == 429: headers.append(('Retry-After', '60'))
+        except sqlite3.OperationalError:
+            status, body = 503, b'{"error":"Database unavailable. Please retry."}'
+            LOG.error('database_unavailable')
+        except Exception as error:
+            status, body = 500, b'{"error":"Internal server error."}'
+            LOG.error('request_error type=%s', type(error).__name__)
+        headers += [('Content-Type', content_type), ('Cache-Control', cache), ('Content-Length', str(len(body)))]
+        # Only known endpoint shapes: no credentials, bodies, query strings or attacker-supplied log lines.
+        route = re.sub(r'/(event-)?[a-f0-9]{24,32}(?=/|$)', '/:id', path) if re.fullmatch(r'/v1/[a-zA-Z0-9/_-]+', path) else '/static'
+        LOG.info('request method=%s route=%s status=%d duration_ms=%d', method, route, status, (time.monotonic()-started)*1000)
+        start_response(f'{status} {HTTPStatus(status).phrase}', headers)
+        return [b'' if method == 'HEAD' else body]
 
-    def setup(self):
-        super().setup()
-        self.connection.settimeout(20)
 
-    def static_file(self, path):
-        base = (ROOT / 'app').resolve()
-        target = (base / unquote(path).lstrip('/')).resolve()
-        if target == base: target = base / 'index.html'
-        if not target.is_relative_to(base) or not target.is_file(): raise APIError(404, 'Файл не найден.')
-        content = target.read_bytes()
-        mime = {'.js':'application/javascript', '.css':'text/css', '.json':'application/json'}.get(target.suffix) or mimetypes.guess_type(target.name)[0] or 'application/octet-stream'
-        self.send_response(200)
-        self.send_header('Content-Type', mime)
-        self.send_header('X-Content-Type-Options', 'nosniff')
-        self.send_header('Content-Length', str(len(content)))
-        self.end_headers()
-        self.wfile.write(content)
+class LocalServer(ThreadingMixIn, WSGIServer):
+    daemon_threads = True
 
-def make_server(host, port, store):
-    server = ThreadingHTTPServer((host, port), Handler)
-    server.store, server.rates, server.rate_lock = store, defaultdict(deque), threading.Lock()
-    server.daemon_threads = True
-    return server
 
-def main():
-    parser = argparse.ArgumentParser(description='UUST Campus — общий сервер афиши и аккаунтов')
-    parser.add_argument('--host', default='0.0.0.0')
-    parser.add_argument('--port', type=int, default=8787)
-    parser.add_argument('--data', default=str(Path(__file__).parent / 'data' / 'campus.sqlite'))
-    parser.add_argument('--init-admin', action='store_true')
-    args = parser.parse_args()
-    store = Store(args.data)
-    if args.init_admin or not store.has_admin():
-        print('Создание администратора. Пароль хранится только в виде хеша; ввод скрыт.')
-        username = input('Логин администратора (латиница): ').strip()
+class QuietHandler(WSGIRequestHandler):
+    def log_message(self, *args): pass  # Application logs metadata, never raw request lines.
+
+
+def make_server(host, port, store, settings=None):
+    """Standard-library server for isolated tests only; CLI always uses Waitress."""
+    return wsgi_server(host, port, Application(store, settings), server_class=LocalServer, handler_class=QuietHandler)
+
+
+def bootstrap_admin(store, settings, env=None, interactive=False):
+    env = os.environ if env is None else env
+    if store.has_admin() and not interactive: return
+    if interactive:
+        if not sys.stdin.isatty(): raise ValueError('--init-admin требует интерактивный терминал.')
+        username = input('Логин администратора: ').strip()
         name = input('Имя: ').strip() or username
-        password = getpass.getpass('Пароль (не менее 8 символов): ')
-        if password != getpass.getpass('Повторите пароль: '): raise SystemExit('Пароли не совпадают.')
-        try: store.register({'username':username, 'name':name, 'password':password}, role='admin')
-        except APIError as e: raise SystemExit(e.message)
-    print('\nСервер УУНиТ запущен. Оставьте это окно открытым.')
-    print(f'На ноутбуке: http://127.0.0.1:{args.port}')
-    addresses = set(socket.gethostbyname_ex(socket.gethostname())[2])
-    for address in sorted(addresses):
-        if not address.startswith('127.'): print(f'Адрес для телефонов в общей сети: http://{address}:{args.port}')
-    print('В приложении: Профиль → Сервер команды → введите адрес ноутбука.\nОстановка: Ctrl+C. База сохраняется в', args.data, flush=True)
-    server = make_server(args.host, args.port, store)
-    try: server.serve_forever()
-    except KeyboardInterrupt: print('\nСервер остановлен. Данные сохранены.')
-    finally: server.server_close()
+        password = getpass.getpass('Пароль: ')
+        if password != getpass.getpass('Повторите пароль: '): raise ValueError('Пароли не совпадают.')
+    else:
+        username, password = env.get('ADMIN_USERNAME', ''), env.get('ADMIN_PASSWORD', '')
+        name = env.get('ADMIN_NAME') or username
+        if not username or not password:
+            raise ValueError('Первая настройка: задайте ADMIN_USERNAME и ADMIN_PASSWORD или выполните --init-admin в терминале.')
+    if settings.production and len(password) < 12:
+        raise ValueError('Пароль администратора в production должен содержать не менее 12 символов.')
+    try: store.register({'username': username, 'name': name, 'password': password}, role='admin')
+    except APIError as error: raise ValueError(error.message) from None
+    LOG.info('administrator_created')
+
+
+def waitress_options(settings):
+    options = dict(host=settings.host, port=settings.port, threads=settings.threads,
+                   max_request_body_size=MAX_BODY, max_request_header_size=16384,
+                   channel_timeout=30, connection_limit=128, clear_untrusted_proxy_headers=True,
+                   ident='UUSTCampus')
+    if settings.trusted_proxy:
+        options.update(trusted_proxy=settings.trusted_proxy, trusted_proxy_count=settings.trusted_proxy_count,
+                       trusted_proxy_headers={'x-forwarded-for', 'x-forwarded-proto'})
+    return options
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description='UUST Campus — общий сервер афиши и аккаунтов')
+    parser.add_argument('--host')
+    parser.add_argument('--port', type=int)
+    parser.add_argument('--data')
+    parser.add_argument('--init-admin', action='store_true', help='Создать администратора в терминале и выйти')
+    parser.add_argument('--backup', metavar='FILE', help='Создать согласованную копию SQLite и выйти')
+    args = parser.parse_args(argv)
+    try:
+        environment = dict(os.environ)
+        for key, value in [('HOST',args.host), ('PORT',args.port), ('DATABASE_PATH',args.data)]:
+            if value is not None: environment[key] = str(value)
+        settings = Settings.from_env(environment)
+        if settings.production: os.umask(0o077)
+        logging.basicConfig(level=settings.log_level, format='%(asctime)s %(levelname)s %(message)s', stream=sys.stdout)
+        if args.backup and not Path(settings.database_path).is_file(): raise ValueError('База для резервного копирования не найдена.')
+        store = Store(settings.database_path)
+        if args.backup:
+            store.backup(args.backup)
+            LOG.info('database_backup_complete')
+            return
+        bootstrap_admin(store, settings, interactive=args.init_admin or (not settings.production and not store.has_admin() and not os.environ.get('ADMIN_USERNAME') and sys.stdin.isatty()))
+        if args.init_admin: return
+        from waitress import create_server
+        server = create_server(Application(store, settings), **waitress_options(settings))
+    except (ValueError, OSError, sqlite3.Error) as error:
+        parser.exit(1, f'Ошибка запуска: {error}\n')
+    except ImportError:
+        parser.exit(1, 'Установите зависимости: python -m pip install -r server/requirements.txt\n')
+    LOG.info('server_started host=%s port=%d environment=%s', settings.host, settings.port, settings.environment)
+    print('Профиль → Сервер команды →', settings.public_url or f'http://127.0.0.1:{settings.port}', flush=True)
+    def terminate(signum, frame): raise KeyboardInterrupt()
+    signal.signal(signal.SIGTERM, terminate)
+    try: server.run()
+    except KeyboardInterrupt: pass
+    finally:
+        server.close()
+        LOG.info('server_stopped')
+
 
 if __name__ == '__main__': main()
