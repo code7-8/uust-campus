@@ -19,10 +19,10 @@ export function campusPreview(events,clubs,now=Date.now()){
 }
 function clubImage(club){
   return club.image?`<img src="${esc(club.image)}" alt="${esc(club.imageAlt)}" loading="lazy" width="640" height="400">`:
-    `<div class="club-monogram" aria-hidden="true">${esc(club.monogram||club.name.slice(0,2))}<span>ИДЕИ СТАНОВЯТСЯ ИГРАМИ</span></div>`;
+    `<div class="club-monogram" aria-hidden="true">${esc(club.monogram||club.name.slice(0,2))}</div>`;
 }
 export function clubCard(club){
-  return `<article class="club-card"><button data-action="club-detail" data-id="${esc(club.id)}" aria-label="О клубе ${esc(club.name)}"><div class="club-image">${clubImage(club)}<span class="life-badge club">Студенческий клуб</span></div><div class="club-body"><span class="eyebrow">${esc(club.category)}</span><h3>${esc(club.name)}</h3><p>${esc(club.summary)}</p><span class="club-more">Найти своих <span aria-hidden="true">↗</span></span></div></button></article>`;
+  return `<article class="club-card"><button data-action="club-detail" data-id="${esc(club.id)}" aria-label="О клубе ${esc(club.name)}"><div class="club-image">${clubImage(club)}<span class="life-badge club">Студенческий клуб</span></div><div class="club-body"><span class="eyebrow">${esc(club.category)}</span><h3>${esc(club.name)}</h3><p>${esc(club.summary)}</p><span class="club-more">О клубе <span aria-hidden="true">↗</span></span></div></button></article>`;
 }
 export function clubDetail(club){
   const link=(label,key)=>club[key]?`<button class="button ${key==='source'?'outline':'light'}" data-action="club-link" data-id="${esc(club.id)}" data-link="${key}">${label} ↗</button>`:'';
