@@ -12,7 +12,8 @@ export function bindGestures(svg, camera, onPick, onChange) {
     v[1]=Math.max(b[1]-offsetY,Math.min(b[1]+b[3]-offsetY,v[1]));
     svg.setAttribute('viewBox',v.join(' '));
     svg.classList.toggle('show-room-labels',b[2]/v[2]>=1.25);
-    const matrix=svg.getScreenCTM(), scale=matrix?Math.hypot(matrix.a,matrix.b):1;
+    const screenScale=el=>{const matrix=el.getScreenCTM();return matrix?Math.hypot(matrix.a,matrix.b):1;};
+    const scale=screenScale(svg);
     if(scale>0)for(const marker of svg.querySelectorAll('.map-number')) {
       const circle=marker.querySelector('circle');circle.setAttribute('r',14/scale);
       marker.querySelector('text').style.fontSize=(14/scale)+'px';
@@ -21,20 +22,28 @@ export function bindGestures(svg, camera, onPick, onChange) {
     }
     if(scale>0){
       for(const text of svg.querySelectorAll('.map-street-name'))text.style.fontSize=(9/scale)+'px';
-      for(const text of svg.querySelectorAll('.room-label'))text.style.fontSize=(Math.max(7,Math.min(12,(Number(text.dataset.roomWidth)*scale-3)/(text.textContent.length*.62)))/scale)+'px';
-      for(const text of svg.querySelectorAll('.selection-caption text'))text.style.fontSize=(12/scale)+'px';
+      for(const text of svg.querySelectorAll('.room-label')){
+        const localScale=screenScale(text);
+        const size=Math.min(12,(Number(text.dataset.roomWidth)*localScale-3)/(text.textContent.length*.62));
+        text.style.visibility=size>=7||text.classList.contains('is-selected')?'visible':'hidden';
+        text.style.fontSize=(Math.max(7,size)/localScale)+'px';
+      }
+      for(const text of svg.querySelectorAll('.selection-caption text'))text.style.fontSize=(12/screenScale(text))+'px';
       const used=[];
       for(const poi of svg.querySelectorAll('.floor-poi')) {
+        poi.style.display='';
         const circle=poi.querySelector('circle'),x=+circle.getAttribute('cx'),y=+circle.getAttribute('cy');
         const important=poi.classList.contains('is-selected')||poi.classList.contains('on-route');
-        const visible=important||!used.some(p=>Math.hypot(p[0]-x,p[1]-y)*scale<30);
-        poi.style.display=visible?'':'none';if(visible)used.push([x,y]);
-        circle.setAttribute('r',11/scale);poi.querySelector('text').style.fontSize=(10/scale)+'px';
+        const matrix=poi.getScreenCTM(),localScale=screenScale(poi),px=matrix.a*x+matrix.c*y+matrix.e,py=matrix.b*x+matrix.d*y+matrix.f;
+        const visible=important||!used.some(p=>Math.hypot(p[0]-px,p[1]-py)<30);
+        poi.style.display=visible?'':'none';if(visible)used.push([px,py]);
+        circle.setAttribute('r',11/localScale);poi.querySelector('text').style.fontSize=(10/localScale)+'px';
       }
       for(const endpoint of svg.querySelectorAll('.route-endpoint')) {
         const text=endpoint.querySelector('text'),cx=+text.getAttribute('x'),cy=+text.getAttribute('y'),circle=endpoint.querySelector('circle'),rect=endpoint.querySelector('rect');
-        text.style.fontSize=((text.textContent.length>1?10:12)/scale)+'px';if(circle)circle.setAttribute('r',14/scale);
-        if(rect){rect.setAttribute('x',cx-12/scale);rect.setAttribute('y',cy-12/scale);rect.setAttribute('width',24/scale);rect.setAttribute('height',24/scale);}
+        const localScale=screenScale(endpoint);
+        text.style.fontSize=((text.textContent.length>1?10:12)/localScale)+'px';if(circle)circle.setAttribute('r',14/localScale);
+        if(rect){rect.setAttribute('x',cx-12/localScale);rect.setAttribute('y',cy-12/localScale);rect.setAttribute('width',24/localScale);rect.setAttribute('height',24/localScale);}
       }
     }
     onChange?.();
@@ -51,8 +60,9 @@ export function bindGestures(svg, camera, onPick, onChange) {
     apply();
   };
   const zoom=(factor,x,y)=>{
-    const v=camera.box,width=camera.fitWidth||bounds()[2],ratio=Math.max(.16,Math.min(1.5,v[2]/width/factor))/(v[2]/width);
-    const anchor=x===undefined?{x:v[0]+v[2]/2,y:v[1]+v[3]/2}:world(x,y);
+    const v=camera.box,width=camera.fitWidth||bounds()[2],ratio=Math.max(camera.minWidth??width*.16,Math.min(camera.maxWidth??width*1.5,v[2]/factor))/v[2];
+    const viewport=svg.getBoundingClientRect(),insets=camera.insets||{left:0,right:0,top:0,bottom:0};
+    const anchor=x===undefined?world(viewport.left+(viewport.width+insets.left-insets.right)/2,viewport.top+(viewport.height+insets.top-insets.bottom)/2):world(x,y);
     camera.box=[anchor.x+(v[0]-anchor.x)*ratio,anchor.y+(v[1]-anchor.y)*ratio,v[2]*ratio,v[3]*ratio];apply();
   };
   const gesture=()=>{const p=[...pointers.values()];return {x:p.reduce((s,v)=>s+v.x,0)/p.length,y:p.reduce((s,v)=>s+v.y,0)/p.length,d:p.length===2?Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y):0};};
