@@ -4,6 +4,24 @@ export const placeNode=place=>place?.type==='building'?'campus:building:'+place.
 export const floorRooms=(data,id)=>data.locations.filter(l=>l.floorId===id&&l.type==='room')
   .sort((a,b)=>a.number.localeCompare(b.number,'ru',{numeric:true}));
 
+// Consecutive map views along the complete route, independent of selection.
+// Keep a repeated floor as a separate section when a route leaves and returns.
+export function journeySections(graph,route) {
+  if(!route)return [];
+  const nodes=new Map(graph.nodes.map(n=>[n.id,n])),sections=[];
+  for(const id of route.nodeIds){
+    const node=nodes.get(id),floorId=node.floorId??null;
+    let section=sections.at(-1);
+    if(!section||section.floorId!==floorId){
+      const floor=graph.floors.find(f=>f.id===floorId);
+      section={floorId,buildingId:floor?.buildingId||null,title:floor?`Корпус ${floor.buildingId} · ${floor.name}`:'Территория',nodeIds:[]};
+      sections.push(section);
+    }
+    section.nodeIds.push(id);
+  }
+  return sections;
+}
+
 export function journeyGraph(data,{mode='shortest'}={}) {
   // Image pixels differ between floors. Compare relative cost using wing length,
   // including a stair penalty, never advertise these costs as metres or minutes.
