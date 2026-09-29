@@ -1,13 +1,5 @@
 import {campusPoint} from './svg.js';
 
-// Main street-facing wings, in campus coordinates from the existing outlines.
-// Whole-building bounding boxes also include side wings and empty courtyards;
-// centring a rectangular plan in those boxes displaced it outside the building.
-const indoorFrames={
-  '6':[230,776,65,315],
-  '7':[230,283,65,377],
-};
-
 // Display placement only: the source plans have no surveyed campus coordinates.
 // Keep their proportions and fit them into the outline's bounding box. Do not
 // use this transform for route weights, entrances, distances or GPS.
@@ -25,15 +17,11 @@ export function createSceneLayout(buildings,floors) {
     }
   } finally {probe.remove();}
   for(const floor of floors){
-    const frame=indoorFrames[floor.buildingId]||frames.get(floor.buildingId),box=floor.viewBox;
+    const frame=frames.get(floor.buildingId),box=floor.viewBox;
     if(!frame||!frame[2]||!frame[3])continue;
     const scale=.92*Math.min(frame[2]/box[2],frame[3]/box[3]);
     const x=frame[0]+(frame[2]-box[2]*scale)/2,y=frame[1]+(frame[3]-box[3]*scale)/2;
-    // Team field report: building 7 rooms face the street. Only its orientation
-    // needs reflecting; building 6 needs corrected placement, not reflection.
-    const mirrorX=floor.buildingId==='7',scaleX=mirrorX?-scale:scale;
-    const tx=mirrorX?x+(box[0]+box[2])*scale:x-box[0]*scale;
-    plans.set(floor.id,{floorId:floor.id,buildingId:floor.buildingId,scale,scaleX,mirrorX,tx,ty:y-box[1]*scale,box:[x,y,box[2]*scale,box[3]*scale]});
+    plans.set(floor.id,{floorId:floor.id,buildingId:floor.buildingId,scale,tx:x-box[0]*scale,ty:y-box[1]*scale,box:[x,y,box[2]*scale,box[3]*scale]});
   }
   return {frames,plans};
 }
@@ -41,7 +29,7 @@ export function createSceneLayout(buildings,floors) {
 export function scenePoint(layout,floorId,point) {
   if(!floorId)return campusPoint(point);
   const plan=layout.plans.get(floorId);
-  return [plan.tx+point[0]*plan.scaleX,plan.ty+point[1]*plan.scale];
+  return [plan.tx+point[0]*plan.scale,plan.ty+point[1]*plan.scale];
 }
 
 export const boxPoints=box=>[[box[0],box[1]],[box[0]+box[2],box[1]+box[3]]];

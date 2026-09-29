@@ -1,6 +1,6 @@
 {
   "name": "uust-campus",
-  "version": "0.3.3",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "description": "Offline Android campus assistant with a Russian interface",
