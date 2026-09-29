@@ -1,34 +1,25 @@
-name: Repair maps JSON and build APK
+name: Repair maps and build APK
 
 on:
   push:
     branches:
       - fix/maps-json-edbc879
 
-permissions:
-  contents: write
-
 jobs:
-  repair-build:
-    if: ${{ !contains(github.event.head_commit.message, 'fix: regenerate valid maps JSON') }}
+  build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Regenerate maps.json
+      - name: Regenerate maps
         shell: pwsh
         run: |
           python tools/prepare_survey_maps.py
           python -m json.tool app/data/maps.json > $null
-
       - name: Run tests
         shell: pwsh
         run: |
           npm test
           node tools/validate-maps.mjs
-
       - name: Ensure Android SDK 35
         shell: pwsh
         run: |
@@ -37,29 +28,16 @@ jobs:
             $sdkmanager = Get-ChildItem "$env:ANDROID_HOME\cmdline-tools" -Recurse -Filter sdkmanager.bat | Select-Object -First 1 -ExpandProperty FullName
           }
           & $sdkmanager "platforms;android-35" "build-tools;35.0.0"
-
       - name: Build APK
         shell: pwsh
         run: |
           $env:JAVA_HOME = $env:JAVA_HOME_17_X64
           .\tools\build.ps1
-
-      - name: Commit repaired maps
-        shell: pwsh
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add app/data/maps.json
-          if (git diff --cached --quiet) {
-            Write-Host "No generated map changes"
-          } else {
-            git commit -m "fix: regenerate valid maps JSON"
-            git push origin HEAD:fix/maps-json-edbc879
-          }
-
-      - name: Upload APK
+      - name: Upload fixed build
         uses: actions/upload-artifact@v4
         with:
           name: uust-campus-fixed-edbc879
-          path: artifacts/uust-campus-0.3.2.apk
+          path: |
+            artifacts/uust-campus-0.3.2.apk
+            app/data/maps.json
           if-no-files-found: error
