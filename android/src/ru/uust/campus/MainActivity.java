@@ -18,6 +18,7 @@ import java.util.concurrent.*;
 /** An offline Android shell. Only packaged assets execute JS; remote content is JSON. */
 public final class MainActivity extends Activity {
     private WebView web;
+    private volatile String reminderTarget="null";
     private ValueCallback<Uri[]> fileCallback;
     private static final String ORIGIN = "appassets.androidplatform.net";
     private static final String API = "https://dev.uust-time.ru/api/v/852972/";
@@ -27,6 +28,9 @@ public final class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
+        reminderTarget=getIntent().getStringExtra("reminderTarget");
+        if(reminderTarget==null)reminderTarget="null";
+        ReminderReceiver.rearm(this);
         web = new WebView(this);
         web.setBackgroundColor(0xfff6f7f2);
         web.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS);
@@ -80,6 +84,21 @@ public final class MainActivity extends Activity {
         web.loadUrl("https://" + ORIGIN + "/index.html");
     }
 
+    private void notificationChanged() {
+        ReminderReceiver.rearm(this);
+        if(web!=null)web.evaluateJavascript("window.campusNotificationChanged && window.campusNotificationChanged()",null);
+    }
+    @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] results) {
+        super.onRequestPermissionsResult(request,permissions,results);if(request==41)notificationChanged();
+    }
+    @Override protected void onResume() {super.onResume();notificationChanged();}
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);setIntent(intent);
+        String target=intent.getStringExtra("reminderTarget");if(target==null)return;
+        try{reminderTarget=new JSONObject(target).toString();}catch(Exception e){return;}
+        if(web!=null)web.evaluateJavascript("(()=>{if(!window.campusOpenReminder)return false;window.campusOpenReminder("+reminderTarget+");return true;})()",result->{if("true".equals(result))reminderTarget="null";});
+    }
+
     private WebResourceResponse apiResponse(Uri uri) {
         String target;
         if ("/api/groups".equals(uri.getPath())) target = "groups";
@@ -115,6 +134,25 @@ public final class MainActivity extends Activity {
         runOnUiThread(() -> {try {startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(Exception e){Toast.makeText(this,"Не найден браузер",Toast.LENGTH_SHORT).show();}});
     }
     public final class CampusActions {
+        @JavascriptInterface public String notificationStatus() {return ReminderReceiver.status(MainActivity.this);}
+        @JavascriptInterface public String consumeReminderTarget() {String result=reminderTarget;reminderTarget="null";return result;}
+        @JavascriptInterface public void syncReminders(String payload) {
+            try{ReminderReceiver.replace(MainActivity.this,payload);}catch(Exception e){throw new IllegalArgumentException("Не удалось сохранить напоминания",e);}
+        }
+        @JavascriptInterface public void requestNotifications() {
+            runOnUiThread(()->{
+                if(android.os.Build.VERSION.SDK_INT>=33&&checkSelfPermission("android.permission.POST_NOTIFICATIONS")!=android.content.pm.PackageManager.PERMISSION_GRANTED)
+                    requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"},41);
+                else if(!ReminderReceiver.enabled(MainActivity.this))openNotificationSettings();
+                else notificationChanged();
+            });
+        }
+        @JavascriptInterface public void openNotificationSettings() {
+            runOnUiThread(()->startActivity(new Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE,getPackageName())));
+        }
+        @JavascriptInterface public void requestExactReminders() {
+            if(android.os.Build.VERSION.SDK_INT>=31)runOnUiThread(()->startActivity(new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,Uri.parse("package:"+getPackageName()))));
+        }
         @JavascriptInterface public void setColorTheme(String theme) {
             final boolean green = "green".equals(theme);
             runOnUiThread(() -> {

@@ -22,13 +22,17 @@ export function bindGestures(svg, camera, onPick, onChange) {
     }
     if(scale>0){
       for(const text of svg.querySelectorAll('.map-street-name'))text.style.fontSize=(9/scale)+'px';
+      for(const text of svg.querySelectorAll('.map-passage-label'))text.style.fontSize=(10/scale)+'px';
       for(const text of svg.querySelectorAll('.room-label')){
         const localScale=screenScale(text);
         const size=Math.min(12,(Number(text.dataset.roomWidth)*localScale-3)/(text.textContent.length*.62));
         text.style.visibility=size>=7||text.classList.contains('is-selected')?'visible':'hidden';
         text.style.fontSize=(Math.max(7,size)/localScale)+'px';
       }
-      for(const text of svg.querySelectorAll('.selection-caption text'))text.style.fontSize=(12/screenScale(text))+'px';
+      for(const text of svg.querySelectorAll('.selection-caption text')){
+        const localScale=screenScale(text);text.style.fontSize=(12/localScale)+'px';
+        text.setAttribute('y',Number(text.dataset.captionY)-24/localScale);
+      }
       const used=[];
       for(const poi of svg.querySelectorAll('.floor-poi')) {
         poi.style.display='';

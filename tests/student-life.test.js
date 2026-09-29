@@ -22,10 +22,11 @@ test('home mixes a club, nearest official and nearest student event; excludes fi
 });
 test('club catalog has unique IDs, primary sources, safe social links and bundled photographs',()=>{
   const {clubs}=JSON.parse(readFileSync(new URL('../app/data/clubs.json',import.meta.url),'utf8'));
+  assert.equal(clubs.length,35,'Полный официальный каталог от 29.09.2026');
   assert.equal(new Set(clubs.map(c=>c.id)).size,clubs.length);
   for(const club of clubs){
     assert.match(club.source,/^https:\/\/uust\.ru\/departments\//);
-    assert.match(club.vk,/^https:\/\/vk\.com\//);
+    if(club.vk)assert.match(club.vk,/^https:\/\/vk\.com\//);
     if(club.telegram)assert.match(club.telegram,/^https:\/\/t\.me\//);
     if(club.image)assert.ok(existsSync(new URL('../app/'+club.image,import.meta.url)));
     assert.ok(club.activities.length);assert.ok(club.audience);

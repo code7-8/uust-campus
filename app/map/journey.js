@@ -55,7 +55,7 @@ export function planJourney(data,startPlaceId,endPlaceId,options={}) {
   const routingData=sameInterior?{...graph,edges:graph.edges.filter(e=>e.kind!=='handoff')}:graph;
   const route=findRoute(routingData,a,b,{stepFree:options.stepFree,allowArchive:true});
   if(route){
-    route.partial=route.links.some(l=>l.edge.manual);
+    route.partial=route.links.some(l=>l.edge.manual||l.edge.underground);
     route.outdoor=route.links.some(l=>l.edge.kind==='outdoor');
     route.cost=route.links.reduce((n,l)=>n+l.edge.weight,0);
   }
@@ -82,7 +82,8 @@ export function journeySteps(graph,route) {
     }else if(kind==='outdoor'){
       if(route.links[i-1]?.edge.kind!=='outdoor')result.push(step('Уличный участок: ориентировочный обход по схеме. Дорожки и ограждения не проверены.',from,{approximate:true}));
     }else if(kind==='passage'){
-      if(to.buildingId)result.push(step('По переходам: '+name(to.id),to));
+      if(link.edge.underground&&!route.links[i-1]?.edge.underground)result.push(step('Подземный переход между корпусами 6 и 7. Спуститесь к переходу по указателям; входы на поэтажных планах пока не отмечены.',from,{manual:true}));
+      if(to.buildingId)result.push(step((link.edge.underground?'По подземному переходу: ':'По переходам: ')+name(to.id),to));
     }else if(from.floorId!==to.floorId){
       const direction=(graph.floors.find(f=>f.id===to.floorId)?.order||0)>(graph.floors.find(f=>f.id===from.floorId)?.order||0)?'Поднимитесь':'Спуститесь';
       result.push(step(`${direction} ${kind==='lift'?'на лифте':'по лестнице'} → ${floorName(to.floorId)}`,from,{nextFloorId:to.floorId}));

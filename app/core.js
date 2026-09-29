@@ -65,6 +65,17 @@ export function lessonsOn(rows, date, config=DEFAULT_CONFIG) {
   if(!week) return [];
   return rows.filter(r=>r.day===weekday(date) && r.weeks.includes(week)).sort((a,b)=>(a.start??1440)-(b.start??1440)||a.subject.localeCompare(b.subject,'ru'));
 }
+// The upstream semester identifier can span an academic year. Show exactly the
+// supplied weeks, without guessing an institution-wide winter/summer boundary.
+export function semesterWeeks(rows,config=DEFAULT_CONFIG) {
+  const weeks=[...new Set(rows.flatMap(row=>row.weeks))].sort((a,b)=>a-b);
+  return weeks.map(week=>{
+    const start=addDays(config.academicStart,(week-1)*7);
+    const days=Array.from({length:7},(_,i)=>addDays(start,i)).filter(date=>date<=config.academicEnd)
+      .map(date=>({date,lessons:lessonsOn(rows,date,config)}));
+    return {week,start,end:days.at(-1)?.date,days,count:days.reduce((n,day)=>n+day.lessons.length,0)};
+  }).filter(week=>week.count>0);
+}
 export function nextLesson(rows, instant=new Date(), config=DEFAULT_CONFIG) {
   const today=dateKey(instant), minute=minuteOfDay(instant);
   for(let offset=0;offset<42;offset++) {

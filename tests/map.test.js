@@ -151,11 +151,15 @@ test('room-to-room routes across all three floors are continuous, without unchar
   const j=planJourney(archive,'cw-6-301','cw-6-513');
   assert.deepEqual(journeySteps(j.graph,j.route).filter(s=>s.nextFloorId).map(s=>s.nextFloorId),['cw-6-f4','cw-6-f5']);
 });
-test('street alternative can beat passages, and modes exclude the other edge type',()=>{
+test('underground 6–7 passage beats the street detour and respects route modes',()=>{
   const shortest=planJourney(archive,'building:6','building:7');
   const indoor=planJourney(archive,'building:6','building:7',{mode:'indoor'});
   const outside=planJourney(archive,'building:6','building:8',{mode:'outdoor'});
-  assert.ok(shortest.route.outdoor);assert.ok(shortest.route.cost<indoor.route.cost);
+  assert.equal(shortest.route.outdoor,false);assert.equal(shortest.route.cost,indoor.route.cost);
+  assert.ok(shortest.route.links.some(l=>l.edge.underground));
+  assert.ok(journeySteps(indoor.graph,indoor.route).some(s=>s.text.includes('Подземный переход')));
+  const detour=planJourney(archive,'building:6','building:7',{mode:'outdoor'});
+  assert.ok(detour.route.outdoor);assert.ok(shortest.route.cost<detour.route.cost);
   assert.ok(indoor.route.links.every(l=>!['outdoor','access'].includes(l.edge.kind)));
   assert.ok(outside.route.links.every(l=>l.edge.kind!=='passage'));
   assert.equal(planJourney(archive,'building:6','building:7',{stepFree:true}).route,null);

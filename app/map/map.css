@@ -114,3 +114,11 @@
 .route-section-actions{display:flex;gap:6px;margin-top:5px}.route-section-actions .primary{flex:1}
 .route-transition{font-size:.72rem;margin:5px 0;color:var(--ink)}
 .route-extra{font-size:.68rem;color:var(--muted);margin-top:7px;line-height:1.4}.route-extra summary{cursor:pointer}.route-extra p{margin:5px 0}
+
+.map-passage.is-underground .map-passage-fill{stroke:#81749e;stroke-dasharray:9 6}.map-passage.is-underground .map-passage-border{stroke-dasharray:9 6}.map-indoor-layer .selection-caption text{pointer-events:none}
+
+.map-indoor-layer .floor-area{vector-effect:non-scaling-stroke}.map-indoor-layer .indoor-background path{vector-effect:non-scaling-stroke}
+
+.map-indoor-layer .source-plan .floor-areas{opacity:.2}.map-indoor-layer .source-plan .floor-walls{opacity:.4}
+
+.map-passage-label{font-size:12px;fill:#67527e;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}

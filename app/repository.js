@@ -14,7 +14,7 @@ export async function json(url, timeout=22000) {
 }
 export async function initialData() {
   const [config, buildings, bundledEvents, groups, snapshot, raw, mapPack, clubs] = await Promise.all([
-    json('data/config.json'),json('data/buildings.json'),json('data/events.json'),json('data/groups.json'),json('data/snapshot.json'),json('data/schedule-14381-241.json'),json('data/maps.json'),json('data/clubs.json'),json('data/clubs.json')
+    json('data/config.json'),json('data/buildings.json'),json('data/events.json'),json('data/groups.json'),json('data/snapshot.json'),json('data/schedule-14381-241.json'),json('data/maps.json'),json('data/clubs.json')
   ]);
   const saved=storage.read('events');
   let events;
