@@ -13249,7 +13249,1512 @@
       "number": "407",
       "aliases": [
         "7-407",
-        "кабинcampusId": "uust-karl-marx",
+        "кабинет 407",
+        "Аудитория"
+      ],
+      "point": [
+        354.5,
+        432.5
+      ],
+      "nodeId": "sv-7-f4-n-door-407",
+      "doorId": "sv-7-407-door",
+      "areaId": "sv-7-f4-area-room-407"
+    },
+    {
+      "id": "sv-7-f4-wc-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "toilet",
+      "name": "Туалет у большой аудитории",
+      "aliases": [
+        "Туалет у большой аудитории"
+      ],
+      "point": [
+        364,
+        946
+      ],
+      "nodeId": null
+    },
+    {
+      "id": "sv-7-f4-wc-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "toilet",
+      "name": "Туалет у библиотеки",
+      "aliases": [
+        "Туалет у библиотеки"
+      ],
+      "point": [
+        375,
+        375
+      ],
+      "nodeId": null
+    },
+    {
+      "id": "sv-7-f4-wing-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "stairs",
+      "name": "Лестница между аудиториями 401 и 404",
+      "aliases": [
+        "Лестница между аудиториями 401 и 404"
+      ],
+      "point": [
+        346,
+        879
+      ],
+      "nodeId": "sv-7-f4-n-wing-stair"
+    },
+    {
+      "id": "sv-7-f4-library-left-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "stairs",
+      "name": "Лестница в левом торце библиотеки",
+      "aliases": [
+        "Лестница в левом торце библиотеки"
+      ],
+      "point": [
+        618,
+        300
+      ],
+      "nodeId": null
+    },
+    {
+      "id": "sv-7-f4-library-right-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "stairs",
+      "name": "Лестница в правом торце библиотеки",
+      "aliases": [
+        "Лестница в правом торце библиотеки"
+      ],
+      "point": [
+        618,
+        143
+      ],
+      "nodeId": null
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cw-6-f4-node-door-409",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Класс 6-409",
+      "point": [
+        510,
+        1301
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-410",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Преподавательская 6-410",
+      "point": [
+        456,
+        1171
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-411",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Преподавательская 6-411",
+      "point": [
+        510,
+        1132
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-412",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Лаборатория 6-412",
+      "point": [
+        456,
+        1073
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-413",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Класс 6-413",
+      "point": [
+        515,
+        826
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-414",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Класс 6-414",
+      "point": [
+        456,
+        930
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-414a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Лаборатория 6-414а",
+      "point": [
+        456,
+        826
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-415",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Аудитория 6-415",
+      "point": [
+        515,
+        596
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-416",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Аудитория 6-416",
+      "point": [
+        456,
+        524
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-417",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Преподавательская 6-417",
+      "point": [
+        515,
+        334
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-419",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Лаборатория 6-419",
+      "point": [
+        485,
+        111
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-420a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Кабинет 6-420а",
+      "point": [
+        456,
+        448
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-door-422",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "door",
+      "name": "Кабинет 6-422",
+      "point": [
+        456,
+        158
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "point": [
+        550,
+        1447
+      ],
+      "connectorId": "cw-stairs-west"
+    },
+    {
+      "id": "cw-6-f4-node-west-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1447
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "stairs",
+      "name": "Лестница у аудитории 415",
+      "point": [
+        550,
+        435
+      ],
+      "connectorId": "cw-stairs-east"
+    },
+    {
+      "id": "cw-6-f4-node-east-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        435
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-409",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1301
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-410",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1171
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-411",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1132
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-412",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        1073
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-413",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        826
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-414",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        930
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-414a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        826
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-415",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        596
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-416",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        524
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-417",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        334
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-419",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        111
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-420a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        448
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-hall-422",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        486,
+        158
+      ]
+    },
+    {
+      "id": "cw-6-f4-node-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f4",
+      "type": "landmark",
+      "name": "Туалет",
+      "point": [
+        380,
+        1371
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-509",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Лаборатория 6-509",
+      "point": [
+        510,
+        999
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-510",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Преподавательская 6-510",
+      "point": [
+        330,
+        910
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-511",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Лаборатория 6-511",
+      "point": [
+        510,
+        838
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-512",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-512",
+      "point": [
+        330,
+        680
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-513",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-513",
+      "point": [
+        510,
+        644
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-514",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-514",
+      "point": [
+        330,
+        514
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-515",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-515",
+      "point": [
+        510,
+        534
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-518",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Кабинет 6-518",
+      "point": [
+        330,
+        244
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-520",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Кабинет 6-520",
+      "point": [
+        330,
+        180
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-door-517",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "door",
+      "name": "Аудитория 6-517",
+      "point": [
+        510,
+        93
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "point": [
+        600,
+        1178
+      ],
+      "connectorId": "cw-stairs-west"
+    },
+    {
+      "id": "cw-6-f5-node-west-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        1178
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "stairs",
+      "name": "Лестница у аудитории 515",
+      "point": [
+        600,
+        264
+      ],
+      "connectorId": "cw-stairs-east"
+    },
+    {
+      "id": "cw-6-f5-node-east-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        264
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-509",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        999
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-510",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        910
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-511",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        838
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-512",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        680
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-513",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        644
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-514",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        514
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-515",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        534
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-518",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        244
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-520",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        180
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-hall-517",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        420,
+        93
+      ]
+    },
+    {
+      "id": "cw-6-f5-node-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f5",
+      "type": "landmark",
+      "name": "Туалет",
+      "point": [
+        180,
+        1009
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-301",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-301",
+      "point": [
+        145,
+        1151
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-302",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Лаборатория 6-302",
+      "point": [
+        117,
+        1095
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-303",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-303",
+      "point": [
+        187,
+        1155
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-303a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-303а",
+      "point": [
+        303,
+        1155
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-304",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-304",
+      "point": [
+        305,
+        1095
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-305",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-305",
+      "point": [
+        360,
+        1149
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-307",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-307",
+      "point": [
+        432,
+        1099
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-309",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Аудитория 6-309",
+      "point": [
+        412,
+        858
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-310",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Преподавательская 6-310",
+      "point": [
+        364,
+        770
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-311",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Лаборатория 6-311",
+      "point": [
+        410,
+        744
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-312",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-312",
+      "point": [
+        366,
+        707
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-313",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-313",
+      "point": [
+        410,
+        605
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-314",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-314",
+      "point": [
+        365,
+        603
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-315",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Преподавательская 6-315",
+      "point": [
+        408,
+        500
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-316",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Лаборатория 6-316",
+      "point": [
+        367,
+        491
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-317",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-317",
+      "point": [
+        407,
+        146
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-318",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-318",
+      "point": [
+        364,
+        400
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-318a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Кабинет 6-318а",
+      "point": [
+        365,
+        333
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-319",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Класс 6-319",
+      "point": [
+        387,
+        99
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-320",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Кабинет 6-320",
+      "point": [
+        365,
+        246
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-door-322",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "door",
+      "name": "Приёмная 6-322",
+      "point": [
+        363,
+        138
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-turn",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-301",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        145,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-302",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        117,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-303",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        187,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-303a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        303,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-304",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        305,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-305",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        360,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-307",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        432,
+        1123
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-309",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        858
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-310",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        770
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-311",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        744
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-312",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        707
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-313",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        605
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-314",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        603
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-315",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        500
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-316",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        491
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-317",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        146
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-318",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        400
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-318a",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        333
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-319",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        99
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-320",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        246
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-hall-322",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        138
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "stairs",
+      "name": "Лестница у левого торца",
+      "point": [
+        452,
+        962
+      ],
+      "connectorId": "cw-stairs-west"
+    },
+    {
+      "id": "cw-6-f3-node-west-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        962
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "stairs",
+      "name": "Лестница у аудитории 317",
+      "point": [
+        452,
+        308
+      ],
+      "connectorId": "cw-stairs-east"
+    },
+    {
+      "id": "cw-6-f3-node-east-hall",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        385,
+        308
+      ]
+    },
+    {
+      "id": "cw-6-f3-node-wc",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "cw-6-f3",
+      "type": "landmark",
+      "name": "Туалет",
+      "point": [
+        323,
+        893
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j0",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        105,
+        920
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j1",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        320,
+        920
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j2",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        320,
+        255
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j3",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        320,
+        980
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j4",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        320,
+        305
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j5",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        240,
+        305
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j6",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        240,
+        320
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-publishing",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "landmark",
+      "name": "Редакционно-издательское помещение",
+      "point": [
+        180,
+        345
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-door-101",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "door",
+      "name": "Кабинет 6-101",
+      "point": [
+        330,
+        960
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j7",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        320,
+        960
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-door-104",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "door",
+      "name": "Аудитория 6-104",
+      "point": [
+        306,
+        658
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j8",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        320,
+        658
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-door-106",
+      "campusId": "uust-karl-marx",
+      "buildingId": "6",
+      "floorId": "sv-6-f1",
+      "type": "door",
+      "name": "Аудитория 6-106",
+      "point": [
+        306,
+        555
+      ]
+    },
+    {
+      "id": "sv-6-f1-n-j9",
+      "campusId": "uust-karl-marx",
       "buildingId": "6",
       "floorId": "sv-6-f1",
       "type": "junction",
@@ -15204,7 +16709,6494 @@
       ]
     },
     {
-      "i    "status": "plan",
+      "id": "sv-7-f2-n-j12",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f2",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        313
+      ]
+    },
+    {
+      "id": "sv-7-f2-n-library",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f2",
+      "type": "landmark",
+      "name": "Библиотека и книгохранилище",
+      "point": [
+        500,
+        225
+      ]
+    },
+    {
+      "id": "sv-7-f2-n-library-left-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f2",
+      "type": "stairs",
+      "name": "Лестница в левом торце библиотеки",
+      "point": [
+        618,
+        300
+      ],
+      "connectorId": "sv-7-f2-library-left-stair"
+    },
+    {
+      "id": "sv-7-f2-n-library-right-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f2",
+      "type": "stairs",
+      "name": "Лестница в правом торце библиотеки",
+      "point": [
+        618,
+        143
+      ],
+      "connectorId": "sv-7-f2-library-right-stair"
+    },
+    {
+      "id": "sv-7-f3-n-j0",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        1155
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j1",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        290
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j2",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        300
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j3",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        565,
+        300
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j4",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        565,
+        225
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j5",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        590,
+        225
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-door-301",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "door",
+      "name": "Аудитория 7-301",
+      "point": [
+        397,
+        1123
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j6",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        1123
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-door-304",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "door",
+      "name": "Аудитория 7-304",
+      "point": [
+        397,
+        825
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j7",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        825
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-door-305",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "door",
+      "name": "Аудитория 7-305",
+      "point": [
+        397,
+        655
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j8",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        655
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-door-306",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "door",
+      "name": "Аудитория 7-306",
+      "point": [
+        397,
+        595
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j9",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        595
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-door-307",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "door",
+      "name": "Аудитория 7-307",
+      "point": [
+        397,
+        435
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j10",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        435
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-wc-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "landmark",
+      "name": "Туалет у большой аудитории",
+      "point": [
+        364,
+        946
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-wc-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "landmark",
+      "name": "Туалет у библиотеки",
+      "point": [
+        375,
+        375
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-wing-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "stairs",
+      "name": "Лестница между аудиториями 301 и 304",
+      "point": [
+        346,
+        879
+      ],
+      "connectorId": "sv-7-wing-stair"
+    },
+    {
+      "id": "sv-7-f3-n-j11",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        879
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-door-306-reading",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "door",
+      "name": "Читальный зал 7-306",
+      "point": [
+        432,
+        313
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-j12",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        313
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-library",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "landmark",
+      "name": "Библиотека и книгохранилище",
+      "point": [
+        500,
+        225
+      ]
+    },
+    {
+      "id": "sv-7-f3-n-library-left-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "stairs",
+      "name": "Лестница в левом торце библиотеки",
+      "point": [
+        618,
+        300
+      ],
+      "connectorId": "sv-7-f3-library-left-stair"
+    },
+    {
+      "id": "sv-7-f3-n-library-right-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f3",
+      "type": "stairs",
+      "name": "Лестница в правом торце библиотеки",
+      "point": [
+        618,
+        143
+      ],
+      "connectorId": "sv-7-f3-library-right-stair"
+    },
+    {
+      "id": "sv-7-f4-n-j0",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        1155
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j1",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        290
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j2",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        300
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j3",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        565,
+        300
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j4",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        565,
+        225
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j5",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        590,
+        225
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-door-401",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "door",
+      "name": "Аудитория 7-401",
+      "point": [
+        397,
+        1123
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j6",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        1123
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-door-404",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "door",
+      "name": "Аудитория 7-404",
+      "point": [
+        397,
+        825
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j7",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        825
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-door-405",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "door",
+      "name": "Аудитория 7-405",
+      "point": [
+        397,
+        655
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j8",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        655
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-door-406",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "door",
+      "name": "Аудитория 7-406",
+      "point": [
+        397,
+        595
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j9",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        595
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-door-407",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "door",
+      "name": "Аудитория 7-407",
+      "point": [
+        397,
+        435
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-j10",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        435
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-wc-west",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "landmark",
+      "name": "Туалет у большой аудитории",
+      "point": [
+        364,
+        946
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-wc-east",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "landmark",
+      "name": "Туалет у библиотеки",
+      "point": [
+        375,
+        375
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-wing-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "stairs",
+      "name": "Лестница между аудиториями 401 и 404",
+      "point": [
+        346,
+        879
+      ],
+      "connectorId": "sv-7-wing-stair"
+    },
+    {
+      "id": "sv-7-f4-n-j11",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "junction",
+      "name": "Коридор",
+      "point": [
+        415,
+        879
+      ]
+    },
+    {
+      "id": "sv-7-f4-n-library-left-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "stairs",
+      "name": "Лестница в левом торце библиотеки",
+      "point": [
+        618,
+        300
+      ],
+      "connectorId": "sv-7-f4-library-left-stair"
+    },
+    {
+      "id": "sv-7-f4-n-library-right-stair",
+      "campusId": "uust-karl-marx",
+      "buildingId": "7",
+      "floorId": "sv-7-f4",
+      "type": "stairs",
+      "name": "Лестница в правом торце библиотеки",
+      "point": [
+        618,
+        143
+      ],
+      "connectorId": "sv-7-f4-library-right-stair"
+    }
+  ],
+  "edges": [
+    {
+      "id": "cw-edge-1",
+      "to": "cw-6-f4-node-west-hall",
+      "kind": "corridor",
+      "weight": 64.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          550,
+          1447
+        ],
+        [
+          486,
+          1447
+        ]
+      ],
+      "from": "cw-6-f4-node-west"
+    },
+    {
+      "id": "cw-edge-2",
+      "to": "cw-6-f4-node-east-hall",
+      "kind": "corridor",
+      "weight": 64.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          550,
+          435
+        ],
+        [
+          486,
+          435
+        ]
+      ],
+      "from": "cw-6-f4-node-east"
+    },
+    {
+      "id": "cw-edge-3",
+      "to": "cw-6-f4-node-door-409",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1301
+        ],
+        [
+          510,
+          1301
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-409"
+    },
+    {
+      "id": "cw-edge-4",
+      "to": "cw-6-f4-node-door-410",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1171
+        ],
+        [
+          456,
+          1171
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-410"
+    },
+    {
+      "id": "cw-edge-5",
+      "to": "cw-6-f4-node-door-411",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1132
+        ],
+        [
+          510,
+          1132
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-411"
+    },
+    {
+      "id": "cw-edge-6",
+      "to": "cw-6-f4-node-door-412",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1073
+        ],
+        [
+          456,
+          1073
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-412"
+    },
+    {
+      "id": "cw-edge-7",
+      "to": "cw-6-f4-node-door-413",
+      "kind": "corridor",
+      "weight": 29.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          515,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-413"
+    },
+    {
+      "id": "cw-edge-8",
+      "to": "cw-6-f4-node-door-414",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          930
+        ],
+        [
+          456,
+          930
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414"
+    },
+    {
+      "id": "cw-edge-9",
+      "to": "cw-6-f4-node-door-414a",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          456,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414a"
+    },
+    {
+      "id": "cw-edge-10",
+      "to": "cw-6-f4-node-door-415",
+      "kind": "corridor",
+      "weight": 29.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          596
+        ],
+        [
+          515,
+          596
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-415"
+    },
+    {
+      "id": "cw-edge-11",
+      "to": "cw-6-f4-node-door-416",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          524
+        ],
+        [
+          456,
+          524
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-416"
+    },
+    {
+      "id": "cw-edge-12",
+      "to": "cw-6-f4-node-door-417",
+      "kind": "corridor",
+      "weight": 29.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          334
+        ],
+        [
+          515,
+          334
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-417"
+    },
+    {
+      "id": "cw-edge-13",
+      "to": "cw-6-f4-node-door-419",
+      "kind": "corridor",
+      "weight": 1.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          111
+        ],
+        [
+          485,
+          111
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-419"
+    },
+    {
+      "id": "cw-edge-14",
+      "to": "cw-6-f4-node-door-420a",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          448
+        ],
+        [
+          456,
+          448
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-420a"
+    },
+    {
+      "id": "cw-edge-15",
+      "to": "cw-6-f4-node-door-422",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          158
+        ],
+        [
+          456,
+          158
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-422"
+    },
+    {
+      "id": "cw-edge-16",
+      "to": "cw-6-f4-node-hall-409",
+      "kind": "corridor",
+      "weight": 146.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1447
+        ],
+        [
+          486,
+          1301
+        ]
+      ],
+      "from": "cw-6-f4-node-west-hall"
+    },
+    {
+      "id": "cw-edge-17",
+      "to": "cw-6-f4-node-hall-410",
+      "kind": "corridor",
+      "weight": 130.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1301
+        ],
+        [
+          486,
+          1171
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-409"
+    },
+    {
+      "id": "cw-edge-18",
+      "to": "cw-6-f4-node-hall-411",
+      "kind": "corridor",
+      "weight": 39.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1171
+        ],
+        [
+          486,
+          1132
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-410"
+    },
+    {
+      "id": "cw-edge-19",
+      "to": "cw-6-f4-node-hall-412",
+      "kind": "corridor",
+      "weight": 59.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1132
+        ],
+        [
+          486,
+          1073
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-411"
+    },
+    {
+      "id": "cw-edge-20",
+      "to": "cw-6-f4-node-hall-414",
+      "kind": "corridor",
+      "weight": 143.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          1073
+        ],
+        [
+          486,
+          930
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-412"
+    },
+    {
+      "id": "cw-edge-21",
+      "to": "cw-6-f4-node-hall-413",
+      "kind": "corridor",
+      "weight": 104.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          930
+        ],
+        [
+          486,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414"
+    },
+    {
+      "id": "cw-edge-22",
+      "to": "cw-6-f4-node-hall-414a",
+      "kind": "corridor",
+      "weight": 0.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          486,
+          826
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-413"
+    },
+    {
+      "id": "cw-edge-23",
+      "to": "cw-6-f4-node-hall-415",
+      "kind": "corridor",
+      "weight": 230.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          826
+        ],
+        [
+          486,
+          596
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-414a"
+    },
+    {
+      "id": "cw-edge-24",
+      "to": "cw-6-f4-node-hall-416",
+      "kind": "corridor",
+      "weight": 72.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          596
+        ],
+        [
+          486,
+          524
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-415"
+    },
+    {
+      "id": "cw-edge-25",
+      "to": "cw-6-f4-node-hall-420a",
+      "kind": "corridor",
+      "weight": 76.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          524
+        ],
+        [
+          486,
+          448
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-416"
+    },
+    {
+      "id": "cw-edge-26",
+      "to": "cw-6-f4-node-east-hall",
+      "kind": "corridor",
+      "weight": 13.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          448
+        ],
+        [
+          486,
+          435
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-420a"
+    },
+    {
+      "id": "cw-edge-27",
+      "to": "cw-6-f4-node-hall-417",
+      "kind": "corridor",
+      "weight": 101.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          435
+        ],
+        [
+          486,
+          334
+        ]
+      ],
+      "from": "cw-6-f4-node-east-hall"
+    },
+    {
+      "id": "cw-edge-28",
+      "to": "cw-6-f4-node-hall-422",
+      "kind": "corridor",
+      "weight": 176.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          334
+        ],
+        [
+          486,
+          158
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-417"
+    },
+    {
+      "id": "cw-edge-29",
+      "to": "cw-6-f4-node-hall-419",
+      "kind": "corridor",
+      "weight": 47.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          486,
+          158
+        ],
+        [
+          486,
+          111
+        ]
+      ],
+      "from": "cw-6-f4-node-hall-422"
+    },
+    {
+      "id": "cw-edge-30",
+      "to": "cw-6-f5-node-west-hall",
+      "kind": "corridor",
+      "weight": 180.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          600,
+          1178
+        ],
+        [
+          420,
+          1178
+        ]
+      ],
+      "from": "cw-6-f5-node-west"
+    },
+    {
+      "id": "cw-edge-31",
+      "to": "cw-6-f5-node-west",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f4-node-west"
+    },
+    {
+      "id": "cw-edge-32",
+      "to": "cw-6-f5-node-east-hall",
+      "kind": "corridor",
+      "weight": 180.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          600,
+          264
+        ],
+        [
+          420,
+          264
+        ]
+      ],
+      "from": "cw-6-f5-node-east"
+    },
+    {
+      "id": "cw-edge-33",
+      "to": "cw-6-f5-node-east",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f4-node-east"
+    },
+    {
+      "id": "cw-edge-34",
+      "to": "cw-6-f5-node-door-509",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          999
+        ],
+        [
+          510,
+          999
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-509"
+    },
+    {
+      "id": "cw-edge-35",
+      "to": "cw-6-f5-node-door-510",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          910
+        ],
+        [
+          330,
+          910
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-510"
+    },
+    {
+      "id": "cw-edge-36",
+      "to": "cw-6-f5-node-door-511",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          838
+        ],
+        [
+          510,
+          838
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-511"
+    },
+    {
+      "id": "cw-edge-37",
+      "to": "cw-6-f5-node-door-512",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          680
+        ],
+        [
+          330,
+          680
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-512"
+    },
+    {
+      "id": "cw-edge-38",
+      "to": "cw-6-f5-node-door-513",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          644
+        ],
+        [
+          510,
+          644
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-513"
+    },
+    {
+      "id": "cw-edge-39",
+      "to": "cw-6-f5-node-door-514",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          514
+        ],
+        [
+          330,
+          514
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-514"
+    },
+    {
+      "id": "cw-edge-40",
+      "to": "cw-6-f5-node-door-515",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          534
+        ],
+        [
+          510,
+          534
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-515"
+    },
+    {
+      "id": "cw-edge-41",
+      "to": "cw-6-f5-node-door-518",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          244
+        ],
+        [
+          330,
+          244
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-518"
+    },
+    {
+      "id": "cw-edge-42",
+      "to": "cw-6-f5-node-door-520",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          180
+        ],
+        [
+          330,
+          180
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-520"
+    },
+    {
+      "id": "cw-edge-43",
+      "to": "cw-6-f5-node-door-517",
+      "kind": "corridor",
+      "weight": 90.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          93
+        ],
+        [
+          510,
+          93
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-517"
+    },
+    {
+      "id": "cw-edge-44",
+      "to": "cw-6-f5-node-hall-509",
+      "kind": "corridor",
+      "weight": 179.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          1178
+        ],
+        [
+          420,
+          999
+        ]
+      ],
+      "from": "cw-6-f5-node-west-hall"
+    },
+    {
+      "id": "cw-edge-45",
+      "to": "cw-6-f5-node-hall-510",
+      "kind": "corridor",
+      "weight": 89.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          999
+        ],
+        [
+          420,
+          910
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-509"
+    },
+    {
+      "id": "cw-edge-46",
+      "to": "cw-6-f5-node-hall-511",
+      "kind": "corridor",
+      "weight": 72.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          910
+        ],
+        [
+          420,
+          838
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-510"
+    },
+    {
+      "id": "cw-edge-47",
+      "to": "cw-6-f5-node-hall-512",
+      "kind": "corridor",
+      "weight": 158.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          838
+        ],
+        [
+          420,
+          680
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-511"
+    },
+    {
+      "id": "cw-edge-48",
+      "to": "cw-6-f5-node-hall-513",
+      "kind": "corridor",
+      "weight": 36.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          680
+        ],
+        [
+          420,
+          644
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-512"
+    },
+    {
+      "id": "cw-edge-49",
+      "to": "cw-6-f5-node-hall-515",
+      "kind": "corridor",
+      "weight": 110.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          644
+        ],
+        [
+          420,
+          534
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-513"
+    },
+    {
+      "id": "cw-edge-50",
+      "to": "cw-6-f5-node-hall-514",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          534
+        ],
+        [
+          420,
+          514
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-515"
+    },
+    {
+      "id": "cw-edge-51",
+      "to": "cw-6-f5-node-east-hall",
+      "kind": "corridor",
+      "weight": 250.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          514
+        ],
+        [
+          420,
+          264
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-514"
+    },
+    {
+      "id": "cw-edge-52",
+      "to": "cw-6-f5-node-hall-518",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          264
+        ],
+        [
+          420,
+          244
+        ]
+      ],
+      "from": "cw-6-f5-node-east-hall"
+    },
+    {
+      "id": "cw-edge-53",
+      "to": "cw-6-f5-node-hall-520",
+      "kind": "corridor",
+      "weight": 64.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          244
+        ],
+        [
+          420,
+          180
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-518"
+    },
+    {
+      "id": "cw-edge-54",
+      "to": "cw-6-f5-node-hall-517",
+      "kind": "corridor",
+      "weight": 87.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          420,
+          180
+        ],
+        [
+          420,
+          93
+        ]
+      ],
+      "from": "cw-6-f5-node-hall-520"
+    },
+    {
+      "id": "cw-edge-55",
+      "to": "cw-6-f3-node-door-301",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          145,
+          1123
+        ],
+        [
+          145,
+          1151
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-301"
+    },
+    {
+      "id": "cw-edge-56",
+      "to": "cw-6-f3-node-door-302",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          117,
+          1123
+        ],
+        [
+          117,
+          1095
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-302"
+    },
+    {
+      "id": "cw-edge-57",
+      "to": "cw-6-f3-node-door-303",
+      "kind": "corridor",
+      "weight": 32.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          187,
+          1123
+        ],
+        [
+          187,
+          1155
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303"
+    },
+    {
+      "id": "cw-edge-58",
+      "to": "cw-6-f3-node-door-303a",
+      "kind": "corridor",
+      "weight": 32.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          1123
+        ],
+        [
+          303,
+          1155
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303a"
+    },
+    {
+      "id": "cw-edge-59",
+      "to": "cw-6-f3-node-door-304",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          305,
+          1123
+        ],
+        [
+          305,
+          1095
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-304"
+    },
+    {
+      "id": "cw-edge-60",
+      "to": "cw-6-f3-node-door-305",
+      "kind": "corridor",
+      "weight": 26.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          360,
+          1123
+        ],
+        [
+          360,
+          1149
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-305"
+    },
+    {
+      "id": "cw-edge-61",
+      "to": "cw-6-f3-node-door-307",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          432,
+          1123
+        ],
+        [
+          432,
+          1099
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-307"
+    },
+    {
+      "id": "cw-edge-62",
+      "to": "cw-6-f3-node-door-309",
+      "kind": "corridor",
+      "weight": 27.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          858
+        ],
+        [
+          412,
+          858
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-309"
+    },
+    {
+      "id": "cw-edge-63",
+      "to": "cw-6-f3-node-door-310",
+      "kind": "corridor",
+      "weight": 21.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          770
+        ],
+        [
+          364,
+          770
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-310"
+    },
+    {
+      "id": "cw-edge-64",
+      "to": "cw-6-f3-node-door-311",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          744
+        ],
+        [
+          410,
+          744
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-311"
+    },
+    {
+      "id": "cw-edge-65",
+      "to": "cw-6-f3-node-door-312",
+      "kind": "corridor",
+      "weight": 19.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          707
+        ],
+        [
+          366,
+          707
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-312"
+    },
+    {
+      "id": "cw-edge-66",
+      "to": "cw-6-f3-node-door-313",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          605
+        ],
+        [
+          410,
+          605
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-313"
+    },
+    {
+      "id": "cw-edge-67",
+      "to": "cw-6-f3-node-door-314",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          603
+        ],
+        [
+          365,
+          603
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-314"
+    },
+    {
+      "id": "cw-edge-68",
+      "to": "cw-6-f3-node-door-315",
+      "kind": "corridor",
+      "weight": 23.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          500
+        ],
+        [
+          408,
+          500
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-315"
+    },
+    {
+      "id": "cw-edge-69",
+      "to": "cw-6-f3-node-door-316",
+      "kind": "corridor",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          491
+        ],
+        [
+          367,
+          491
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-316"
+    },
+    {
+      "id": "cw-edge-70",
+      "to": "cw-6-f3-node-door-317",
+      "kind": "corridor",
+      "weight": 22.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          146
+        ],
+        [
+          407,
+          146
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-317"
+    },
+    {
+      "id": "cw-edge-71",
+      "to": "cw-6-f3-node-door-318",
+      "kind": "corridor",
+      "weight": 21.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          400
+        ],
+        [
+          364,
+          400
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318"
+    },
+    {
+      "id": "cw-edge-72",
+      "to": "cw-6-f3-node-door-318a",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          333
+        ],
+        [
+          365,
+          333
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318a"
+    },
+    {
+      "id": "cw-edge-73",
+      "to": "cw-6-f3-node-door-319",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          99
+        ],
+        [
+          387,
+          99
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-319"
+    },
+    {
+      "id": "cw-edge-74",
+      "to": "cw-6-f3-node-door-320",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          246
+        ],
+        [
+          365,
+          246
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-320"
+    },
+    {
+      "id": "cw-edge-75",
+      "to": "cw-6-f3-node-door-322",
+      "kind": "corridor",
+      "weight": 22.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          138
+        ],
+        [
+          363,
+          138
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-322"
+    },
+    {
+      "id": "cw-edge-76",
+      "to": "cw-6-f3-node-west-hall",
+      "kind": "corridor",
+      "weight": 67.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          452,
+          962
+        ],
+        [
+          385,
+          962
+        ]
+      ],
+      "from": "cw-6-f3-node-west"
+    },
+    {
+      "id": "cw-edge-77",
+      "to": "cw-6-f4-node-west",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f3-node-west"
+    },
+    {
+      "id": "cw-edge-78",
+      "to": "cw-6-f3-node-east-hall",
+      "kind": "corridor",
+      "weight": 67.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          452,
+          308
+        ],
+        [
+          385,
+          308
+        ]
+      ],
+      "from": "cw-6-f3-node-east"
+    },
+    {
+      "id": "cw-edge-79",
+      "to": "cw-6-f4-node-east",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": null,
+      "from": "cw-6-f3-node-east"
+    },
+    {
+      "id": "cw-edge-80",
+      "to": "cw-6-f3-node-hall-301",
+      "kind": "corridor",
+      "weight": 28.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          117,
+          1123
+        ],
+        [
+          145,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-302"
+    },
+    {
+      "id": "cw-edge-81",
+      "to": "cw-6-f3-node-hall-303",
+      "kind": "corridor",
+      "weight": 42.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          145,
+          1123
+        ],
+        [
+          187,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-301"
+    },
+    {
+      "id": "cw-edge-82",
+      "to": "cw-6-f3-node-hall-303a",
+      "kind": "corridor",
+      "weight": 116.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          187,
+          1123
+        ],
+        [
+          303,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303"
+    },
+    {
+      "id": "cw-edge-83",
+      "to": "cw-6-f3-node-hall-304",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          1123
+        ],
+        [
+          305,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-303a"
+    },
+    {
+      "id": "cw-edge-84",
+      "to": "cw-6-f3-node-hall-305",
+      "kind": "corridor",
+      "weight": 55.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          305,
+          1123
+        ],
+        [
+          360,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-304"
+    },
+    {
+      "id": "cw-edge-85",
+      "to": "cw-6-f3-node-turn",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          360,
+          1123
+        ],
+        [
+          385,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-305"
+    },
+    {
+      "id": "cw-edge-86",
+      "to": "cw-6-f3-node-hall-307",
+      "kind": "corridor",
+      "weight": 47.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          1123
+        ],
+        [
+          432,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-turn"
+    },
+    {
+      "id": "cw-edge-87",
+      "to": "cw-6-f3-node-hall-322",
+      "kind": "corridor",
+      "weight": 39.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          99
+        ],
+        [
+          385,
+          138
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-319"
+    },
+    {
+      "id": "cw-edge-88",
+      "to": "cw-6-f3-node-hall-317",
+      "kind": "corridor",
+      "weight": 8.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          138
+        ],
+        [
+          385,
+          146
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-322"
+    },
+    {
+      "id": "cw-edge-89",
+      "to": "cw-6-f3-node-hall-320",
+      "kind": "corridor",
+      "weight": 100.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          146
+        ],
+        [
+          385,
+          246
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-317"
+    },
+    {
+      "id": "cw-edge-90",
+      "to": "cw-6-f3-node-east-hall",
+      "kind": "corridor",
+      "weight": 62.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          246
+        ],
+        [
+          385,
+          308
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-320"
+    },
+    {
+      "id": "cw-edge-91",
+      "to": "cw-6-f3-node-hall-318a",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          308
+        ],
+        [
+          385,
+          333
+        ]
+      ],
+      "from": "cw-6-f3-node-east-hall"
+    },
+    {
+      "id": "cw-edge-92",
+      "to": "cw-6-f3-node-hall-318",
+      "kind": "corridor",
+      "weight": 67.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          333
+        ],
+        [
+          385,
+          400
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318a"
+    },
+    {
+      "id": "cw-edge-93",
+      "to": "cw-6-f3-node-hall-316",
+      "kind": "corridor",
+      "weight": 91.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          400
+        ],
+        [
+          385,
+          491
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-318"
+    },
+    {
+      "id": "cw-edge-94",
+      "to": "cw-6-f3-node-hall-315",
+      "kind": "corridor",
+      "weight": 9.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          491
+        ],
+        [
+          385,
+          500
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-316"
+    },
+    {
+      "id": "cw-edge-95",
+      "to": "cw-6-f3-node-hall-314",
+      "kind": "corridor",
+      "weight": 103.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          500
+        ],
+        [
+          385,
+          603
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-315"
+    },
+    {
+      "id": "cw-edge-96",
+      "to": "cw-6-f3-node-hall-313",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          603
+        ],
+        [
+          385,
+          605
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-314"
+    },
+    {
+      "id": "cw-edge-97",
+      "to": "cw-6-f3-node-hall-312",
+      "kind": "corridor",
+      "weight": 102.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          605
+        ],
+        [
+          385,
+          707
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-313"
+    },
+    {
+      "id": "cw-edge-98",
+      "to": "cw-6-f3-node-hall-311",
+      "kind": "corridor",
+      "weight": 37.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          707
+        ],
+        [
+          385,
+          744
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-312"
+    },
+    {
+      "id": "cw-edge-99",
+      "to": "cw-6-f3-node-hall-310",
+      "kind": "corridor",
+      "weight": 26.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          744
+        ],
+        [
+          385,
+          770
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-311"
+    },
+    {
+      "id": "cw-edge-100",
+      "to": "cw-6-f3-node-hall-309",
+      "kind": "corridor",
+      "weight": 88.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          770
+        ],
+        [
+          385,
+          858
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-310"
+    },
+    {
+      "id": "cw-edge-101",
+      "to": "cw-6-f3-node-west-hall",
+      "kind": "corridor",
+      "weight": 104.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          858
+        ],
+        [
+          385,
+          962
+        ]
+      ],
+      "from": "cw-6-f3-node-hall-309"
+    },
+    {
+      "id": "cw-edge-102",
+      "to": "cw-6-f3-node-turn",
+      "kind": "corridor",
+      "weight": 161.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "CampusWay, haru-matsui, 5b380013 (20.05.2026); архивный план, без проверки на месте",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          385,
+          962
+        ],
+        [
+          385,
+          1123
+        ]
+      ],
+      "from": "cw-6-f3-node-west-hall"
+    },
+    {
+      "id": "sv-edge-102",
+      "from": "sv-6-f1-n-door-101",
+      "to": "sv-6-f1-n-j7",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          960
+        ],
+        [
+          320,
+          960
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-103",
+      "from": "sv-6-f1-n-door-104",
+      "to": "sv-6-f1-n-j8",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          306,
+          658
+        ],
+        [
+          320,
+          658
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-104",
+      "from": "sv-6-f1-n-door-106",
+      "to": "sv-6-f1-n-j9",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          306,
+          555
+        ],
+        [
+          320,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-105",
+      "from": "sv-6-f1-n-door-108",
+      "to": "sv-6-f1-n-j10",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          306,
+          479
+        ],
+        [
+          320,
+          479
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-106",
+      "from": "sv-6-f1-n-door-107",
+      "to": "sv-6-f1-n-j11",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          713
+        ],
+        [
+          320,
+          713
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-107",
+      "from": "sv-6-f1-n-door-109",
+      "to": "sv-6-f1-n-j12",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          657
+        ],
+        [
+          320,
+          657
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-108",
+      "from": "sv-6-f1-n-door-111",
+      "to": "sv-6-f1-n-j13",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          569
+        ],
+        [
+          320,
+          569
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-109",
+      "from": "sv-6-f1-n-door-113",
+      "to": "sv-6-f1-n-j14",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          466
+        ],
+        [
+          320,
+          466
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-110",
+      "from": "sv-6-f1-n-door-115",
+      "to": "sv-6-f1-n-j15",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          330
+        ],
+        [
+          320,
+          330
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-111",
+      "from": "sv-6-f1-n-door-115a",
+      "to": "sv-6-f1-n-j16",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          330,
+          274
+        ],
+        [
+          320,
+          274
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-112",
+      "from": "sv-6-f1-n-entry",
+      "to": "sv-6-f1-n-j17",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          105,
+          920
+        ],
+        [
+          120,
+          920
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-113",
+      "from": "sv-6-f1-n-west",
+      "to": "sv-6-f1-n-j18",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          775
+        ],
+        [
+          320,
+          775
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-114",
+      "from": "sv-6-f1-n-east",
+      "to": "sv-6-f1-n-j19",
+      "kind": "corridor",
+      "weight": 35.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          355,
+          375
+        ],
+        [
+          320,
+          375
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-115",
+      "from": "sv-6-f1-n-j0",
+      "to": "sv-6-f1-n-j17",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          105,
+          920
+        ],
+        [
+          120,
+          920
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-116",
+      "from": "sv-6-f1-n-j17",
+      "to": "sv-6-f1-n-j1",
+      "kind": "corridor",
+      "weight": 200.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          120,
+          920
+        ],
+        [
+          320,
+          920
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-117",
+      "from": "sv-6-f1-n-j1",
+      "to": "sv-6-f1-n-j18",
+      "kind": "corridor",
+      "weight": 145.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          920
+        ],
+        [
+          320,
+          775
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-118",
+      "from": "sv-6-f1-n-j18",
+      "to": "sv-6-f1-n-j11",
+      "kind": "corridor",
+      "weight": 62.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          775
+        ],
+        [
+          320,
+          713
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-119",
+      "from": "sv-6-f1-n-j11",
+      "to": "sv-6-f1-n-j8",
+      "kind": "corridor",
+      "weight": 55.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          713
+        ],
+        [
+          320,
+          658
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-120",
+      "from": "sv-6-f1-n-j8",
+      "to": "sv-6-f1-n-j12",
+      "kind": "corridor",
+      "weight": 1.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          658
+        ],
+        [
+          320,
+          657
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-121",
+      "from": "sv-6-f1-n-j12",
+      "to": "sv-6-f1-n-j13",
+      "kind": "corridor",
+      "weight": 88.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          657
+        ],
+        [
+          320,
+          569
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-122",
+      "from": "sv-6-f1-n-j13",
+      "to": "sv-6-f1-n-j9",
+      "kind": "corridor",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          569
+        ],
+        [
+          320,
+          555
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-123",
+      "from": "sv-6-f1-n-j9",
+      "to": "sv-6-f1-n-j10",
+      "kind": "corridor",
+      "weight": 76.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          555
+        ],
+        [
+          320,
+          479
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-124",
+      "from": "sv-6-f1-n-j10",
+      "to": "sv-6-f1-n-j14",
+      "kind": "corridor",
+      "weight": 13.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          479
+        ],
+        [
+          320,
+          466
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-125",
+      "from": "sv-6-f1-n-j14",
+      "to": "sv-6-f1-n-j19",
+      "kind": "corridor",
+      "weight": 91.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          466
+        ],
+        [
+          320,
+          375
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-126",
+      "from": "sv-6-f1-n-j19",
+      "to": "sv-6-f1-n-j15",
+      "kind": "corridor",
+      "weight": 45.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          375
+        ],
+        [
+          320,
+          330
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-127",
+      "from": "sv-6-f1-n-j15",
+      "to": "sv-6-f1-n-j4",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          330
+        ],
+        [
+          320,
+          305
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-128",
+      "from": "sv-6-f1-n-j4",
+      "to": "sv-6-f1-n-j16",
+      "kind": "corridor",
+      "weight": 31.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          305
+        ],
+        [
+          320,
+          274
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-129",
+      "from": "sv-6-f1-n-j16",
+      "to": "sv-6-f1-n-j2",
+      "kind": "corridor",
+      "weight": 19.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          274
+        ],
+        [
+          320,
+          255
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-130",
+      "from": "sv-6-f1-n-j3",
+      "to": "sv-6-f1-n-j7",
+      "kind": "corridor",
+      "weight": 20.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          980
+        ],
+        [
+          320,
+          960
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-131",
+      "from": "sv-6-f1-n-j7",
+      "to": "sv-6-f1-n-j1",
+      "kind": "corridor",
+      "weight": 40.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          960
+        ],
+        [
+          320,
+          920
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-132",
+      "from": "sv-6-f1-n-j5",
+      "to": "sv-6-f1-n-j4",
+      "kind": "corridor",
+      "weight": 80.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          240,
+          305
+        ],
+        [
+          320,
+          305
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-133",
+      "from": "sv-6-f1-n-j6",
+      "to": "sv-6-f1-n-j5",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          240,
+          320
+        ],
+        [
+          240,
+          305
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-134",
+      "from": "sv-6-f2-n-door-201",
+      "to": "sv-6-f2-n-j6",
+      "kind": "door",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          190,
+          995
+        ],
+        [
+          190,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-135",
+      "from": "sv-6-f2-n-door-203",
+      "to": "sv-6-f2-n-j7",
+      "kind": "door",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          250,
+          995
+        ],
+        [
+          250,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-136",
+      "from": "sv-6-f2-n-door-205",
+      "to": "sv-6-f2-n-j8",
+      "kind": "door",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          345,
+          995
+        ],
+        [
+          345,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-137",
+      "from": "sv-6-f2-n-door-202",
+      "to": "sv-6-f2-n-j9",
+      "kind": "door",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          200,
+          965
+        ],
+        [
+          200,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-138",
+      "from": "sv-6-f2-n-door-204",
+      "to": "sv-6-f2-n-j10",
+      "kind": "door",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          275,
+          965
+        ],
+        [
+          275,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-139",
+      "from": "sv-6-f2-n-door-207",
+      "to": "sv-6-f2-n-j11",
+      "kind": "door",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          355,
+          965
+        ],
+        [
+          355,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-140",
+      "from": "sv-6-f2-n-door-210",
+      "to": "sv-6-f2-n-j12",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          648
+        ],
+        [
+          320,
+          648
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-141",
+      "from": "sv-6-f2-n-door-212",
+      "to": "sv-6-f2-n-j13",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          583
+        ],
+        [
+          320,
+          583
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-142",
+      "from": "sv-6-f2-n-door-214",
+      "to": "sv-6-f2-n-j14",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          547
+        ],
+        [
+          320,
+          547
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-143",
+      "from": "sv-6-f2-n-door-216-south",
+      "to": "sv-6-f2-n-j15",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          508
+        ],
+        [
+          320,
+          508
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-144",
+      "from": "sv-6-f2-n-door-216-north",
+      "to": "sv-6-f2-n-j16",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          482
+        ],
+        [
+          320,
+          482
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-145",
+      "from": "sv-6-f2-n-door-218",
+      "to": "sv-6-f2-n-j17",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          439
+        ],
+        [
+          320,
+          439
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-146",
+      "from": "sv-6-f2-n-door-220",
+      "to": "sv-6-f2-n-j18",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          406
+        ],
+        [
+          320,
+          406
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-147",
+      "from": "sv-6-f2-n-door-222",
+      "to": "sv-6-f2-n-j19",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          373
+        ],
+        [
+          320,
+          373
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-148",
+      "from": "sv-6-f2-n-door-224",
+      "to": "sv-6-f2-n-j20",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          303,
+          333
+        ],
+        [
+          320,
+          333
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-149",
+      "from": "sv-6-f2-n-door-211",
+      "to": "sv-6-f2-n-j21",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          337,
+          635
+        ],
+        [
+          320,
+          635
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-150",
+      "from": "sv-6-f2-n-door-213",
+      "to": "sv-6-f2-n-j22",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          337,
+          486
+        ],
+        [
+          320,
+          486
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-151",
+      "from": "sv-6-f2-n-door-215a",
+      "to": "sv-6-f2-n-j23",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          337,
+          400
+        ],
+        [
+          320,
+          400
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-152",
+      "from": "sv-6-f2-n-door-215b",
+      "to": "sv-6-f2-n-j24",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          337,
+          310
+        ],
+        [
+          320,
+          310
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-153",
+      "from": "sv-6-f2-n-door-217b",
+      "to": "sv-6-f2-n-j25",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          337,
+          174
+        ],
+        [
+          320,
+          174
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-154",
+      "from": "sv-6-f2-n-door-217",
+      "to": "sv-6-f2-n-j26",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          337,
+          98
+        ],
+        [
+          320,
+          98
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-155",
+      "from": "sv-6-f2-n-door-219",
+      "to": "sv-6-f2-n-j27",
+      "kind": "door",
+      "weight": 43.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          205,
+          257
+        ],
+        [
+          205,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-156",
+      "from": "sv-6-f2-n-west",
+      "to": "sv-6-f2-n-j28",
+      "kind": "corridor",
+      "weight": 46.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          366,
+          870
+        ],
+        [
+          320,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-157",
+      "from": "sv-6-f2-n-east",
+      "to": "sv-6-f2-n-j29",
+      "kind": "corridor",
+      "weight": 46.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          366,
+          248
+        ],
+        [
+          320,
+          248
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-158",
+      "from": "sv-6-f2-n-side-north",
+      "to": "sv-6-f2-n-j30",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          145,
+          910
+        ],
+        [
+          160,
+          910
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-159",
+      "from": "sv-6-f2-n-side-south",
+      "to": "sv-6-f2-n-j31",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          145,
+          1040
+        ],
+        [
+          160,
+          1040
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-160",
+      "from": "sv-6-f2-n-j0",
+      "to": "sv-6-f2-n-j26",
+      "kind": "corridor",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          80
+        ],
+        [
+          320,
+          98
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-161",
+      "from": "sv-6-f2-n-j26",
+      "to": "sv-6-f2-n-j25",
+      "kind": "corridor",
+      "weight": 76.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          98
+        ],
+        [
+          320,
+          174
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-162",
+      "from": "sv-6-f2-n-j25",
+      "to": "sv-6-f2-n-j29",
+      "kind": "corridor",
+      "weight": 74.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          174
+        ],
+        [
+          320,
+          248
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-163",
+      "from": "sv-6-f2-n-j29",
+      "to": "sv-6-f2-n-j5",
+      "kind": "corridor",
+      "weight": 52.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          248
+        ],
+        [
+          320,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-164",
+      "from": "sv-6-f2-n-j5",
+      "to": "sv-6-f2-n-j24",
+      "kind": "corridor",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          300
+        ],
+        [
+          320,
+          310
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-165",
+      "from": "sv-6-f2-n-j24",
+      "to": "sv-6-f2-n-j20",
+      "kind": "corridor",
+      "weight": 23.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          310
+        ],
+        [
+          320,
+          333
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-166",
+      "from": "sv-6-f2-n-j20",
+      "to": "sv-6-f2-n-j19",
+      "kind": "corridor",
+      "weight": 40.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          333
+        ],
+        [
+          320,
+          373
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-167",
+      "from": "sv-6-f2-n-j19",
+      "to": "sv-6-f2-n-j23",
+      "kind": "corridor",
+      "weight": 27.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          373
+        ],
+        [
+          320,
+          400
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-168",
+      "from": "sv-6-f2-n-j23",
+      "to": "sv-6-f2-n-j18",
+      "kind": "corridor",
+      "weight": 6.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          400
+        ],
+        [
+          320,
+          406
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-169",
+      "from": "sv-6-f2-n-j18",
+      "to": "sv-6-f2-n-j17",
+      "kind": "corridor",
+      "weight": 33.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          406
+        ],
+        [
+          320,
+          439
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-170",
+      "from": "sv-6-f2-n-j17",
+      "to": "sv-6-f2-n-j16",
+      "kind": "corridor",
+      "weight": 43.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          439
+        ],
+        [
+          320,
+          482
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-171",
+      "from": "sv-6-f2-n-j16",
+      "to": "sv-6-f2-n-j22",
+      "kind": "corridor",
+      "weight": 4.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          482
+        ],
+        [
+          320,
+          486
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-172",
+      "from": "sv-6-f2-n-j22",
+      "to": "sv-6-f2-n-j15",
+      "kind": "corridor",
+      "weight": 22.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          486
+        ],
+        [
+          320,
+          508
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-173",
+      "from": "sv-6-f2-n-j15",
+      "to": "sv-6-f2-n-j14",
+      "kind": "corridor",
+      "weight": 39.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          508
+        ],
+        [
+          320,
+          547
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-174",
+      "from": "sv-6-f2-n-j14",
+      "to": "sv-6-f2-n-j13",
+      "kind": "corridor",
+      "weight": 36.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          547
+        ],
+        [
+          320,
+          583
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-175",
+      "from": "sv-6-f2-n-j13",
+      "to": "sv-6-f2-n-j21",
+      "kind": "corridor",
+      "weight": 52.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          583
+        ],
+        [
+          320,
+          635
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-176",
+      "from": "sv-6-f2-n-j21",
+      "to": "sv-6-f2-n-j12",
+      "kind": "corridor",
+      "weight": 13.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          635
+        ],
+        [
+          320,
+          648
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-177",
+      "from": "sv-6-f2-n-j12",
+      "to": "sv-6-f2-n-j28",
+      "kind": "corridor",
+      "weight": 222.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          648
+        ],
+        [
+          320,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-178",
+      "from": "sv-6-f2-n-j28",
+      "to": "sv-6-f2-n-j1",
+      "kind": "corridor",
+      "weight": 110.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          870
+        ],
+        [
+          320,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-179",
+      "from": "sv-6-f2-n-j2",
+      "to": "sv-6-f2-n-j6",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          160,
+          980
+        ],
+        [
+          190,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-180",
+      "from": "sv-6-f2-n-j6",
+      "to": "sv-6-f2-n-j9",
+      "kind": "corridor",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          190,
+          980
+        ],
+        [
+          200,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-181",
+      "from": "sv-6-f2-n-j9",
+      "to": "sv-6-f2-n-j7",
+      "kind": "corridor",
+      "weight": 50.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          200,
+          980
+        ],
+        [
+          250,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-182",
+      "from": "sv-6-f2-n-j7",
+      "to": "sv-6-f2-n-j10",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          250,
+          980
+        ],
+        [
+          275,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-183",
+      "from": "sv-6-f2-n-j10",
+      "to": "sv-6-f2-n-j1",
+      "kind": "corridor",
+      "weight": 45.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          275,
+          980
+        ],
+        [
+          320,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-184",
+      "from": "sv-6-f2-n-j1",
+      "to": "sv-6-f2-n-j8",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          320,
+          980
+        ],
+        [
+          345,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-185",
+      "from": "sv-6-f2-n-j8",
+      "to": "sv-6-f2-n-j11",
+      "kind": "corridor",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          345,
+          980
+        ],
+        [
+          355,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-186",
+      "from": "sv-6-f2-n-j11",
+      "to": "sv-6-f2-n-j3",
+      "kind": "corridor",
+      "weight": 30.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          355,
+          980
+        ],
+        [
+          385,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-187",
+      "from": "sv-6-f2-n-j4",
+      "to": "sv-6-f2-n-j27",
+      "kind": "corridor",
+      "weight": 105.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          100,
+          300
+        ],
+        [
+          205,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-188",
+      "from": "sv-6-f2-n-j27",
+      "to": "sv-6-f2-n-j5",
+      "kind": "corridor",
+      "weight": 115.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          205,
+          300
+        ],
+        [
+          320,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-189",
+      "from": "sv-6-f2-n-j30",
+      "to": "sv-6-f2-n-j2",
+      "kind": "corridor",
+      "weight": 70.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          160,
+          910
+        ],
+        [
+          160,
+          980
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-190",
+      "from": "sv-6-f2-n-j2",
+      "to": "sv-6-f2-n-j31",
+      "kind": "corridor",
+      "weight": 60.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          160,
+          980
+        ],
+        [
+          160,
+          1040
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-191",
+      "from": "sv-6-f1-n-west",
+      "to": "sv-6-f2-n-west",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": null
+    },
+    {
+      "id": "sv-edge-192",
+      "from": "sv-6-f1-n-east",
+      "to": "sv-6-f2-n-east",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": null
+    },
+    {
+      "id": "sv-edge-193",
+      "from": "sv-6-f2-n-west",
+      "to": "cw-6-f3-node-west",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": null
+    },
+    {
+      "id": "sv-edge-194",
+      "from": "sv-6-f2-n-east",
+      "to": "cw-6-f3-node-east",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": null
+    },
+    {
+      "id": "sv-edge-195",
+      "from": "sv-6-f4-annex-n-door-401a",
+      "to": "sv-6-f4-annex-n-j6",
+      "kind": "door",
+      "weight": 31.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          249,
+          583
+        ],
+        [
+          280,
+          583
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-196",
+      "from": "sv-6-f4-annex-n-door-401b",
+      "to": "sv-6-f4-annex-n-j7",
+      "kind": "door",
+      "weight": 31.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          249,
+          662
+        ],
+        [
+          280,
+          662
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-197",
+      "from": "sv-6-f4-annex-n-door-403v",
+      "to": "sv-6-f4-annex-n-j8",
+      "kind": "door",
+      "weight": 35.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          217,
+          890
+        ],
+        [
+          217,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-198",
+      "from": "sv-6-f4-annex-n-door-403b",
+      "to": "sv-6-f4-annex-n-j3",
+      "kind": "door",
+      "weight": 21.587033144922902,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          189,
+          860
+        ],
+        [
+          210,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-199",
+      "from": "sv-6-f4-annex-n-door-403a",
+      "to": "sv-6-f4-annex-n-j9",
+      "kind": "door",
+      "weight": 33.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          220,
+          822
+        ],
+        [
+          220,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-200",
+      "from": "sv-6-f4-annex-n-door-405",
+      "to": "sv-6-f4-annex-n-j10",
+      "kind": "door",
+      "weight": 1.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          281,
+          907
+        ],
+        [
+          280,
+          907
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-201",
+      "from": "sv-6-f4-annex-n-door-407",
+      "to": "sv-6-f4-annex-n-j11",
+      "kind": "door",
+      "weight": 13.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          342,
+          883
+        ],
+        [
+          342,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-202",
+      "from": "sv-6-f4-annex-n-door-406",
+      "to": "sv-6-f4-annex-n-j12",
+      "kind": "door",
+      "weight": 36.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          316,
+          738
+        ],
+        [
+          280,
+          738
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-203",
+      "from": "sv-6-f4-annex-n-door-404",
+      "to": "sv-6-f4-annex-n-j13",
+      "kind": "door",
+      "weight": 34.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          314,
+          660
+        ],
+        [
+          280,
+          660
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-204",
+      "from": "sv-6-f4-annex-n-door-402",
+      "to": "sv-6-f4-annex-n-j14",
+      "kind": "door",
+      "weight": 33.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          313,
+          560
+        ],
+        [
+          280,
+          560
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-205",
+      "from": "sv-6-f4-annex-n-north",
+      "to": "sv-6-f4-annex-n-j1",
+      "kind": "corridor",
+      "weight": 68.59300255857006,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          212,
+          501
+        ],
+        [
+          280,
+          510
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-206",
+      "from": "sv-6-f4-annex-n-south",
+      "to": "sv-6-f4-annex-n-j1",
+      "kind": "corridor",
+      "weight": 84.48076704197234,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          364,
+          501
+        ],
+        [
+          280,
+          510
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-207",
+      "from": "sv-6-f4-annex-n-west",
+      "to": "sv-6-f4-annex-n-j5",
+      "kind": "corridor",
+      "weight": 62.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          465,
+          932
+        ],
+        [
+          465,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-208",
+      "from": "sv-6-f4-annex-n-j0",
+      "to": "sv-6-f4-annex-n-j10",
+      "kind": "corridor",
+      "weight": 3.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          910
+        ],
+        [
+          280,
+          907
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-209",
+      "from": "sv-6-f4-annex-n-j10",
+      "to": "sv-6-f4-annex-n-j4",
+      "kind": "corridor",
+      "weight": 37.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          907
+        ],
+        [
+          280,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-210",
+      "from": "sv-6-f4-annex-n-j4",
+      "to": "sv-6-f4-annex-n-j2",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          870
+        ],
+        [
+          280,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-211",
+      "from": "sv-6-f4-annex-n-j2",
+      "to": "sv-6-f4-annex-n-j12",
+      "kind": "corridor",
+      "weight": 117.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          855
+        ],
+        [
+          280,
+          738
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-212",
+      "from": "sv-6-f4-annex-n-j12",
+      "to": "sv-6-f4-annex-n-j7",
+      "kind": "corridor",
+      "weight": 76.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          738
+        ],
+        [
+          280,
+          662
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-213",
+      "from": "sv-6-f4-annex-n-j7",
+      "to": "sv-6-f4-annex-n-j13",
+      "kind": "corridor",
+      "weight": 2.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          662
+        ],
+        [
+          280,
+          660
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-214",
+      "from": "sv-6-f4-annex-n-j13",
+      "to": "sv-6-f4-annex-n-j6",
+      "kind": "corridor",
+      "weight": 77.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          660
+        ],
+        [
+          280,
+          583
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-215",
+      "from": "sv-6-f4-annex-n-j6",
+      "to": "sv-6-f4-annex-n-j14",
+      "kind": "corridor",
+      "weight": 23.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          583
+        ],
+        [
+          280,
+          560
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-216",
+      "from": "sv-6-f4-annex-n-j14",
+      "to": "sv-6-f4-annex-n-j1",
+      "kind": "corridor",
+      "weight": 50.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          560
+        ],
+        [
+          280,
+          510
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-217",
+      "from": "sv-6-f4-annex-n-j3",
+      "to": "sv-6-f4-annex-n-j8",
+      "kind": "corridor",
+      "weight": 7.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          210,
+          855
+        ],
+        [
+          217,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-218",
+      "from": "sv-6-f4-annex-n-j8",
+      "to": "sv-6-f4-annex-n-j9",
+      "kind": "corridor",
+      "weight": 3.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          217,
+          855
+        ],
+        [
+          220,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-219",
+      "from": "sv-6-f4-annex-n-j9",
+      "to": "sv-6-f4-annex-n-j2",
+      "kind": "corridor",
+      "weight": 60.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          220,
+          855
+        ],
+        [
+          280,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-220",
+      "from": "sv-6-f4-annex-n-j4",
+      "to": "sv-6-f4-annex-n-j11",
+      "kind": "corridor",
+      "weight": 62.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          870
+        ],
+        [
+          342,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-221",
+      "from": "sv-6-f4-annex-n-j11",
+      "to": "sv-6-f4-annex-n-j5",
+      "kind": "corridor",
+      "weight": 123.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          342,
+          870
+        ],
+        [
+          465,
+          870
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-222",
+      "from": "sv-7-f1-n-door-101",
+      "to": "sv-7-f1-n-j6",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          1136
+        ],
+        [
+          350,
+          1136
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-223",
+      "from": "sv-7-f1-n-door-104",
+      "to": "sv-7-f1-n-j7",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          889
+        ],
+        [
+          350,
+          889
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-224",
+      "from": "sv-7-f1-n-door-105",
+      "to": "sv-7-f1-n-j8",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          855
+        ],
+        [
+          350,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-225",
+      "from": "sv-7-f1-n-door-106",
+      "to": "sv-7-f1-n-j9",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          818
+        ],
+        [
+          350,
+          818
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-226",
+      "from": "sv-7-f1-n-door-107",
+      "to": "sv-7-f1-n-j10",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          719
+        ],
+        [
+          350,
+          719
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-227",
+      "from": "sv-7-f1-n-door-108",
+      "to": "sv-7-f1-n-j11",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          660
+        ],
+        [
+          350,
+          660
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-228",
+      "from": "sv-7-f1-n-door-110",
+      "to": "sv-7-f1-n-j12",
+      "kind": "door",
+      "weight": 14.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          336,
+          548
+        ],
+        [
+          350,
+          548
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-229",
+      "from": "sv-7-f1-n-door-115",
+      "to": "sv-7-f1-n-j13",
+      "kind": "door",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          285,
+          355
+        ],
+        [
+          285,
+          365
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-230",
+      "from": "sv-7-f1-n-wing-stair",
+      "to": "sv-7-f1-n-j14",
+      "kind": "corridor",
+      "weight": 36.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          314,
+          944
+        ],
+        [
+          350,
+          944
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-231",
+      "from": "sv-7-f1-n-hall-stair",
+      "to": "sv-7-f1-n-j15",
+      "kind": "corridor",
+      "weight": 38.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          388,
+          451
+        ],
+        [
+          350,
+          451
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-232",
+      "from": "sv-7-f1-n-entry",
+      "to": "sv-7-f1-n-j16",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          525,
+          300
+        ],
+        [
+          510,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-233",
+      "from": "sv-7-f1-n-j0",
+      "to": "sv-7-f1-n-j17",
+      "kind": "corridor",
+      "weight": 5.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          360
+        ],
+        [
+          350,
+          365
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-234",
+      "from": "sv-7-f1-n-j17",
+      "to": "sv-7-f1-n-j15",
+      "kind": "corridor",
+      "weight": 86.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          365
+        ],
+        [
+          350,
+          451
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-235",
+      "from": "sv-7-f1-n-j15",
+      "to": "sv-7-f1-n-j12",
+      "kind": "corridor",
+      "weight": 97.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          451
+        ],
+        [
+          350,
+          548
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-236",
+      "from": "sv-7-f1-n-j12",
+      "to": "sv-7-f1-n-j11",
+      "kind": "corridor",
+      "weight": 112.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          548
+        ],
+        [
+          350,
+          660
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-237",
+      "from": "sv-7-f1-n-j11",
+      "to": "sv-7-f1-n-j10",
+      "kind": "corridor",
+      "weight": 59.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          660
+        ],
+        [
+          350,
+          719
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-238",
+      "from": "sv-7-f1-n-j10",
+      "to": "sv-7-f1-n-j9",
+      "kind": "corridor",
+      "weight": 99.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          719
+        ],
+        [
+          350,
+          818
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-239",
+      "from": "sv-7-f1-n-j9",
+      "to": "sv-7-f1-n-j8",
+      "kind": "corridor",
+      "weight": 37.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          818
+        ],
+        [
+          350,
+          855
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-240",
+      "from": "sv-7-f1-n-j8",
+      "to": "sv-7-f1-n-j7",
+      "kind": "corridor",
+      "weight": 34.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          855
+        ],
+        [
+          350,
+          889
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-241",
+      "from": "sv-7-f1-n-j7",
+      "to": "sv-7-f1-n-j14",
+      "kind": "corridor",
+      "weight": 55.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          889
+        ],
+        [
+          350,
+          944
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-242",
+      "from": "sv-7-f1-n-j14",
+      "to": "sv-7-f1-n-j6",
+      "kind": "corridor",
+      "weight": 192.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          944
+        ],
+        [
+          350,
+          1136
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-243",
+      "from": "sv-7-f1-n-j6",
+      "to": "sv-7-f1-n-j1",
+      "kind": "corridor",
+      "weight": 24.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          1136
+        ],
+        [
+          350,
+          1160
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-244",
+      "from": "sv-7-f1-n-j3",
+      "to": "sv-7-f1-n-j16",
+      "kind": "corridor",
+      "weight": 85.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          425,
+          300
+        ],
+        [
+          510,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-245",
+      "from": "sv-7-f1-n-j16",
+      "to": "sv-7-f1-n-j2",
+      "kind": "corridor",
+      "weight": 15.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          510,
+          300
+        ],
+        [
+          525,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-246",
+      "from": "sv-7-f1-n-j3",
+      "to": "sv-7-f1-n-j4",
+      "kind": "corridor",
+      "weight": 65.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          425,
+          300
+        ],
+        [
+          425,
+          365
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-247",
+      "from": "sv-7-f1-n-j5",
+      "to": "sv-7-f1-n-j13",
+      "kind": "corridor",
+      "weight": 5.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          280,
+          365
+        ],
+        [
+          285,
+          365
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-248",
+      "from": "sv-7-f1-n-j13",
+      "to": "sv-7-f1-n-j17",
+      "kind": "corridor",
+      "weight": 65.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          285,
+          365
+        ],
+        [
+          350,
+          365
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-249",
+      "from": "sv-7-f1-n-j17",
+      "to": "sv-7-f1-n-j4",
+      "kind": "corridor",
+      "weight": 75.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          350,
+          365
+        ],
+        [
+          425,
+          365
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-250",
+      "from": "sv-7-f2-n-door-201",
+      "to": "sv-7-f2-n-j6",
+      "kind": "door",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          397,
+          1123
+        ],
+        [
+          415,
+          1123
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-251",
+      "from": "sv-7-f2-n-door-204",
+      "to": "sv-7-f2-n-j7",
+      "kind": "door",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          397,
+          825
+        ],
+        [
+          415,
+          825
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-252",
+      "from": "sv-7-f2-n-door-205",
+      "to": "sv-7-f2-n-j8",
+      "kind": "door",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          397,
+          655
+        ],
+        [
+          415,
+          655
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-253",
+      "from": "sv-7-f2-n-door-206",
+      "to": "sv-7-f2-n-j9",
+      "kind": "door",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          397,
+          595
+        ],
+        [
+          415,
+          595
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-254",
+      "from": "sv-7-f2-n-door-207",
+      "to": "sv-7-f2-n-j10",
+      "kind": "door",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          397,
+          435
+        ],
+        [
+          415,
+          435
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-255",
+      "from": "sv-7-f2-n-wing-stair",
+      "to": "sv-7-f2-n-j11",
+      "kind": "corridor",
+      "weight": 69.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          346,
+          879
+        ],
+        [
+          415,
+          879
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-256",
+      "from": "sv-7-f1-n-wing-stair",
+      "to": "sv-7-f2-n-wing-stair",
+      "kind": "stairs",
+      "weight": 1,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": null
+    },
+    {
+      "id": "sv-edge-257",
+      "from": "sv-7-f2-n-door-206-reading",
+      "to": "sv-7-f2-n-j12",
+      "kind": "door",
+      "weight": 17.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          432,
+          313
+        ],
+        [
+          415,
+          313
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-258",
+      "from": "sv-7-f2-n-j0",
+      "to": "sv-7-f2-n-j6",
+      "kind": "corridor",
+      "weight": 32.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          1155
+        ],
+        [
+          415,
+          1123
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-259",
+      "from": "sv-7-f2-n-j6",
+      "to": "sv-7-f2-n-j11",
+      "kind": "corridor",
+      "weight": 244.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          1123
+        ],
+        [
+          415,
+          879
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-260",
+      "from": "sv-7-f2-n-j11",
+      "to": "sv-7-f2-n-j7",
+      "kind": "corridor",
+      "weight": 54.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          879
+        ],
+        [
+          415,
+          825
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-261",
+      "from": "sv-7-f2-n-j7",
+      "to": "sv-7-f2-n-j8",
+      "kind": "corridor",
+      "weight": 170.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          825
+        ],
+        [
+          415,
+          655
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-262",
+      "from": "sv-7-f2-n-j8",
+      "to": "sv-7-f2-n-j9",
+      "kind": "corridor",
+      "weight": 60.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          655
+        ],
+        [
+          415,
+          595
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-263",
+      "from": "sv-7-f2-n-j9",
+      "to": "sv-7-f2-n-j10",
+      "kind": "corridor",
+      "weight": 160.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          595
+        ],
+        [
+          415,
+          435
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-264",
+      "from": "sv-7-f2-n-j10",
+      "to": "sv-7-f2-n-j12",
+      "kind": "corridor",
+      "weight": 122.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          435
+        ],
+        [
+          415,
+          313
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-265",
+      "from": "sv-7-f2-n-j12",
+      "to": "sv-7-f2-n-j2",
+      "kind": "corridor",
+      "weight": 13.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          313
+        ],
+        [
+          415,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-266",
+      "from": "sv-7-f2-n-j2",
+      "to": "sv-7-f2-n-j1",
+      "kind": "corridor",
+      "weight": 10.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          415,
+          300
+        ],
+        [
+          415,
+          290
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-267",
+      "from": "sv-7-f2-n-j3",
+      "to": "sv-7-f2-n-j2",
+      "kind": "corridor",
+      "weight": 150.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          565,
+          300
+        ],
+        [
+          415,
+          300
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-268",
+      "from": "sv-7-f2-n-j3",
+      "to": "sv-7-f2-n-j4",
+      "kind": "corridor",
+      "weight": 75.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          565,
+          300
+        ],
+        [
+          565,
+          225
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-269",
+      "from": "sv-7-f2-n-j5",
+      "to": "sv-7-f2-n-j4",
+      "kind": "corridor",
+      "weight": 25.0,
+      "direction": "both",
+      "status": "plan",
+      "stepFree": null,
+      "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
+      "verifiedAt": null,
+      "geometry": [
+        [
+          590,
+          225
+        ],
+        [
+          565,
+          225
+        ]
+      ]
+    },
+    {
+      "id": "sv-edge-270",
+      "from": "sv-7-f3-n-door-301",
+      "to": "sv-7-f3-n-j6",
+      "kind": "door",
+      "weight": 18.0,
+      "direction": "both",
+      "status": "plan",
       "stepFree": null,
       "source": "Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена",
       "verifiedAt": null,
