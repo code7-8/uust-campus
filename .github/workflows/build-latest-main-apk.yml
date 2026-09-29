@@ -1,0 +1,36 @@
+name: Build latest main APK
+
+on:
+  push:
+    branches:
+      - build/latest-main-apk
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure Android SDK 35
+        shell: pwsh
+        run: |
+          $sdkmanager = Join-Path $env:ANDROID_HOME 'cmdline-tools\latest\bin\sdkmanager.bat'
+          if (-not (Test-Path $sdkmanager)) {
+            $sdkmanager = Get-ChildItem "$env:ANDROID_HOME\cmdline-tools" -Recurse -Filter sdkmanager.bat | Select-Object -First 1 -ExpandProperty FullName
+          }
+          & $sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Run tests
+        shell: pwsh
+        run: |
+          npm test
+          node tools/validate-maps.mjs
+      - name: Build APK
+        shell: pwsh
+        run: |
+          $env:JAVA_HOME = $env:JAVA_HOME_17_X64
+          .\tools\build.ps1
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: uust-campus-latest-main
+          path: artifacts/uust-campus-0.3.2.apk
+          if-no-files-found: error
