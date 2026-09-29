@@ -19,8 +19,10 @@ export function campusSvg(data, selected, route=null) {
     ${route?[...endpoints].map((id,index)=>{const point=campusPoint(nodes.get(id).point),label=endpoints.size===1?'А/Б':index===0?'А':'Б';return `<g data-campus-building="${esc(nodes.get(id).buildingId||'')}" class="route-endpoint ${index?'end':'start'}"><circle cx="${point[0]}" cy="${point[1]}" r="18"/><text x="${point[0]}" y="${point[1]}" dy=".35em">${label}</text></g>`;}).join(''):''}</g>`;
 }
 
-export function floorSvg(data, floor, selected, route, typeFilter='all',sourcePlan=false) {
+export function floorSvg(data, floor, selected, route, typeFilter='all',sourcePlan=false,mirrorX=false) {
   sourcePlan=sourcePlan&&!!floor.image;
+  // Reflect geometry as a whole, then restore the orientation of each label.
+  const upright=x=>mirrorX?` transform="translate(${2*x} 0) scale(-1 1)"`:'';
   const places=data.locations.filter(l=>l.floorId===floor.id);
   const nodes=new Map(data.nodes.map(n=>[n.id,n]));
   const activeLines=(route?.links||[]).filter(l=>l.edge.geometry && nodes.get(l.from)?.floorId===floor.id && nodes.get(l.to)?.floorId===floor.id);
@@ -33,10 +35,10 @@ export function floorSvg(data, floor, selected, route, typeFilter='all',sourcePl
     <g class="floor-walls">${floor.walls.map(w=>`<polyline points="${points(w)}"/>`).join('')}</g>
     <g class="floor-doors">${floor.doors.map(d=>`<polyline points="${points(d.points)}"/>`).join('')}</g>
     <g class="route-halo">${activeLines.map(l=>`<polyline points="${points(l.edge.geometry)}"/>`).join('')}</g><g class="route-line">${activeLines.map(l=>`<polyline points="${points(l.edge.geometry)}"/>`).join('')}</g>
-    ${places.filter(l=>l.type==='room').map(l=>`<text data-room-width="${Math.max(...floor.areas.find(a=>a.id===l.areaId).points.map(p=>p[0]))-Math.min(...floor.areas.find(a=>a.id===l.areaId).points.map(p=>p[0]))}" class="room-label ${l.id===selected?.id?'is-selected':''}" x="${l.point[0]}" y="${l.point[1]}" dy=".35em">${esc(l.number)}</text>`).join('')}
-    ${pois.filter(l=>!route||![route.startId,route.endId].includes(l.nodeId)).map(l=>`<g class="floor-poi ${l.id===selected?.id?'is-selected':''} ${route?.nodeIds.includes(l.nodeId)?'on-route':''}" ${targetAttrs(l)}><circle cx="${l.point[0]}" cy="${l.point[1]}" r="13"/><text x="${l.point[0]}" y="${l.point[1]}" dy=".35em">${symbols[l.type]||'•'}</text></g>`).join('')}
-    ${route?[['start',route.startId,'А'],['end',route.endId,'Б']].map(([kind,id,label])=>{const n=nodes.get(id);return n.floorId===floor.id?`<g class="route-endpoint ${kind}"><${kind==='start'?'circle':'rect'} ${kind==='start'?`cx="${n.point[0]}" cy="${n.point[1]}" r="12"`:`x="${n.point[0]-12}" y="${n.point[1]-12}" width="24" height="24" rx="4"`}/><text x="${n.point[0]}" y="${n.point[1]}" dy=".35em">${label}</text></g>`:'';}).join(''):''}
-    ${selected?.floorId===floor.id?`<g class="selection-caption"><text x="${selected.point[0]}" y="${selected.point[1]-24}" text-anchor="middle">${esc(selected.name)}</text></g>`:''}</g>`;
+    ${places.filter(l=>l.type==='room').map(l=>`<text data-room-width="${Math.max(...floor.areas.find(a=>a.id===l.areaId).points.map(p=>p[0]))-Math.min(...floor.areas.find(a=>a.id===l.areaId).points.map(p=>p[0]))}" class="room-label ${l.id===selected?.id?'is-selected':''}" x="${l.point[0]}" y="${l.point[1]}"${upright(l.point[0])} dy=".35em">${esc(l.number)}</text>`).join('')}
+    ${pois.filter(l=>!route||![route.startId,route.endId].includes(l.nodeId)).map(l=>`<g class="floor-poi ${l.id===selected?.id?'is-selected':''} ${route?.nodeIds.includes(l.nodeId)?'on-route':''}" ${targetAttrs(l)}><circle cx="${l.point[0]}" cy="${l.point[1]}" r="13"/><text x="${l.point[0]}" y="${l.point[1]}"${upright(l.point[0])} dy=".35em">${symbols[l.type]||'•'}</text></g>`).join('')}
+    ${route?[['start',route.startId,'А'],['end',route.endId,'Б']].map(([kind,id,label])=>{const n=nodes.get(id);return n.floorId===floor.id?`<g class="route-endpoint ${kind}"><${kind==='start'?'circle':'rect'} ${kind==='start'?`cx="${n.point[0]}" cy="${n.point[1]}" r="12"`:`x="${n.point[0]-12}" y="${n.point[1]-12}" width="24" height="24" rx="4"`}/><text x="${n.point[0]}" y="${n.point[1]}"${upright(n.point[0])} dy=".35em">${label}</text></g>`:'';}).join(''):''}
+    ${selected?.floorId===floor.id?`<g class="selection-caption"><text x="${selected.point[0]}" y="${selected.point[1]-24}"${upright(selected.point[0])} text-anchor="middle">${esc(selected.name)}</text></g>`:''}</g>`;
 }
 
 // Every floor is drawn in the same campus coordinate space. Zoom changes only
@@ -45,6 +47,6 @@ export function sceneSvg(data,layout,shownFloors,selected,route,typeFilter,sourc
   return campusSvg({...data,campus:data},selected,route)+shownFloors.map(floor=>{
     const p=layout.plans.get(floor.id);if(!p)return '';
     const [x,y,w,h]=floor.viewBox,clip='plan-clip-'+floor.id;
-    return `<g class="map-indoor-layer" data-scene-floor="${esc(floor.id)}" data-scene-building="${esc(floor.buildingId)}" aria-hidden="true" transform="translate(${p.tx} ${p.ty}) scale(${p.scale})"><defs><clipPath id="${esc(clip)}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs><rect class="indoor-background" x="${x}" y="${y}" width="${w}" height="${h}" rx="8"/><g clip-path="url(#${esc(clip)})">${floorSvg(data,floor,selected,route,typeFilter,sourceFloorId===floor.id)}</g></g>`;
+    return `<g class="map-indoor-layer" data-scene-floor="${esc(floor.id)}" data-scene-building="${esc(floor.buildingId)}" aria-hidden="true" transform="translate(${p.tx} ${p.ty}) scale(${p.scaleX} ${p.scale})"><defs><clipPath id="${esc(clip)}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs><rect class="indoor-background" x="${x}" y="${y}" width="${w}" height="${h}" rx="8"/><g clip-path="url(#${esc(clip)})">${floorSvg(data,floor,selected,route,typeFilter,sourceFloorId===floor.id,p.mirrorX)}</g></g>`;
   }).join('');
 }
