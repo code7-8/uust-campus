@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 pack = runpy.run_path(str(ROOT/'tools/prepare_campusway.py'))['pack']
 SOURCE = 'Планы этажей, фото команды от 28.09.2026; доступность проходов не проверена'
-pack.update(dataVersion='survey-2026.09.29', source='CampusWay (этажи 3–5 корпуса 6) и планы этажей, фото команды от 28.09.2026')
+pack.update(dataVersion='survey-2026.09.29-layout1', source='CampusWay (этажи 3–5 корпуса 6) и планы этажей, фото команды от 28.09.2026')
 # Only these explicit ground-floor anchors receive a manual campus handoff.
 # An isolated annex is not implicitly connected to a building centre.
 pack['campusAnchors'] = []
@@ -33,10 +33,11 @@ def edge(a, b, kind='corridor'):
 
 
 class Floor:
-    def __init__(self, building, level, photos, *, key=None, name=None, transform='cw', note=None, scale=.4):
+    def __init__(self, building, level, photos, *, key=None, name=None, transform='cw', mirror=False, note=None, scale=.4):
         self.id=f'sv-{building}-f{key or level}'
         self.building=str(building)
         self.transform=transform
+        self.mirror=mirror
         self.f=dict(id=self.id, campusId=pack['campusId'], buildingId=self.building,
             name=name or f'{level} этаж', order=level, source=SOURCE, sourceLabel='Планы команды · 28.09.2026',
             sourcePhotos=photos, verifiedAt=None, costScale=scale, areas=[],walls=[],doors=[])
@@ -48,7 +49,11 @@ class Floor:
 
     def point(self, p):
         x,y=p
-        return [y,1280-x] if self.transform=='cw' else [900-y,x] if self.transform=='reverse' else [x,y]
+        p=[y,1280-x] if self.transform=='cw' else [900-y,x] if self.transform=='reverse' else [x,y]
+        # Building 7 classrooms face Karl Marx Street (left on the campus map).
+        # Reflect coordinates at import so rooms, doors, POIs and route geometry
+        # stay aligned, while SVG labels keep their normal reading direction.
+        return [900-p[0],p[1]] if self.mirror else p
 
     def node(self,key,p,kind='junction',name='Коридор',connector=None):
         n=dict(id=self.id+'-n-'+slug(key), campusId=pack['campusId'],buildingId=self.building,
@@ -260,7 +265,7 @@ f645.finish()
 
 # 7/1 is printed facing the other way from floors 2–4. Rotate it by 180°
 # relative to their source orientation; room numbers do not define the floor.
-f71=Floor(7,1,[56,57,77,104,105,106],transform='reverse',scale=.42)
+f71=Floor(7,1,[56,57,77,104,105,106],transform='reverse',mirror=True,scale=.42)
 f71.hall([(360,350),(1160,350)],20)
 f71.hall([(300,525),(300,425),(365,425),(365,280)],20)
 f71.area('vestibule',[190,425,413,513])
@@ -290,7 +295,7 @@ f71.finish()
 
 previous=w71
 for level,photos in [(2,[76,102,103]),(3,[75]),(4,[74])]:
-    f=Floor(7,level,photos,scale=.42)
+    f=Floor(7,level,photos,mirror=True,scale=.42)
     # Aligned plan tracings, with the auditorium and library wings retained.
     f.hall([(125,485),(990,485)],20)
     f.hall([(980,485),(980,335),(1055,335),(1055,310)],20)

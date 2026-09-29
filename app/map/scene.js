@@ -1,8 +1,23 @@
 import {campusPoint} from './svg.js';
 
 // Display placement only: the source plans have no surveyed campus coordinates.
-// Keep their proportions and fit them into the outline's bounding box. Do not
+// Keep their proportions and fit them into the whole outline's bounding box. Do not
 // use this transform for route weights, entrances, distances or GPS.
+const validBox=box=>Array.isArray(box)&&box.length===4&&box.every(Number.isFinite)&&box[2]>0&&box[3]>0;
+const campusFrame=box=>{
+  const corner=campusPoint([box[0]+box[2],box[1]]);
+  return [corner[0],corner[1],box[3],box[2]];
+};
+
+export function fitFloorPlan(floor,frame) {
+  const box=floor.viewBox;
+  if(!validBox(frame)||!validBox(box))return null;
+  // One positive scale for both axes: never stretch, crop or reflect a plan.
+  const scale=.92*Math.min(frame[2]/box[2],frame[3]/box[3]);
+  const x=frame[0]+(frame[2]-box[2]*scale)/2,y=frame[1]+(frame[3]-box[3]*scale)/2;
+  return {floorId:floor.id,buildingId:floor.buildingId,scale,tx:x-box[0]*scale,ty:y-box[1]*scale,box:[x,y,box[2]*scale,box[3]*scale]};
+}
+
 export function createSceneLayout(buildings,floors) {
   const ns='http://www.w3.org/2000/svg',probe=document.createElementNS(ns,'svg');
   probe.setAttribute('aria-hidden','true');
@@ -12,16 +27,16 @@ export function createSceneLayout(buildings,floors) {
   try {
     for(const building of buildings){
       const path=document.createElementNS(ns,'path');path.setAttribute('d',building.path);probe.append(path);
-      const box=path.getBBox(),corner=campusPoint([box.x+box.width,box.y]);
-      frames.set(building.id,[corner[0],corner[1],box.height,box.width]);path.remove();
+      const box=path.getBBox(),frame=campusFrame([box.x,box.y,box.width,box.height]);
+      frames.set(building.id,frame);
+      path.remove();
     }
   } finally {probe.remove();}
   for(const floor of floors){
-    const frame=frames.get(floor.buildingId),box=floor.viewBox;
-    if(!frame||!frame[2]||!frame[3])continue;
-    const scale=.92*Math.min(frame[2]/box[2],frame[3]/box[3]);
-    const x=frame[0]+(frame[2]-box[2]*scale)/2,y=frame[1]+(frame[3]-box[3]*scale)/2;
-    plans.set(floor.id,{floorId:floor.id,buildingId:floor.buildingId,scale,tx:x-box[0]*scale,ty:y-box[1]*scale,box:[x,y,box[2]*scale,box[3]*scale]});
+    // Use the complete building dimensions. Substituting a narrower wing here
+    // shrinks the floor relative to the building, even with uniform scaling.
+    const plan=fitFloorPlan(floor,frames.get(floor.buildingId));
+    if(plan)plans.set(floor.id,plan);
   }
   return {frames,plans};
 }
