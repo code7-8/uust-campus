@@ -20,7 +20,9 @@ export function buildReminders({rows=[],events=[],favorites=[],group=null,config
   const items=[];
   const add=(id,title,body,start,tab,date)=>{
     const at=start-settings.leadMinutes*60000;
-    if(Number.isFinite(at)&&at>now&&!quietAt(at,settings))items.push({id,title,body,at,start,tab,date});
+    // Keep due reminders until the event starts: an inexact Android alarm may
+    // still be waiting when a feed refresh rebuilds this queue.
+    if(Number.isFinite(at)&&start>now&&!quietAt(at,settings))items.push({id,title,body,at,start,tab,date});
   };
   if(settings.lessons&&group&&config){
     let date=dateKey(new Date(now));if(date<config.academicStart)date=config.academicStart;
@@ -42,14 +44,15 @@ export function createNotifications({storage,onOpen,onError=()=>{}}) {
   let settings=notificationSettings(storage.read('notifications')),items=[],signature='';
   const native=window.CampusAndroid;
   const nativeSupported=typeof native?.syncReminders==='function';
-  let delivered=new Set(storage.read('notificationDelivered',[]));
+  const savedDelivered=storage.read('notificationDelivered',[]);
+  let delivered=new Set(Array.isArray(savedDelivered)?savedDelivered:[]);
   function status(){
     if(nativeSupported){try{return {...JSON.parse(native.notificationStatus()),native:true};}catch{return {native:true,enabled:false};}}
     return {native:false,supported:'Notification' in window,enabled:'Notification' in window&&Notification.permission==='granted',permission:'Notification' in window?Notification.permission:'unsupported'};
   }
   function sync(input){
-    tick();
     items=buildReminders({...input,settings});
+    tick();
     const next=JSON.stringify(items);
     if(next===signature)return;
     if(nativeSupported){try{native.syncReminders(next);}catch{onError('Не удалось сохранить напоминания Android');return;}}
@@ -64,14 +67,22 @@ export function createNotifications({storage,onOpen,onError=()=>{}}) {
     if(nativeSupported||!settings.enabled||!status().enabled)return;
     const now=Date.now();
     for(const item of items){
-      if(item.at>now||item.start<=now||delivered.has(item.id))continue;
-      try{const n=new Notification(item.title,{body:item.body,tag:item.id});n.onclick=()=>{window.focus();onOpen(item);n.close();};delivered.add(item.id);}catch{}
+      const key=item.id+':'+item.start;
+      if(item.at>now||item.start<=now||delivered.has(key))continue;
+      try{const n=new Notification(item.title,{body:item.body,tag:item.id});n.onclick=()=>{window.focus();onOpen(item);n.close();};delivered.add(key);}catch{onError('Не удалось показать уведомление. Проверьте разрешения браузера.');}
     }
     if(delivered.size>5000)delivered=new Set([...delivered].slice(-2500));
     storage.write('notificationDelivered',[...delivered]);
   }
   setInterval(tick,15000);
-  return {get:()=>({...settings}),items:()=>items,status,sync,save,request,
+  function test(){
+    if(!status().enabled)throw new Error('Сначала разрешите уведомления в настройках устройства.');
+    if(nativeSupported){
+      if(typeof native.testNotification!=='function')throw new Error('Для проверки обновите Android-приложение.');
+      native.testNotification();
+    }else new Notification('Кампус · проверка',{body:'Уведомления разрешены. Напоминания о парах и событиях появятся здесь.',tag:'campus-test'});
+  }
+  return {get:()=>({...settings}),items:()=>items,status,sync,save,request,test,
     systemSettings:()=>nativeSupported&&native.openNotificationSettings(),
     exactSettings:()=>nativeSupported&&native.requestExactReminders()};
 }

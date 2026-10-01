@@ -64,7 +64,7 @@ public final class MainActivity extends Activity {
                 try {
                     String asset = path.equals("/") ? "index.html" : path.substring(1);
                     if (asset.contains("..")) return response(403, "text/plain", "Blocked");
-                    String mime = asset.endsWith(".js") ? "application/javascript" : asset.endsWith(".css") ? "text/css" : asset.endsWith(".json") ? "application/json" : asset.endsWith(".svg") ? "image/svg+xml" : asset.endsWith(".png") ? "image/png" : asset.endsWith(".jpg") ? "image/jpeg" : asset.endsWith(".woff2") ? "font/woff2" : "text/html";
+                    String mime = asset.endsWith(".js") ? "application/javascript" : asset.endsWith(".css") ? "text/css" : asset.endsWith(".json") ? "application/json" : asset.endsWith(".svg") ? "image/svg+xml" : asset.endsWith(".png") ? "image/png" : asset.endsWith(".webp") ? "image/webp" : (asset.endsWith(".jpg")||asset.endsWith(".jpeg")) ? "image/jpeg" : asset.endsWith(".woff2") ? "font/woff2" : "text/html";
                     return new WebResourceResponse(mime, "UTF-8", getAssets().open(asset));
                 } catch (IOException e) {android.util.Log.e("CampusAssets", path, e); return response(404, "text/plain", "Not found");}
             }
@@ -135,6 +135,9 @@ public final class MainActivity extends Activity {
     }
     public final class CampusActions {
         @JavascriptInterface public String notificationStatus() {return ReminderReceiver.status(MainActivity.this);}
+        @JavascriptInterface public void testNotification() {
+            try{ReminderReceiver.test(MainActivity.this);}catch(Exception e){throw new IllegalStateException("Проверьте разрешение уведомлений Android",e);}
+        }
         @JavascriptInterface public String consumeReminderTarget() {String result=reminderTarget;reminderTarget="null";return result;}
         @JavascriptInterface public void syncReminders(String payload) {
             try{ReminderReceiver.replace(MainActivity.this,payload);}catch(Exception e){throw new IllegalArgumentException("Не удалось сохранить напоминания",e);}

@@ -27,6 +27,7 @@ try{
   const base=await start();browser=await chromium.launch({headless:true,channel:process.env.PLAYWRIGHT_CHANNEL||'chrome'});
   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,reducedMotion:'reduce'});
   await context.route('**/api/**',route=>route.abort());
+  await context.route('https://139.100.239.210.sslip.io/**',route=>route.fulfill({json:{events:[],updatedAt:new Date().toISOString()}}));
   await context.addInitScript(()=>localStorage.setItem('uust.campus.v1.profile',JSON.stringify({guest:true,group:null})));
   page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base);await page.locator('[data-tab="map"]').click();await frames();await shot('01-campus');
@@ -46,8 +47,11 @@ try{
   await page.locator('[data-map-action="import-reset"]').click();
   await page.locator('[data-map-action="data-close"]').click();
   await search('Корпус 6','building:6');
+  await page.locator('[data-map-action="zoom-in"]').click();await frames();
   for(const id of ['sv-6-f1','sv-6-f2','cw-6-f3','cw-6-f4','cw-6-f5']){
+    const previous=await page.locator('#map-surface').getAttribute('viewBox');
     await page.locator('[data-map-action="floor"][data-floor="'+id+'"]').click();await frames();
+    assert.equal(await page.locator('#map-surface').getAttribute('viewBox'),previous,'Floor switch must preserve zoom and position');
     assert.equal(await page.locator('[data-scene-floor="'+id+'"]').getAttribute('aria-hidden'),'false');
     if(id==='cw-6-f4'){
       assert.equal(await page.locator('[data-scene-floor="sv-6-f4-annex"]').getAttribute('aria-hidden'),'false');
@@ -72,8 +76,11 @@ try{
   }
   assert.ok([...encountered].some(s=>s.includes('Корпус 7')),'Panning reaches building 7');
   await search('Корпус 7','building:7');
+  await page.locator('[data-map-action="zoom-in"]').click();await frames();
   for(const id of ['sv-7-f1','sv-7-f2','sv-7-f3','sv-7-f4']){
+    const previous=await surface.getAttribute('viewBox');
     await page.locator('[data-map-action="floor"][data-floor="'+id+'"]').click();await frames();
+    assert.equal(await surface.getAttribute('viewBox'),previous,'Building 7 level switch preserves the camera');
     assert.equal(await page.locator('[data-scene-floor="'+id+'"]').getAttribute('aria-hidden'),'false');
   }
   await shot('04-building-7');

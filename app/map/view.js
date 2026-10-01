@@ -254,7 +254,11 @@ export function createMapController({buildings,bundledPack,storage,external,onFa
     if(action==='card-close'){s.selected=null;s.context=null;s.expanded=false;s.error='';s.floorCardHidden=true;}
     if(action==='territory')setView(null);
     if(action==='source-plan')s.sourcePlan=s.sourcePlan===s.floorId?null:s.floorId;
-    if(action==='floor'||action==='route-floor'){setView(el.dataset.floor||null);if(action==='floor'){s.selected='building:'+floor().buildingId;s.expanded=false;}}
+    if(action==='floor'){
+      // A level switch changes the layer, not the user's camera framing.
+      useFloor(el.dataset.floor);pendingFocus=null;s.selected='building:'+floor().buildingId;s.expanded=false;
+    }
+    if(action==='route-floor')setView(el.dataset.floor||null);
     if(action==='open-floor'){setView(availableFloors()[0]?.id||null);s.expanded=false;}
     if(action==='external'){external('https://yandex.ru/maps/?text='+encodeURIComponent(`УУНиТ Уфа Карла Маркса 12 ${buildings.find(b=>b.id===l.buildingId).name}`));return;}
     if(action==='favorite')onFavorite(l.buildingId);

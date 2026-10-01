@@ -92,7 +92,8 @@
       "image": null,
       "monogram": "ЙЕ",
       "source": "https://uust.ru/departments/yashlek/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/iyeshlek/photo_scene_1.jpg"
     },
     {
       "id": "allegro",
@@ -108,7 +109,8 @@
       "image": null,
       "monogram": "АЛ",
       "source": "https://uust.ru/departments/allegro/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/allegro/photo_scene_1.jpeg"
     },
     {
       "id": "irandek",
@@ -125,7 +127,8 @@
       "monogram": "ИР",
       "vk": "https://vk.com/club946110",
       "source": "https://uust.ru/departments/irandek/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/irandek/photo_scene_1.jpeg"
     },
     {
       "id": "aitugan",
@@ -140,7 +143,8 @@
       "image": null,
       "monogram": "АЙ",
       "source": "https://uust.ru/departments/aitugan/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/aiytugan/photo_scene_1.jpeg"
     },
     {
       "id": "atmosfera",
@@ -157,7 +161,8 @@
       "monogram": "АТ",
       "vk": "https://vk.com/atmosferaproject02",
       "source": "https://uust.ru/departments/atmosfera/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/atmosfera/photo_scene_1.jpg"
     },
     {
       "id": "cheerleading",
@@ -174,7 +179,8 @@
       "monogram": "СБ",
       "vk": "https://vk.com/atmosferaproject02",
       "source": "https://uust.ru/departments/cheerleading/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/photo_scene_1.jpeg"
     },
     {
       "id": "dance-vibe",
@@ -207,7 +213,8 @@
       "monogram": "WA",
       "vk": "https://vk.com/watermelons_crew",
       "source": "https://uust.ru/departments/watermelons-crew/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/-/photo_scene_1.jpeg"
     },
     {
       "id": "septima",
@@ -223,7 +230,8 @@
       "image": null,
       "monogram": "СЕ",
       "source": "https://uust.ru/departments/septima/",
-      "checkedAt": "29.09.2026"
+      "checkedAt": "29.09.2026",
+      "imageSource": "https://uust.ru/media/pages/subdivisionpage/septima/photo_scene_1.jpeg"
     },
     {
       "id": "momentov-more",

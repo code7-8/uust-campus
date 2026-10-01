@@ -96,7 +96,8 @@ function notificationPanel(){
     <label class="notification-option"><span>Напомнить заранее</span><select data-notification="leadMinutes" aria-label="За сколько минут напоминать">${[5,10,15,30,60].map(n=>`<option value="${n}" ${prefs.leadMinutes===n?'selected':''}>За ${n} мин</option>`).join('')}</select></label>
     ${toggle('quiet','Тихие часы','Напоминания в этот промежуток пропускаются. Одинаковое начало и конец отключает ограничение.')}
     <div class="notification-times"><label>С <input type="time" data-notification="quietStart" value="${prefs.quietStart}" ${prefs.quiet?'':'disabled'}></label><label>До <input type="time" data-notification="quietEnd" value="${prefs.quietEnd}" ${prefs.quiet?'':'disabled'}></label></div></fieldset>
-    <h2>Ближайшие напоминания</h2>${upcoming.length?`<ul class="notification-upcoming">${upcoming.map(item=>`<li><strong>${escape(item.title)}</strong><span>${formatDate(dateKey(new Date(item.at)),{day:'numeric',month:'short'})} · ${clock(minuteOfDay(new Date(item.at)))}</span><small>${escape(item.body)}</small></li>`).join('')}</ul>`:'<p class="subtle">Нет запланированных напоминаний. Выберите группу или сохраните событие с известным временем.</p>'}`;
+    ${status.enabled?btn('Проверить уведомление','notification-test','button light'):''}
+    <h2>Ближайшие напоминания</h2>${upcoming.length?`<ul class="notification-upcoming">${upcoming.map(item=>`<li><strong>${escape(item.title)}</strong><span>${item.at<=Date.now()?'Время напоминания наступило':`${formatDate(dateKey(new Date(item.at)),{day:'numeric',month:'short'})} · ${clock(minuteOfDay(new Date(item.at)))}`}</span><small>${escape(item.body)}</small></li>`).join('')}</ul>`:'<p class="subtle">Нет запланированных напоминаний. Выберите группу или сохраните событие с известным временем.</p>'}`;
 }
 function schedule(){
   if(!group())return `${pageHeading('','Расписание')}${empty('Выберите группу','Карта и события уже доступны. Группа нужна только для расписания.','calendar')}${btn('Выбрать группу','groups','button wide')}`;
@@ -212,6 +213,7 @@ async function action(name,el){
   if(name==='notification-permission'){await notifications.request();syncNotifications();renderModal();return;}
   if(name==='notification-system'){notifications.systemSettings();return;}
   if(name==='notification-exact'){notifications.exactSettings();return;}
+  if(name==='notification-test'){try{notifications.test();toast('Тестовое уведомление отправлено');}catch(error){toast(error.message);}return;}
   if(name==='life-section'){state.lifeSection=el.dataset.id;state.eventFilter='all';render();if(state.lifeSection!=='clubs')community?.sync({quiet:true});return;}
   if(name==='club-detail'){showModal('club',el.dataset.id);return;}
   if(name==='club-link'){const club=state.data.clubs.find(c=>c.id===el.dataset.id);if(club&&['vk','telegram','source'].includes(el.dataset.link))external(club[el.dataset.link]);return;}

@@ -58,7 +58,7 @@ export function validateMapPack(pack, buildings, {allowSynthetic=false}={}) {
     if(f.displayWith!==undefined){const parent=floors.get(f.displayWith);check(parent&&parent.buildingId===f.buildingId&&!parent.displayWith&&parent.id!==f.id,`${f.id}: неверная группа этажей`);}
     if(f.placement!==undefined){
       const p=f.placement,finite=v=>Number.isFinite(v)&&Math.abs(v)<100000;
-      check(p&&[180,270].includes(p.rotation),`${f.id}: неверный поворот размещения`);
+      check(p&&[90,180,270].includes(p.rotation),`${f.id}: неверный поворот размещения`);
       if(p?.box)check(Array.isArray(p.box)&&p.box.length===4&&p.box.every(finite)&&p.box[2]>0&&p.box[3]>0,`${f.id}: неверная область размещения`);
       else check(p?.rotation===180&&finite(p.coreX)&&p.coreX>f.viewBox[0]&&p.coreX<f.viewBox[0]+f.viewBox[2]&&finite(p.spineRight)
         &&Array.isArray(p.sourceY)&&Array.isArray(p.targetY)&&p.sourceY.length>=2&&p.sourceY.length<=20&&p.sourceY.length===p.targetY.length

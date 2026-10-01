@@ -31,23 +31,31 @@ public final class ReminderReceiver extends BroadcastReceiver {
     private static JSONArray queue(Context c) {
         try{return new JSONArray(prefs(c).getString("queue","[]"));}catch(JSONException e){return new JSONArray();}
     }
+    private static String deliveryKey(JSONObject item) {return item.optString("id")+":"+item.optLong("start");}
+    private static JSONObject delivered(Context c) {
+        JSONObject saved;
+        try{saved=new JSONObject(prefs(c).getString("delivered","{}"));}catch(JSONException e){saved=new JSONObject();}
+        long now=System.currentTimeMillis();Iterator<String> keys=saved.keys();
+        while(keys.hasNext())if(saved.optLong(keys.next())<=now)keys.remove();
+        return saved;
+    }
     static synchronized void replace(Context c,String text) throws JSONException {
         if(text.length()>3*1024*1024)throw new JSONException("Queue too large");
         JSONArray raw=new JSONArray(text);if(raw.length()>5000)throw new JSONException("Too many reminders");
-        ArrayList<JSONObject> valid=new ArrayList<>();HashSet<String> ids=new HashSet<>();long now=System.currentTimeMillis();
+        ArrayList<JSONObject> valid=new ArrayList<>();HashSet<String> ids=new HashSet<>();long now=System.currentTimeMillis();JSONObject sent=delivered(c);
         for(int i=0;i<raw.length();i++){
             JSONObject item=raw.getJSONObject(i);String id=item.getString("id"),tab=item.getString("tab"),date=item.getString("date");
             long at=item.getLong("at"),start=item.getLong("start");
             if(id.length()>240||!ids.add(id)||!Arrays.asList("schedule","events").contains(tab)||!date.matches("\\d{4}-\\d{2}-\\d{2}")||start<at)throw new JSONException("Invalid reminder");
-            if(at<=now||at>now+370L*86400000)continue;
+            if(start<=now||at>now+370L*86400000||sent.has(deliveryKey(item)))continue;
             valid.add(new JSONObject().put("id",id).put("tab",tab).put("date",date).put("at",at).put("start",start)
                 .put("title",item.getString("title").substring(0,Math.min(200,item.getString("title").length())))
                 .put("body",item.getString("body").substring(0,Math.min(500,item.getString("body").length()))));
         }
         valid.sort((a,b)->Long.compare(a.optLong("at"),b.optLong("at")));
         JSONArray next=new JSONArray();for(JSONObject item:valid)next.put(item);
-        if(!prefs(c).edit().putString("queue",next.toString()).commit())throw new JSONException("Cannot save reminders");
-        if(next.length()==0)c.getSystemService(NotificationManager.class).cancelAll();
+        if(!prefs(c).edit().putString("queue",next.toString()).putString("delivered",sent.toString()).commit())throw new JSONException("Cannot save reminders");
+        if(raw.length()==0)c.getSystemService(NotificationManager.class).cancelAll();
         arm(c,next);
     }
     private static void arm(Context c,JSONArray items) {
@@ -66,16 +74,27 @@ public final class ReminderReceiver extends BroadcastReceiver {
     @Override public void onReceive(Context c,Intent intent) {
         synchronized(ReminderReceiver.class){
             if(!ACTION.equals(intent.getAction())){rearm(c);return;}
-            JSONArray current=queue(c),future=new JSONArray();long now=System.currentTimeMillis();
+            JSONArray current=queue(c),future=new JSONArray();long now=System.currentTimeMillis();JSONObject sent=delivered(c);
             for(int i=0;i<current.length();i++){
                 JSONObject item=current.optJSONObject(i);if(item==null)continue;
                 if(item.optLong("at")>now){future.put(item);continue;}
-                if(item.optLong("start")>now&&enabled(c))show(c,item);
+                if(item.optLong("start")>now&&!sent.has(deliveryKey(item))){
+                    if(enabled(c)&&show(c,item)){
+                        try{sent.put(deliveryKey(item),item.optLong("start"));}catch(JSONException ignored){}
+                    }else future.put(item);
+                }
             }
-            prefs(c).edit().putString("queue",future.toString()).commit();arm(c,future);
+            prefs(c).edit().putString("queue",future.toString()).putString("delivered",sent.toString()).commit();arm(c,future);
         }
     }
-    private static void show(Context c,JSONObject item) {
+    static void test(Context c) throws JSONException {
+        if(!enabled(c))throw new SecurityException("Notifications disabled");
+        JSONObject item=new JSONObject().put("id","campus-test").put("tab","events")
+            .put("title","Кампус · проверка").put("body","Уведомления разрешены. Напоминания о парах и событиях появятся здесь.")
+            .put("start",System.currentTimeMillis()+300000);
+        if(!show(c,item))throw new SecurityException("Notification permission revoked");
+    }
+    private static boolean show(Context c,JSONObject item) {
         int id=item.optString("id").hashCode();
         Intent open=new Intent(c,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP)
             .putExtra("reminderTarget",item.toString());
@@ -85,6 +104,6 @@ public final class ReminderReceiver extends BroadcastReceiver {
             .setStyle(new Notification.BigTextStyle().bigText(item.optString("body")))
             .setContentIntent(tap).setAutoCancel(true).setCategory(Notification.CATEGORY_REMINDER)
             .setVisibility(Notification.VISIBILITY_PRIVATE).setTimeoutAfter(Math.max(1000,item.optLong("start")-System.currentTimeMillis())).build();
-        try{c.getSystemService(NotificationManager.class).notify(id,notification);}catch(SecurityException ignored){}
+        try{c.getSystemService(NotificationManager.class).notify(id,notification);return true;}catch(SecurityException ignored){return false;}
     }
 }

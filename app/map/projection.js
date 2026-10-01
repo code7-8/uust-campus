@@ -24,6 +24,7 @@ export function placement(floor,bounds,frame,outline) {
   const spec=floor.placement;if(!spec)return null;
   const [x,y,w,h]=bounds,box=spec.box||frame;
   const base={floorId:floor.id,buildingId:floor.buildingId,bounds,box:[...box],rotation:spec.rotation};
+  if(spec.rotation===90)return {...base,sx:0,sy:0,xy:-box[2]/h,yx:box[3]/w,tx:box[0]+box[2]+y*box[2]/h,ty:box[1]-x*box[3]/w};
   if(spec.rotation===270)return {...base,sx:0,sy:0,xy:box[2]/h,yx:-box[3]/w,tx:box[0]-y*box[2]/h,ty:box[1]+box[3]+x*box[3]/w};
   if(spec.box)return {...base,sx:-box[2]/w,sy:-box[3]/h,tx:box[0]+box[2]+x*box[2]/w,ty:box[1]+box[3]+y*box[3]/h};
   const tiles=[];

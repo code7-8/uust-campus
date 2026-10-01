@@ -65,7 +65,7 @@ test('all ten placed floors preserve rooms and routes inside the building contou
     const polygon=buildings.find(b=>b.id===floor.buildingId).sceneOutline.map(campusPoint);
     const xs=polygon.map(p=>p[0]),ys=polygon.map(p=>p[1]),frame=[Math.min(...xs),Math.min(...ys),Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys)];
     const p=fitFloor(floor,frame,polygon);plans.set(floor.id,p);frames.set(floor.buildingId,frame);
-    assert.equal(p.rotation,floor.id==='sv-6-f4-annex'?270:180);
+    assert.equal(p.rotation,floor.id==='sv-6-f4-annex'?90:180);
     const inside=([x,y])=>{
       assert.ok(Number.isFinite(x)&&Number.isFinite(y));
       assert.ok(y>=frame[1]-.01&&y<=frame[1]+frame[3]+.01);
@@ -88,7 +88,7 @@ test('all ten placed floors preserve rooms and routes inside the building contou
   assert.match(svg,/is-underground/);
 });
 
-test('main wings reach the right edge, upper floors share a footprint and annex rotates clockwise',()=>{
+test('main wings keep their geometry; annex occupies the whole upper wing and joins at the laboratory stairs',()=>{
   const buildings=read('buildings.json').buildings,data=createMapData(read('maps.json'),buildings);
   for(const f of data.floors.filter(f=>f.placement?.coreX)){
     const outline=buildings.find(b=>b.id===f.buildingId).sceneOutline.map(campusPoint),frame=f.buildingId==='6'?[230,776,162,315]:[230,283,110,377];
@@ -96,9 +96,16 @@ test('main wings reach the right edge, upper floors share a footprint and annex 
     for(let i=1;i<ys.length;i++)assert.ok(Math.abs(projectPoint(p,[f.placement.coreX,(ys[i-1]+ys[i])/2])[0]-295)<.001);
   }
   const fourth=data.floors.find(f=>f.id==='cw-6-f4'),fifth=data.floors.find(f=>f.id==='cw-6-f5'),annex=data.floors.find(f=>f.id==='sv-6-f4-annex');
-  assert.deepEqual(fourth.placement.box,fifth.placement.box);assert.equal(fourth.placement.box[0]+fourth.placement.box[2],annex.placement.box[0]);
+  assert.deepEqual(fourth.placement.box,fifth.placement.box);
+  assert.deepEqual(fourth.placement.box,[230,863,65,228]);
+  assert.deepEqual(annex.placement.box,[230,776,109,87]);
+  assert.equal(annex.placement.box[1]+annex.placement.box[3],fourth.placement.box[1]);
   assert.equal(displayFloorGroup(data.floors,annex.id),fourth.id);
-  const p=fitFloor(annex,annex.placement.box,[]),a=projectPoint(p,[300,600]),b=projectPoint(p,[300,700]);assert.ok(b[0]>a[0]);assert.equal(b[1],a[1]);
+  const link=data.edges.find(e=>e.id==='sv-6-f4-to-annex');assert.equal(link.to,'sv-6-f4-annex-n-west');
+  const p=fitFloor(annex,annex.placement.box,[]),a=projectPoint(p,data.nodes.find(n=>n.id===link.to).point);
+  const b=projectPoint(fitFloor(fourth,fourth.placement.box,[]),data.nodes.find(n=>n.id===link.from).point);
+  assert.ok(a[0]<annex.placement.box[0]+annex.placement.box[2]/2,'Laboratory stairs face the main floor');
+  assert.ok(a[1]<b[1]&&Math.hypot(a[0]-b[0],a[1]-b[1])<24,'Stair landings meet at the boundary');
 });
 
 test('camera keeps its floor through a gap and small boundary changes, then switches decisively',()=>{

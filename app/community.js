@@ -4,6 +4,7 @@ import {validateEvents, dateKey, ufaTimestamp} from './core.js';
 const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const roles={user:'Участник',organizer:'Организатор',admin:'Администратор'};
 const localHosts=['localhost','127.0.0.1','10.0.2.2','192.168.137.1','192.168.31.245'];
+export const DEFAULT_SERVER_URL='https://139.100.239.210.sslip.io';
 const pending=new Map();
 window.campusServerResult=(id,status,text)=>{const item=pending.get(id);if(item){clearTimeout(item.timer);pending.delete(id);item.resolve({status,text});}};
 
@@ -12,6 +13,11 @@ export function normalizeServer(value) {
   if(url.username||url.password||url.search||url.hash||!['','/'].includes(url.pathname))throw new Error('Нужен адрес сервера без пути, пароля и параметров.');
   if(url.protocol!=='https:' && !(url.protocol==='http:' && localHosts.includes(url.hostname)))throw new Error('Для интернет-сервера нужен HTTPS. В точке доступа ноутбука используйте http://192.168.137.1:8787');
   return url.origin;
+}
+
+export function initialServer(saved) {
+  try {return typeof saved==='string'&&saved.trim()?normalizeServer(saved):DEFAULT_SERVER_URL;}
+  catch {return DEFAULT_SERVER_URL;}
 }
 
 async function request(baseUrl,path,method='GET',body=null,token='') {
@@ -39,8 +45,7 @@ async function request(baseUrl,path,method='GET',body=null,token='') {
 }
 
 export function createCommunity({onEvents,onChange,onPublished,toast,closeMainModal,mapData}) {
-  const browserDefault=!window.CampusAndroid&&(location.protocol==='https:'||location.port==='8787')?location.origin:'';
-  let base=storage.read('serverUrl',browserDefault),session=storage.read('account'),events=[],online=false,lastSync=null,busy=null,screen='',editing=null;
+  let base=initialServer(storage.read('serverUrl')),session=storage.read('account'),events=[],online=false,lastSync=null,busy=null,screen='',editing=null;
   if(session?.server!==base)session=null;
   const cached=storage.read('communityCache');
   if(cached?.server===base){try{events=validateEvents({schemaVersion:1,events:cached.events});lastSync=cached.at;events=events.map(e=>({...e,viewerGoing:cached.viewerId===session?.user?.id&&e.viewerGoing}));}catch{}}
