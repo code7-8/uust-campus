@@ -21,7 +21,7 @@ const btn=(text,action,cls='button',more='')=>`<button class="${cls}" data-actio
 const iconBtn=(name,label,action,more='')=>btn(icon(name),action,'icon-button',`aria-label="${attrs(label)}" ${more}`);
 function external(url) {if(!/^https:\/\//.test(url))return; if(window.CampusAndroid)window.CampusAndroid.openExternal(url);else window.open(url,'_blank','noopener,noreferrer');}
 function group() {return state.profile?.group;}
-function currentLessons(date=state.date) {return lessonsOn(state.rows,date,state.data.config);}
+function currentLessons(date=state.date) {return lessonsOn(state.rows,date,state.data.config).map(l=>personalLesson(l,date));}
 
 // Personal notes are stored per device and academic group; never sent to the schedule API.
 function personalKey(){return 'personal.schedule.'+state.data.config.semester+'.'+group().id;}
@@ -29,7 +29,7 @@ function personalData(){const saved=storage.read(personalKey(),{});return saved&
 function specialSubject(subject){
   const name=String(subject||'').toLocaleLowerCase('ru-RU').replace(/ё/g,'е');
   if(/физическ|физкультур/.test(name))return 'physical';
-  if(/иностранн.*язык|английск.*язык|немецк.*язык|французск.*язык|китайск.*язык/.test(name))return 'foreign:'+name.replace(/\\s+/g,' ').trim();
+  if(/иностранн.*язык|английск.*язык|немецк.*язык|французск.*язык|китайск.*язык/.test(name))return 'foreign:'+name.replace(/\s+/g,' ').trim();
   return null;
 }
 function personalLesson(lesson,date){
@@ -79,7 +79,7 @@ function lessonList(lessons,date,limit=99){
   const gaps=freeGaps(lessons);
   return `<div class="lesson-list">${lessons.slice(0,limit).map((l,i)=>{
     const gap=i>0?gaps.find(g=>g.end===l.start):null;
-    return `${gap?`<div class="gap-row">${icon('coffee')} Окно ${gap.minutes} мин · до ${clock(gap.end)}</div>`:''}<div class="lesson-row"><div class="lesson-time">${l.start===null?'—':clock(l.start)}<span>${l.end===null?'уточняется':clock(l.end)}</span></div><button class="lesson-card" data-lesson="${attrs(l.id)}" data-date="${date}">${tag(l.type)}<h3>${escape(l.subject)}</h3><p>${escape(l.teacherShort||l.teacher||'Преподаватель не указан')}</p><span class="room">${icon('pin')}${escape(l.room||'Место уточняется')}${!l.buildingId&&l.room?' · вне схемы':''}</span>${icon('chevron','chev')}</button></div>`;
+    return `${gap?`<div class="gap-row">${icon('coffee')} Окно ${gap.minutes} мин · до ${clock(gap.end)}</div>`:''}<div class="lesson-row"><div class="lesson-time">${l.start===null?'—':clock(l.start)}<span>${l.end===null?'уточняется':clock(l.end)}</span></div><button class="lesson-card" data-lesson="${attrs(l.id)}" data-date="${date}">${tag(l.type)}<h3>${escape(l.subject)}</h3><p>${escape(l.teacherShort||l.teacher||'Преподаватель не указан')}</p><span class="room">${icon('pin')}${escape(l.room||'Место уточняется')}${!l.buildingId&&l.room?' · вне схемы':''}</span>${l.homework?'<span class="homework-indicator">ДЗ</span>':''}${icon('chevron','chev')}</button></div>`;
   }).join('')}</div>`;
 }
 function dayRelative(date){return date===dateKey()?'Сегодня':date===addDays(dateKey(),1)?'Завтра':formatDate(date,{day:'numeric',month:'short'});}
