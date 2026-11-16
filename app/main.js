@@ -22,6 +22,41 @@ const iconBtn=(name,label,action,more='')=>btn(icon(name),action,'icon-button',`
 function external(url) {if(!/^https:\/\//.test(url))return; if(window.CampusAndroid)window.CampusAndroid.openExternal(url);else window.open(url,'_blank','noopener,noreferrer');}
 function group() {return state.profile?.group;}
 function currentLessons(date=state.date) {return lessonsOn(state.rows,date,state.data.config);}
+
+// Personal notes are stored per device and academic group; never sent to the schedule API.
+function personalKey(){return 'personal.schedule.'+state.data.config.semester+'.'+group().id;}
+function personalData(){const saved=storage.read(personalKey(),{});return saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{};}
+function specialSubject(subject){
+  const name=String(subject||'').toLocaleLowerCase('ru-RU').replace(/ё/g,'е');
+  if(/физическ|физкультур/.test(name))return 'physical';
+  if(/иностранн.*язык|английск.*язык|немецк.*язык|французск.*язык|китайск.*язык/.test(name))return 'foreign:'+name.replace(/\\s+/g,' ').trim();
+  return null;
+}
+function personalLesson(lesson,date){
+  if(!group())return {...lesson,date};
+  const data=personalData(),subjectKey=specialSubject(lesson.subject);
+  const override=subjectKey?data.subjects?.[subjectKey]:null;
+  const homework=data.homework?.[date+'|'+lesson.id]||'';
+  return {...lesson,date,teacher:override?.teacher||lesson.teacher,teacherShort:override?.teacher||lesson.teacherShort,
+    room:override?.room||lesson.room,buildingTitle:override?.room?'Личное место проведения':lesson.buildingTitle,
+    buildingId:override?.room?null:lesson.buildingId,locationId:override?.room?null:lesson.locationId,
+    personalOverride:!!override,homework};
+}
+function savePersonal(kind,lesson,values){
+  const data=personalData();
+  if(kind==='subject'){
+    const key=specialSubject(lesson.subject);if(!key)return false;
+    data.subjects={...data.subjects};
+    if(values.teacher||values.room)data.subjects[key]={teacher:values.teacher,room:values.room};
+    else delete data.subjects[key];
+  }else{
+    data.homework={...data.homework};
+    const key=lesson.date+'|'+lesson.id;
+    if(values.homework)data.homework[key]=values.homework;
+    else delete data.homework[key];
+  }
+  return storage.write(personalKey(),data);
+}
 function tag(type) {const cls=/Лекц/.test(type)?'lecture':/Лаб/.test(type)?'lab':'practice';return `<span class="chip ${cls}">${escape(type?.replace(' (семинар)','')||'Занятие')}</span>`;}
 const brandIcon=()=>'<span class="brand-symbol brand-image"><img class="brand-purple" src="assets/uust-logo.png" alt="УУНиТ"><img class="brand-green" src="assets/uust-logo-green.png" alt="УУНиТ"></span>';
 const wordmark=()=>`<div class="wordmark">${brandIcon()}<span><strong>Кампус</strong><small>УУНИТ · УФА</small></span></div>`;
@@ -50,13 +85,13 @@ function lessonList(lessons,date,limit=99){
 function dayRelative(date){return date===dateKey()?'Сегодня':date===addDays(dateKey(),1)?'Завтра':formatDate(date,{day:'numeric',month:'short'});}
 function nextHero(){
   if(!group())return `<section class="hero hero-empty"><div class="eyebrow">Расписание</div><h2>Выберите группу</h2><p>Для загрузки расписания.</p>${btn('Выбрать группу','groups','button lime')}</section>`;
-  const next=nextLesson(state.rows,new Date(),state.data.config);
+  const nextRaw=nextLesson(state.rows,new Date(),state.data.config),next=nextRaw?personalLesson(nextRaw,nextRaw.date):null;
   if(!state.loaded){return `<section class="hero hero-empty"><div class="eyebrow">Расписание</div><h2>${state.busy?'Загрузка расписания…':'Расписание не загружено'}</h2><p>${state.busy?'Получаем расписание с сервиса УУНиТ.':'Нужен интернет для первой загрузки. После этого пары будут доступны офлайн.'}</p>${btn('Загрузить расписание '+icon('refresh'),'refresh','button lime',state.busy?'disabled':'')}</section>`;}
   if(!next)return `<section class="hero hero-empty"><div class="eyebrow">Расписание</div><h2>Нет ближайших пар</h2><p>В загруженном расписании нет пар с известным временем на ближайшие 6 недель. Проверьте расписание и обновления источника.</p>${btn('Открыть расписание '+icon('arrow'),'schedule','button lime')}</section>`;
   return `<section class="hero"><div class="hero-top"><span class="eyebrow">${next.ongoing?'Сейчас идёт':'Ближайшая пара'}</span><span class="chip">${dayRelative(next.date)} · ${clock(next.start)}</span></div><h2>${escape(next.subject)}</h2><div class="hero-meta"><span>${icon('clock')}${clock(next.start)}–${clock(next.end)}</span><span>${icon('pin')}${escape(next.room||'Место уточняется')}</span></div><div class="hero-footer">${next.buildingId||next.locationId?btn(`Показать место ${icon('arrow')}`,'next-map','button lime'):btn('О паре '+icon('arrow'),'next-detail','button lime')}${iconBtn('bell','Добавить ближайшую пару в календарь','next-calendar')}</div></section>`;
 }
 function home(){
-  const today=dateKey(),now=new Date(),day=lessonsOn(state.rows,today,state.data.config),next=nextLesson(state.rows,now,state.data.config);
+  const today=dateKey(),now=new Date(),day=currentLessons(today),rawNext=nextLesson(state.rows,now,state.data.config),next=rawNext?personalLesson(rawNext,rawNext.date):null;
   const previewDate=day.length?today:next?.date||today,preview=currentLessons(previewDate),gaps=freeGaps(day);
   const lifePreview=campusPreview(state.data.events,state.data.clubs);
   const info=!state.loaded?['offline','Расписание офлайн','После первой загрузки расписание сохраняется на этом устройстве.']:!day.length?['sun','Сегодня без пар','В расписании на сегодня нет занятий.']:gaps.length?['coffee',`Окно ${gaps[0].minutes} минут`,`${clock(gaps[0].start)}–${clock(gaps[0].end)} · время между занятиями по расписанию.`]:['check','Занятия сегодня',`${day.length} ${declension(day.length,['занятие','занятия','занятий'])} сегодня.`];
@@ -172,9 +207,15 @@ function renderModal(){
   const {kind,payload}=state.modal;let body='',label='';
   if(kind==='notifications'){label='Напоминания';body=notificationPanel();}
   else if(kind==='lesson'){
-    const l=payload;label='Занятие';
-    body=`${tag(l.type)}<h1>${escape(l.subject)}</h1>${detailRow('calendar',formatDate(l.date,{weekday:'long',day:'numeric',month:'long'}),`${academicWeek(l.date,state.data.config)}-я учебная неделя`)}${detailRow('clock',l.start===null?'Время уточняется':`${clock(l.start)}–${clock(l.end)}`,'Время Уфы · UTC+5')}${detailRow('user',l.teacher||'Преподаватель не указан')}${detailRow('pin',l.room||'Аудитория не указана',l.buildingTitle||'Место уточняется')}${l.comment?`<p>${escape(l.comment)}</p>`:''}${!l.buildingId?'<div class="insight compact">'+icon('info')+'<p>Это место пока не сопоставлено со схемой кампуса. Сверьтесь с исходным адресом и указателями университета.</p></div>':''}<div class="modal-actions">${l.buildingId||l.locationId?btn('Показать место '+icon('map'),'lesson-map','button wide'):''}${l.start!==null?btn(icon('bell')+' Добавить в календарь','lesson-calendar','button light wide'):''}${btn('Расписание в источнике '+icon('external'),'schedule-source','button outline wide')}</div><p class="source-line">Данные: schedule.uust.ru · ${state.source==='live'?'загруженная версия':'сохранённая версия'}. Изменения проверяются при обновлении.</p>`;
-  } else if(kind==='event'){
+    const l=personalLesson(payload,payload.date);label='Занятие';
+    body=`${tag(l.type)}<h1>${escape(l.subject)}</h1>${detailRow('calendar',formatDate(l.date,{weekday:'long',day:'numeric',month:'long'}),`${academicWeek(l.date,state.data.config)}-я учебная неделя`)}${detailRow('clock',l.start===null?'Время уточняется':`${clock(l.start)}–${clock(l.end)}`,'Время Уфы · UTC+5')}${detailRow('user',l.teacher||'Преподаватель не указан')}${detailRow('pin',l.room||'Аудитория не указана',l.buildingTitle||'Место уточняется')}${l.comment?`<p>${escape(l.comment)}</p>`:''}${l.homework?`<div class="personal-note"><strong>Домашнее задание</strong><p>${escape(l.homework).replace(/\\n/g,'<br>')}</p></div>`:''}<div class="modal-actions">${specialSubject(l.subject)?btn('Изменить преподавателя и место','edit-subject','button light wide'):''}${btn(l.homework?'Изменить ДЗ':'Добавить ДЗ','edit-homework','button light wide')}</div>${!l.buildingId?'<div class="insight compact">'+icon('info')+'<p>Это место пока не сопоставлено со схемой кампуса. Сверьтесь с исходным адресом и указателями университета.</p></div>':''}<div class="modal-actions">${l.buildingId||l.locationId?btn('Показать место '+icon('map'),'lesson-map','button wide'):''}${l.start!==null?btn(icon('bell')+' Добавить в календарь','lesson-calendar','button light wide'):''}${btn('Расписание в источнике '+icon('external'),'schedule-source','button outline wide')}</div><p class="source-line">Данные: schedule.uust.ru · ${state.source==='live'?'загруженная версия':'сохранённая версия'}. Изменения проверяются при обновлении.</p>`;
+  }   else if(kind==='edit-subject'||kind==='edit-homework'){
+    const l=personalLesson(payload,payload.date),subject=kind==='edit-subject';
+    label=subject?'Личные данные занятия':'Домашнее задание';
+    body=subject?`<h1>Преподаватель и место</h1><p class="subtle">Изменения будут видны только на этом устройстве и применятся к следующим занятиям «${escape(l.subject)}».</p><form id="personal-form"><label class="field-label" for="personal-teacher">Преподаватель</label><input class="personal-input" id="personal-teacher" maxlength="160" value="${attrs(l.personalOverride?personalData().subjects[specialSubject(l.subject)]?.teacher||'':'')}" placeholder="ФИО преподавателя"><label class="field-label" for="personal-room">Место проведения</label><input class="personal-input" id="personal-room" maxlength="200" value="${attrs(l.personalOverride?personalData().subjects[specialSubject(l.subject)]?.room||'':'')}" placeholder="Корпус, аудитория или спортзал"><button class="button wide" type="submit">Сохранить</button></form>`:
+    `<h1>ДЗ · ${escape(l.subject)}</h1><p class="subtle">${formatDate(l.date,{day:'numeric',month:'long'})}. Запись относится только к этой паре и хранится на устройстве.</p><form id="personal-form"><label class="field-label" for="personal-homework">Домашнее задание</label><textarea class="personal-input" id="personal-homework" rows="5" maxlength="4000" placeholder="Что нужно сделать к занятию">${escape(l.homework)}</textarea><button class="button wide" type="submit">Сохранить</button></form>`;
+  }
+ else if(kind==='event'){
     const e=state.data.events.find(e=>e.id===payload);if(!e){closeModal();return;}
     const fit=eventCompatibility(e,state.rows,state.loaded,state.data.config);label=e.demo?'Демонстрационное событие':'Жизнь кампуса';
     body=`${cover(e)}${kindBadge(e)}<h1>${escape(e.title)}</h1>${detailRow('calendar',formatDate(e.date,{day:'numeric',month:'long',year:'numeric'}),e.time?`${e.time}${e.endTime?'–'+e.endTime:''} · время Уфы`:'Время начала не опубликовано')}${detailRow('user',e.organizer||e.authorName||e.sourceLabel,'Организатор')}${detailRow('pin',e.place||'Место уточняется',[e.buildingId?'Корпус '+e.buildingId:'',e.room?'Аудитория '+e.room:'',state.data.mapPack.floors.find(f=>f.id===e.floorId)?.name||''].filter(Boolean).join(' · '))}${community?.attendance(e)||''}
@@ -217,7 +258,7 @@ async function action(name,el){
   if(name==='life-section'){state.lifeSection=el.dataset.id;state.eventFilter='all';render();if(state.lifeSection!=='clubs')community?.sync({quiet:true});return;}
   if(name==='club-detail'){showModal('club',el.dataset.id);return;}
   if(name==='club-link'){const club=state.data.clubs.find(c=>c.id===el.dataset.id);if(club&&['vk','telegram','source'].includes(el.dataset.link))external(club[el.dataset.link]);return;}
-  const next=()=>nextLesson(state.rows,new Date(),state.data.config);
+  const next=()=>{const l=nextLesson(state.rows,new Date(),state.data.config);return l?personalLesson(l,l.date):null;};
   const event=()=>state.data.events.find(e=>e.id===state.modal?.payload);
   if(['home','schedule','map','events','profile'].includes(name)){navigate(name);return;}
   if(name==='close'){closeModal();return;}
@@ -244,6 +285,7 @@ async function action(name,el){
   if(['sources','privacy','import','saved-places','original-map'].includes(name)){showModal(name);return;}
   if(name==='schedule-source'){external(`https://schedule.uust.ru/schedule?type=0&id=${group()?.id||14381}`);return;}
   if(name==='all-events'){external('https://uust.ru/events/');return;}
+  if(name==='edit-subject'||name==='edit-homework'){showModal(name,state.modal.payload);return;}
   if(name==='lesson-map'){const l=state.modal.payload;openBuilding(l.buildingId,{...l,title:l.subject});return;}
   if(name==='lesson-calendar'){calendar(state.modal.payload);return;}
   if(name==='event-map'){const e=event();openBuilding(e.buildingId,{...e,room:e.room||e.place,planRoute:true});return;}
@@ -256,10 +298,19 @@ document.addEventListener('click',e=>{
   const el=e.target.closest('[data-action],[data-tab],[data-lesson],[data-event],[data-day],[data-pick-group],[data-building]');if(!el)return;
   if(el.dataset.action){action(el.dataset.action,el);return;}
   if(el.dataset.tab){navigate(el.dataset.tab);return;}
-  if(el.dataset.lesson){const lesson=state.rows.find(l=>l.id===el.dataset.lesson);if(lesson)showModal('lesson',{...lesson,date:el.dataset.date});return;}
+  if(el.dataset.lesson){const lesson=state.rows.find(l=>l.id===el.dataset.lesson);if(lesson)showModal('lesson',personalLesson(lesson,el.dataset.date));return;}
   if(el.dataset.event){showModal('event',el.dataset.event);return;}
   if(el.dataset.day){state.date=el.dataset.day;state.scheduleView='day';render();return;}
   if(el.dataset.pickGroup){state.selectedGroup=state.data.groups.find(g=>g.id===+el.dataset.pickGroup);$('#group-results').innerHTML=groupResults();$('#save-group').disabled=false;return;}
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id!=='personal-form')return;
+  e.preventDefault();
+  const {kind,payload}=state.modal||{};
+  if(!['edit-subject','edit-homework'].includes(kind)||!group())return;
+  const values=kind==='edit-subject'?{teacher:$('#personal-teacher').value.trim(),room:$('#personal-room').value.trim()}:{homework:$('#personal-homework').value.trim()};
+  if(!savePersonal(kind==='edit-subject'?'subject':'homework',payload,values)){toast('Не удалось сохранить данные на устройстве');return;}
+  state.modal={kind:'lesson',payload};render();renderModal();toast('Личные изменения сохранены');
 });
 document.addEventListener('input',e=>{
   if(e.target.id==='club-search'){state.clubQuery=e.target.value;$('#club-results').innerHTML=clubResults();}
