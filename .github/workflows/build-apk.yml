@@ -1,0 +1,49 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [feature/personal-schedule-notes]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install Android SDK
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Build and sign debug APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK="${ANDROID_HOME:-$ANDROID_SDK_ROOT}"
+          BT="$SDK/build-tools/35.0.0"
+          ANDROID_JAR="$SDK/platforms/android-35/android.jar"
+          mkdir -p build/classes build/dex artifacts
+          "$BT/aapt2" compile --dir android/res -o build/resources.zip
+          "$BT/aapt2" link -o build/base.apk --manifest android/AndroidManifest.xml -I "$ANDROID_JAR" build/resources.zip --auto-add-overlay
+          mapfile -d '' sources < <(find android/src -name '*.java' -print0)
+          javac -encoding UTF-8 -source 8 -target 8 -Xlint:-options -bootclasspath "$BT/core-lambda-stubs.jar:$ANDROID_JAR" -d build/classes "${sources[@]}"
+          jar cf build/classes.jar -C build/classes .
+          java -cp "$BT/lib/d8.jar" com.android.tools.r8.D8 --lib "$ANDROID_JAR" --min-api 26 --output build/dex build/classes.jar
+          python tools/package_apk.py build/base.apk app build/dex/classes.dex build/unsigned.apk
+          "$BT/zipalign" -f -p 4 build/unsigned.apk build/aligned.apk
+          keytool -genkeypair -noprompt -keystore build/debug.jks -storepass android -keypass android -alias campus -dname 'CN=UUST Campus CI Debug' -keyalg RSA -keysize 2048 -validity 10000
+          "$BT/apksigner" sign --ks build/debug.jks --ks-key-alias campus --ks-pass pass:android --key-pass pass:android --out artifacts/uust-campus-personal-debug.apk build/aligned.apk
+          "$BT/apksigner" verify --verbose artifacts/uust-campus-personal-debug.apk
+          sha256sum artifacts/*.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uust-campus-personal-debug-apk
+          path: artifacts/*.apk
+          if-no-files-found: error
