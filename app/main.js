@@ -13,7 +13,7 @@ const RELEASES_API='https://api.github.com/repos/code7-8/uust-campus/releases/la
 let updateInfo=null;
 function versionParts(v){return String(v||'').replace(/^v/i,'').split('.').map(n=>Number(n));}
 function newerVersion(remote,local=APP_VERSION){
-  if(!/^v?\\d+\\.\\d+\\.\\d+$/.test(String(remote)))return false;
+  if(!/^v?\d+\.\d+\.\d+$/.test(String(remote)))return false;
   const a=versionParts(remote),b=versionParts(local);
   return a.some((n,i)=>n>(b[i]||0)&&a.slice(0,i).every((x,j)=>x===(b[j]||0)));
 }
@@ -22,10 +22,10 @@ async function checkAppUpdates(silent=false){
     const response=await fetch(RELEASES_API,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
     if(!response.ok)throw Error('GitHub HTTP '+response.status);
     const release=await response.json();
-    const asset=(release.assets||[]).find(a=>/\\.apk$/i.test(a.name)&&/^https:\/\/github\\.com\/code7-8\/uust-campus\/releases\/download\//.test(a.browser_download_url||''));
+    const asset=(release.assets||[]).find(a=>/\.apk$/i.test(a.name)&&/^https:\/\/github\.com\/code7-8\/uust-campus\/releases\/download\//.test(a.browser_download_url||''));
     updateInfo={version:release.tag_name,notes:String(release.body||'').slice(0,1200),url:asset?.browser_download_url||release.html_url,available:newerVersion(release.tag_name),hasApk:!!asset};
     storage.write('lastUpdateCheck',Date.now());
-    if(updateInfo.available){if(!silent)showModal('app-update');else if(state.tab==='profile')render();}
+    if(updateInfo.available){if(!silent||storage.read('updateNotifiedVersion','')!==updateInfo.version){storage.write('updateNotifiedVersion',updateInfo.version);if(!state.modal)showModal('app-update');}else if(state.tab==='profile')render();}
     else if(!silent)toast('Установлена актуальная версия');
     return updateInfo;
   }catch(error){if(!silent)toast('Не удалось проверить обновления. Проверьте интернет.');return null;}
