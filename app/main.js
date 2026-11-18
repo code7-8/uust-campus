@@ -83,12 +83,33 @@ function lessonList(lessons,date,limit=99){
   }).join('')}</div>`;
 }
 function dayRelative(date){return date===dateKey()?'Сегодня':date===addDays(dateKey(),1)?'Завтра':formatDate(date,{day:'numeric',month:'short'});}
+function countdownText(ms){
+  const seconds=Math.max(0,Math.ceil(ms/1000)),days=Math.floor(seconds/86400),hours=Math.floor(seconds%86400/3600),minutes=Math.floor(seconds%3600/60),rest=seconds%60;
+  const clock=[hours,minutes,rest].map(n=>String(n).padStart(2,'0')).join(':');
+  return days?days+' дн. '+clock:clock;
+}
+function heroTimer(next){
+  const now=Date.now(),start=new Date(next.date+'T00:00:00').getTime()+next.start*60000,end=new Date(next.date+'T00:00:00').getTime()+next.end*60000;
+  const ongoing=now>=start&&now<end,target=ongoing?end:start;
+  const earlier=currentLessons(next.date).filter(l=>l.end!==null&&l.end<=next.start).sort((a,b)=>b.end-a.end)[0];
+  const gap=earlier?next.start-earlier.end:null;
+  const label=ongoing?'До конца пары':next.date!==dateKey()?'До следующей пары':gap!==null&&gap<=30?'До конца перемены':gap!==null?'До конца окна':'До начала пары';
+  return `<div class="hero-timer" role="timer" aria-label="${label}"><span class="hero-timer-label">${label}</span><strong class="hero-timer-value" data-countdown-target="${target}">${countdownText(target-now)}</strong></div>`;
+}
+function updateHeroCountdown(){
+  if(state.tab!=='home'||document.visibilityState!=='visible'||state.modal)return;
+  const timer=document.querySelector('[data-countdown-target]');
+  if(!timer)return;
+  const remaining=Number(timer.dataset.countdownTarget)-Date.now();
+  if(remaining<=0){render();return;}
+  timer.textContent=countdownText(remaining);
+}
 function nextHero(){
   if(!group())return `<section class="hero hero-empty"><div class="eyebrow">Расписание</div><h2>Выберите группу</h2><p>Для загрузки расписания.</p>${btn('Выбрать группу','groups','button lime')}</section>`;
   const nextRaw=nextLesson(state.rows,new Date(),state.data.config),next=nextRaw?personalLesson(nextRaw,nextRaw.date):null;
   if(!state.loaded){return `<section class="hero hero-empty"><div class="eyebrow">Расписание</div><h2>${state.busy?'Загрузка расписания…':'Расписание не загружено'}</h2><p>${state.busy?'Получаем расписание с сервиса УУНиТ.':'Нужен интернет для первой загрузки. После этого пары будут доступны офлайн.'}</p>${btn('Загрузить расписание '+icon('refresh'),'refresh','button lime',state.busy?'disabled':'')}</section>`;}
   if(!next)return `<section class="hero hero-empty"><div class="eyebrow">Расписание</div><h2>Нет ближайших пар</h2><p>В загруженном расписании нет пар с известным временем на ближайшие 6 недель. Проверьте расписание и обновления источника.</p>${btn('Открыть расписание '+icon('arrow'),'schedule','button lime')}</section>`;
-  return `<section class="hero"><div class="hero-top"><span class="eyebrow">${next.ongoing?'Сейчас идёт':'Ближайшая пара'}</span><span class="chip">${dayRelative(next.date)} · ${clock(next.start)}</span></div><h2>${escape(next.subject)}</h2><div class="hero-meta"><span>${icon('clock')}${clock(next.start)}–${clock(next.end)}</span><span>${icon('pin')}${escape(next.room||'Место уточняется')}</span></div><div class="hero-footer">${next.buildingId||next.locationId?btn(`Показать место ${icon('arrow')}`,'next-map','button lime'):btn('О паре '+icon('arrow'),'next-detail','button lime')}${iconBtn('bell','Добавить ближайшую пару в календарь','next-calendar')}</div></section>`;
+  return `<section class="hero"><div class="hero-top"><span class="eyebrow">${next.ongoing?'Сейчас идёт':'Ближайшая пара'}</span><span class="chip">${dayRelative(next.date)} · ${clock(next.start)}</span></div><h2>${escape(next.subject)}</h2><div class="hero-meta"><span>${icon('clock')}${clock(next.start)}–${clock(next.end)}</span><span>${icon('pin')}${escape(next.room||'Место уточняется')}</span></div>${heroTimer(next)}<div class="hero-footer">${next.buildingId||next.locationId?btn(`Показать место ${icon('arrow')}`,'next-map','button lime'):btn('О паре '+icon('arrow'),'next-detail','button lime')}${iconBtn('bell','Добавить ближайшую пару в календарь','next-calendar')}</div></section>`;
 }
 function home(){
   const today=dateKey(),now=new Date(),day=currentLessons(today),rawNext=nextLesson(state.rows,now,state.data.config),next=rawNext?personalLesson(rawNext,rawNext.date):null;
@@ -353,5 +374,5 @@ async function boot(){
 window.addEventListener('online',()=>{if(group()&&!state.busy)refresh();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&state.data&&group()){render();if(!state.at||Date.now()-Date.parse(state.at)>15*60*1000)refresh();}});
 // Re-evaluate the nearest class at a minute boundary without interrupting dialogs or typing.
-setInterval(()=>{if(state.data&&state.profile&&state.tab==='home'&&!state.modal&&document.visibilityState==='visible')render();},60000);
+setInterval(()=>{if(state.data&&state.profile)updateHeroCountdown();},1000);
 boot();
