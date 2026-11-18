@@ -23,6 +23,11 @@ jobs:
         with:
           packages: "platform-tools platforms;android-35 build-tools;35.0.0"
       - name: Build and sign debug APK
+        env:
+          SIGNING_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          SIGNING_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          SIGNING_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         shell: bash
         run: |
           set -euo pipefail
@@ -38,8 +43,14 @@ jobs:
           java -cp "$BT/lib/d8.jar" com.android.tools.r8.D8 --lib "$ANDROID_JAR" --min-api 26 --output build/dex build/classes.jar
           python tools/package_apk.py build/base.apk app build/dex/classes.dex build/unsigned.apk
           "$BT/zipalign" -f -p 4 build/unsigned.apk build/aligned.apk
-          keytool -genkeypair -noprompt -keystore build/debug.jks -storepass android -keypass android -alias campus -dname 'CN=UUST Campus CI Debug' -keyalg RSA -keysize 2048 -validity 10000
-          "$BT/apksigner" sign --ks build/debug.jks --ks-key-alias campus --ks-pass pass:android --key-pass pass:android --out artifacts/uust-campus-personal-debug.apk build/aligned.apk
+          if [[ -n "$SIGNING_KEYSTORE" && -n "$SIGNING_PASSWORD" && -n "$SIGNING_ALIAS" && -n "$SIGNING_KEY_PASSWORD" ]]; then
+            printf '%s' "$SIGNING_KEYSTORE" | base64 -d > build/signing.jks
+            "$BT/apksigner" sign --ks build/signing.jks --ks-key-alias "$SIGNING_ALIAS" --ks-pass env:SIGNING_PASSWORD --key-pass env:SIGNING_KEY_PASSWORD --out artifacts/uust-campus-personal-debug.apk build/aligned.apk
+          else
+            echo "::warning::Signing secrets not set. APK uses a temporary test key and cannot update a previous installation."
+            keytool -genkeypair -noprompt -keystore build/debug.jks -storepass android -keypass android -alias campus -dname 'CN=UUST Campus CI Debug' -keyalg RSA -keysize 2048 -validity 10000
+            "$BT/apksigner" sign --ks build/debug.jks --ks-key-alias campus --ks-pass pass:android --key-pass pass:android --out artifacts/uust-campus-personal-debug.apk build/aligned.apk
+          fi
           "$BT/apksigner" verify --verbose artifacts/uust-campus-personal-debug.apk
           sha256sum artifacts/*.apk
       - uses: actions/upload-artifact@v4
