@@ -8,6 +8,29 @@ import {clubCard,clubDetail,kindBadge,eventKind,eventEnded,campusPreview} from '
 import {semesterWeeks,normalizeSearch,validDate} from './core.js';
 import {createNotifications} from './notifications.js';
 
+const APP_VERSION='0.3.3';
+const RELEASES_API='https://api.github.com/repos/code7-8/uust-campus/releases/latest';
+let updateInfo=null;
+function versionParts(v){return String(v||'').replace(/^v/i,'').split('.').map(n=>Number(n));}
+function newerVersion(remote,local=APP_VERSION){
+  if(!/^v?\\d+\\.\\d+\\.\\d+$/.test(String(remote)))return false;
+  const a=versionParts(remote),b=versionParts(local);
+  return a.some((n,i)=>n>(b[i]||0)&&a.slice(0,i).every((x,j)=>x===(b[j]||0)));
+}
+async function checkAppUpdates(silent=false){
+  try{
+    const response=await fetch(RELEASES_API,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+    if(!response.ok)throw Error('GitHub HTTP '+response.status);
+    const release=await response.json();
+    const asset=(release.assets||[]).find(a=>/\\.apk$/i.test(a.name)&&/^https:\/\/github\\.com\/code7-8\/uust-campus\/releases\/download\//.test(a.browser_download_url||''));
+    updateInfo={version:release.tag_name,notes:String(release.body||'').slice(0,1200),url:asset?.browser_download_url||release.html_url,available:newerVersion(release.tag_name),hasApk:!!asset};
+    storage.write('lastUpdateCheck',Date.now());
+    if(updateInfo.available){if(!silent)showModal('app-update');else if(state.tab==='profile')render();}
+    else if(!silent)toast('Установлена актуальная версия');
+    return updateInfo;
+  }catch(error){if(!silent)toast('Не удалось проверить обновления. Проверьте интернет.');return null;}
+}
+
 const $ = s=>document.querySelector(s);
 const escape = value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const attrs = escape;
@@ -204,8 +227,8 @@ function themePicker(){const current=window.campusTheme?.get()||'purple';return 
 
 function profile(){const g=group()||{title:'Без группы',faculty:'Выбери группу для расписания'};return `${pageHeading('','Профиль')}<section class="profile-hero"><span class="avatar">${escape(g.title.split('-')[0].slice(0,2))}</span><div><h2>${escape(g.title)}</h2><p>${escape([g.faculty,g.course?g.course+' курс':'',g.city].filter(Boolean).join(' · '))}</p></div></section>
   <div class="settings-list">${setting('user','Учебная группа',escape(g.title)+' · можно изменить','groups')}${setting('heart','Сохранённые места',state.savedPlaces.length+' '+declension(state.savedPlaces.length,['корпус','корпуса','корпусов']),'saved-places')}${setting('spark','Избранные события',state.favorites.length+' '+declension(state.favorites.length,['событие','события','событий']),'saved-events')}</div>
-  ${community?.accountCard()||''}${section('Цветовая тема')}${themePicker()}${section('Данные и настройки')}<div class="settings-list">${setting('bell','Уведомления',notifications?.get().enabled?'Напоминания включены':'Пары, события и тихие часы','notifications')}${setting('refresh','Обновить расписание',state.at?'Последняя загрузка: '+formatDate(dateKey(new Date(state.at))):'Для выбранной группы','refresh')}${setting('download','Импорт мероприятий','Обновить подборку из JSON-файла','import')}${setting('globe','Источники и точность','Откуда пары, события и карта','sources')}${setting('shield','Локальный профиль','Группа и избранное хранятся на устройстве','privacy')}</div>
-  <div class="profile-note">Время Уфы · UTC+5<br>Карта доступна без интернета. Загруженное расписание сохраняется отдельно для каждой группы. Регистрация не требуется.</div><div class="version">Кампус · 0.3.2</div>`;}
+  ${community?.accountCard()||''}${section('Цветовая тема')}${themePicker()}${section('Данные и настройки')}<div class="settings-list">${setting('bell','Уведомления',notifications?.get().enabled?'Напоминания включены':'Пары, события и тихие часы','notifications')}${setting('download','Обновления приложения',updateInfo?.available?'Доступна версия '+escape(updateInfo.version):'Текущая версия '+APP_VERSION,'check-app-updates')}${setting('refresh','Обновить расписание',state.at?'Последняя загрузка: '+formatDate(dateKey(new Date(state.at))):'Для выбранной группы','refresh')}${setting('download','Импорт мероприятий','Обновить подборку из JSON-файла','import')}${setting('globe','Источники и точность','Откуда пары, события и карта','sources')}${setting('shield','Локальный профиль','Группа и избранное хранятся на устройстве','privacy')}</div>
+  <div class="profile-note">Время Уфы · UTC+5<br>Карта доступна без интернета. Загруженное расписание сохраняется отдельно для каждой группы. Регистрация не требуется.</div><div class="version">Кампус · ${APP_VERSION}</div>`;}
 function groupResults(){const matches=searchGroups(state.data.groups,state.groupQuery);return matches.length?matches.map(g=>`<button class="group-result ${state.selectedGroup?.id===g.id?'active':''}" data-pick-group="${g.id}"><span class="group-avatar">${escape(g.title.slice(0,2))}</span><span><strong>${escape(g.title)}</strong><small>${escape([g.faculty,g.course?g.course+' курс':'',g.city].filter(Boolean).join(' · '))}</small></span>${state.selectedGroup?.id===g.id?icon('check'):icon('chevron')}</button>`).join(''):`<div class="empty-state"><h3>Группа не найдена</h3><p>Попробуйте часть названия. Список содержит ${state.data.groups.length} групп из источника.</p>${btn('Обновить список','refresh-groups','text-button')}</div>`;}
 function groupPicker(){return `<label class="search-field">${icon('search')}<input id="group-search" type="search" placeholder="Введите учебную группу" value="${attrs(state.groupQuery)}" autocomplete="off" aria-label="Поиск учебной группы"></label><div class="group-results" id="group-results">${groupResults()}</div>${btn(state.profile?'Сохранить группу '+icon('check'):'Это моя группа '+icon('arrow'),'save-group','button wide',`id="save-group" ${state.selectedGroup?'':'disabled'}`)}`;}
 function onboarding(){return `<main class="intro"><div class="topbar">${wordmark()}</div><section class="intro-hero"><h1>Расписание, карта<br>и события</h1><div class="intro-map">${mapSvg('1',true)}</div></section><div class="intro-step"><h2>Учебная группа</h2></div>${groupPicker()}${btn('Продолжить без группы','guest','text-button guest-button')}<div class="intro-foot"><div class="privacy">${icon('shield')}Регистрация необязательна</div></div></main>`;}
@@ -227,6 +250,7 @@ function renderModal(){
   const modalScroll=$('#modal-root .modal')?.scrollTop||0;
   const {kind,payload}=state.modal;let body='',label='';
   if(kind==='notifications'){label='Напоминания';body=notificationPanel();}
+  else if(kind==='app-update'){label='Обновление приложения';body=`<h1>Доступна версия ${escape(updateInfo?.version||'')}</h1><p class="subtle">Установлена версия ${APP_VERSION}. Обновление скачивается через GitHub. Установка выполняется с вашего согласия.</p>${updateInfo?.notes?`<p class="personal-note">${escape(updateInfo.notes)}</p>`:''}${updateInfo?.hasApk?btn('Скачать APK','download-app-update','button wide'):btn('Открыть страницу выпуска','download-app-update','button wide')}<p class="subtle">Для обновления без удаления приложения необходим тот же ключ подписи APK.</p>`;}
   else if(kind==='lesson'){
     const l=personalLesson(payload,payload.date);label='Занятие';
     body=`${tag(l.type)}<h1>${escape(l.subject)}</h1>${detailRow('calendar',formatDate(l.date,{weekday:'long',day:'numeric',month:'long'}),`${academicWeek(l.date,state.data.config)}-я учебная неделя`)}${detailRow('clock',l.start===null?'Время уточняется':`${clock(l.start)}–${clock(l.end)}`,'Время Уфы · UTC+5')}${detailRow('user',l.teacher||'Преподаватель не указан')}${detailRow('pin',l.room||'Аудитория не указана',l.buildingTitle||'Место уточняется')}${l.comment?`<p>${escape(l.comment)}</p>`:''}${l.homework?`<div class="personal-note"><strong>Домашнее задание</strong><p>${escape(l.homework).replace(/\\n/g,'<br>')}</p></div>`:''}<div class="modal-actions">${specialSubject(l.subject)?btn('Изменить преподавателя и место','edit-subject','button light wide'):''}${btn(l.homework?'Изменить ДЗ':'Добавить ДЗ','edit-homework','button light wide')}</div>${!l.buildingId?'<div class="insight compact">'+icon('info')+'<p>Это место пока не сопоставлено со схемой кампуса. Сверьтесь с исходным адресом и указателями университета.</p></div>':''}<div class="modal-actions">${l.buildingId||l.locationId?btn('Показать место '+icon('map'),'lesson-map','button wide'):''}${l.start!==null?btn(icon('bell')+' Добавить в календарь','lesson-calendar','button light wide'):''}${btn('Расписание в источнике '+icon('external'),'schedule-source','button outline wide')}</div><p class="source-line">Данные: schedule.uust.ru · ${state.source==='live'?'загруженная версия':'сохранённая версия'}. Изменения проверяются при обновлении.</p>`;
@@ -272,6 +296,8 @@ function calendar(item){
 }
 async function action(name,el){
   if(name==='notifications'){showModal('notifications');return;}
+  if(name==='check-app-updates'){await checkAppUpdates();return;}
+  if(name==='download-app-update'){if(updateInfo?.url)external(updateInfo.url);return;}
   if(name==='notification-permission'){await notifications.request();syncNotifications();renderModal();return;}
   if(name==='notification-system'){notifications.systemSettings();return;}
   if(name==='notification-exact'){notifications.exactSettings();return;}
@@ -366,7 +392,7 @@ async function boot(){
     if(state.profile && !state.profile.group && !state.profile.guest)state.profile=null;
     state.selectedGroup=state.profile?.group||state.data.groups.find(g=>g.id===14381);
     if(group())Object.assign(state,loadSavedSchedule(group().id,state.data));
-    render();community.sync({quiet:true});if(group())refresh();
+    render();community.sync({quiet:true});if(group())refresh();if(Date.now()-Number(storage.read('lastUpdateCheck',0))>86400000)checkAppUpdates(true);
     if(typeof window.CampusAndroid?.consumeReminderTarget==='function'){try{const target=JSON.parse(window.CampusAndroid.consumeReminderTarget());if(target)window.campusOpenReminder(target);}catch{}}
     refreshGroups().then(groups=>{state.data.groups=groups;}).catch(()=>{});
   }catch(error){$('#app').innerHTML=`<div class="boot"><span class="brand-symbol">к.</span><h1>Не удалось открыть приложение</h1><p>${escape(error.message)}</p><p>Перезапустите приложение. Если ошибка повторяется, установите APK заново.</p></div>`;}
